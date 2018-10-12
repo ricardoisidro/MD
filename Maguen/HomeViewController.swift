@@ -17,7 +17,7 @@ struct cellComponents {
 class HomeViewController: UITableViewController {
 
     var tableViewData = [cellComponents]()
-    var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet"]
+    var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut"]
     //var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut", "Escuelas", "Juventud", "Comites", "Directorio"]
     
     @IBOutlet var homeTableView: UITableView!
@@ -34,7 +34,20 @@ class HomeViewController: UITableViewController {
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_escuelas"), cellColor: MaguenColors.blue6, cellTitle: "ESCUELAS"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_juventud"), cellColor: MaguenColors.blue7, cellTitle: "JUVENTUD"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_directorio"), cellColor: MaguenColors.blue8, cellTitle: "DIRECTORIO")]
+        
+        
 
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        super.viewWillAppear(animated)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillDisappear(animated)
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,7 +74,7 @@ class HomeViewController: UITableViewController {
         print("You tapped cell number \(indexPath.row).")
         homeTableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row < 4 {
+        if indexPath.row < 5 {
             performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)
         }
     }
