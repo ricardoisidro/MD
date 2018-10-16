@@ -65,7 +65,9 @@ class HomeViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+       
+            return 80.0
+        
     }
     
     // method to run when table view cell is tapped
