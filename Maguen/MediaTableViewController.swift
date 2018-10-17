@@ -17,6 +17,8 @@ struct mediaComponents {
 class MediaTableViewController: UITableViewController {
 
     var tableViewData = [mediaComponents]()
+    var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram"]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +68,8 @@ class MediaTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
+        
+        performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)
     }
 
     /*

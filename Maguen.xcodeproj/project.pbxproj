@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4EFE21779965007CC317 /* YoutubeViewController.swift */; };
+		59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0021779C6A007CC317 /* DailyViewController.swift */; };
+		59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0221779F4D007CC317 /* MagazineViewController.swift */; };
+		59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F042177A0B9007CC317 /* FacebookViewController.swift */; };
+		59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F062177A0CE007CC317 /* InstagramViewController.swift */; };
+		59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F082177A439007CC317 /* SchoolPageViewController.swift */; };
+		59BB4F0B2177C2D2007CC317 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0A2177C2D2007CC317 /* EventViewController.swift */; };
 		59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52C2174F66C004E4813 /* EmergencyController.swift */; };
 		59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52E217516BE004E4813 /* NotificationCell.swift */; };
 		59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */; };
@@ -37,6 +44,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59BB4EFE21779965007CC317 /* YoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewController.swift; sourceTree = "<group>"; };
+		59BB4F0021779C6A007CC317 /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
+		59BB4F0221779F4D007CC317 /* MagazineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineViewController.swift; sourceTree = "<group>"; };
+		59BB4F042177A0B9007CC317 /* FacebookViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FacebookViewController.swift; sourceTree = "<group>"; };
+		59BB4F062177A0CE007CC317 /* InstagramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramViewController.swift; sourceTree = "<group>"; };
+		59BB4F082177A439007CC317 /* SchoolPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolPageViewController.swift; sourceTree = "<group>"; };
+		59BB4F0A2177C2D2007CC317 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		59C6D52C2174F66C004E4813 /* EmergencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyController.swift; sourceTree = "<group>"; };
 		59C6D52E217516BE004E4813 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -134,6 +148,13 @@
 				59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */,
 				59D30E222176AB140063B303 /* YouthTableViewController.swift */,
 				59D30E272176B2440063B303 /* DirectoryTableViewController.swift */,
+				59BB4EFE21779965007CC317 /* YoutubeViewController.swift */,
+				59BB4F0021779C6A007CC317 /* DailyViewController.swift */,
+				59BB4F0221779F4D007CC317 /* MagazineViewController.swift */,
+				59BB4F042177A0B9007CC317 /* FacebookViewController.swift */,
+				59BB4F062177A0CE007CC317 /* InstagramViewController.swift */,
+				59BB4F082177A439007CC317 /* SchoolPageViewController.swift */,
+				59BB4F0A2177C2D2007CC317 /* EventViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -212,7 +233,9 @@
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
+				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
+				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
@@ -221,8 +244,10 @@
 				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
 				59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
+				59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */,
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
+				59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */,
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,
 				59E9875221711B6C004DDE0D /* CardController.swift in Sources */,
@@ -230,9 +255,12 @@
 				59D30E1B217684790063B303 /* EventCell.swift in Sources */,
 				8C4B054C216FDEA80079A937 /* HomeCell.swift in Sources */,
 				59D30E232176AB140063B303 /* YouthTableViewController.swift in Sources */,
+				59BB4F0B2177C2D2007CC317 /* EventViewController.swift in Sources */,
+				59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */,
 				59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,
 				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
+				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

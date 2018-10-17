@@ -258,12 +258,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zS1-lF-wHT" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="599" y="521"/>
+            <point key="canvasLocation" x="-300" y="519"/>
         </scene>
-        <!--YouthViewController-->
+        <!--Youth Table View Controller-->
         <scene sceneID="wT0-eg-YEF">
             <objects>
-                <tableViewController title="YouthViewController" id="Uhr-oM-JhM" customClass="YouthTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Uhr-oM-JhM" customClass="YouthTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="iTV-7b-zvj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -313,12 +313,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XMp-xG-fgc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1573.5999999999999" y="607.64617691154433"/>
+            <point key="canvasLocation" x="2086" y="151"/>
         </scene>
-        <!--DirectoryViewController-->
+        <!--Directory Table View Controller-->
         <scene sceneID="9wB-Ia-UeQ">
             <objects>
-                <tableViewController title="DirectoryViewController" id="sSH-2Z-vag" customClass="DirectoryTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="sSH-2Z-vag" customClass="DirectoryTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="f8a-sz-d93">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -379,12 +379,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="I0f-ZX-jXd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2333.5999999999999" y="606.74662668665667"/>
+            <point key="canvasLocation" x="2086" y="1476"/>
         </scene>
-        <!--CommitteeViewController-->
+        <!--Committee Table View Controller-->
         <scene sceneID="WfG-Xy-Pay">
             <objects>
-                <tableViewController title="CommitteeViewController" id="KQO-d2-EHZ" customClass="CommitteeTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="KQO-d2-EHZ" customClass="CommitteeTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="FYE-zb-MQA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -445,7 +445,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etZ-ui-bTg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3047" y="608"/>
+            <point key="canvasLocation" x="2086" y="797"/>
         </scene>
         <!--CardViewController-->
         <scene sceneID="3JZ-cY-xYe">
@@ -497,7 +497,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEJ-13-SW9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1674" y="520"/>
+            <point key="canvasLocation" x="-2415" y="520"/>
         </scene>
         <!--Avisos-->
         <scene sceneID="zR2-km-jPP">
@@ -581,7 +581,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEW-u7-J1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-911" y="519"/>
+            <point key="canvasLocation" x="-1726" y="520"/>
         </scene>
         <!--HomeViewController-->
         <scene sceneID="1Dh-3S-eBQ">
@@ -665,12 +665,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Nw-L8-lE0" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1882" y="-91"/>
+            <point key="canvasLocation" x="1121" y="797"/>
         </scene>
-        <!--KashrutViewController-->
+        <!--Kashrut-->
         <scene sceneID="A9f-hj-ng1">
             <objects>
-                <viewController storyboardIdentifier="KashrutViewController" title="KashrutViewController" id="XuJ-93-evg" customClass="KashrutController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KashrutViewController" id="XuJ-93-evg" customClass="KashrutController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gxJ-5Z-Kq7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -680,7 +680,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EWh-HK-7MO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2608.8000000000002" y="-91.304347826086968"/>
+            <point key="canvasLocation" x="1121" y="151"/>
         </scene>
         <!--Media Table View Controller-->
         <scene sceneID="A8B-yG-teN">
@@ -742,15 +742,97 @@
                             <outlet property="delegate" destination="sRi-Mz-HS8" id="Zt0-s2-g4d"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="6tN-5V-b2z" kind="show" identifier="Youtube" id="EfR-DC-nbW"/>
+                        <segue destination="9NC-Pv-t5y" kind="show" identifier="Periodico" id="N5X-8j-RCp"/>
+                        <segue destination="K0a-v4-Y9z" kind="show" identifier="Revista" id="ZHs-Tx-RtT"/>
+                        <segue destination="gV3-Bs-VdT" kind="show" identifier="Facebook" id="Fp6-rc-mio"/>
+                        <segue destination="Rz6-r9-tk5" kind="show" identifier="Instagram" id="bgZ-x3-hJ9"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nf0-Rz-LPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1184.8" y="-846.02698650674665"/>
+            <point key="canvasLocation" x="1121" y="-1796"/>
         </scene>
-        <!--ChurchsViewController-->
+        <!--YoutubeViewController-->
+        <scene sceneID="f3z-q3-yZJ">
+            <objects>
+                <viewController title="YoutubeViewController" id="6tN-5V-b2z" customClass="YoutubeViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="6og-5f-77y">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="uyy-wU-qf3"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Canal YouTube" id="RdD-wN-2Ah"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="F7Q-zF-aCp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1986" y="-2041"/>
+        </scene>
+        <!--Periódico-->
+        <scene sceneID="qtO-ye-Dtg">
+            <objects>
+                <viewController id="9NC-Pv-t5y" customClass="DailyViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="dZu-Ss-rXj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="gBU-hk-RIu"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Periódico" id="ACa-3e-yTO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zJ9-3B-b1B" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2682" y="-2042"/>
+        </scene>
+        <!--Revista-->
+        <scene sceneID="oYf-0F-uBe">
+            <objects>
+                <viewController id="K0a-v4-Y9z" customClass="MagazineViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fiq-Xp-sIS">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="FNH-WE-MfO"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Revista" id="Cf8-DB-ry9"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TEO-T5-Rqp" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3393" y="-2042"/>
+        </scene>
+        <!--Facebook-->
+        <scene sceneID="HaM-pj-4gu">
+            <objects>
+                <viewController id="gV3-Bs-VdT" customClass="FacebookViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="fwb-WI-7KJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="iLc-SA-M7D"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Facebook" id="eMa-Vc-81E"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wJw-sn-0vh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4078" y="-2042"/>
+        </scene>
+        <!--Instagram-->
+        <scene sceneID="Jfj-tW-2cj">
+            <objects>
+                <viewController id="Rz6-r9-tk5" customClass="InstagramViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="izl-uG-BoH">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="FkG-6P-qFD"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Instagram" id="8Hx-OQ-Pgn"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mWw-UR-RWU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4812" y="-2042"/>
+        </scene>
+        <!--Churchs Table View Controller-->
         <scene sceneID="Udi-1K-72w">
             <objects>
-                <tableViewController title="ChurchsViewController" id="YSV-ir-PXz" customClass="ChurchsTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="YSV-ir-PXz" customClass="ChurchsTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="piA-52-azq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -800,12 +882,12 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XcE-fS-ZGt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2022" y="-846"/>
+            <point key="canvasLocation" x="1121" y="-1148"/>
         </scene>
-        <!--EventViewController-->
+        <!--Event Table View Controller-->
         <scene sceneID="knp-3S-vf9">
             <objects>
-                <tableViewController title="EventViewController" id="n46-3y-TeG" customClass="EventTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="n46-3y-TeG" customClass="EventTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="jE4-eA-Lnz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -896,15 +978,33 @@
                             <outlet property="delegate" destination="n46-3y-TeG" id="9kS-gt-5KD"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="VpZ-6f-Ouc" kind="show" identifier="evento" id="mso-8h-WPS"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wun-Jt-j9r" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2805.5999999999999" y="-846.02698650674665"/>
+            <point key="canvasLocation" x="1121" y="-499"/>
         </scene>
-        <!--SchoolViewController-->
+        <!--Event View Controller-->
+        <scene sceneID="uja-S2-2Qf">
+            <objects>
+                <viewController id="VpZ-6f-Ouc" customClass="EventViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gtN-aS-hmw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="1hA-IS-kQM"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H8h-yP-BiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2044" y="-529.38530734632684"/>
+        </scene>
+        <!--Schools Table View Controller-->
         <scene sceneID="Zey-kH-TYC">
             <objects>
-                <tableViewController title="SchoolViewController" id="ke9-qN-TfI" customClass="SchoolsTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="ke9-qN-TfI" customClass="SchoolsTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="Oto-TX-zFx">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -951,10 +1051,27 @@
                             <outlet property="delegate" destination="ke9-qN-TfI" id="CDL-nD-nLo"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="v7f-9d-mer" kind="show" identifier="schoolpage" id="RzP-af-Rls"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zKe-5w-Csl" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1120.8" y="-150.67466266866569"/>
+            <point key="canvasLocation" x="1121" y="1476"/>
+        </scene>
+        <!--School Page View Controller-->
+        <scene sceneID="5VM-3x-S09">
+            <objects>
+                <viewController id="v7f-9d-mer" customClass="SchoolPageViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="MTp-a9-uCa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Xcn-BW-KWW"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="t1P-yq-nlY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1121" y="2194"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="yl2-sM-qoP">
@@ -1157,7 +1274,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kC-u5-d9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-132" y="520"/>
+            <point key="canvasLocation" x="-1001" y="519"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J56-AC-LPc">
