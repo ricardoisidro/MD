@@ -47,6 +47,8 @@ class ChurchsTableViewController: UITableViewController {
         cell.imgChurch.clipsToBounds = true
         cell.txtChurch.text = tableViewData[indexPath.row].churchText
         
+        cell.layer.borderWidth = CGFloat(5.0)
+        cell.layer.borderColor = tableView.backgroundColor?.cgColor
 
         return cell
     }

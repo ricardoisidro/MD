@@ -1,36 +1,26 @@
 //
-//  MediaTableViewController.swift
+//  SchoolsTableViewController.swift
 //  Maguen
 //
-//  Created by ExpresionBinaria on 10/15/18.
+//  Created by ExpresionBinaria on 10/16/18.
 //  Copyright © 2018 Expression B. All rights reserved.
 //
 
 import UIKit
 
-struct mediaComponents {
-    var mediaImage = UIImage()
-    var mediaText = String()
-    var mediaDate = String()
+struct schoolComponents {
+    var schoolImage = UIImage()
+    var schoolText = String()
 }
 
-class MediaTableViewController: UITableViewController {
+class SchoolsTableViewController: UITableViewController {
 
-    var tableViewData = [mediaComponents]()
+    var tableViewData = [schoolComponents]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        tableViewData =
-            [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaDate: "")
-        ]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        
+        tableViewData = [schoolComponents(schoolImage: #imageLiteral(resourceName: "icon_escuelas"), schoolText: "ATID"), schoolComponents(schoolImage: #imageLiteral(resourceName: "icon_escuelas"), schoolText: "Maguén David"), schoolComponents(schoolImage: #imageLiteral(resourceName: "icon_escuelas"), schoolText: "OR Hajayim")]
     }
 
     // MARK: - Table view data source
@@ -41,14 +31,12 @@ class MediaTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "media") as! MediaCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "school") as! SchoolCell
         
-        cell.imgMedia.image = tableViewData[indexPath.row].mediaImage
-        cell.imgMedia.layer.cornerRadius = cell.imgMedia.frame.size.width / 2
-        cell.imgMedia.clipsToBounds = true
-        cell.textMedia.text = tableViewData[indexPath.row].mediaText
-        cell.dateMedia.text = tableViewData[indexPath.row].mediaDate
-        cell.dateMedia.font = UIFont(name: "System", size: 9.0)
+        cell.imgSchool.image = tableViewData[indexPath.row].schoolImage
+        cell.imgSchool.layer.cornerRadius = cell.imgSchool.frame.size.width / 2
+        cell.imgSchool.clipsToBounds = true
+        cell.txtSchool.text = tableViewData[indexPath.row].schoolText
         
         cell.layer.borderWidth = CGFloat(5.0)
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
@@ -62,6 +50,7 @@ class MediaTableViewController: UITableViewController {
         
     }
     
+    // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")

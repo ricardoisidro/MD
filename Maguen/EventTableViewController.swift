@@ -1,35 +1,32 @@
 //
-//  MediaTableViewController.swift
+//  EventTableViewController.swift
 //  Maguen
 //
-//  Created by ExpresionBinaria on 10/15/18.
+//  Created by ExpresionBinaria on 10/16/18.
 //  Copyright © 2018 Expression B. All rights reserved.
 //
 
 import UIKit
 
-struct mediaComponents {
-    var mediaImage = UIImage()
-    var mediaText = String()
-    var mediaDate = String()
+struct eventComponents {
+    var eventImage = UIImage()
+    var eventTitle = String()
+    var eventPlace = String()
+    var eventDate = String()
+    var eventTime = String()
 }
 
-class MediaTableViewController: UITableViewController {
+class EventTableViewController: UITableViewController {
 
-    var tableViewData = [mediaComponents]()
+    var tableViewData = [eventComponents]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableViewData =
-            [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaDate: "")
-        ]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+            [eventComponents(eventImage: #imageLiteral(resourceName: "evento_cuatro") ,eventTitle: "Bar Mitzva", eventPlace: "Maguén David", eventDate: "22/08/2016", eventTime: "08:00 A.M."),
+             eventComponents(eventImage: #imageLiteral(resourceName: "evento_uno") ,eventTitle: "Evento 2", eventPlace: "Maguén David", eventDate: "22/08/2017", eventTime: "09:00 A.M."),
+             eventComponents(eventImage: #imageLiteral(resourceName: "evento_dos") ,eventTitle: "Mazel Tov", eventPlace: "Maguén David", eventDate: "22/08/2018", eventTime: "10:00 A.M.")]
 
     }
 
@@ -39,34 +36,40 @@ class MediaTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return tableViewData.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "media") as! MediaCell
-        
-        cell.imgMedia.image = tableViewData[indexPath.row].mediaImage
-        cell.imgMedia.layer.cornerRadius = cell.imgMedia.frame.size.width / 2
-        cell.imgMedia.clipsToBounds = true
-        cell.textMedia.text = tableViewData[indexPath.row].mediaText
-        cell.dateMedia.text = tableViewData[indexPath.row].mediaDate
-        cell.dateMedia.font = UIFont(name: "System", size: 9.0)
-        
-        cell.layer.borderWidth = CGFloat(5.0)
-        cell.layer.borderColor = tableView.backgroundColor?.cgColor
+        let cell = tableView.dequeueReusableCell(withIdentifier: "event") as! EventCell
+        cell.eventTitle.text = tableViewData[indexPath.row].eventTitle
+        cell.eventDate.text = tableViewData[indexPath.row].eventDate
+        cell.eventTime.text = tableViewData[indexPath.row].eventTime
+        cell.eventPlace.text = tableViewData[indexPath.row].eventPlace
+        cell.eventImage.image = tableViewData[indexPath.row].eventImage
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 120.0
+        return 200.0
         
     }
     
+    // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
     }
+
+    /*
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+
+        // Configure the cell...
+
+        return cell
+    }
+    */
 
     /*
     // Override to support conditional editing of the table view.

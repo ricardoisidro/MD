@@ -14,6 +14,16 @@
 		59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */; };
 		59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D536217554AE004E4813 /* MediaTableViewController.swift */; };
 		59C6D539217560EA004E4813 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D538217560EA004E4813 /* MediaCell.swift */; };
+		59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E182176829B0063B303 /* EventTableViewController.swift */; };
+		59D30E1B217684790063B303 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E1A217684790063B303 /* EventCell.swift */; };
+		59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */; };
+		59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E1E2176A2080063B303 /* SchoolCell.swift */; };
+		59D30E212176AA330063B303 /* YouthCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E202176AA330063B303 /* YouthCell.swift */; };
+		59D30E232176AB140063B303 /* YouthTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E222176AB140063B303 /* YouthTableViewController.swift */; };
+		59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E252176B1570063B303 /* DirectoryCell.swift */; };
+		59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E272176B2440063B303 /* DirectoryTableViewController.swift */; };
+		59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E292176B7BA0063B303 /* CommitteeCell.swift */; };
+		59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */; };
 		59E9875021711620004DDE0D /* KashrutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9874F21711620004DDE0D /* KashrutController.swift */; };
 		59E9875221711B6C004DDE0D /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9875121711B6C004DDE0D /* CardController.swift */; };
 		8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B0547216FBD3E0079A937 /* HomeViewController.swift */; };
@@ -34,6 +44,16 @@
 		59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchsTableViewController.swift; sourceTree = "<group>"; };
 		59C6D536217554AE004E4813 /* MediaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewController.swift; sourceTree = "<group>"; };
 		59C6D538217560EA004E4813 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		59D30E182176829B0063B303 /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
+		59D30E1A217684790063B303 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsTableViewController.swift; sourceTree = "<group>"; };
+		59D30E1E2176A2080063B303 /* SchoolCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolCell.swift; sourceTree = "<group>"; };
+		59D30E202176AA330063B303 /* YouthCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthCell.swift; sourceTree = "<group>"; };
+		59D30E222176AB140063B303 /* YouthTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthTableViewController.swift; sourceTree = "<group>"; };
+		59D30E252176B1570063B303 /* DirectoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryCell.swift; sourceTree = "<group>"; };
+		59D30E272176B2440063B303 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
+		59D30E292176B7BA0063B303 /* CommitteeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitteeCell.swift; sourceTree = "<group>"; };
+		59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommitteeTableViewController.swift; path = Maguen/CommitteeTableViewController.swift; sourceTree = SOURCE_ROOT; };
 		59E9874F21711620004DDE0D /* KashrutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashrutController.swift; sourceTree = "<group>"; };
 		59E9875121711B6C004DDE0D /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 		8C4B0547216FBD3E0079A937 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -59,6 +79,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		59D30E242176B02A0063B303 /* CellViews */ = {
+			isa = PBXGroup;
+			children = (
+				59C6D52E217516BE004E4813 /* NotificationCell.swift */,
+				59C6D538217560EA004E4813 /* MediaCell.swift */,
+				59D30E202176AA330063B303 /* YouthCell.swift */,
+				59D30E1E2176A2080063B303 /* SchoolCell.swift */,
+				59D30E1A217684790063B303 /* EventCell.swift */,
+				59C6D53221754976004E4813 /* ChurchCell.swift */,
+				8C4B054B216FDEA80079A937 /* HomeCell.swift */,
+				59D30E252176B1570063B303 /* DirectoryCell.swift */,
+				59D30E292176B7BA0063B303 /* CommitteeCell.swift */,
+			);
+			path = CellViews;
+			sourceTree = "<group>";
+		};
 		8C5CEF23216FA155002F5D56 = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +114,7 @@
 		8C5CEF2E216FA155002F5D56 /* Maguen */ = {
 			isa = PBXGroup;
 			children = (
+				59D30E242176B02A0063B303 /* CellViews */,
 				8C5CEF2F216FA155002F5D56 /* AppDelegate.swift */,
 				8C5CEF33216FA155002F5D56 /* StoreController.swift */,
 				8C5CEF35216FA156002F5D56 /* Main.storyboard */,
@@ -86,16 +123,17 @@
 				8C5CEF3D216FA159002F5D56 /* Info.plist */,
 				8C4B0547216FBD3E0079A937 /* HomeViewController.swift */,
 				8C4B0549216FD3C70079A937 /* Constants.swift */,
-				8C4B054B216FDEA80079A937 /* HomeCell.swift */,
 				59E9874F21711620004DDE0D /* KashrutController.swift */,
 				59E9875121711B6C004DDE0D /* CardController.swift */,
+				59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */,
 				59C6D52C2174F66C004E4813 /* EmergencyController.swift */,
-				59C6D52E217516BE004E4813 /* NotificationCell.swift */,
 				59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */,
-				59C6D53221754976004E4813 /* ChurchCell.swift */,
 				59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */,
 				59C6D536217554AE004E4813 /* MediaTableViewController.swift */,
-				59C6D538217560EA004E4813 /* MediaCell.swift */,
+				59D30E182176829B0063B303 /* EventTableViewController.swift */,
+				59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */,
+				59D30E222176AB140063B303 /* YouthTableViewController.swift */,
+				59D30E272176B2440063B303 /* DirectoryTableViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -172,19 +210,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
+				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
+				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
+				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
+				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
+				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
 				59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */,
+				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,
 				59E9875221711B6C004DDE0D /* CardController.swift in Sources */,
+				59D30E212176AA330063B303 /* YouthCell.swift in Sources */,
+				59D30E1B217684790063B303 /* EventCell.swift in Sources */,
 				8C4B054C216FDEA80079A937 /* HomeCell.swift in Sources */,
+				59D30E232176AB140063B303 /* YouthTableViewController.swift in Sources */,
 				59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,
+				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

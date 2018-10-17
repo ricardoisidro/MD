@@ -1,36 +1,26 @@
 //
-//  MediaTableViewController.swift
+//  YouthTableViewController.swift
 //  Maguen
 //
-//  Created by ExpresionBinaria on 10/15/18.
+//  Created by ExpresionBinaria on 10/16/18.
 //  Copyright © 2018 Expression B. All rights reserved.
 //
 
 import UIKit
 
-struct mediaComponents {
-    var mediaImage = UIImage()
-    var mediaText = String()
-    var mediaDate = String()
+struct youthComponents {
+    var youthImage = UIImage()
+    var youthText = String()
 }
 
-class MediaTableViewController: UITableViewController {
-
-    var tableViewData = [mediaComponents]()
+class YouthTableViewController: UITableViewController {
     
+    var tableViewData = [youthComponents]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewData =
-            [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaDate: "")
-        ]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        tableViewData = [youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Talmud Torah"), youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Nuevo grupo")]
     }
 
     // MARK: - Table view data source
@@ -39,16 +29,14 @@ class MediaTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return tableViewData.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "media") as! MediaCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "youth") as! YouthCell
         
-        cell.imgMedia.image = tableViewData[indexPath.row].mediaImage
-        cell.imgMedia.layer.cornerRadius = cell.imgMedia.frame.size.width / 2
-        cell.imgMedia.clipsToBounds = true
-        cell.textMedia.text = tableViewData[indexPath.row].mediaText
-        cell.dateMedia.text = tableViewData[indexPath.row].mediaDate
-        cell.dateMedia.font = UIFont(name: "System", size: 9.0)
+        cell.imgYouth.image = tableViewData[indexPath.row].youthImage
+        cell.imgYouth.layer.cornerRadius = cell.imgYouth.frame.size.width / 2
+        cell.imgYouth.clipsToBounds = true
+        cell.txtYouth.text = tableViewData[indexPath.row].youthText
         
         cell.layer.borderWidth = CGFloat(5.0)
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
@@ -62,6 +50,7 @@ class MediaTableViewController: UITableViewController {
         
     }
     
+    // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")

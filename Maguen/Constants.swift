@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 
 struct MaguenColors {
+    // Main screen blue color palette
     static let blue1 = UIColor(red:0.03, green:0.03, blue:0.16, alpha:1.0)
     static let blue2 = UIColor(red:0.04, green:0.09, blue:0.24, alpha:1.0)
     static let blue3 = UIColor(red:0.07, green:0.14, blue:0.33, alpha:1.0)

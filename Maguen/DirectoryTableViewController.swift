@@ -1,36 +1,27 @@
 //
-//  MediaTableViewController.swift
+//  DirectoryTableViewController.swift
 //  Maguen
 //
-//  Created by ExpresionBinaria on 10/15/18.
+//  Created by ExpresionBinaria on 10/16/18.
 //  Copyright © 2018 Expression B. All rights reserved.
 //
 
 import UIKit
 
-struct mediaComponents {
-    var mediaImage = UIImage()
-    var mediaText = String()
-    var mediaDate = String()
+struct directoryComponents {
+    var directoryImage = UIImage()
+    var directoryTitle = String()
+    var directoryPhone = String()
 }
 
-class MediaTableViewController: UITableViewController {
-
-    var tableViewData = [mediaComponents]()
+class DirectoryTableViewController: UITableViewController {
     
+    var tableViewData = [directoryComponents]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewData =
-            [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaDate: "")
-        ]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
+        tableViewData = [directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Arija", directoryPhone: "55143068"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Caja", directoryPhone: "57182367"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Eventos", directoryPhone: "57182869"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Ayudas", directoryPhone: "23232323"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Prensa", directoryPhone: "53264789")]
     }
 
     // MARK: - Table view data source
@@ -39,16 +30,15 @@ class MediaTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         return tableViewData.count
     }
-
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "media") as! MediaCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "directory") as! DirectoryCell
         
-        cell.imgMedia.image = tableViewData[indexPath.row].mediaImage
-        cell.imgMedia.layer.cornerRadius = cell.imgMedia.frame.size.width / 2
-        cell.imgMedia.clipsToBounds = true
-        cell.textMedia.text = tableViewData[indexPath.row].mediaText
-        cell.dateMedia.text = tableViewData[indexPath.row].mediaDate
-        cell.dateMedia.font = UIFont(name: "System", size: 9.0)
+        cell.imgDirectory.image = tableViewData[indexPath.row].directoryImage
+        cell.imgDirectory.layer.cornerRadius = cell.imgDirectory.frame.size.width / 2
+        cell.imgDirectory.clipsToBounds = true
+        cell.txtDirectory.text = tableViewData[indexPath.row].directoryTitle
+        cell.phoneDirectory.text = tableViewData[indexPath.row].directoryPhone
         
         cell.layer.borderWidth = CGFloat(5.0)
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
@@ -62,6 +52,7 @@ class MediaTableViewController: UITableViewController {
         
     }
     
+    // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")

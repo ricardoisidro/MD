@@ -9,18 +9,43 @@
 import UIKit
 import WebKit
 
-class KashrutController: UIViewController {
+class KashrutController: UIViewController, WKNavigationDelegate {
 
-    @IBOutlet weak var webViewKashrut: WKWebView!
+    
+    var activityIndicator: UIActivityIndicatorView!
+    var webView: WKWebView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         let url = URL(string: "http://www.kosher.com.mx/consumidor/index.php?ver=productos_certificados")
         let req = URLRequest(url: url!)
-        webViewKashrut.load(req)
+        webView.load(req)
     }
     
+    override func loadView() {
+        webView = WKWebView()
+        webView.navigationDelegate = self
+        view = webView
+        
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        activityIndicator.style = UIActivityIndicatorView.Style.white
+        activityIndicator.hidesWhenStopped = true
+        let barButton = UIBarButtonItem(customView: activityIndicator)
+        self.navigationItem.setRightBarButton(barButton, animated: true)
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
+    }
+    
+    func showActivityIndicator(show: Bool) {
+        if show {
+            // Start the loading animation
+            activityIndicator.startAnimating()
+        } else {
+            // Stop the loading animation
+            activityIndicator.stopAnimating()
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -31,5 +56,27 @@ class KashrutController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK:- WKNavigationDelegate
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        print("Start to load")
+        showActivityIndicator(show: true)
+    }
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        print("Finish to load")
+        title = webView.title
+        showActivityIndicator(show: false)
+    }
+    
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        print(error.localizedDescription)
+        showActivityIndicator(show: false)
+    }
+    
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
+        print(error.localizedDescription)
+        showActivityIndicator(show: false)
+    }
 
 }

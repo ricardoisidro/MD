@@ -17,7 +17,7 @@ struct cellComponents {
 class HomeViewController: UITableViewController {
 
     var tableViewData = [cellComponents]()
-    var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut"]
+    var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut", "Escuelas", "Juventud", "Comite", "Directorio"]
     //var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut", "Escuelas", "Juventud", "Comites", "Directorio"]
     
     @IBOutlet var homeTableView: UITableView!
@@ -33,12 +33,10 @@ class HomeViewController: UITableViewController {
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_kmd"), cellColor: MaguenColors.blue5, cellTitle: "KASHRUT"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_escuelas"), cellColor: MaguenColors.blue6, cellTitle: "ESCUELAS"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_juventud"), cellColor: MaguenColors.blue7, cellTitle: "JUVENTUD"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_directorio"), cellColor: MaguenColors.blue8, cellTitle: "DIRECTORIO")]
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_comite"), cellColor: MaguenColors.blue8, cellTitle: "COMITÉ"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_directorio"), cellColor: MaguenColors.blue9, cellTitle: "DIRECTORIO")]
         
-        
-
     }
-    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
@@ -66,7 +64,7 @@ class HomeViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
        
-            return 80.0
+            return 90.0
         
     }
     
@@ -76,9 +74,8 @@ class HomeViewController: UITableViewController {
         print("You tapped cell number \(indexPath.row).")
         homeTableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.row < 5 {
-            performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)
-        }
+        performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)
+        
     }
     
 
