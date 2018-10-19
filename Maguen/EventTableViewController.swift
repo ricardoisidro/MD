@@ -31,6 +31,9 @@ class EventTableViewController: UITableViewController {
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
         
+        self.tableView.backgroundColor = MaguenColors.black1
+
+        
     }
 
     // MARK: - Table view data source

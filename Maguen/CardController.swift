@@ -18,6 +18,8 @@ class CardController: UIViewController {
         cardView.backgroundColor = .black
         cardView.layer.cornerRadius = 10
         cardView.layer.masksToBounds = true
+        
+        self.view.backgroundColor = MaguenColors.black1
 
         // Do any additional setup after loading the view.
     }

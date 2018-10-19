@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */; };
+		59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */; };
+		59BAF0B7217A5E9500756117 /* DailyPage02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */; };
+		59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B9217A6A8500756117 /* MagazinePage01ViewController.swift */; };
+		59BAF0BC217A6A9800756117 /* MagazinePage02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */; };
 		59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4EFE21779965007CC317 /* YoutubeViewController.swift */; };
 		59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0021779C6A007CC317 /* DailyViewController.swift */; };
 		59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0221779F4D007CC317 /* MagazineViewController.swift */; };
@@ -49,6 +54,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPage01ViewController.swift; sourceTree = "<group>"; };
+		59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPage02ViewController.swift; sourceTree = "<group>"; };
+		59BAF0B9217A6A8500756117 /* MagazinePage01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazinePage01ViewController.swift; sourceTree = "<group>"; };
+		59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazinePage02ViewController.swift; sourceTree = "<group>"; };
 		59BB4EFE21779965007CC317 /* YoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewController.swift; sourceTree = "<group>"; };
 		59BB4F0021779C6A007CC317 /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
 		59BB4F0221779F4D007CC317 /* MagazineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineViewController.swift; sourceTree = "<group>"; };
@@ -103,6 +113,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		59BAF0B1217A5BCB00756117 /* Daily */ = {
+			isa = PBXGroup;
+			children = (
+				59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */,
+				59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */,
+			);
+			path = Daily;
+			sourceTree = "<group>";
+		};
+		59BAF0B8217A6A5600756117 /* Magazine */ = {
+			isa = PBXGroup;
+			children = (
+				59BAF0B9217A6A8500756117 /* MagazinePage01ViewController.swift */,
+				59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */,
+			);
+			path = Magazine;
+			sourceTree = "<group>";
+		};
 		59D30E242176B02A0063B303 /* CellViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +169,8 @@
 		8C5CEF2E216FA155002F5D56 /* Maguen */ = {
 			isa = PBXGroup;
 			children = (
+				59BAF0B8217A6A5600756117 /* Magazine */,
+				59BAF0B1217A5BCB00756117 /* Daily */,
 				59D30E242176B02A0063B303 /* CellViews */,
 				8C5CEF2F216FA155002F5D56 /* AppDelegate.swift */,
 				8C5CEF33216FA155002F5D56 /* StoreController.swift */,
@@ -170,6 +200,7 @@
 				59BB4F0A2177C2D2007CC317 /* EventViewController.swift */,
 				8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */,
 				8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */,
+				59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -250,12 +281,15 @@
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
 				8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */,
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
+				59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */,
+				59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
 				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
 				8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */,
+				59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
 				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
@@ -278,9 +312,11 @@
 				59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */,
 				59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,
+				59BAF0B7217A5E9500756117 /* DailyPage02ViewController.swift in Sources */,
 				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
 				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
+				59BAF0BC217A6A9800756117 /* MagazinePage02ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -427,7 +463,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K58JH44H3K;
+				DEVELOPMENT_TEAM = R4CTQPXKR2;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -445,7 +481,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K58JH44H3K;
+				DEVELOPMENT_TEAM = R4CTQPXKR2;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

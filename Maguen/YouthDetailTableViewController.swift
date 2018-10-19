@@ -26,6 +26,9 @@ class YouthDetailTableViewController: UITableViewController {
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
     self.navigationController?.navigationBar.titleTextAttributes = titleColor
         
+        self.tableView.backgroundColor = MaguenColors.black1
+
+        
     }
 
     override func numberOfSections(in tableView: UITableView) -> Int {

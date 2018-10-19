@@ -36,6 +36,9 @@ class HomeViewController: UITableViewController {
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_comite"), cellColor: MaguenColors.blue8, cellTitle: "COMITÉ"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_directorio"), cellColor: MaguenColors.blue9, cellTitle: "DIRECTORIO")]
         
+        self.homeTableView.backgroundColor = MaguenColors.black1
+        self.navigationController?.navigationBar.barTintColor = MaguenColors.black2
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

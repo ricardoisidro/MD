@@ -28,11 +28,7 @@ class NotificationsTableViewController: UITableViewController {
              notificationsComponents(notificationTitle: "Centro Maguén", notificationDate: "18/09/18 10:40", notificationText: "Estimada comunidad, son todos bienvenidos a la fiesta que se llevará a cabo este fin de semana por la mañana, acompañando a nuestro amigo el Sr Toffy"),
              notificationsComponents(notificationTitle: "Centro Maguén", notificationDate: "17/09/18 10:40", notificationText: "Estimada comunidad, son tod@s bienvenidos a la fiesta...")]
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.tableView.backgroundColor = MaguenColors.black1
     }
 
     // MARK: - Table view data source
@@ -45,10 +41,11 @@ class NotificationsTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = notificationsTableView.dequeueReusableCell(withIdentifier: "notification") as! NotificationCell
         cell.notificationTitle.text = tableViewData[indexPath.row].notificationTitle
+        cell.notificationTitle.font = UIFont.boldSystemFont(ofSize: 13.0)
         cell.notificationDate.text = tableViewData[indexPath.row].notificationDate
+        cell.notificationDate.font = UIFont.systemFont(ofSize: 12.0)
         cell.notificationText.text = tableViewData[indexPath.row].notificationText
-
-        // Configure the cell...
+        cell.notificationText.font = UIFont.boldSystemFont(ofSize: 15.0)
 
         return cell
     }

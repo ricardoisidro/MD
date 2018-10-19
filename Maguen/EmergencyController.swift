@@ -30,6 +30,8 @@ class EmergencyController: UIViewController {
         imgJebra.layer.cornerRadius = imgJebra.frame.size.width / 2;
         imgJebra.clipsToBounds = true
         
+        self.view.backgroundColor = MaguenColors.black1
+        
         //img1118.layer.cornerRadius = img
 
         // Do any additional setup after loading the view.

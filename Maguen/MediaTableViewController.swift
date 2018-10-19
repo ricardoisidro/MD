@@ -33,6 +33,8 @@ class MediaTableViewController: UITableViewController {
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
+        
+        self.tableView.backgroundColor = MaguenColors.black1
 
     }
 
@@ -51,7 +53,7 @@ class MediaTableViewController: UITableViewController {
         cell.imgMedia.clipsToBounds = true
         cell.textMedia.text = tableViewData[indexPath.row].mediaText
         cell.dateMedia.text = tableViewData[indexPath.row].mediaDate
-        cell.dateMedia.font = UIFont(name: "System", size: 9.0)
+        cell.dateMedia.font = UIFont.systemFont(ofSize: 13.0)
         
         cell.layer.borderWidth = CGFloat(5.0)
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
