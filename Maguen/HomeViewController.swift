@@ -74,7 +74,7 @@ class HomeViewController: UITableViewController {
         print("You tapped cell number \(indexPath.row).")
         homeTableView.deselectRow(at: indexPath, animated: true)
         
-        performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)
+        performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: tableViewData[indexPath.row].cellTitle)
         
     }
     
@@ -114,14 +114,57 @@ class HomeViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        //var controller = UIViewController()
+        switch(segue.identifier)
+        {
+        case "MediosDigitales":
+            let controller = segue.destination as? MediaTableViewController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Templos":
+            let controller = segue.destination as? ChurchsTableViewController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Eventos":
+            let controller = segue.destination as? EventTableViewController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Juventud":
+            let controller = segue.destination as? YouthTableViewController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Kashrut":
+            let controller = segue.destination as? KashrutController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Comite":
+            let controller = segue.destination as? CommitteeTableViewController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "SuperEmet":
+            let controller = segue.destination as? StoreController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Directorio":
+            let controller = segue.destination as? DirectoryTableViewController
+            controller?.navigationItem.title = (sender as! String)
+
+        case "Escuelas":
+            let controller = segue.destination as? SchoolsTableViewController
+            controller?.navigationItem.title = (sender as! String)
+            
+        case .none:
+            print("None")
+        case .some(_):
+            print("Some")
+        }
+
     }
-    */
+    
 
 }

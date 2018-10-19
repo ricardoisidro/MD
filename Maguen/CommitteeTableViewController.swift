@@ -25,6 +25,9 @@ class CommitteeTableViewController: UITableViewController {
             committeeComponents(committeeImage: #imageLiteral(resourceName: "img_jebrakadisha"), committeeTitle: "Comité 1", committeePhone: "5557575757"),
             committeeComponents(committeeImage: #imageLiteral(resourceName: "img_jebrakadisha"), committeeTitle: "Comité 2", committeePhone: "5556565656")]
         
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
+        
     }
 
     // MARK: - Table view data source

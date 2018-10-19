@@ -28,6 +28,9 @@ class EventTableViewController: UITableViewController {
              eventComponents(eventImage: #imageLiteral(resourceName: "evento_uno") ,eventTitle: "Evento 2", eventPlace: "Maguén David", eventDate: "22/08/2017", eventTime: "09:00 A.M."),
              eventComponents(eventImage: #imageLiteral(resourceName: "evento_dos") ,eventTitle: "Mazel Tov", eventPlace: "Maguén David", eventDate: "22/08/2018", eventTime: "10:00 A.M.")]
 
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
+        
     }
 
     // MARK: - Table view data source
@@ -59,15 +62,16 @@ class EventTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "eventdetail", sender: tableViewData[indexPath.row].eventTitle)
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "evento") {
+        if(segue.identifier == "eventdetail") {
             let controller = segue.destination as? EventViewController
-            //controller?.
+            //controller? = (sender as! String)
             
         }
     }

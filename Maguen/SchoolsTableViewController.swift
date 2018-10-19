@@ -22,6 +22,10 @@ class SchoolsTableViewController: UITableViewController {
         super.viewDidLoad()
         
         tableViewData = [schoolComponents(schoolImage: #imageLiteral(resourceName: "icon_escuelas"), schoolText: "ATID", schoolPage: "https://www.atid.edu.mx/web/"), schoolComponents(schoolImage: #imageLiteral(resourceName: "icon_escuelas"), schoolText: "Maguén David", schoolPage: "https://www.chmd.edu.mx/"), schoolComponents(schoolImage: #imageLiteral(resourceName: "icon_escuelas"), schoolText: "OR Hajayim", schoolPage: "http://ideurban.com.mx/archivos/536")]
+        
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
+        
     }
 
     // MARK: - Table view data source

@@ -30,8 +30,9 @@ class MediaTableViewController: UITableViewController {
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaDate: ""),
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaDate: "")
         ]
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
 
     }
 

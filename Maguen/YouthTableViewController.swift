@@ -21,6 +21,9 @@ class YouthTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableViewData = [youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Talmud Torah"), youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Nuevo grupo")]
+        
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
     }
 
     // MARK: - Table view data source
@@ -55,6 +58,7 @@ class YouthTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
+        self.performSegue(withIdentifier: "youthdetail", sender: tableViewData[indexPath.row].youthText)
     }
 
     /*
@@ -92,14 +96,17 @@ class YouthTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        if(segue.identifier == "youthdetail") {
+            let controller = segue.destination as? YouthDetailTableViewController
+            controller?.navigationItem.title = (sender as! String)
+        }
+        
     }
-    */
+    
 
 }

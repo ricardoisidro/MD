@@ -41,6 +41,11 @@
 		8C5CEF37216FA156002F5D56 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5CEF35216FA156002F5D56 /* Main.storyboard */; };
 		8C5CEF39216FA159002F5D56 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8C5CEF38216FA159002F5D56 /* Assets.xcassets */; };
 		8C5CEF3C216FA159002F5D56 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8C5CEF3A216FA159002F5D56 /* LaunchScreen.storyboard */; };
+		8C7F08C321790F6E004A9FBF /* ChurchDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08C221790F6E004A9FBF /* ChurchDetailTableViewCell.swift */; };
+		8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */; };
+		8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08C821792405004A9FBF /* ChurchDetailChildCell.swift */; };
+		8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */; };
+		8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -80,6 +85,11 @@
 		8C5CEF38216FA159002F5D56 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8C5CEF3B216FA159002F5D56 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8C5CEF3D216FA159002F5D56 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8C7F08C221790F6E004A9FBF /* ChurchDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchDetailTableViewCell.swift; sourceTree = "<group>"; };
+		8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchDetailTableViewController.swift; sourceTree = "<group>"; };
+		8C7F08C821792405004A9FBF /* ChurchDetailChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchDetailChildCell.swift; sourceTree = "<group>"; };
+		8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailTableViewController.swift; sourceTree = "<group>"; };
+		8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +115,9 @@
 				8C4B054B216FDEA80079A937 /* HomeCell.swift */,
 				59D30E252176B1570063B303 /* DirectoryCell.swift */,
 				59D30E292176B7BA0063B303 /* CommitteeCell.swift */,
+				8C7F08C221790F6E004A9FBF /* ChurchDetailTableViewCell.swift */,
+				8C7F08C821792405004A9FBF /* ChurchDetailChildCell.swift */,
+				8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -155,6 +168,8 @@
 				59BB4F062177A0CE007CC317 /* InstagramViewController.swift */,
 				59BB4F082177A439007CC317 /* SchoolPageViewController.swift */,
 				59BB4F0A2177C2D2007CC317 /* EventViewController.swift */,
+				8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */,
+				8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -233,20 +248,24 @@
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
+				8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */,
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
 				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
+				8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
 				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
 				59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */,
+				8C7F08C321790F6E004A9FBF /* ChurchDetailTableViewCell.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
 				59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */,
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
+				8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */,
 				59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */,
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,
@@ -260,6 +279,7 @@
 				59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,
 				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
+				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -407,7 +427,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4CTQPXKR2;
+				DEVELOPMENT_TEAM = K58JH44H3K;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -425,7 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4CTQPXKR2;
+				DEVELOPMENT_TEAM = K58JH44H3K;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

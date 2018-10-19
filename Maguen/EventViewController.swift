@@ -9,26 +9,30 @@
 import UIKit
 
 class EventViewController: UIViewController {
-
+    
+    @IBOutlet weak var popView: UIView!
+    @IBOutlet weak var imgEvent: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        popView.layer.cornerRadius = 10
+        popView.layer.masksToBounds = true
         // Do any additional setup after loading the view.
+        imgEvent.isUserInteractionEnabled = true
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
+        imgEvent.addGestureRecognizer(pinchGesture)
+        
     }
     
-    func draw(_ rect: CGRect) {
-        guard let context = UIGraphicsGetCurrentContext() else { return }
-        let lineWidth: CGFloat = 1.0
-        context.setLineWidth(lineWidth)
-        context.setStrokeColor(UIColor.lightGray.cgColor)
-        let startingPoint = CGPoint(x: 0, y: rect.size.height - lineWidth)
-        let endingPoint = CGPoint(x: rect.size.width, y: rect.size.height - lineWidth)
-        context.move(to: startingPoint )
-        context.addLine(to: endingPoint )
-        context.strokePath()
+    @objc func pinchGesture(sender: UIPinchGestureRecognizer) {
+        sender.view?.transform = ((sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!)
+        sender.scale = 1.0
     }
-    
 
+    @IBAction func closePopup(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
     /*
     // MARK: - Navigation
 

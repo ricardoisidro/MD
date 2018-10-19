@@ -22,6 +22,10 @@ class DirectoryTableViewController: UITableViewController {
         super.viewDidLoad()
 
         tableViewData = [directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Arija", directoryPhone: "55143068"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Caja", directoryPhone: "57182367"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Eventos", directoryPhone: "57182869"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Ayudas", directoryPhone: "23232323"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Prensa", directoryPhone: "53264789")]
+        
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
+        
     }
 
     // MARK: - Table view data source
