@@ -926,7 +926,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3o3-7L-PhW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2436" y="-2723.3883058470765"/>
+            <point key="canvasLocation" x="2436" y="-2729"/>
         </scene>
         <!--Periodico-->
         <scene sceneID="RUA-cB-ImN">
@@ -1193,7 +1193,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RRG-95-xlp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2029.5999999999999" y="-1210.344827586207"/>
+            <point key="canvasLocation" x="2086" y="-1221"/>
         </scene>
         <!--Magazine Page01 View Controller-->
         <scene sceneID="yhI-gK-fEt">
@@ -1521,7 +1521,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H8h-yP-BiF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2044" y="-529.38530734632684"/>
+            <point key="canvasLocation" x="2086" y="-528"/>
         </scene>
         <!--Escuelas-->
         <scene sceneID="Zey-kH-TYC">
