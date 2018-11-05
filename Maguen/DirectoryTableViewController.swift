@@ -44,8 +44,7 @@ class DirectoryTableViewController: UITableViewController {
         cell.imgDirectory.layer.cornerRadius = cell.imgDirectory.frame.size.width / 2
         cell.imgDirectory.clipsToBounds = true
         cell.txtDirectory.text = tableViewData[indexPath.row].directoryTitle
-        cell.phoneDirectory.text = tableViewData[indexPath.row].directoryPhone
-        
+        cell.txtPhone.text = tableViewData[indexPath.row].directoryPhone
         cell.layer.borderWidth = CGFloat(5.0)
         cell.layer.borderColor = tableView.backgroundColor?.cgColor
         
@@ -63,15 +62,15 @@ class DirectoryTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
+        let number = tableViewData[indexPath.row].directoryPhone
+        let url:NSURL = NSURL(string: "tel://" + number)!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    @objc func buttonClicked(_ sender: UIButton) {
+        
+        
     }
-    */
 
     /*
     // Override to support editing the table view.

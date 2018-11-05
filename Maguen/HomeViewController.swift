@@ -41,6 +41,8 @@ class HomeViewController: UITableViewController {
         
     }
     
+    // MARK: - Hide and show NavBar
+    
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         super.viewWillAppear(animated)
@@ -51,6 +53,7 @@ class HomeViewController: UITableViewController {
         super.viewWillDisappear(animated)
     }
 
+    //MARK: - TableView
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData.count
     }

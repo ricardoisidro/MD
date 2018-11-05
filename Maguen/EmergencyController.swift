@@ -39,6 +39,36 @@ class EmergencyController: UIViewController {
     
     @IBAction func btnHatzala(_ sender: Any) {
         print("Calling hatzala")
+        let url:NSURL = NSURL(string: "tel://52805780")!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+        
+    }
+    
+    @IBAction func btnAccionSocial1(_ sender: UIButton) {
+        print("Calling accsocial1")
+        let url:NSURL = NSURL(string: "tel://19951520")!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func btnAccionSocial2(_ sender: UIButton) {
+        
+        let url:NSURL = NSURL(string: "tel://19951521")!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func btnAccionSocial3(_ sender: UIButton) {
+        let url:NSURL = NSURL(string: "tel://19951523")!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func btn1118(_ sender: UIButton) {
+        let url:NSURL = NSURL(string: "tel://59801118")!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
+    }
+    
+    @IBAction func btnJebra(_ sender: UIButton) {
+        let url:NSURL = NSURL(string: "tel://5555032044")!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }
     
     /*

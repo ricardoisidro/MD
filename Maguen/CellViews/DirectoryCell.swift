@@ -12,6 +12,6 @@ class DirectoryCell: UITableViewCell {
 
     @IBOutlet weak var imgDirectory: UIImageView!
     @IBOutlet weak var txtDirectory: UILabel!
-    @IBOutlet weak var phoneDirectory: UILabel!
+    @IBOutlet weak var txtPhone: UILabel!
 
 }
