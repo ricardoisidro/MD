@@ -26,6 +26,9 @@
 		59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */; };
 		59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D536217554AE004E4813 /* MediaTableViewController.swift */; };
 		59C6D539217560EA004E4813 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D538217560EA004E4813 /* MediaCell.swift */; };
+		59CE6745219200B300A5D719 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE6744219200B300A5D719 /* NewSettingsViewController.swift */; };
+		59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE67472192594200A5D719 /* MaguenTextFieldDesign.swift */; };
+		59CE674B21925F6D00A5D719 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE674A21925F6D00A5D719 /* UITextField+Extension.swift */; };
 		59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E182176829B0063B303 /* EventTableViewController.swift */; };
 		59D30E1B217684790063B303 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E1A217684790063B303 /* EventCell.swift */; };
 		59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */; };
@@ -73,6 +76,9 @@
 		59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchsTableViewController.swift; sourceTree = "<group>"; };
 		59C6D536217554AE004E4813 /* MediaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewController.swift; sourceTree = "<group>"; };
 		59C6D538217560EA004E4813 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		59CE6744219200B300A5D719 /* NewSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSettingsViewController.swift; sourceTree = "<group>"; };
+		59CE67472192594200A5D719 /* MaguenTextFieldDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaguenTextFieldDesign.swift; sourceTree = "<group>"; };
+		59CE674A21925F6D00A5D719 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
 		59D30E182176829B0063B303 /* EventTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventTableViewController.swift; sourceTree = "<group>"; };
 		59D30E1A217684790063B303 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolsTableViewController.swift; sourceTree = "<group>"; };
@@ -131,6 +137,22 @@
 			path = Magazine;
 			sourceTree = "<group>";
 		};
+		59CE67462192591D00A5D719 /* IBDesignables */ = {
+			isa = PBXGroup;
+			children = (
+				59CE67472192594200A5D719 /* MaguenTextFieldDesign.swift */,
+			);
+			path = IBDesignables;
+			sourceTree = "<group>";
+		};
+		59CE674921925F4500A5D719 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				59CE674A21925F6D00A5D719 /* UITextField+Extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		59D30E242176B02A0063B303 /* CellViews */ = {
 			isa = PBXGroup;
 			children = (
@@ -169,6 +191,8 @@
 		8C5CEF2E216FA155002F5D56 /* Maguen */ = {
 			isa = PBXGroup;
 			children = (
+				59CE674921925F4500A5D719 /* Extensions */,
+				59CE67462192591D00A5D719 /* IBDesignables */,
 				59BAF0B8217A6A5600756117 /* Magazine */,
 				59BAF0B1217A5BCB00756117 /* Daily */,
 				59D30E242176B02A0063B303 /* CellViews */,
@@ -201,6 +225,7 @@
 				8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */,
 				8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */,
 				59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */,
+				59CE6744219200B300A5D719 /* NewSettingsViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -280,6 +305,7 @@
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
 				8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */,
+				59CE6745219200B300A5D719 /* NewSettingsViewController.swift in Sources */,
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
 				59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */,
 				59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */,
@@ -292,9 +318,11 @@
 				59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
+				59CE674B21925F6D00A5D719 /* UITextField+Extension.swift in Sources */,
 				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
 				59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */,
 				8C7F08C321790F6E004A9FBF /* ChurchDetailTableViewCell.swift in Sources */,
+				59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
 				59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */,
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,

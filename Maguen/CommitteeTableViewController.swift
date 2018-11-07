@@ -66,6 +66,9 @@ class CommitteeTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
+        let number = tableViewData[indexPath.row].committeePhone
+        let url:NSURL = NSURL(string: "tel://" + number)!
+        UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }
 
     /*
