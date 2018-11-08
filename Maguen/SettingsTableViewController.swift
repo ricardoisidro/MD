@@ -66,9 +66,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         case textConfigSurname2:
             textConfigSex.becomeFirstResponder()
         case textConfigSex:
-            textConfigBirthday.becomeFirstResponder()
+            textConfigSex.resignFirstResponder()
         case textConfigBirthday:
-            textConfigMail.becomeFirstResponder()
+            textConfigBirthday.resignFirstResponder()
         case textConfigMail:
             textConfigPhone.becomeFirstResponder()
         case textConfigPhone:

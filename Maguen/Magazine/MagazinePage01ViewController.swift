@@ -26,8 +26,18 @@ class MagazinePage01ViewController: UIViewController {
     }
     
     @objc func pinchGesture(sender: UIPinchGestureRecognizer) {
+        self.view.bringSubviewToFront(img01)
         sender.view?.transform = ((sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!)
         sender.scale = 1.0
+    }
+    
+    @IBAction func handlePan(recognizer:UIPanGestureRecognizer) {
+        let translation = recognizer.translation(in: self.img01)
+        if let view = recognizer.view {
+            view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+            
+        }
+        recognizer.setTranslation(CGPoint.zero, in: self.img01)
     }
 
 }
