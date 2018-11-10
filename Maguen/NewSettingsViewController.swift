@@ -18,6 +18,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var btnPhoto: UIButton!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var imageTake: UIImageView!
+    @IBOutlet weak var btnDeactivate: UIButton!
     
     var imagePicker: UIImagePickerController!
     
@@ -28,6 +29,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         btnPhoto.layer.cornerRadius = 0.5 * btnPhoto.bounds.size.width
         btnPhoto.clipsToBounds = true
         btnSave.layer.cornerRadius = 10
+        btnDeactivate.layer.cornerRadius = 10
         btnPhoto.layer.masksToBounds = true
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))

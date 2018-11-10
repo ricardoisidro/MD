@@ -39,6 +39,12 @@ class HomeViewController: UITableViewController {
         self.homeTableView.backgroundColor = MaguenColors.black1
         self.navigationController?.navigationBar.barTintColor = MaguenColors.black2
         
+        self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
+        //self.tabBarController?.tabBar.backgroundImage = UIImage.gif(asset: "logo_animado")
+        self.tabBarController?.tabBarItem.image = UIImage.gif(asset: "logo_animado")
+        self.tabBarController?.tabBarItem.title = "Hola"
+        
+        
     }
     
     // MARK: - Hide and show NavBar

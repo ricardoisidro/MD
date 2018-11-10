@@ -9,10 +9,44 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
 
+    // This delegate open the modal view before open the desired view.
+    /*func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        if viewController is CardController {
+            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
+                tabBarController.present(popUpVC, animated: true)
+                print("Pedir login antes de la credencial")
+                return false
+            }
+        }
+        else if viewController is NewSettingsViewController {
+            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
+                tabBarController.present(popUpVC, animated: true)
+                print("Pedir login antes de los ajustes")
+                return false
+            }
+        }
+        return true
+    }*/
+    
+    // This delegate open the modal view after open the desired view.
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        if viewController is CardController {
+            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
+                tabBarController.present(popUpVC, animated: true)
+                print("Pedir login antes de la credencial")
+            }
+        }
+        else if viewController is NewSettingsViewController {
+            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
+                tabBarController.present(popUpVC, animated: true)
+                print("Pedir login antes de los ajustes")
+            }
+        }
+    }
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

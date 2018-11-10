@@ -54,6 +54,8 @@
 		8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08C821792405004A9FBF /* ChurchDetailChildCell.swift */; };
 		8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */; };
 		8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */; };
+		8C895D642194BF43004F5D46 /* AskLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C895D622194BF43004F5D46 /* AskLoginViewController.swift */; };
+		8C895D6721950C6E004F5D46 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C895D6621950C6E004F5D46 /* UIImage+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -106,6 +108,8 @@
 		8C7F08C821792405004A9FBF /* ChurchDetailChildCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchDetailChildCell.swift; sourceTree = "<group>"; };
 		8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailTableViewController.swift; sourceTree = "<group>"; };
 		8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailCell.swift; sourceTree = "<group>"; };
+		8C895D622194BF43004F5D46 /* AskLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskLoginViewController.swift; sourceTree = "<group>"; };
+		8C895D6621950C6E004F5D46 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,7 @@
 			isa = PBXGroup;
 			children = (
 				59CE674A21925F6D00A5D719 /* UITextField+Extension.swift */,
+				8C895D6621950C6E004F5D46 /* UIImage+Extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -226,6 +231,7 @@
 				8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */,
 				59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */,
 				59CE6744219200B300A5D719 /* NewSettingsViewController.swift */,
+				8C895D622194BF43004F5D46 /* AskLoginViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -310,6 +316,7 @@
 				59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */,
 				59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
+				8C895D6721950C6E004F5D46 /* UIImage+Extension.swift in Sources */,
 				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
@@ -332,6 +339,7 @@
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,
 				59E9875221711B6C004DDE0D /* CardController.swift in Sources */,
+				8C895D642194BF43004F5D46 /* AskLoginViewController.swift in Sources */,
 				59D30E212176AA330063B303 /* YouthCell.swift in Sources */,
 				59D30E1B217684790063B303 /* EventCell.swift in Sources */,
 				8C4B054C216FDEA80079A937 /* HomeCell.swift in Sources */,
