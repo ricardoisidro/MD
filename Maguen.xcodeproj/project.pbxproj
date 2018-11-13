@@ -39,6 +39,7 @@
 		59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E272176B2440063B303 /* DirectoryTableViewController.swift */; };
 		59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E292176B7BA0063B303 /* CommitteeCell.swift */; };
 		59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */; };
+		59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */; };
 		59E9875021711620004DDE0D /* KashrutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9874F21711620004DDE0D /* KashrutController.swift */; };
 		59E9875221711B6C004DDE0D /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9875121711B6C004DDE0D /* CardController.swift */; };
 		8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B0547216FBD3E0079A937 /* HomeViewController.swift */; };
@@ -91,6 +92,7 @@
 		59D30E272176B2440063B303 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		59D30E292176B7BA0063B303 /* CommitteeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitteeCell.swift; sourceTree = "<group>"; };
 		59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommitteeTableViewController.swift; path = Maguen/CommitteeTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchPrayDetailViewController.swift; sourceTree = "<group>"; };
 		59E9874F21711620004DDE0D /* KashrutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashrutController.swift; sourceTree = "<group>"; };
 		59E9875121711B6C004DDE0D /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 		8C4B0547216FBD3E0079A937 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */,
 				59CE6744219200B300A5D719 /* NewSettingsViewController.swift */,
 				8C895D622194BF43004F5D46 /* AskLoginViewController.swift */,
+				59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */,
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,

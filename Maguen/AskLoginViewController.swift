@@ -25,10 +25,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate {
         loginView.layer.masksToBounds = true
         btnOK.layer.cornerRadius = 10
         btnOK.layer.masksToBounds = true
-        btnOK.backgroundColor = MaguenColors.blue1
         btnCancel.layer.cornerRadius = 10
         btnCancel.layer.masksToBounds = true
-        btnCancel.backgroundColor = MaguenColors.blue2
         
         txtUsuario.delegate = self
         txtPassword.delegate = self

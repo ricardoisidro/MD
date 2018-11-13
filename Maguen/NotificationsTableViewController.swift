@@ -29,6 +29,31 @@ class NotificationsTableViewController: UITableViewController {
              notificationsComponents(notificationTitle: "Centro Maguén", notificationDate: "17/09/18 10:40", notificationText: "Estimada comunidad, son tod@s bienvenidos a la fiesta...")]
 
         self.tableView.backgroundColor = MaguenColors.black1
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if tableViewData.count > 0
+        {
+            self.tabBarItem.badgeValue = String(tableViewData.count)
+            self.tabBarItem.badgeColor = .red
+        }
+        else {
+            self.tabBarItem.badgeValue = nil
+        }
+        
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if tableViewData.count > 0
+        {
+            self.tabBarItem.badgeValue = String(tableViewData.count)
+            self.tabBarItem.badgeColor = .red
+        }
+        else {
+            self.tabBarItem.badgeValue = nil
+        }
     }
 
     // MARK: - Table view data source
