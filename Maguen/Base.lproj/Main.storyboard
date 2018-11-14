@@ -1537,7 +1537,7 @@
         <!--Event View Controller-->
         <scene sceneID="uja-S2-2Qf">
             <objects>
-                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="currentContext" id="VpZ-6f-Ouc" customClass="EventViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="VpZ-6f-Ouc" customClass="EventViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gtN-aS-hmw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
