@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A99219CE8A200909453 /* LoginRequest.swift */; };
+		59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A9C219CFACB00909453 /* LoginResponse.swift */; };
 		59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */; };
 		59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */; };
 		59BAF0B7217A5E9500756117 /* DailyPage02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */; };
@@ -57,9 +59,14 @@
 		8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */; };
 		8C895D642194BF43004F5D46 /* AskLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C895D622194BF43004F5D46 /* AskLoginViewController.swift */; };
 		8C895D6721950C6E004F5D46 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C895D6621950C6E004F5D46 /* UIImage+Extension.swift */; };
+		C6D705AB43C1EF32A6C28A50 /* Pods_Maguen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6FDEFD400814C4CD04914 /* Pods_Maguen.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14C6FDEFD400814C4CD04914 /* Pods_Maguen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maguen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		50FC3295375B0EFE71FEFBEC /* Pods-Maguen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maguen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Maguen/Pods-Maguen.debug.xcconfig"; sourceTree = "<group>"; };
+		59AA1A99219CE8A200909453 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		59AA1A9C219CFACB00909453 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPage01ViewController.swift; sourceTree = "<group>"; };
 		59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPage02ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +102,7 @@
 		59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchPrayDetailViewController.swift; sourceTree = "<group>"; };
 		59E9874F21711620004DDE0D /* KashrutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashrutController.swift; sourceTree = "<group>"; };
 		59E9875121711B6C004DDE0D /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
+		7F8F764BC2093E1B97B5F49F /* Pods-Maguen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maguen.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maguen/Pods-Maguen.release.xcconfig"; sourceTree = "<group>"; };
 		8C4B0547216FBD3E0079A937 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C4B0549216FD3C70079A937 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8C4B054B216FDEA80079A937 /* HomeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -119,12 +127,31 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C6D705AB43C1EF32A6C28A50 /* Pods_Maguen.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		39F2675F3C04B0347C40057E /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				50FC3295375B0EFE71FEFBEC /* Pods-Maguen.debug.xcconfig */,
+				7F8F764BC2093E1B97B5F49F /* Pods-Maguen.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		59AA1A96219CBC7200909453 /* JSON */ = {
+			isa = PBXGroup;
+			children = (
+				59AA1A99219CE8A200909453 /* LoginRequest.swift */,
+				59AA1A9C219CFACB00909453 /* LoginResponse.swift */,
+			);
+			path = JSON;
+			sourceTree = "<group>";
+		};
 		59BAF0B1217A5BCB00756117 /* Daily */ = {
 			isa = PBXGroup;
 			children = (
@@ -141,6 +168,13 @@
 				59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */,
 			);
 			path = Magazine;
+			sourceTree = "<group>";
+		};
+		59C5561A219E000D009E72E6 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		59CE67462192591D00A5D719 /* IBDesignables */ = {
@@ -184,6 +218,8 @@
 			children = (
 				8C5CEF2E216FA155002F5D56 /* Maguen */,
 				8C5CEF2D216FA155002F5D56 /* Products */,
+				39F2675F3C04B0347C40057E /* Pods */,
+				E091360605218408BDE259BB /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -198,6 +234,8 @@
 		8C5CEF2E216FA155002F5D56 /* Maguen */ = {
 			isa = PBXGroup;
 			children = (
+				59C5561A219E000D009E72E6 /* Protocols */,
+				59AA1A96219CBC7200909453 /* JSON */,
 				59CE674921925F4500A5D719 /* Extensions */,
 				59CE67462192591D00A5D719 /* IBDesignables */,
 				59BAF0B8217A6A5600756117 /* Magazine */,
@@ -239,6 +277,14 @@
 			path = Maguen;
 			sourceTree = "<group>";
 		};
+		E091360605218408BDE259BB /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				14C6FDEFD400814C4CD04914 /* Pods_Maguen.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -246,9 +292,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8C5CEF40216FA159002F5D56 /* Build configuration list for PBXNativeTarget "Maguen" */;
 			buildPhases = (
+				A8E19D8AED0A5C7FB9E9D46F /* [CP] Check Pods Manifest.lock */,
 				8C5CEF28216FA155002F5D56 /* Sources */,
 				8C5CEF29216FA155002F5D56 /* Frameworks */,
 				8C5CEF2A216FA155002F5D56 /* Resources */,
+				C1FD0B67D8D8E41E241E2A0D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -305,6 +353,53 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		A8E19D8AED0A5C7FB9E9D46F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Maguen-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C1FD0B67D8D8E41E241E2A0D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-Maguen/Pods-Maguen-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Maguen/Pods-Maguen-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		8C5CEF28216FA155002F5D56 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -325,6 +420,7 @@
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
+				59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */,
 				8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */,
 				59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
@@ -343,6 +439,7 @@
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,
 				59E9875221711B6C004DDE0D /* CardController.swift in Sources */,
+				59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */,
 				8C895D642194BF43004F5D46 /* AskLoginViewController.swift in Sources */,
 				59D30E212176AA330063B303 /* YouthCell.swift in Sources */,
 				59D30E1B217684790063B303 /* EventCell.swift in Sources */,
@@ -500,6 +597,7 @@
 		};
 		8C5CEF41216FA159002F5D56 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 50FC3295375B0EFE71FEFBEC /* Pods-Maguen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -518,6 +616,7 @@
 		};
 		8C5CEF42216FA159002F5D56 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 7F8F764BC2093E1B97B5F49F /* Pods-Maguen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;

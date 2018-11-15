@@ -34,7 +34,11 @@ struct MaguenColors {
     static let titlescolor = UIColor(red:0.24, green:0.71, blue:0.95, alpha:1.0)
     static let datescolor = UIColor(red:0.59, green:0.79, blue:0.89, alpha:1.0)
     
-    
-    
     static let white1 = [NSAttributedString.Key.foregroundColor:UIColor.white]
+}
+
+struct MaguenCredentials {
+    static let key = "Expr3s10nB1n4r14"
+    static let IV = "Expr3s10nB1n4r14"
+    static let getUsuarioApp = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetUsuarioApp"
 }
