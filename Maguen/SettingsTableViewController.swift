@@ -8,6 +8,8 @@
 
 import UIKit
 
+let dataNotificationKey = "co.loginData"
+
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var textConfigName: UITextField!
@@ -17,6 +19,12 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     @IBOutlet weak var textConfigBirthday: UITextField!
     @IBOutlet weak var textConfigMail: UITextField!
     @IBOutlet weak var textConfigPhone: UITextField!
+    
+    let dataNotif = Notification.Name(rawValue: dataNotificationKey)
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     
     let sexTypes = ["HOMBRE", "MUJER"]
     let birthDatePicker: UIDatePicker = UIDatePicker()
@@ -41,6 +49,19 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigMail.delegate = self
         textConfigPhone.delegate = self
     
+        createObservers()
+    }
+    
+    func createObservers() {
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(self.updateData(notification:)),
+                                               name: dataNotif,
+                                               object: nil)
+    }
+    
+    @objc func updateData(notification: Notification) {
+        let info = notification.userInfo?["mykey"]
+        //textConfigName.text =
     }
     
     @objc func dismissKeyboard(){

@@ -21,6 +21,7 @@
 		59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F062177A0CE007CC317 /* InstagramViewController.swift */; };
 		59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F082177A439007CC317 /* SchoolPageViewController.swift */; };
 		59BB4F0B2177C2D2007CC317 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0A2177C2D2007CC317 /* EventViewController.swift */; };
+		59C5561C219E09D5009E72E6 /* SettingsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C5561B219E09D5009E72E6 /* SettingsProtocol.swift */; };
 		59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52C2174F66C004E4813 /* EmergencyController.swift */; };
 		59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52E217516BE004E4813 /* NotificationCell.swift */; };
 		59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */; };
@@ -79,6 +80,7 @@
 		59BB4F062177A0CE007CC317 /* InstagramViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstagramViewController.swift; sourceTree = "<group>"; };
 		59BB4F082177A439007CC317 /* SchoolPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolPageViewController.swift; sourceTree = "<group>"; };
 		59BB4F0A2177C2D2007CC317 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		59C5561B219E09D5009E72E6 /* SettingsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsProtocol.swift; sourceTree = "<group>"; };
 		59C6D52C2174F66C004E4813 /* EmergencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyController.swift; sourceTree = "<group>"; };
 		59C6D52E217516BE004E4813 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -173,6 +175,7 @@
 		59C5561A219E000D009E72E6 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
+				59C5561B219E09D5009E72E6 /* SettingsProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
 				8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */,
+				59C5561C219E09D5009E72E6 /* SettingsProtocol.swift in Sources */,
 				59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */,
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,

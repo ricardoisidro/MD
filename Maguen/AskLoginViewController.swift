@@ -66,8 +66,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     @IBAction func makeLogin(_ sender: UIButton) {
         
-        let cipherRequest: Array<UInt8>
-        let aes: AES
+        //let cipherRequest: Array<UInt8>
+        //let aes: AES
         
         guard let user = txtUsuario.text else {
             print("No user")
@@ -77,46 +77,34 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             print("No password")
             return
         }
+        //get data to send
         let loginRequest = LoginRequest(contrasena: pass, imei: "356021081404192", sistema_operativo: "iOS", usuario: user)
         
+        let chainEncodedandEncrypted = encodeAndEncryptJSONString(LoginRequest: loginRequest)
         
-        do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(loginRequest)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            //let jsonDecoder = JSONDecoder()
-            //let loginResult = try jsonDecoder.decode(LoginRequest.self, from: Data(jsonString.utf8))
-            //print("LoginResult Data: \(loginResult)")
-            //print(loginResult.usuario)
-            //print(loginResult.imei)
-            aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
-            print(cipherRequest.toBase64()!)
-            let soapMessage =
-            "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetUsuarioApp xmlns='http://tempuri.org/'><Cadena>\(cipherRequest.toBase64()!)</Cadena><Token></Token></GetUsuarioApp></soap:Body></soap:Envelope>"
-            //let endpoint = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetUsuarioApp"
-            let url = URL(string: MaguenCredentials.getUsuarioApp)
-            let req = NSMutableURLRequest(url: url!)
-            let msgLength = soapMessage.count
-            req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
-            req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
-            req.httpMethod = "POST"
-            req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        let soapMessage =
+        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetUsuarioApp xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetUsuarioApp></soap:Body></soap:Envelope>"
+        
+        //Prepare request
+        let url = URL(string: MaguenCredentials.getUsuarioApp)
+        let req = NSMutableURLRequest(url: url!)
+        let msgLength = soapMessage.count
+        req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
+        req.httpMethod = "POST"
+        req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
             
-            //Make the request
-            dataTask?.cancel()
-            dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
-                defer { self.dataTask = nil }
-                guard let data = data else { return }
-                let parser = XMLParser(data: data)
-                parser.delegate = self
-                parser.parse()
-            }
-            dataTask?.resume()
+        //Make the request
+        dataTask?.cancel()
+        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
+            defer { self.dataTask = nil }
+            guard let data = data else { return }
+            let parser = XMLParser(data: data)
+            parser.delegate = self
+            parser.parse()
         }
-        catch let err{
-            print("Error al hacer login: \(err)")
-        }
+        dataTask?.resume()
+        
     }
     
     //MARK:- XML Delegate methods
@@ -160,18 +148,55 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         print("parseErrorOccurred: \(parseError)")
     }
     
+    func encodeAndEncryptJSONString(LoginRequest: LoginRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(LoginRequest)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
+    /*func decryptAndDecodeJSONString() -> LoginResponse {
+        var loginResultData: LoginResponse = LoginResponse()
+        do {
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapString.decryptBase64ToString(cipher: aes)
+            loginResultData = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
+     
+        }
+        catch let err {
+     
+        }
+        return loginResultData
+    }*/
+    
     func updateUI() {
         do {
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             let decrypted = try soapString.decryptBase64ToString(cipher: aes)
             
-            let loginResulta = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
-            print(loginResulta.Value.usuario_app_id)
-            print(loginResulta.Value.telefonoActual.sistema_operativo)
-            print(loginResulta.Value.primer_apellido)
-            print(loginResulta.Value.nombre)
+            let loginResult = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
+            print(loginResult.Value.usuario_app_id)
+            print(loginResult.Value.telefonoActual.sistema_operativo)
+            print(loginResult.Value.primer_apellido)
+            print(loginResult.Value.nombre)
+            
+            //delegate?.sendData(value: loginResult)
             //print(loginResulta.Value.credencialActual.fotografia)
+            let name = Notification.Name(rawValue: dataNotificationKey)
+            let userInfo:[String:LoginResponse] = ["mykey":loginResult]
+            //NotificationCenter.default.post(name: name, object: nil, userInfo)
+            NotificationCenter.default.post(name: name, object: loginResult, userInfo: userInfo)
         }
         catch let jsonErr{
             print(jsonErr)
@@ -179,14 +204,4 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         
     }
     
-    
-    /*func cipherJSON(lr: LoginRequest) -> AES {
-        do {
-            
-        }
-        catch let err {
-            
-        }
-        
-    }*/
 }
