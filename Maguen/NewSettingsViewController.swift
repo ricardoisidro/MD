@@ -18,7 +18,6 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var btnPhoto: UIButton!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var imageTake: UIImageView!
-    @IBOutlet weak var btnDeactivate: UIButton!
     
     var imagePicker: UIImagePickerController!
     
@@ -29,11 +28,45 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         btnPhoto.layer.cornerRadius = 0.5 * btnPhoto.bounds.size.width
         btnPhoto.clipsToBounds = true
         btnSave.layer.cornerRadius = 10
-        btnDeactivate.layer.cornerRadius = 10
         btnPhoto.layer.masksToBounds = true
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let validString = UserDefaults.standard.string(forKey: "name") ?? ""
+        let sessionisEmpty = (validString == "")
+        if sessionisEmpty {
+            btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
+            btnSave.backgroundColor = MaguenColors.blue5
+        }
+        else {
+            btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
+            btnSave.backgroundColor = .orange
+        }
+        
+        let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
+        let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
+        imageTake.image = avatarImage
+        
+        
+    }
+    
+    @IBAction func btnSaveorDiscard(_ sender: UIButton) {
+        
+        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "surname1")
+        UserDefaults.standard.removeObject(forKey: "surname2")
+        UserDefaults.standard.removeObject(forKey: "sex")
+        UserDefaults.standard.removeObject(forKey: "birthday")
+        UserDefaults.standard.removeObject(forKey: "mail")
+        UserDefaults.standard.removeObject(forKey: "phone")
+        UserDefaults.standard.removeObject(forKey: "photo")
+        
+        self.tabBarController?.selectedIndex = 0
+        
     }
     
     @objc func dismissKeyboard() {

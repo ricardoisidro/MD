@@ -8,7 +8,7 @@
 
 import UIKit
 
-let dataNotificationKey = "co.loginData"
+//let dataNotificationKey = "co.loginData"
 
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
@@ -20,11 +20,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     @IBOutlet weak var textConfigMail: UITextField!
     @IBOutlet weak var textConfigPhone: UITextField!
     
-    let dataNotif = Notification.Name(rawValue: dataNotificationKey)
+    //let dataNotif = Notification.Name(rawValue: dataNotificationKey)
     
-    deinit {
+    /*deinit {
         NotificationCenter.default.removeObserver(self)
-    }
+    }*/
     
     let sexTypes = ["HOMBRE", "MUJER"]
     let birthDatePicker: UIDatePicker = UIDatePicker()
@@ -49,10 +49,20 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigMail.delegate = self
         textConfigPhone.delegate = self
     
-        createObservers()
+        //createObservers()
     }
     
-    func createObservers() {
+    override func viewWillAppear(_ animated: Bool) {
+        textConfigName.text = UserDefaults.standard.string(forKey: "name") ?? ""
+        textConfigSurname1.text = UserDefaults.standard.string(forKey: "surname1") ?? ""
+        textConfigSurname2.text =  UserDefaults.standard.string(forKey: "surname2") ?? ""
+        textConfigSex.text =  UserDefaults.standard.string(forKey: "sex") ?? ""
+        textConfigBirthday.text = UserDefaults.standard.string(forKey: "birthday") ?? ""
+        textConfigMail.text = UserDefaults.standard.string(forKey: "mail") ?? ""
+        textConfigPhone.text = UserDefaults.standard.string(forKey: "phone") ?? ""
+    }
+    
+    /*func createObservers() {
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(self.updateData(notification:)),
                                                name: dataNotif,
@@ -62,7 +72,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     @objc func updateData(notification: Notification) {
         let info = notification.userInfo?["mykey"]
         //textConfigName.text =
-    }
+    }*/
     
     @objc func dismissKeyboard(){
         view.endEditing(true)

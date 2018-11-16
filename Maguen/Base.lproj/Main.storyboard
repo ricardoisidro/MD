@@ -1638,7 +1638,7 @@
         <!--Ajustes-->
         <scene sceneID="vtM-zY-Aeg">
             <objects>
-                <viewController id="sNC-bE-UeZ" customClass="NewSettingsViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NewSettingsViewController" id="sNC-bE-UeZ" customClass="NewSettingsViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ua4-kd-8Nf">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="1051"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1650,42 +1650,33 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="1100"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sJw-xP-cMo">
-                                                <rect key="frame" x="87.5" y="1016" width="200" height="30"/>
+                                                <rect key="frame" x="87.5" y="1046" width="200" height="30"/>
                                                 <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="4Sm-lq-RJu"/>
                                                 </constraints>
-                                                <state key="normal" title="ENVIAR">
+                                                <state key="normal" title="GUARDAR CAMBIOS">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="btnSaveorDiscard:" destination="sNC-bE-UeZ" eventType="touchUpInside" id="Y2D-uk-tRT"/>
+                                                </connections>
                                             </button>
                                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N5W-Ua-c2E">
-                                                <rect key="frame" x="0.0" y="178" width="375" height="814"/>
+                                                <rect key="frame" x="0.0" y="178" width="375" height="844"/>
                                                 <connections>
                                                     <segue destination="y5z-ey-GLA" kind="embed" id="pjA-od-NH9"/>
                                                 </connections>
                                             </containerView>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mic-g6-a1p">
-                                                <rect key="frame" x="87.5" y="1054" width="200" height="30"/>
-                                                <color key="backgroundColor" red="1" green="0.57637232540000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="JEz-aP-qEF"/>
-                                                </constraints>
-                                                <state key="normal" title="DESACTIVAR USUARIO">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                </state>
-                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstItem="Mic-g6-a1p" firstAttribute="top" secondItem="sJw-xP-cMo" secondAttribute="bottom" constant="8" id="5jr-Nk-g58"/>
                                             <constraint firstItem="sJw-xP-cMo" firstAttribute="top" secondItem="N5W-Ua-c2E" secondAttribute="bottom" constant="24" id="JY0-df-ynx"/>
                                             <constraint firstAttribute="trailing" secondItem="N5W-Ua-c2E" secondAttribute="trailing" id="Kw2-DF-3Hd"/>
                                             <constraint firstItem="sJw-xP-cMo" firstAttribute="centerX" secondItem="raK-2t-7cP" secondAttribute="centerX" id="NHi-Uv-ULd"/>
                                             <constraint firstAttribute="height" constant="1100" id="PwM-vl-LD5"/>
-                                            <constraint firstAttribute="bottom" secondItem="Mic-g6-a1p" secondAttribute="bottom" constant="16" id="QL3-EX-rMG"/>
                                             <constraint firstItem="N5W-Ua-c2E" firstAttribute="leading" secondItem="raK-2t-7cP" secondAttribute="leading" id="dHB-BJ-gvP"/>
-                                            <constraint firstItem="Mic-g6-a1p" firstAttribute="centerX" secondItem="raK-2t-7cP" secondAttribute="centerX" id="yxP-Jx-4cX"/>
+                                            <constraint firstAttribute="bottom" secondItem="sJw-xP-cMo" secondAttribute="bottom" constant="24" id="te8-z7-VVJ"/>
                                         </constraints>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_foto_default" translatesAutoresizingMaskIntoConstraints="NO" id="PqK-Z5-XAM">
@@ -1735,7 +1726,6 @@
                     <tabBarItem key="tabBarItem" tag="4" title="Ajustes" image="tab_config" id="MF9-If-Rsl"/>
                     <size key="freeformSize" width="375" height="1100"/>
                     <connections>
-                        <outlet property="btnDeactivate" destination="Mic-g6-a1p" id="JGQ-KA-yYE"/>
                         <outlet property="btnPhoto" destination="r1q-WN-ABE" id="Jkd-2e-SjW"/>
                         <outlet property="btnSave" destination="sJw-xP-cMo" id="suh-iG-yoW"/>
                         <outlet property="imageTake" destination="PqK-Z5-XAM" id="nbX-i1-hoM"/>
@@ -1750,7 +1740,7 @@
             <objects>
                 <tableViewController id="y5z-ey-GLA" customClass="SettingsTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="U4G-Ob-DZv">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="814"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="844"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <sections>

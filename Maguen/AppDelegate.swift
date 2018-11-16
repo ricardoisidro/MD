@@ -14,39 +14,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     var window: UIWindow?
 
     // This delegate open the modal view before open the desired view.
-    /*func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        if viewController is CardController {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        let validString = UserDefaults.standard.string(forKey: "name") ?? ""
+        let sessionisEmpty = (validString == "")
+        if viewController is CardController && sessionisEmpty {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
-                print("Pedir login antes de la credencial")
+                //tabBarController.selectedIndex = 1
                 return false
             }
         }
-        else if viewController is NewSettingsViewController {
+        else if viewController is NewSettingsViewController && sessionisEmpty {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
-                print("Pedir login antes de los ajustes")
+                //tabBarController.selectedIndex = 4
                 return false
+                
+                //192.168.1.171
             }
         }
+        
         return true
-    }*/
+    }
     
     // This delegate open the modal view after open the desired view.
-    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        if viewController is CardController {
+    /*func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+        let validString = UserDefaults.standard.string(forKey: "name") ?? ""
+        let sessionisEmpty = (validString == "")
+        if viewController is CardController && sessionisEmpty {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
                 print("Pedir login antes de la credencial")
             }
         }
-        else if viewController is NewSettingsViewController {
+        else if viewController is NewSettingsViewController && sessionisEmpty {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
                 print("Pedir login antes de los ajustes")
             }
         }
-    }
+    }*/
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.

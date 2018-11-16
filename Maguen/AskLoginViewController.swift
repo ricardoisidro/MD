@@ -38,6 +38,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         txtUsuario.delegate = self
         txtPassword.delegate = self
         
+        
+        
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -112,7 +114,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentParsingElement = elementName
         if elementName == "GetUsuarioAppResponse" {
-            print("Started parsing...")
+            //print("Started parsing...")
         }
     }
     
@@ -141,6 +143,9 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         DispatchQueue.main.async {
             self.updateUI()
             self.dismiss(animated: true, completion: nil)
+            let myapp = UIStoryboard(name: "Main", bundle: nil)
+            let controller = myapp.instantiateViewController(withIdentifier: "NewSettingsViewController")
+            controller.tabBarController?.selectedIndex = 4
         }
     }
     
@@ -181,22 +186,28 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     func updateUI() {
         do {
+            
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             let decrypted = try soapString.decryptBase64ToString(cipher: aes)
             
             let loginResult = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
-            print(loginResult.Value.usuario_app_id)
-            print(loginResult.Value.telefonoActual.sistema_operativo)
-            print(loginResult.Value.primer_apellido)
-            print(loginResult.Value.nombre)
             
-            //delegate?.sendData(value: loginResult)
-            //print(loginResulta.Value.credencialActual.fotografia)
-            let name = Notification.Name(rawValue: dataNotificationKey)
-            let userInfo:[String:LoginResponse] = ["mykey":loginResult]
-            //NotificationCenter.default.post(name: name, object: nil, userInfo)
-            NotificationCenter.default.post(name: name, object: loginResult, userInfo: userInfo)
+            let sexo = loginResult.Value.sexo == "H"
+            let savedSex = sexo ? "HOMBRE" : "MUJER"
+            let birthDate = loginResult.Value.fecha_nacimiento.prefix(10)
+            
+            UserDefaults.standard.set(loginResult.Value.nombre, forKey: "name")
+            UserDefaults.standard.set(loginResult.Value.primer_apellido, forKey: "surname1")
+            UserDefaults.standard.set(loginResult.Value.segundo_apellido, forKey: "surname2")
+            UserDefaults.standard.set(savedSex, forKey: "sex")
+            UserDefaults.standard.set(birthDate, forKey: "birthday")
+            UserDefaults.standard.set(loginResult.Value.correo, forKey: "mail")
+            UserDefaults.standard.set(loginResult.Value.telefonoActual.numero, forKey: "phone")
+            UserDefaults.standard.set(loginResult.Value.credencialActual.fotografia, forKey: "photo")
+            
+            
+            
         }
         catch let jsonErr{
             print(jsonErr)
