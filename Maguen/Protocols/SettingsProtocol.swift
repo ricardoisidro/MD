@@ -6,7 +6,4 @@
 //  Copyright © 2018 Expression B. All rights reserved.
 //
 
-protocol SettingsDelegate {
-    
-    func onDataLoaded(type: LoginResponse)
-}
+

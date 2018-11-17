@@ -45,11 +45,11 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         else {
             btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
             btnSave.backgroundColor = .orange
+            
+            let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
+            let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
+            imageTake.image = avatarImage
         }
-        
-        let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
-        let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
-        imageTake.image = avatarImage
         
         
     }
