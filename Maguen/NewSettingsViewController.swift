@@ -7,19 +7,26 @@
 //
 
 import UIKit
+import CryptoSwift
 
-class NewSettingsViewController: UIViewController, UINavigationControllerDelegate {
+class NewSettingsViewController: UIViewController, UINavigationControllerDelegate, XMLParserDelegate {
     
     enum ImageSource {
         case photoLibrary
         case camera
     }
 
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var btnPhoto: UIButton!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var imageTake: UIImageView!
     
     var imagePicker: UIImagePickerController!
+    
+    var dataTask: URLSessionDataTask?
+    var mySession = URLSession.shared
+    var currentParsingElement:String = ""
+    var soapString:String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +43,8 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         
+        //scroll on top always
+        scrollView.setContentOffset(.zero, animated: true)
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
         if sessionisEmpty {
@@ -51,6 +60,33 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             imageTake.image = avatarImage
         }
         
+        let validUser = UserDefaults.standard.string(forKey: "user")
+        let saldoRequest = SaldoRequest(usuario: validUser!)
+        
+        let chainEncodedandEncrypted = encodeAndEncryptJSONString(SaldoRequest: saldoRequest)
+        
+        let soapMessage =
+        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetSaldoActual xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetSaldoActual></soap:Body></soap:Envelope>"
+        
+        //Prepare request
+        let url = URL(string: MaguenCredentials.getSaldoActual)
+        let req = NSMutableURLRequest(url: url!)
+        let msgLength = soapMessage.count
+        req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
+        req.httpMethod = "POST"
+        req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        //Make the request
+        dataTask?.cancel()
+        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
+            defer { self.dataTask = nil }
+            guard let data = data else { return }
+            let parser = XMLParser(data: data)
+            parser.delegate = self
+            parser.parse()
+        }
+        dataTask?.resume()
         
     }
     
@@ -64,6 +100,9 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         UserDefaults.standard.removeObject(forKey: "mail")
         UserDefaults.standard.removeObject(forKey: "phone")
         UserDefaults.standard.removeObject(forKey: "photo")
+        UserDefaults.standard.removeObject(forKey: "user")
+        UserDefaults.standard.removeObject(forKey: "balance")
+        //UserDefaults.standard.removeObject(forKey: "dateLastSync")
         
         self.tabBarController?.selectedIndex = 0
         
@@ -118,6 +157,79 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
         ac.addAction(UIAlertAction(title: "OK", style: .default))
         present(ac, animated: true)
+    }
+    
+    func encodeAndEncryptJSONString(SaldoRequest: SaldoRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(SaldoRequest)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
+    func updateAccount() {
+        do {
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            var decrypted = try soapString.decryptBase64ToString(cipher: aes)
+            //print("Cadena decrypted saldo: \(decrypted)")
+            
+            let saldoResult = try jsonDecoder.decode(SaldoResponse.self, from: Data(decrypted.utf8))
+            //print("Saldo: \(saldoResult.Value)")
+            UserDefaults.standard.set(saldoResult.Value, forKey: "balance")
+        }
+        catch let ex {
+            print("updateSaldo error: \(ex)")
+        }
+    }
+    
+    //MARK:- XML Delegate methods
+    
+    func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        currentParsingElement = elementName
+        if elementName == "GetSaldoActualResponse" {
+            //print("Started parsing...")
+        }
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        let foundedChar = string.trimmingCharacters(in:NSCharacterSet.whitespacesAndNewlines)
+        
+        if (!foundedChar.isEmpty) {
+            if currentParsingElement == "GetSaldoActualResult" {
+                self.soapString = ""
+                self.soapString += foundedChar
+            }
+            else {
+                self.soapString += "nothing"
+            }
+        }
+        
+    }
+    
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if elementName == "GetSaldoActualResponse" {
+            print("Ended parsing...")
+            
+        }
+    }
+    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        DispatchQueue.main.async {
+            self.updateAccount()
+        }
+    }
+    
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+        print("parseErrorOccurred: \(parseError)")
     }
 
 }

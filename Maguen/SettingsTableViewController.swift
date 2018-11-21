@@ -20,6 +20,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     @IBOutlet weak var textConfigMail: UITextField!
     @IBOutlet weak var textConfigPhone: UITextField!
     
+    @IBOutlet weak var textConfigBalance: UILabel!
     //let dataNotif = Notification.Name(rawValue: dataNotificationKey)
     
     /*deinit {
@@ -60,6 +61,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigBirthday.text = UserDefaults.standard.string(forKey: "birthday") ?? ""
         textConfigMail.text = UserDefaults.standard.string(forKey: "mail") ?? ""
         textConfigPhone.text = UserDefaults.standard.string(forKey: "phone") ?? ""
+        textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""
     }
     
     /*func createObservers() {

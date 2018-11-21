@@ -650,7 +650,7 @@
         <!--HomeViewController-->
         <scene sceneID="1Dh-3S-eBQ">
             <objects>
-                <tableViewController title="HomeViewController" id="xPb-ZV-AvX" customClass="HomeViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="HomeViewController" title="HomeViewController" id="xPb-ZV-AvX" customClass="HomeViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="HrP-HR-SJR">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1193,7 +1193,7 @@
                                         <rect key="frame" x="1" y="90" width="109" height="415"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="9Pr-aV-mJP">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="shajarit" id="9Pr-aV-mJP">
                                                 <rect key="frame" x="0.0" y="28" width="109" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9Pr-aV-mJP" id="TRt-yc-QHn">
@@ -1208,7 +1208,7 @@
                                         <rect key="frame" x="114" y="90" width="109" height="415"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Map-11-vvH">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="minja" id="Map-11-vvH">
                                                 <rect key="frame" x="0.0" y="28" width="109" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Map-11-vvH" id="zJx-i6-pa3">
@@ -1223,7 +1223,7 @@
                                         <rect key="frame" x="227" y="90" width="109.5" height="415"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="orZ-Lh-g6e">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="arbit" id="orZ-Lh-g6e">
                                                 <rect key="frame" x="0.0" y="28" width="109.5" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="orZ-Lh-g6e" id="Spg-Nx-TUJ">
@@ -1238,7 +1238,7 @@
                                         <rect key="frame" x="68.5" y="521" width="200" height="30"/>
                                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="200" id="7g9-J7-swk"/>
+                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="200" id="7g9-J7-swk"/>
                                         </constraints>
                                         <state key="normal" title="CERRAR">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1732,6 +1732,7 @@
                         <outlet property="btnPhoto" destination="r1q-WN-ABE" id="Jkd-2e-SjW"/>
                         <outlet property="btnSave" destination="sJw-xP-cMo" id="suh-iG-yoW"/>
                         <outlet property="imageTake" destination="PqK-Z5-XAM" id="nbX-i1-hoM"/>
+                        <outlet property="scrollView" destination="G3M-Ga-3kl" id="qny-ea-1el"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNJ-g9-Tsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2103,8 +2104,8 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$1,000.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wdo-oA-BDL">
-                                                    <rect key="frame" x="269" y="10.5" width="90" height="23"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$ Pendiente" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wdo-oA-BDL">
+                                                    <rect key="frame" x="256.5" y="10.5" width="102.5" height="23"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="5eN-wH-A4f"/>
                                                     </constraints>
@@ -2286,6 +2287,7 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="textConfigBalance" destination="Wdo-oA-BDL" id="F5x-x8-eNZ"/>
                         <outlet property="textConfigBirthday" destination="s6R-9J-Yes" id="ZjE-v2-EdN"/>
                         <outlet property="textConfigMail" destination="J51-vl-GAF" id="lh3-22-jQt"/>
                         <outlet property="textConfigName" destination="i7D-15-TdI" id="SsM-Tv-huL"/>

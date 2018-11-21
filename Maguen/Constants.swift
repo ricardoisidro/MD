@@ -41,4 +41,6 @@ struct MaguenCredentials {
     static let key = "Expr3s10nB1n4r14"
     static let IV = "Expr3s10nB1n4r14"
     static let getUsuarioApp = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetUsuarioApp"
+    static let getSaldoActual = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetSaldoActual"
+    static let getModifyTables = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetModifyTables"
 }

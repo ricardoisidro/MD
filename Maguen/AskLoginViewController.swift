@@ -23,6 +23,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     var currentParsingElement:String = ""
     var soapString:String = ""
     
+    var activityIndicatorView = UIView()
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -71,6 +73,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         //let cipherRequest: Array<UInt8>
         //let aes: AES
         
+        addLoadingView()
         guard let user = txtUsuario.text else {
             print("No user")
             return
@@ -143,9 +146,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         DispatchQueue.main.async {
             self.updateUI()
             self.dismiss(animated: true, completion: nil)
-            let myapp = UIStoryboard(name: "Main", bundle: nil)
-            let controller = myapp.instantiateViewController(withIdentifier: "NewSettingsViewController")
-            controller.tabBarController?.selectedIndex = 4
+            
         }
     }
     
@@ -205,14 +206,37 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             UserDefaults.standard.set(loginResult.Value.correo, forKey: "mail")
             UserDefaults.standard.set(loginResult.Value.telefonoActual.numero, forKey: "phone")
             UserDefaults.standard.set(loginResult.Value.credencialActual.fotografia, forKey: "photo")
+            UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")
             
             
             
         }
         catch let jsonErr{
-            print(jsonErr)
+            print("UpdateUI error: \(jsonErr)")
         }
-        
     }
+    
+    func addLoadingView() {
+        // You only need to adjust this frame to move it anywhere you want
+        activityIndicatorView = UIView(frame: CGRect(x: view.frame.midX - 140, y: view.frame.midY - 25, width: 280, height: 50))
+        activityIndicatorView.backgroundColor = UIColor.white
+        activityIndicatorView.alpha = 0.8
+        activityIndicatorView.layer.cornerRadius = 10
+        
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 60, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = "Validando credenciales..."
+        
+        activityIndicatorView.addSubview(activityView)
+        activityIndicatorView.addSubview(textLabel)
+        
+        view.addSubview(activityIndicatorView)
+    }
+
     
 }

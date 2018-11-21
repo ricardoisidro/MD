@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import CryptoSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate, XMLParserDelegate {
 
     var window: UIWindow?
+    var dataTask: URLSessionDataTask?
+    let mySession = URLSession.shared
+    var parser = XMLParser()
+    var currentParsingElement:String = ""
+    var soapString:String = ""
+    
 
     // This delegate open the modal view before open the desired view.
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
@@ -57,6 +64,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        if (UserDefaults.standard.object(forKey: "dateLastSync") == nil) {
+            UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
+        }
+        else {
+            
+        }
+        
+        let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
+        let getModifyTablesRequest = GetModifyTablesRequest(FechaSincronizacion: lastDate!)
+        print(getModifyTablesRequest)
+        let chainEncodedandEncrypted = encodeAndEncryptJSONString(GetModifyTablesRequest: getModifyTablesRequest)
+        
+        print(chainEncodedandEncrypted.toBase64()!)
+        
+        let soapMessage =
+        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetModifyTables xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetModifyTables></soap:Body></soap:Envelope>"
+        
+        //Prepare request
+        let url = URL(string: MaguenCredentials.getModifyTables)
+        let req = NSMutableURLRequest(url: url!)
+        let msgLength = soapMessage.count
+        req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
+        req.httpMethod = "POST"
+        req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        //Make the request
+        dataTask?.cancel()
+        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
+            defer { self.dataTask = nil }
+            guard let data = data else { return }
+            let parser = XMLParser(data: data)
+            parser.delegate = self
+            parser.parse()
+        }
+        dataTask?.resume()
+        
+        
         return true
     }
 
@@ -72,6 +117,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     func applicationWillEnterForeground(_ application: UIApplication) {
         // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+        print("Hi, Im back")
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
@@ -83,5 +129,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
 
 
+    func encodeAndEncryptJSONString(GetModifyTablesRequest: GetModifyTablesRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(GetModifyTablesRequest)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONString error: \(err)")
+        }
+        return cipherRequest
+    }
 }
 
