@@ -7,5 +7,5 @@
 //
 
 struct GetModifyTablesResponse : Decodable {
-    var Tablas: String
+    var Value: String
 }

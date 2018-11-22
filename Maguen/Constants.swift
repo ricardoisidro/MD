@@ -43,4 +43,6 @@ struct MaguenCredentials {
     static let getUsuarioApp = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetUsuarioApp"
     static let getSaldoActual = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetSaldoActual"
     static let getModifyTables = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetModifyTables"
+    static let getModifyID = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetIDs"
+    
 }

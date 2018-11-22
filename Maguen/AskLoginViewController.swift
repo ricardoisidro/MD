@@ -216,6 +216,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         }
     }
     
+    //MARK: - WS ActivityIndicator
     func addLoadingView() {
         // You only need to adjust this frame to move it anywhere you want
         activityIndicatorView = UIView(frame: CGRect(x: view.frame.midX - 140, y: view.frame.midY - 25, width: 280, height: 50))

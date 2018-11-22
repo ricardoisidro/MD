@@ -10,16 +10,19 @@ import UIKit
 import CryptoSwift
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate, XMLParserDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
-    var dataTask: URLSessionDataTask?
+    /*var dataTask: URLSessionDataTask?
     let mySession = URLSession.shared
     var parser = XMLParser()
     var currentParsingElement:String = ""
     var soapString:String = ""
+    var windowsToSync: [String] = [String]()*/
     
+    let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
 
+    //MARK: - TabBarController delegate
     // This delegate open the modal view before open the desired view.
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
@@ -62,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
     }*/
 
+    //MARK: - App delegates
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         if (UserDefaults.standard.object(forKey: "dateLastSync") == nil) {
@@ -71,17 +75,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             
         }
         
-        let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
-        let getModifyTablesRequest = GetModifyTablesRequest(FechaSincronizacion: lastDate!)
-        print(getModifyTablesRequest)
-        let chainEncodedandEncrypted = encodeAndEncryptJSONString(GetModifyTablesRequest: getModifyTablesRequest)
+        //let getModifyTablesRequest = GetModifyTablesRequest(FechaSincronizacion: lastDate!)
+        //print(getModifyTablesRequest)
+        let aesJSON = AESforJSON()
+        let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONTablesString(fecha: lastDate!)
+        print(chainTablesEncodedandEncrypted.toBase64()!)
+
+        let soapXML = Global.shared.createSOAPXMLString(methodName: "GetModifyTables", encryptedString: chainTablesEncodedandEncrypted)
         
-        print(chainEncodedandEncrypted.toBase64()!)
+        let soapRequest = CallSOAP()
+        soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyTables, soapMessage: soapXML)
         
-        let soapMessage =
-        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetModifyTables xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetModifyTables></soap:Body></soap:Envelope>"
         
-        //Prepare request
+        
+        /*//Prepare request
         let url = URL(string: MaguenCredentials.getModifyTables)
         let req = NSMutableURLRequest(url: url!)
         let msgLength = soapMessage.count
@@ -95,12 +102,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
             defer { self.dataTask = nil }
             guard let data = data else { return }
-            let parser = XMLParser(data: data)
-            parser.delegate = self
-            parser.parse()
+            let modifyTablesparser = XMLParser(data: data)
+            modifyTablesparser.delegate = self
+            modifyTablesparser.parse()
         }
-        dataTask?.resume()
-        
+        dataTask?.resume()*/
         
         return true
     }
@@ -129,7 +135,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
 
 
-    func encodeAndEncryptJSONString(GetModifyTablesRequest: GetModifyTablesRequest) -> Array<UInt8> {
+    //MARK: - Decode/encode funcs 
+    /*func encodeAndEncryptJSONTablesString(GetModifyTablesRequest: GetModifyTablesRequest) -> Array<UInt8> {
         var cipherRequest: [UInt8] = []
         do {
             let jsonEncoder = JSONEncoder()
@@ -141,9 +148,127 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             
         }
         catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
+            print("encodeAndEncryptJSONTablesString error: \(err)")
         }
         return cipherRequest
     }
+    
+    /*func getTablesList() {
+        do {
+            
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapString.decryptBase64ToString(cipher: aes)
+            
+            let modifyTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
+            
+            
+            windowsToSync = modifyTablesResult.Value.components(separatedBy: ",")
+            for i in 0...(windowsToSync.count - 1) {
+                print(windowsToSync[i])
+            }
+            
+            processID()
+        }
+        catch let jsonErr{
+            print("getTablesList error: \(jsonErr)")
+        }
+    }*/
+    
+    /*func processID() {
+        let getModifiedIDRequest = GetIDRequest(FechaSincronizacion: lastDate!, Tables: windowsToSync[1])
+        print(getModifiedIDRequest)
+        let chainIDEncodedandEncrypted = encodeAndEncryptJSONIDString(GetRequest: getModifiedIDRequest)
+        
+        print(chainIDEncodedandEncrypted.toBase64()!)
+        
+        let soapMessage =
+        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetIDs xmlns='http://tempuri.org/'><Cadena>\(chainIDEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetIDs></soap:Body></soap:Envelope>"
+        
+        //Prepare request
+        let url = URL(string: MaguenCredentials.getModifyID)
+        let req = NSMutableURLRequest(url: url!)
+        let msgLength = soapMessage.count
+        req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
+        req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
+        req.httpMethod = "POST"
+        req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
+        
+        //Make the request
+        dataTask?.cancel()
+        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
+            defer { self.dataTask = nil }
+            guard let data = data else { return }
+            let parser = XMLParser(data: data)
+            let idparser = MyClass()
+            parser.delegate = idparser
+            parser.parse()
+        }
+        dataTask?.resume()
+        
+        
+    }*/
+
+    /*func encodeAndEncryptJSONIDString(GetRequest: GetIDRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(GetRequest)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+        
+        }
+        catch let err {
+            print("encodeAndEncryptJSONIDString error: \(err)")
+        }
+        return cipherRequest
+    }*/
+
+    //MARK:- XMLParserDelegate methods
+    
+    /*func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
+        currentParsingElement = elementName
+        if elementName == "GetModifyTablesResponse" {
+            //print("Started parsing modifytables...")
+        }
+    }
+    
+    func parser(_ parser: XMLParser, foundCharacters string: String) {
+        let foundedChar = string.trimmingCharacters(in:NSCharacterSet.whitespacesAndNewlines)
+        
+        if (!foundedChar.isEmpty) {
+            if currentParsingElement == "GetModifyTablesResult" {
+                self.soapString = ""
+                self.soapString += foundedChar
+            }
+            else {
+                self.soapString += "nothing"
+            }
+        }
+        
+    }
+    
+    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
+        if elementName == "GetModifyTablesResponse" {
+            //print("Ended parsing modifytables...")
+            
+        }
+    }
+    
+    func parserDidEndDocument(_ parser: XMLParser) {
+        DispatchQueue.main.async {
+            self.getTablesList()
+            //self.dismiss(animated: true, completion: nil)
+            
+        }
+    }
+    
+    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
+        print("parseErrorOccurred: \(parseError)")
+    }*/*/
+    
+    
 }
 
