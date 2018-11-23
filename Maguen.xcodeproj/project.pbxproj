@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5918142321A79BEA0025DEBE /* CentroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5918142221A79BEA0025DEBE /* CentroModel.swift */; };
 		5919397121A5F94200B0E7EF /* GetIDRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5919397021A5F94200B0E7EF /* GetIDRequest.swift */; };
 		5919397321A5F98A00B0E7EF /* GetIDResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5919397221A5F98A00B0E7EF /* GetIDResponse.swift */; };
 		5919397521A627A400B0E7EF /* AESforJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5919397421A627A400B0E7EF /* AESforJSON.swift */; };
@@ -77,6 +78,7 @@
 /* Begin PBXFileReference section */
 		14C6FDEFD400814C4CD04914 /* Pods_Maguen.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Maguen.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50FC3295375B0EFE71FEFBEC /* Pods-Maguen.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maguen.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Maguen/Pods-Maguen.debug.xcconfig"; sourceTree = "<group>"; };
+		5918142221A79BEA0025DEBE /* CentroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CentroModel.swift; sourceTree = "<group>"; };
 		5919397021A5F94200B0E7EF /* GetIDRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIDRequest.swift; sourceTree = "<group>"; };
 		5919397221A5F98A00B0E7EF /* GetIDResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIDResponse.swift; sourceTree = "<group>"; };
 		5919397421A627A400B0E7EF /* AESforJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AESforJSON.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */,
+				5918142221A79BEA0025DEBE /* CentroModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -430,12 +433,14 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Maguen/Pods-Maguen-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/CryptoSwift/CryptoSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SQLite.swift/SQLite.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
 			);
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CryptoSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SQLite.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -503,6 +508,7 @@
 				59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */,
 				5919397721A628AF00B0E7EF /* GetEntityRequest.swift in Sources */,
 				59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */,
+				5918142321A79BEA0025DEBE /* CentroModel.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,
 				5919397321A5F98A00B0E7EF /* GetIDResponse.swift in Sources */,
 				59BAF0B7217A5E9500756117 /* DailyPage02ViewController.swift in Sources */,

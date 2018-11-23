@@ -8,11 +8,31 @@
 
 import UIKit
 import CryptoSwift
+import SQLite
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
+    var database: Connection!
+    let db_categoria_centro = Table("categoria_centro")
+    var db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+    var db_descripcion = Expression<String>("descripcion")
+    var db_eliminado = Expression<Int64>("eliminado")
+    var db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    
+    let db_centro = Table("centro")
+    var db_centro_id = Expression<Int64>("centro_id")
+    //let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+    var db_imagen_portada = Expression<String>("imagen_portada")
+    var db_nombre = Expression<String>("nombre")
+    //let db_descripcion = Expression<String>("descripcion")
+    var db_domicilio_centro_id = Expression<Int64>("domicilio_centro_id")
+    var db_telefonos = Expression<String>("telefonos")
+    var db_activo = Expression<Int64>("activo")
+    var db_seccion_id = Expression<Int64>("seccion_id")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
     /*var dataTask: URLSessionDataTask?
     let mySession = URLSession.shared
@@ -68,6 +88,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     //MARK: - App delegates
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let database = try Connection(fileURL.path)
+            self.database = database
+        }
+        catch let ex {
+            print("createDBFile error: \(ex)")
+        }
+        //let ccm = CategoriaCentroModel()
+        //CategoriaCentroModel.onCreateCategoriaCentroDB()
+        onCreateCategoriaCentroDB()
+        onCreateCentroDB()
         // Override point for customization after application launch.
         if (UserDefaults.standard.object(forKey: "dateLastSync") == nil) {
             UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
@@ -216,9 +250,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
              }*/
             if(table == "categoria_centro") {
                 let ccm = CategoriaCentroModel.deserializaCategoriaCentro(dato: entitiesToSync)
+                
+                onInsert(objeto: ccm)
             }
-            else if(table == "domicilio") {
-                //let dm = 
+            else if(table == "centro") {
+                let c = CentroModel.deserializaCentro(dato: entitiesToSync)
+                
+                onInsertCentroDB(objeto: c)
             }
             
             
@@ -388,6 +426,88 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         print("parseErrorOccurred: \(parseError)")
     }*/*/
     
+    func onCreateCategoriaCentroDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_centro.create(ifNotExists: true) { t in     // CREATE TABLE "users" (
+                t.column(db_categoria_centro_id, primaryKey: true) //     "id" TEXT PRIMARY KEY NOT NULL,
+                t.column(db_descripcion)  //     "descripcion" TEXT,
+                t.column(db_eliminado)   //      "eliminado" TEXT,
+                t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
+            
+            
+            })
+            
+            
+            
+        }
+        catch let ex {
+            print("onCreate SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsert(objeto: CategoriaCentroModel) {
+        do {
+            let db = database
+            let insert = db_categoria_centro.insert(or: .replace, db_categoria_centro_id <- Int64(objeto.categoria_centro_id), db_descripcion <- objeto.descripcion!, db_eliminado <- Int64(objeto.eliminado!), db_fecha_modificacion <- objeto.fecha_modificacion!)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateCentroDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_categoria_centro.create(ifNotExists: true) { t in     // CREATE TABLE "users" (
+                t.column(db_centro_id, primaryKey: true)
+                t.column(db_categoria_centro_id) //     "id" TEXT PRIMARY KEY NOT NULL,
+                t.column(db_imagen_portada)  //     "descripcion" TEXT,
+                t.column(db_nombre)   //      "eliminado" TEXT,
+                t.column(db_descripcion)//"fecha_modificacion" TEXT
+                t.column(db_domicilio_centro_id)
+                t.column(db_telefonos)
+                t.column(db_activo)
+                t.column(db_seccion_id)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+            
+            
+            
+        }
+        catch let ex {
+            print("onCreate SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertCentroDB(objeto: CentroModel) {
+        do {
+            let db = database
+            let insert = db_categoria_centro.insert(or: .replace, db_centro_id <- Int64(objeto.centro_id),
+                                                    db_categoria_centro_id <- Int64(objeto.categoria_centro_id),
+                                                    db_imagen_portada <- objeto.imagen_portada,
+                                                    db_nombre <- objeto.nombre,
+                                                    db_descripcion <- objeto.descripcion,
+                                                    db_domicilio_centro_id <- Int64(objeto.domicilio_centro_id),
+                                                    db_telefonos <- objeto.telefonos!,
+                                                    db_activo <- Int64(objeto.activo),
+                                                    db_seccion_id <- Int64(objeto.seccion_id),
+                                                    db_eliminado <- Int64(objeto.eliminado),
+                                                    db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertError: \(ex)")
+        }
+        
+    }
     
 }
 

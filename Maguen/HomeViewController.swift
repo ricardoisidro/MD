@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SQLite
 
 struct cellComponents {
     var cellImage = UIImage()
@@ -44,6 +45,24 @@ class HomeViewController: UITableViewController {
         self.tabBarController?.tabBarItem.image = UIImage.gif(asset: "logo_animado")
         self.tabBarController?.tabBarItem.title = "Hola"
         
+        Global.shared.createDBFile()
+        
+        do {
+            let db = Global.shared.database
+            let users = Table("categoria_centro")
+            let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+            let db_descripcion = Expression<String>("descripcion")
+            let db_eliminado = Expression<Int64>("eliminado")
+            let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+            
+            for user in try db!.prepare(users) {
+                print("id: \(user[db_categoria_centro_id]), name: \(user[db_descripcion]), email: \(user[db_eliminado]), fechamodificacion: \(user[db_fecha_modificacion])")
+                // id: 1, name: Optional("Alice"), email: alice@mac.com
+            }
+        }
+        catch let ex {
+            print("ReadDB error: \(ex)")
+        }
         
     }
     

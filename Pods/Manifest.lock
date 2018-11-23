@@ -1,16 +1,22 @@
 PODS:
   - CryptoSwift (0.13.0)
+  - SQLite.swift (0.11.5):
+    - SQLite.swift/standard (= 0.11.5)
+  - SQLite.swift/standard (0.11.5)
 
 DEPENDENCIES:
   - CryptoSwift
+  - SQLite.swift (~> 0.11.5)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - CryptoSwift
+    - SQLite.swift
 
 SPEC CHECKSUMS:
   CryptoSwift: 16e78bebf567bad1c87b2d58f6547f25b74c31aa
+  SQLite.swift: 6e5356850bb1791459f8c16d6ee9195b28714a2e
 
-PODFILE CHECKSUM: 619c159c22463b37ec19db2cb2e6130c9b6c5829
+PODFILE CHECKSUM: 6920329476820fa9abe4891244bf72e98765b496
 
 COCOAPODS: 1.5.3
