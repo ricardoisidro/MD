@@ -5,8 +5,6 @@
 //  Created by ExpresionBinaria on 11/21/18.
 //  Copyright © 2018 Expression B. All rights reserved.
 //
-
-import Foundation
 import CryptoSwift
 
 class CallSOAP : NSObject, XMLParserDelegate {
@@ -23,10 +21,9 @@ class CallSOAP : NSObject, XMLParserDelegate {
     var parseType: String = ""
     var parseResult: String = ""
     
-    let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
-    
     func makeRequest(endpoint: String, soapMessage: String) {
         //Prepare request
+        self.done = false
         if endpoint.contains("GetModifyTables") {
             parseType = "GetModifyTablesResponse"
             parseResult = "GetModifyTablesResult"
@@ -34,6 +31,10 @@ class CallSOAP : NSObject, XMLParserDelegate {
         else if endpoint.contains("GetIDs"){
             parseType = "GetIDsResponse"
             parseResult = "GetIDsResult"
+        }
+        else if endpoint.contains("GetEntidad"){
+            parseType = "GetEntidadResponse"
+            parseResult = "GetEntidadResult"
         }
         
         let url = URL(string: endpoint)
@@ -45,26 +46,29 @@ class CallSOAP : NSObject, XMLParserDelegate {
         req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
         
         //Make the request
-        dataTask?.cancel()
-        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
-            defer { self.dataTask = nil }
-            guard let data = data else { return }
+        //dataTask?.cancel()
+        dataTask = mySession.dataTask(with: req as URLRequest ) { (data, response, error) in
+            defer {
+                self.dataTask = nil
+            }
+            guard let data = data else {
+                self.done = true
+                return
+            }
             let parser = XMLParser(data: data)
             parser.delegate = self
             parser.parse()
         }
         dataTask?.resume()
-        
-        
-        
-        
     }
     
     //MARK:- XMLParserDelegate methods
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentParsingElement = elementName
-        if elementName == parseType {
-            print("Started parsing modifytables...")
+        if elementName == "GetModifyTables" {
+            //print("Started parsing modifytables...")
+        } else if elementName == "GetIDs" {
+            //print("Started parsing ids...")
         }
     }
     
@@ -85,77 +89,24 @@ class CallSOAP : NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == parseType {
-            //print("Ended parsing modifytables...")
             
         }
     }
     
     func parserDidEndDocument(_ parser: XMLParser) {
-        DispatchQueue.main.async {
+        self.done = true
+        /*DispatchQueue.main.async {
             if(self.parseType == "GetModifyTablesResponse") {
                 self.getTablesList()
             }
-            else {
+            else if(self.parseType == "GetIDs"){
                 self.getIDList()
             }
-            //
             
-            //self.dismiss(animated: true, completion: nil)
-        }
+        }*/
     }
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("parseErrorOccurred: \(parseError)")
-    }
-    
-    func getTablesList(){
-        do {
-            
-            let jsonDecoder = JSONDecoder()
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
-            
-            let modifyTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
-            
-            
-            tablesToSync = modifyTablesResult.Value.components(separatedBy: ",")
-            
-            let aesJSON = AESforJSON()
-            
-            for i in 0...1  {
-                //print(tableName)
-                let chainIDsEncodedandEncrypted = aesJSON.encodeAndEncryptJSONIDsString(fecha: lastDate!, tableName: tablesToSync[i])
-                //print(chainIDsEncodedandEncrypted.toBase64()!)
-                let soapXML = Global.shared.createSOAPXMLString(methodName: "GetIDs", encryptedString: chainIDsEncodedandEncrypted)
-                self.makeRequest(endpoint: MaguenCredentials.getModifyID, soapMessage: soapXML)
-            }
-            
-        }
-        catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
-        }
-        
-    }
-    
-    func getIDList(){
-        do {
-            
-            let jsonDecoder = JSONDecoder()
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
-            
-            let idTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
-            
-            
-            idToSync = idTablesResult.Value.components(separatedBy: "@")
-            for i in 0...(idToSync.count - 1) {
-                print(idToSync[i])
-            }
-            
-            
-        }
-        catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
-        }
     }
 }

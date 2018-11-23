@@ -13,6 +13,7 @@ import CryptoSwift
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
+    
     /*var dataTask: URLSessionDataTask?
     let mySession = URLSession.shared
     var parser = XMLParser()
@@ -79,14 +80,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         //print(getModifyTablesRequest)
         let aesJSON = AESforJSON()
         let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONTablesString(fecha: lastDate!)
-        print(chainTablesEncodedandEncrypted.toBase64()!)
+        //print(chainTablesEncodedandEncrypted.toBase64()!)
 
-        let soapXML = Global.shared.createSOAPXMLString(methodName: "GetModifyTables", encryptedString: chainTablesEncodedandEncrypted)
+        let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetModifyTables", encryptedString: chainTablesEncodedandEncrypted)
         
         let soapRequest = CallSOAP()
-        soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyTables, soapMessage: soapXML)
+        soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyTables, soapMessage: soapXMLTables)
         
+        while !soapRequest.done {
+            usleep(100000)
+            
+        }
+        let tablesToSync = self.getTablesList(soapResult: soapRequest.soapResult)
         
+        for tables in tablesToSync  {
+            print(tables)
+            let chainIDsEncodedandEncrypted = aesJSON.encodeAndEncryptJSONIDsString(fecha: lastDate!, tableName: tables)
+            //print(chainIDsEncodedandEncrypted.toBase64()!)
+            let soapXMLIDs = Global.shared.createSOAPXMLString(methodName: "GetIDs", encryptedString: chainIDsEncodedandEncrypted)
+            soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyID, soapMessage: soapXMLIDs)
+            while !soapRequest.done {
+                usleep(100000)
+                
+            }
+            let idsToSync = self.getIDList(soapResult: soapRequest.soapResult)
+            for ids in idsToSync{
+                print(ids)
+                let chainEntityEncodedAndEncrypted = aesJSON.encodeAndEncryptJSONEntityString(tableName: tables, id: ids)
+                let soapXMLEntities = Global.shared.createSOAPXMLString(methodName: "GetEntidad", encryptedString: chainEntityEncodedAndEncrypted)
+                //print(soapXMLEntities)
+                soapRequest.makeRequest(endpoint: MaguenCredentials.getEntidad, soapMessage: soapXMLEntities)
+                while !soapRequest.done {
+                    usleep(100000)
+                }
+                //print(soapRequest.soapResult)
+                let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                //for entities in entitiesToSync{
+                print(entitiesToSync)
+                //}
+            }
+        }
+        
+        let currentDate = Date()
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        print(dateFormat.string(from: currentDate))
+        //UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
         
         /*//Prepare request
         let url = URL(string: MaguenCredentials.getModifyTables)
@@ -109,6 +148,86 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         dataTask?.resume()*/
         
         return true
+    }
+    
+    func getTablesList(soapResult: String) -> [String] {
+        var tablesToSync: [String] = [String]()
+        do {
+            
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            
+            let modifyTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
+            
+            
+            tablesToSync = modifyTablesResult.Value.components(separatedBy: ",")
+            
+            
+            
+        }
+        catch let jsonErr{
+            print("getTablesList error: \(jsonErr)")
+        }
+        return tablesToSync
+        
+    }
+    
+    func getIDList(soapResult: String) -> [String]{
+        var idToSync: [String] = []
+        do {
+            
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            
+            let idTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
+            
+            
+            idToSync = idTablesResult.Value.components(separatedBy: "@")
+            /*for i in 0...(idToSync.count - 1) {
+                print(idToSync[i])
+            }*/
+            
+            
+        }
+        catch let jsonErr{
+            print("getTablesList error: \(jsonErr)")
+        }
+        
+        return idToSync
+    }
+    
+    func getEntitiesList(soapResult: String, table: String) -> String{
+        var entitiesToSync: String = ""
+        do {
+            
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            
+            let entityTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
+            
+            
+            //entitiesToSync = entityTablesResult.Value.components(separatedBy: "|@")
+            entitiesToSync = entityTablesResult.Value
+            /*for i in 0...(idToSync.count - 1) {
+             print(idToSync[i])
+             }*/
+            if(table == "categoria_centro") {
+                let ccm = CategoriaCentroModel.deserializaCategoriaCentro(dato: entitiesToSync)
+            }
+            else if(table == "domicilio") {
+                //let dm = 
+            }
+            
+            
+        }
+        catch let jsonErr{
+            print("getTablesList error: \(jsonErr)")
+        }
+        
+        return entitiesToSync
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

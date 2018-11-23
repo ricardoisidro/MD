@@ -20,7 +20,4 @@ class Global {
         
         return soapString
     }
-    
-    
-    var tablesAreFilled = false
 }

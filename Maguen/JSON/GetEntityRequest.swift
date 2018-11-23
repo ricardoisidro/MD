@@ -8,5 +8,5 @@
 
 struct GetEntityRequest : Codable {
     var ID: String
-    var Tables: String
+    var Table: String
 }
