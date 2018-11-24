@@ -45,4 +45,5 @@ struct MaguenCredentials {
     static let getModifyTables = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetModifyTables"
     static let getModifyID = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetIDs"
     static let getEntidad = "http://189.213.167.180/MaguenApp/wsMaguenApp.asmx?op=GetEntidad"
+    static let urlEventImages = "http://189.213.167.180/maguenapp/eventos/"
 }

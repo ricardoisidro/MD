@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SQLite
 
 struct churchsComponents {
-    var churchImage = UIImage()
-    var churchText = String()
+    var churchImage:String
+    var churchText:String
 }
 
 class ChurchsTableViewController: UITableViewController {
@@ -19,11 +20,29 @@ class ChurchsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableViewData =
-            [churchsComponents(churchImage: #imageLiteral(resourceName: "banner_maguen") ,churchText: "Maguen David"),
-             churchsComponents(churchImage: #imageLiteral(resourceName: "evento_dos"), churchText: "Eliahu Fasja"),
-             churchsComponents(churchImage: #imageLiteral(resourceName: "evento_uno"), churchText: "Shaare Tefila"),
-             churchsComponents(churchImage: #imageLiteral(resourceName: "evento_cuatro"), churchText: "Shaarem Shallom")]
+        //Global.shared.createDBFile()
+        
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+            
+            //tableViewData2 = Array(try db.prepare(users.filter(db_categoria_centro_id == 1)))
+            
+            guard let queryResults = try? db.prepare("SELECT imagen_portada, nombre FROM centro WHERE categoria_centro_id = 1 and eliminado = 0") else {
+                print("ERROR al consultar centro")
+                return
+            }
+            
+            _ = queryResults.map { row in
+                let data = churchsComponents(churchImage: row[0] as! String, churchText: row[1] as! String)
+                tableViewData.append(data)
+            }
+            
+        }
+        catch let ex {
+            print("ReadCentroDB in Templos error: \(ex)")
+        }
 
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
@@ -42,8 +61,8 @@ class ChurchsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "church") as! ChurchCell
-
-        cell.imgChurch.image = tableViewData[indexPath.row].churchImage
+        let image = UIImage(data: NSData(base64Encoded: tableViewData[indexPath.row].churchImage)! as Data)
+        cell.imgChurch.image = image ?? #imageLiteral(resourceName: "templo_default")
         cell.imgChurch.layer.cornerRadius = cell.imgChurch.frame.size.width / 2
         cell.imgChurch.clipsToBounds = true
         cell.txtChurch.text = tableViewData[indexPath.row].churchText
@@ -78,7 +97,7 @@ class ChurchsTableViewController: UITableViewController {
         if(segue.identifier == "churchdetail") {
             let controller = segue.destination as? ChurchDetailTableViewController
             //controller?.navigationItem.title = (sender as! String)
-            controller?.imagenCabecera = segueData.churchImage
+            //controller?.imagenCabecera = segueData.churchImage
             controller?.navigationItem.title = segueData.churchText
             
             

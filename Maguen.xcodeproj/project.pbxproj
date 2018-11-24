@@ -35,6 +35,7 @@
 		59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */; };
 		59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D536217554AE004E4813 /* MediaTableViewController.swift */; };
 		59C6D539217560EA004E4813 /* MediaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D538217560EA004E4813 /* MediaCell.swift */; };
+		59C9090721A8B6E000B26E69 /* EventosModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C9090621A8B6E000B26E69 /* EventosModel.swift */; };
 		59CE6745219200B300A5D719 /* NewSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE6744219200B300A5D719 /* NewSettingsViewController.swift */; };
 		59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE67472192594200A5D719 /* MaguenTextFieldDesign.swift */; };
 		59CE674B21925F6D00A5D719 /* UITextField+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CE674A21925F6D00A5D719 /* UITextField+Extension.swift */; };
@@ -106,6 +107,7 @@
 		59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchsTableViewController.swift; sourceTree = "<group>"; };
 		59C6D536217554AE004E4813 /* MediaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaTableViewController.swift; sourceTree = "<group>"; };
 		59C6D538217560EA004E4813 /* MediaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MediaCell.swift; sourceTree = "<group>"; };
+		59C9090621A8B6E000B26E69 /* EventosModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventosModel.swift; sourceTree = "<group>"; };
 		59CE6744219200B300A5D719 /* NewSettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewSettingsViewController.swift; sourceTree = "<group>"; };
 		59CE67472192594200A5D719 /* MaguenTextFieldDesign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaguenTextFieldDesign.swift; sourceTree = "<group>"; };
 		59CE674A21925F6D00A5D719 /* UITextField+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+Extension.swift"; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 			children = (
 				59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */,
 				5918142221A79BEA0025DEBE /* CentroModel.swift */,
+				59C9090621A8B6E000B26E69 /* EventosModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -474,6 +477,7 @@
 				59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */,
 				8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */,
 				59E61D4C21A47C5C00136CB6 /* SaldoRequest.swift in Sources */,
+				59C9090721A8B6E000B26E69 /* EventosModel.swift in Sources */,
 				59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */,
 				5919397121A5F94200B0E7EF /* GetIDRequest.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
@@ -573,9 +577,11 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alberto Amkie (94L5B9G92G)";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 94L5B9G92G;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -634,9 +640,11 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Alberto Amkie (94L5B9G92G)";
+				CODE_SIGN_STYLE = Manual;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 94L5B9G92G;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -662,15 +670,17 @@
 			baseConfigurationReference = 50FC3295375B0EFE71FEFBEC /* Pods-Maguen.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4CTQPXKR2;
+				DEVELOPMENT_TEAM = 94L5B9G92G;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen;
+				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen.David;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -681,15 +691,17 @@
 			baseConfigurationReference = 7F8F764BC2093E1B97B5F49F /* Pods-Maguen.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = R4CTQPXKR2;
+				DEVELOPMENT_TEAM = 94L5B9G92G;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen;
+				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen.David;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

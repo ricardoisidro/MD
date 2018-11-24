@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import SQLite
 
 struct youthComponents {
-    var youthImage = UIImage()
+    var youthImage = String()
     var youthText = String()
 }
 
@@ -20,7 +21,27 @@ class YouthTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewData = [youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Talmud Torah"), youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Nuevo grupo")]
+        //tableViewData = [youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Talmud Torah"), youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Nuevo grupo")]
+        
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+            
+            guard let queryResults = try? db.prepare("SELECT imagen_portada, nombre FROM centro WHERE categoria_centro_id = 3 and eliminado = 0") else {
+                print("ERROR al consultar Juventud")
+                return
+            }
+            
+            _ = queryResults.map { row in
+                let data = youthComponents(youthImage: row[0] as! String, youthText: row[1] as! String)
+                tableViewData.append(data)
+            }
+            
+        }
+        catch let ex {
+            print("ReadCentroDB in Templos error: \(ex)")
+        }
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
@@ -39,7 +60,8 @@ class YouthTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "youth") as! YouthCell
         
-        cell.imgYouth.image = tableViewData[indexPath.row].youthImage
+        let image = UIImage(data: NSData(base64Encoded: tableViewData[indexPath.row].youthImage)! as Data)
+        cell.imgYouth.image = image
         cell.imgYouth.layer.cornerRadius = cell.imgYouth.frame.size.width / 2
         cell.imgYouth.clipsToBounds = true
         cell.txtYouth.text = tableViewData[indexPath.row].youthText

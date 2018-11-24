@@ -80,7 +80,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="evento_cuatro" id="RMB-IB-nEB">
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_maguen" id="RMB-IB-nEB">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -1002,7 +1002,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="341" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="foto_maguen" translatesAutoresizingMaskIntoConstraints="NO" id="2YJ-iL-1tg">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="templo_default" translatesAutoresizingMaskIntoConstraints="NO" id="2YJ-iL-1tg">
                                             <rect key="frame" x="32" y="15" width="70" height="70"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="gM1-fn-g2m"/>
@@ -2622,7 +2622,6 @@
         <image name="credencial_fondo" width="700" height="1000"/>
         <image name="evento_cuatro" width="800" height="600"/>
         <image name="evento_uno" width="384" height="288"/>
-        <image name="foto_maguen" width="144" height="142"/>
         <image name="hoja_p_dos" width="383" height="567"/>
         <image name="hoja_p_uno" width="383" height="567"/>
         <image name="hoja_r_dos" width="299.25" height="387.75"/>
@@ -2650,5 +2649,6 @@
         <image name="tab_credencial" width="64" height="64"/>
         <image name="tab_emergencias" width="37.5" height="37.5"/>
         <image name="tab_maguen" width="62" height="44"/>
+        <image name="templo_default" width="144" height="142"/>
     </resources>
 </document>

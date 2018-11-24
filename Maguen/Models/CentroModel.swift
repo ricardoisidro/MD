@@ -13,29 +13,29 @@ class CentroModel: NSObject {
     let db_centro = Table("centro")
     let db_centro_id = Expression<Int64>("centro_id")
     let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-    let db_imagen_portada = Expression<String>("imagen_portada")
+    let db_imagen_portada = Expression<String?>("imagen_portada")
     let db_nombre = Expression<String>("nombre")
     let db_descripcion = Expression<String>("descripcion")
     let db_domicilio_centro_id = Expression<Int64>("domicilio_centro_id")
     let db_telefonos = Expression<String>("telefonos")
     let db_activo = Expression<Int64>("activo")
-    let db_seccion_id = Expression<Int64>("seccion_id")
+    let db_seccion_id = Expression<Int64?>("seccion_id")
     let db_eliminado = Expression<Int64>("eliminado")
     let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
     var centro_id: Int
     var categoria_centro_id: Int
-    var imagen_portada: String
+    var imagen_portada: String?
     var nombre: String
     var descripcion: String
     var domicilio_centro_id: Int
     var telefonos: String?
     var activo: Int
-    var seccion_id: Int
+    var seccion_id: Int64?
     var eliminado: Int
     var fecha_modificacion: String
     
-    init(centro_id: Int, categoria_centro_id: Int, imagen_portada: String, nombre: String, descripcion: String, domicilio_centro_id: Int, telefonos: String, activo: Int, seccion_id: Int, eliminado: Int, fecha_modificacion: String) {
+    init(centro_id: Int, categoria_centro_id: Int, imagen_portada: String, nombre: String, descripcion: String, domicilio_centro_id: Int, telefonos: String, activo: Int, seccion_id: Int64, eliminado: Int, fecha_modificacion: String) {
         self.centro_id = centro_id
         self.categoria_centro_id = categoria_centro_id
         self.imagen_portada = imagen_portada
@@ -47,6 +47,20 @@ class CentroModel: NSObject {
         self.seccion_id = seccion_id
         self.eliminado = eliminado
         self.fecha_modificacion = fecha_modificacion
+    }
+    
+    override init() {
+        self.centro_id = 0
+        self.categoria_centro_id = 0
+        self.imagen_portada = ""
+        self.nombre = ""
+        self.descripcion = ""
+        self.domicilio_centro_id = 0
+        self.telefonos = ""
+        self.activo = 0
+        self.seccion_id = 0
+        self.eliminado = 0
+        self.fecha_modificacion = ""
     }
     
     func get_centro_id() -> Int
@@ -71,7 +85,7 @@ class CentroModel: NSObject {
     
     func get_imagen_portada() -> String
     {
-        return imagen_portada;
+        return imagen_portada!;
     }
     
     func set_imagen_portada(value: String)
@@ -129,12 +143,12 @@ class CentroModel: NSObject {
         self.activo = value;
     }
     
-    func get_seccion_id() -> Int
+    func get_seccion_id() -> Int64
     {
-        return seccion_id;
+        return seccion_id ?? 0;
     }
     
-    func set_seccion_id(value: Int)
+    func set_seccion_id(value: Int64)
     {
         self.seccion_id = value;
     }
@@ -161,60 +175,67 @@ class CentroModel: NSObject {
     
     static func deserializaCentro(dato: String) -> CentroModel {
         //var categoria_centro_dictionary: [String:String]
+        let centro = CentroModel()
         
-        var datos:[Any] = [0, 0, "", "", "", 0, "", 0, 0, 0, ""]
+        //var datos:[Any] = [0, 0, "", "", "", 0, "", 0, 0, 0, ""]
         let initialPairs = dato.components(separatedBy: "|@")
         for valuesPairs in initialPairs {
             let val = valuesPairs.components(separatedBy: "@|")
             
             if(val[0] == "centro_id"){
                 //ccm.set_categoria_centro_id(value: Int(val[1])!)
-                datos[0] = Int(val[1])!
+                centro.centro_id = Int(val[1])!
             }
             else if(val[0] == "categoria_centro_id") {
                 //ccm.set_descripcion(value: val[1])
-                datos[1] = Int(val[1])!
+                //datos[1] = Int(val[1])!
+                centro.categoria_centro_id = Int(val[1])!
             }
             else if(val[0] == "imagen_portada") {
                 //ccm.set_eliminado(value: Int(val[1])!)
-                datos[2] = val[1]
+                //datos[2] = val[1]
+                centro.imagen_portada = val[1]
             }
             else if(val[0] == "nombre") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[3] = val[1]
+                //datos[3] = val[1]
+                centro.nombre = val[1]
             }
             else if(val[0] == "descripcion") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[4] = val[1]
+                //datos[4] = val[1]
+                centro.descripcion = val[1]
             }
             else if(val[0] == "domicilio_centro_id") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[5] = Int(val[1])!
+                //datos[5] = Int(val[1])!
+                centro.domicilio_centro_id = Int(val[1])!
             }
             else if(val[0] == "teléfonos") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[6] = val[1]
+                centro.telefonos = val[1]
             }
             else if(val[0] == "activo") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[7] = Int(val[1])!
+                centro.activo = Int(val[1])!
             }
             else if(val[0] == "seccion_id") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[8] = Int(val[1])!
+                centro.seccion_id = Int64(val[1]) ?? 0
             }
             else if(val[0] == "eliminado") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[9] = Int(val[1])!
+                centro.eliminado = Int(val[1])!
             }
             else if(val[0] == "fecha_modificacion") {
                 //ccm.set_fecha_modificacion(value: val[1])
-                datos[10] = val[1]
+                centro.fecha_modificacion = val[1]
             }
             
         }
         
-        return CentroModel(centro_id: datos[0] as! Int, categoria_centro_id: datos[1] as! Int, imagen_portada: datos[2] as! String, nombre: datos[3] as! String, descripcion: datos[4] as! String, domicilio_centro_id: datos[5] as! Int, telefonos: datos[6] as! String, activo: datos[7] as! Int, seccion_id: datos[8] as! Int, eliminado: datos[9] as! Int, fecha_modificacion: datos[10] as! String)
+        return centro
+        //return CentroModel(centro_id: datos[0] as! Int, categoria_centro_id: datos[1] as! Int, imagen_portada: datos[2] as! String, nombre: datos[3] as! String, descripcion: datos[4] as! String, domicilio_centro_id: datos[5] as! Int, telefonos: datos[6] as! String, activo: datos[7] as! Int, seccion_id: datos[8] as! Int, eliminado: datos[9] as! Int, fecha_modificacion: datos[10] as! String)
     }
     
 }

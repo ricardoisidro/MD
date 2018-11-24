@@ -12,7 +12,7 @@ import SQLite
 class Global {
 
     static let shared = Global()
-    var database: Connection!
+    //var database: Connection!
     
     init() {}
     
@@ -23,7 +23,7 @@ class Global {
         return soapString
     }
     
-    func createDBFile() {
+    /*func createDBFile() {
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
@@ -33,5 +33,5 @@ class Global {
         catch let ex {
             print("createDBFile error: \(ex)")
         }
-    }
+    }*/
 }

@@ -45,7 +45,7 @@ class HomeViewController: UITableViewController {
         self.tabBarController?.tabBarItem.image = UIImage.gif(asset: "logo_animado")
         self.tabBarController?.tabBarItem.title = "Hola"
         
-        Global.shared.createDBFile()
+        /*Global.shared.createDBFile()
         
         do {
             let db = Global.shared.database
@@ -62,7 +62,7 @@ class HomeViewController: UITableViewController {
         }
         catch let ex {
             print("ReadDB error: \(ex)")
-        }
+        }*/
         
     }
     
