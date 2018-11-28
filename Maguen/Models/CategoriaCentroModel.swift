@@ -45,7 +45,4 @@ class CategoriaCentroModel: NSObject {
                 
         return categoriaCentro
     }
-    
-    
-    
 }

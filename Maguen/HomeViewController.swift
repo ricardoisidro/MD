@@ -45,18 +45,21 @@ class HomeViewController: UITableViewController {
         self.tabBarController?.tabBarItem.image = UIImage.gif(asset: "logo_animado")
         self.tabBarController?.tabBarItem.title = "Hola"
         
-        /*Global.shared.createDBFile()
+        //Global.shared.createDBFile()
         
-        do {
-            let db = Global.shared.database
-            let users = Table("categoria_centro")
+        /*do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+            
+            let users = Table("centro")
+            let db_centro_id = Expression<Int64>("centro_id")
             let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
             let db_descripcion = Expression<String>("descripcion")
             let db_eliminado = Expression<Int64>("eliminado")
-            let db_fecha_modificacion = Expression<String>("fecha_modificacion")
             
-            for user in try db!.prepare(users) {
-                print("id: \(user[db_categoria_centro_id]), name: \(user[db_descripcion]), email: \(user[db_eliminado]), fechamodificacion: \(user[db_fecha_modificacion])")
+            for user in try db.prepare(users) {
+                print("centroid: \(user[db_centro_id]), categoriacentroid: \(user[db_categoria_centro_id]), descripcion: \(user[db_descripcion]), eliminado: \(user[db_eliminado])")
                 // id: 1, name: Optional("Alice"), email: alice@mac.com
             }
         }

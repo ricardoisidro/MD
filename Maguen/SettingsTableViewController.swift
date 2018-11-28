@@ -7,11 +7,18 @@
 //
 
 import UIKit
+import SQLite
 
-//let dataNotificationKey = "co.loginData"
+struct optionsComponents {
+    var selected = Bool()
+    var optionClass = Int64()
+    var optionName = String()
+}
 
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    var tableViewData = [optionsComponents]()
+    
     @IBOutlet weak var textConfigName: UITextField!
     @IBOutlet weak var textConfigSurname1: UITextField!
     @IBOutlet weak var textConfigSurname2: UITextField!
@@ -37,6 +44,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         super.viewDidLoad()
         self.tableView.backgroundColor = .clear
         
+        tableView.register(UINib(nibName: "OptionsTableViewCell", bundle: nil), forCellReuseIdentifier: "options")
+        
         createSexPicker()
         createDatePicker()
         createPickerToolbar()
@@ -49,8 +58,34 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigBirthday.delegate = self
         textConfigMail.delegate = self
         textConfigPhone.delegate = self
-    
+
         //createObservers()
+        do {
+            
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+         
+         /*let users = Table("centro")
+         let db_centro_id = Expression<Int64>("centro_id")
+         let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+         let db_descripcion = Expression<String>("descripcion")
+         let db_eliminado = Expression<Int64>("eliminado")*/
+         
+            guard let queryResults = try? db.prepare("SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id") else {
+                print("ERROR al consultar Comites")
+                return
+            }
+            
+            _ = queryResults.map { row in
+                let data = optionsComponents(selected: false, optionClass: row[0] as! Int64, optionName: row[1] as! String)
+                tableViewData.append(data)
+            }
+         }
+         catch let ex {
+            print("ReadCentroDB error: \(ex)")
+         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -182,5 +217,48 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         dateFormatter.dateFormat = "dd/MM/yyyy"
         textConfigBirthday.text = dateFormatter.string(from: datePicker.date)
     }
+    
+    // MARK: - Table view delegates
+
+    /*override func numberOfSections(in tableView: UITableView) -> Int {
+        return 4
+    }*/
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        //print(section)
+        if section == 3 {
+            return tableViewData.count
+        }
+        return super.tableView(tableView, numberOfRowsInSection: section)
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 3 {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "options", for: indexPath) as! OptionTableViewCell
+            //cell.txtClass.text = "0"//String(tableViewData[indexPath.row].optionClass)
+            //cell.txtPlace.text = "Hola"//tableViewData[indexPath.row].optionName
+            //cell.option.isSelected = false //tableViewData[indexPath.row].selected
+            return cell
+        }
+        return super.tableView(tableView, cellForRowAt: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+        if indexPath.section == 3 {
+            let newIndexPath = IndexPath(row: 0, section: indexPath.section)
+            return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
+        }
+        return super.tableView(tableView, indentationLevelForRowAt: indexPath as IndexPath)
+    }
+    /*override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
+     
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.section == 4 {
+            return 44
+        }
+        return super.tableView(tableView, heightForRowAt: indexPath)
+    }*/
     
 }

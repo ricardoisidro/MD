@@ -10,12 +10,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Maguen/AppDelegate.swift"
-            timestampString = "564715550.5807641"
+            timestampString = "565132635.400148"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "477"
             endingLineNumber = "477"
-            landmarkName = "onInsert(objeto:)"
+            landmarkName = "onInsertCentroDB(objeto:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
