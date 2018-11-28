@@ -73,6 +73,16 @@
 		8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */; };
 		8C895D642194BF43004F5D46 /* AskLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C895D622194BF43004F5D46 /* AskLoginViewController.swift */; };
 		8C895D6721950C6E004F5D46 /* UIImage+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C895D6621950C6E004F5D46 /* UIImage+Extension.swift */; };
+		8C8D05A421ACC66300B74D99 /* ComiteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05A321ACC66200B74D99 /* ComiteModel.swift */; };
+		8C8D05A621ACF93300B74D99 /* CategoriaPublicacionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05A521ACF93300B74D99 /* CategoriaPublicacionModel.swift */; };
+		8C8D05A821AD0FAF00B74D99 /* PublicacionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05A721AD0FAF00B74D99 /* PublicacionModel.swift */; };
+		8C8D05AA21ADB26B00B74D99 /* ComunidadModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05A921ADB26B00B74D99 /* ComunidadModel.swift */; };
+		8C8D05AC21ADC0FB00B74D99 /* HorarioClaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05AB21ADC0FB00B74D99 /* HorarioClaseModel.swift */; };
+		8C8D05AE21ADDC4400B74D99 /* ClasesModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05AD21ADDC4300B74D99 /* ClasesModel.swift */; };
+		8C8D05B021ADE60D00B74D99 /* HorarioResoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05AF21ADE60D00B74D99 /* HorarioResoModel.swift */; };
+		8C8D05B221AE1B5B00B74D99 /* ServicioCentroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05B121AE1B5B00B74D99 /* ServicioCentroModel.swift */; };
+		8C8D05B421AE3E3600B74D99 /* ServicioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05B321AE3E3600B74D99 /* ServicioModel.swift */; };
+		8C8D05B621AE44F400B74D99 /* DomicilioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05B521AE44F400B74D99 /* DomicilioModel.swift */; };
 		C6D705AB43C1EF32A6C28A50 /* Pods_Maguen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6FDEFD400814C4CD04914 /* Pods_Maguen.framework */; };
 /* End PBXBuildFile section */
 
@@ -148,6 +158,16 @@
 		8C7F08CE21798749004A9FBF /* YouthDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YouthDetailCell.swift; sourceTree = "<group>"; };
 		8C895D622194BF43004F5D46 /* AskLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskLoginViewController.swift; sourceTree = "<group>"; };
 		8C895D6621950C6E004F5D46 /* UIImage+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extension.swift"; sourceTree = "<group>"; };
+		8C8D05A321ACC66200B74D99 /* ComiteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComiteModel.swift; sourceTree = "<group>"; };
+		8C8D05A521ACF93300B74D99 /* CategoriaPublicacionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriaPublicacionModel.swift; sourceTree = "<group>"; };
+		8C8D05A721AD0FAF00B74D99 /* PublicacionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicacionModel.swift; sourceTree = "<group>"; };
+		8C8D05A921ADB26B00B74D99 /* ComunidadModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ComunidadModel.swift; sourceTree = "<group>"; };
+		8C8D05AB21ADC0FB00B74D99 /* HorarioClaseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorarioClaseModel.swift; sourceTree = "<group>"; };
+		8C8D05AD21ADDC4300B74D99 /* ClasesModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClasesModel.swift; sourceTree = "<group>"; };
+		8C8D05AF21ADE60D00B74D99 /* HorarioResoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorarioResoModel.swift; sourceTree = "<group>"; };
+		8C8D05B121AE1B5B00B74D99 /* ServicioCentroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioCentroModel.swift; sourceTree = "<group>"; };
+		8C8D05B321AE3E3600B74D99 /* ServicioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioModel.swift; sourceTree = "<group>"; };
+		8C8D05B521AE44F400B74D99 /* DomicilioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomicilioModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -248,6 +268,16 @@
 				59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */,
 				5918142221A79BEA0025DEBE /* CentroModel.swift */,
 				59C9090621A8B6E000B26E69 /* EventosModel.swift */,
+				8C8D05A321ACC66200B74D99 /* ComiteModel.swift */,
+				8C8D05A521ACF93300B74D99 /* CategoriaPublicacionModel.swift */,
+				8C8D05A721AD0FAF00B74D99 /* PublicacionModel.swift */,
+				8C8D05A921ADB26B00B74D99 /* ComunidadModel.swift */,
+				8C8D05AB21ADC0FB00B74D99 /* HorarioClaseModel.swift */,
+				8C8D05AD21ADDC4300B74D99 /* ClasesModel.swift */,
+				8C8D05AF21ADE60D00B74D99 /* HorarioResoModel.swift */,
+				8C8D05B121AE1B5B00B74D99 /* ServicioCentroModel.swift */,
+				8C8D05B321AE3E3600B74D99 /* ServicioModel.swift */,
+				8C8D05B521AE44F400B74D99 /* DomicilioModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -459,6 +489,7 @@
 			files = (
 				59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */,
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
+				8C8D05AE21ADDC4400B74D99 /* ClasesModel.swift in Sources */,
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
 				8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */,
@@ -470,6 +501,7 @@
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
 				59E61D5221A4F50B00136CB6 /* GetModifyTablesResponse.swift in Sources */,
 				8C895D6721950C6E004F5D46 /* UIImage+Extension.swift in Sources */,
+				8C8D05A821AD0FAF00B74D99 /* PublicacionModel.swift in Sources */,
 				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
@@ -481,14 +513,18 @@
 				59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */,
 				5919397121A5F94200B0E7EF /* GetIDRequest.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
+				8C8D05B621AE44F400B74D99 /* DomicilioModel.swift in Sources */,
 				5919397B21A637F700B0E7EF /* CallSOAP.swift in Sources */,
+				8C8D05B421AE3E3600B74D99 /* ServicioModel.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
 				59CE674B21925F6D00A5D719 /* UITextField+Extension.swift in Sources */,
 				59DABC1821A7294800D7445C /* GetEntityResponse.swift in Sources */,
 				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
 				59C6D53521754CAE004E4813 /* ChurchsTableViewController.swift in Sources */,
+				8C8D05AA21ADB26B00B74D99 /* ComunidadModel.swift in Sources */,
 				59DABC1B21A75F4600D7445C /* CategoriaCentroModel.swift in Sources */,
 				8C7F08C321790F6E004A9FBF /* ChurchDetailTableViewCell.swift in Sources */,
+				8C8D05B021ADE60D00B74D99 /* HorarioResoModel.swift in Sources */,
 				59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
 				5919397921A6313D00B0E7EF /* Global.swift in Sources */,
@@ -505,8 +541,11 @@
 				59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */,
 				8C895D642194BF43004F5D46 /* AskLoginViewController.swift in Sources */,
 				59D30E212176AA330063B303 /* YouthCell.swift in Sources */,
+				8C8D05B221AE1B5B00B74D99 /* ServicioCentroModel.swift in Sources */,
 				59D30E1B217684790063B303 /* EventCell.swift in Sources */,
+				8C8D05AC21ADC0FB00B74D99 /* HorarioClaseModel.swift in Sources */,
 				8C4B054C216FDEA80079A937 /* HomeCell.swift in Sources */,
+				8C8D05A621ACF93300B74D99 /* CategoriaPublicacionModel.swift in Sources */,
 				59D30E232176AB140063B303 /* YouthTableViewController.swift in Sources */,
 				59BB4F0B2177C2D2007CC317 /* EventViewController.swift in Sources */,
 				59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */,
@@ -519,6 +558,7 @@
 				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
 				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
+				8C8D05A421ACC66300B74D99 /* ComiteModel.swift in Sources */,
 				59BAF0BC217A6A9800756117 /* MagazinePage02ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,7 +712,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94L5B9G92G;
+				DEVELOPMENT_TEAM = K58JH44H3K;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -682,7 +722,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -693,7 +733,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94L5B9G92G;
+				DEVELOPMENT_TEAM = K58JH44H3K;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -703,7 +743,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

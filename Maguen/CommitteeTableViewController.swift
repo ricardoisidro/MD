@@ -7,9 +7,9 @@
 //
 
 import UIKit
+import SQLite
 
 struct committeeComponents {
-    var committeeImage = UIImage()
     var committeeTitle = String()
     var committeePhone = String()
 }
@@ -21,9 +21,29 @@ class CommitteeTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewData = [
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+            
+            guard let queryResults = try? db.prepare("SELECT nombre_comite, telefono FROM comites WHERE eliminado = 0") else {
+                print("ERROR al consultar Comites")
+                return
+            }
+            
+            _ = queryResults.map { row in
+                let data = committeeComponents(committeeTitle: row[0] as! String, committeePhone: row[1] as! String)
+                tableViewData.append(data)
+            }
+            
+        }
+        catch let ex {
+            print("ReadCentroDB in Templos error: \(ex)")
+        }
+        
+        /*tableViewData = [
             committeeComponents(committeeImage: #imageLiteral(resourceName: "img_jebrakadisha"), committeeTitle: "Comité 1", committeePhone: "5557575757"),
-            committeeComponents(committeeImage: #imageLiteral(resourceName: "img_jebrakadisha"), committeeTitle: "Comité 2", committeePhone: "5556565656")]
+            committeeComponents(committeeImage: #imageLiteral(resourceName: "img_jebrakadisha"), committeeTitle: "Comité 2", committeePhone: "5556565656")]*/
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
@@ -43,7 +63,8 @@ class CommitteeTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "committee") as! CommitteeCell
         
-        cell.imgCommittee.image = tableViewData[indexPath.row].committeeImage
+        //cell.imgCommittee.image = tableViewData[indexPath.row].committeeImage
+        cell.imgCommittee.image = #imageLiteral(resourceName: "img_jebrakadisha")
         cell.imgCommittee.layer.cornerRadius = cell.imgCommittee.frame.size.width / 2
         cell.imgCommittee.clipsToBounds = true
         cell.txtCommittee.text = tableViewData[indexPath.row].committeeTitle

@@ -14,23 +14,24 @@ import SQLite
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
 
     var window: UIWindow?
+    
     var database: Connection!
     let db_categoria_centro = Table("categoria_centro")
-    var db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-    var db_descripcion = Expression<String>("descripcion")
-    var db_eliminado = Expression<Int64>("eliminado")
-    var db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+    let db_descripcion = Expression<String>("descripcion")
+    let db_eliminado = Expression<Int64>("eliminado")
+    let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
     let db_centro = Table("centro")
-    var db_centro_id = Expression<Int64>("centro_id")
+    let db_centro_id = Expression<Int64>("centro_id")
     //let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-    var db_imagen_portada = Expression<String>("imagen_portada")
-    var db_nombre = Expression<String>("nombre")
+    let db_imagen_portada = Expression<String>("imagen_portada")
+    let db_nombre = Expression<String>("nombre")
     //let db_descripcion = Expression<String>("descripcion")
-    var db_domicilio_centro_id = Expression<Int64>("domicilio_centro_id")
-    var db_telefonos = Expression<String>("telefonos")
-    var db_activo = Expression<Int64>("activo")
-    var db_seccion_id = Expression<Int64>("seccion_id")
+    let db_domicilio_centro_id = Expression<Int64>("domicilio_centro_id")
+    let db_telefonos = Expression<String>("telefonos")
+    let db_activo = Expression<Int64>("activo")
+    let db_seccion_id = Expression<Int64>("seccion_id")
     //let db_eliminado = Expression<Int64>("eliminado")
     //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
@@ -42,15 +43,87 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
     let db_horario = Expression<String>("horario")
     let db_imagen = Expression<String?>("imagen")
+    
+    
+    let db_comite = Table("comites")
+    let db_comite_id = Expression<Int64>("comite_id")
+    let db_nombre_comite = Expression<String>("nombre_comite")
+    let db_telefono = Expression<String>("telefono")
     //let db_eliminado = Expression<Int64>("eliminado")
     //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    /*var dataTask: URLSessionDataTask?
-    let mySession = URLSession.shared
-    var parser = XMLParser()
-    var currentParsingElement:String = ""
-    var soapString:String = ""
-    var windowsToSync: [String] = [String]()*/
     
+    let db_categoria_publicacion = Table("categoria_publicacion")
+    let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
+    //let db_descripcion = Expression<String>("categoria_descripcion")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    
+    let db_publicacion = Table("publicacion")
+    let db_publicacion_id = Expression<Int64>("publicacion_id")
+    //let db_descripcion = Expression<String>("descripcion")
+    //let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
+    //let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
+    //let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
+    let db_paginas = Expression<Int64>("paginas")
+    //var db_activo = Expression<Int64>("activo")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    
+    let db_comunidad = Table("comunidad")
+    let db_comunidad_id = Expression<Int64>("comunidad_id")
+    //let db_descripcion = Expression<String>("descripcion")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    
+    let db_horario_clase = Table("horario_clase")
+    let db_horario_clase_id = Expression<Int64>("horario_clase")
+    let db_clase_id = Expression<Int64>("clase_id")
+    let db_profesor = Expression<String>("profesor")
+    let db_dias = Expression<String>("dias")
+    //let db_horario = Expression<String>("horario")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+
+    let db_clases = Table("clases")
+    let db_clases_id = Expression<Int64>("clase_id")
+    //let db_descripcion = Expression<String>("descripcion")
+    //var db_centro_id = Expression<Int64>("centro_id")
+
+    let db_horarios_reso = Table("horarios_reso")
+    let db_horarios_reso_id = Expression<Int64>("horarios_reso_id")
+    //let db_centro_id = Expression<Int64>("centro_id")
+    let db_tipo_reso_id = Expression<Int64>("tipo_reso_id")
+    //let db_titulo = Expression<String>("titulo")
+    //let db_horario = Expression<String>("horario")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    
+    let db_servicio_centro = Table("servicio_centro")
+    let db_servicio_centro_id = Expression<Int64>("servicio_centro_id")
+    //let db_servicio_id = Expression<Int64>("servicio_id")
+    //let db_centro_id = Expression<Int64>("centro_id")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    
+    let db_servicio = Table("servicio")
+    let db_servicio_id = Expression<Int64>("servicio_id")
+    //let db_descripcion = Expression<String>("descripcion")
+    //let db_imagen = Expression<String?>("imagen")
+    //let db_activo = Expression<Int64>("activo")
+    //let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+
+    let db_domicilio = Table("domicilio")
+    let db_domicilio_id = Expression<Int64>("domicilio_id")
+    let db_calle = Expression<String>("calle")
+    let db_numero_exterior = Expression<String>("numero_exterior")
+    let db_numero_interior = Expression<String>("numero_interior")
+    let db_cp = Expression<Int64>("cp")
+    let db_colonia = Expression<String>("colonia")
+    let db_delegacion_municipio = Expression<String>("delegacion_municipio")
+    let db_estado = Expression<String>("estado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+
     let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
 
     //MARK: - TabBarController delegate
@@ -98,7 +171,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     //MARK: - App delegates
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        
+        // Override point for customization after application launch.
+
         var lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
         
         do {
@@ -110,12 +184,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         catch let ex {
             print("createDBFile error: \(ex)")
         }
-        //let ccm = CategoriaCentroModel()
-        //CategoriaCentroModel.onCreateCategoriaCentroDB()
+        
         onCreateCategoriaCentroDB()
+        onCreateDomicilioDB()
         onCreateCentroDB()
         onCreateEventosDB()
-        // Override point for customization after application launch.
+        onCreateServicioDB()
+        onCreateServicioCentroDB()
+        onCreateHorarioResoDB()
+        onCreateHorarioClaseDB()
+        onCreateClasesDB()
+        onCreateComiteDB()
+        onCreateCategoriaPublicacionDB()
+        onCreatePublicacionDB()
+        onCreateComunidadDB()
+        
         if (lastDate == nil) {
             UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
             lastDate = "01/01/1990 00:00:00"
@@ -124,8 +207,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
         }
         
-        //let getModifyTablesRequest = GetModifyTablesRequest(FechaSincronizacion: lastDate!)
-        //print(getModifyTablesRequest)
         let aesJSON = AESforJSON()
         let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONTablesString(fecha: lastDate!)
         //print(chainTablesEncodedandEncrypted.toBase64()!)
@@ -179,29 +260,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
         print(dateFormat.string(from: currentDate))
-        //UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
-        
-        /*//Prepare request
-        let url = URL(string: MaguenCredentials.getModifyTables)
-        let req = NSMutableURLRequest(url: url!)
-        let msgLength = soapMessage.count
-        req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
-        req.httpMethod = "POST"
-        req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
-        
-        //Make the request
-        dataTask?.cancel()
-        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
-            defer { self.dataTask = nil }
-            guard let data = data else { return }
-            let modifyTablesparser = XMLParser(data: data)
-            modifyTablesparser.delegate = self
-            modifyTablesparser.parse()
-        }
-        dataTask?.resume()*/
         
         return true
+    }
+    
+    func applicationWillResignActive(_ application: UIApplication) {
+        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
+        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+    }
+
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
+        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+    }
+
+    func applicationWillEnterForeground(_ application: UIApplication) {
+        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
+    }
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    }
+
+    func applicationWillTerminate(_ application: UIApplication) {
+        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
     
     func getTablesList(soapResult: String) -> [String] {
@@ -214,10 +296,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             
             let modifyTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
             
-            
             tablesToSync = modifyTablesResult.Value.components(separatedBy: ",")
-            
-            
             
         }
         catch let jsonErr{
@@ -239,10 +318,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             
             
             idToSync = idTablesResult.Value.components(separatedBy: "@")
-            /*for i in 0...(idToSync.count - 1) {
-                print(idToSync[i])
-            }*/
-            
             
         }
         catch let jsonErr{
@@ -262,26 +337,60 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             
             let entityTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
             
-            
-            //entitiesToSync = entityTablesResult.Value.components(separatedBy: "|@")
             entitiesToSync = entityTablesResult.Value
-            /*for i in 0...(idToSync.count - 1) {
-             print(idToSync[i])
-             }*/
+            
             if(table == "categoria_centro") {
                 let ccm = CategoriaCentroModel.deserializaCategoriaCentro(dato: entitiesToSync)
-                onInsert(objeto: ccm)
+                onInsertCategoriaCentroDB(objeto: ccm)
+            }
+            else if(table == "domicilio") {
+                let d = DomicilioModel.deserializaCentro(dato: entitiesToSync)
+                onInsertDomicilioDB(objeto: d)
             }
             else if(table == "centro") {
                 let c = CentroModel.deserializaCentro(dato: entitiesToSync)
                 onInsertCentroDB(objeto: c)
             }
-            
             else if(table == "eventos") {
                 let e = EventosModel.deserializaEvento(dato: entitiesToSync)
                 onInsertEventosDB(objeto: e)
             }
-            
+            else if(table == "servicio") {
+                let s = ServicioModel.deserializaCentro(dato: entitiesToSync)
+                onInsertServicioDB(objeto: s)
+            }
+            else if(table == "servicio_centro") {
+                let sc = ServicioCentroModel.deserializaEvento(dato: entitiesToSync)
+                onInsertServicioCentroDB(objeto: sc)
+            }
+            else if(table == "horarios_reso") {
+                let hr = HorarioResoModel.deserializaEvento(dato: entitiesToSync)
+                onInsertHorarioResoDB(objeto: hr)
+            }
+            else if(table == "clases") {
+                let c = ClasesModel.deserializaEvento(dato: entitiesToSync)
+                onInsertClasesDB(objeto: c)
+            }
+            else if(table == "horario_clase") {
+                let h = HorarioClaseModel.deserializaEvento(dato: entitiesToSync)
+                onInsertHorarioClaseDB(objeto: h)
+            }
+            else if(table == "comites") {
+                let c = ComiteModel.deserializaEvento(dato: entitiesToSync)
+                onInsertComiteDB(objeto: c)
+            }
+            else if(table == "categoria_publicacion") {
+                let cp = CategoriaPublicacionModel.deserializaEvento(dato: entitiesToSync)
+                onInsertCategoriaPublicacionDB(objeto: cp)
+            }
+            else if(table == "publicacion") {
+                let p = PublicacionModel.deserializaEvento(dato: entitiesToSync)
+                onInsertPublicacionDB(objeto: p)
+            }
+            else if(table == "comunidad") {
+                let c = ComunidadModel.deserializaEvento(dato: entitiesToSync)
+                onInsertComunidadDB(objeto: c)
+            }
             
         }
         catch let jsonErr{
@@ -290,164 +399,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         return entitiesToSync
     }
-
-    func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
-    }
-
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-        // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
-    }
-
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
-        print("Hi, Im back")
-    }
-
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    }
-
-    func applicationWillTerminate(_ application: UIApplication) {
-        // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    }
-
-
-    //MARK: - Decode/encode funcs 
-    /*func encodeAndEncryptJSONTablesString(GetModifyTablesRequest: GetModifyTablesRequest) -> Array<UInt8> {
-        var cipherRequest: [UInt8] = []
-        do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(GetModifyTablesRequest)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
-            
-        }
-        catch let err {
-            print("encodeAndEncryptJSONTablesString error: \(err)")
-        }
-        return cipherRequest
-    }
-    
-    /*func getTablesList() {
-        do {
-            
-            let jsonDecoder = JSONDecoder()
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            let decrypted = try soapString.decryptBase64ToString(cipher: aes)
-            
-            let modifyTablesResult = try jsonDecoder.decode(GetModifyTablesResponse.self, from: Data(decrypted.utf8))
-            
-            
-            windowsToSync = modifyTablesResult.Value.components(separatedBy: ",")
-            for i in 0...(windowsToSync.count - 1) {
-                print(windowsToSync[i])
-            }
-            
-            processID()
-        }
-        catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
-        }
-    }*/
-    
-    /*func processID() {
-        let getModifiedIDRequest = GetIDRequest(FechaSincronizacion: lastDate!, Tables: windowsToSync[1])
-        print(getModifiedIDRequest)
-        let chainIDEncodedandEncrypted = encodeAndEncryptJSONIDString(GetRequest: getModifiedIDRequest)
-        
-        print(chainIDEncodedandEncrypted.toBase64()!)
-        
-        let soapMessage =
-        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetIDs xmlns='http://tempuri.org/'><Cadena>\(chainIDEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetIDs></soap:Body></soap:Envelope>"
-        
-        //Prepare request
-        let url = URL(string: MaguenCredentials.getModifyID)
-        let req = NSMutableURLRequest(url: url!)
-        let msgLength = soapMessage.count
-        req.addValue("text/xml; charset=utf-8", forHTTPHeaderField: "Content-Type")
-        req.addValue(String(msgLength), forHTTPHeaderField: "Content-Length")
-        req.httpMethod = "POST"
-        req.httpBody = soapMessage.data(using: String.Encoding.utf8, allowLossyConversion: false)
-        
-        //Make the request
-        dataTask?.cancel()
-        dataTask = mySession.dataTask(with: req as URLRequest) { (data, response, error) in
-            defer { self.dataTask = nil }
-            guard let data = data else { return }
-            let parser = XMLParser(data: data)
-            let idparser = MyClass()
-            parser.delegate = idparser
-            parser.parse()
-        }
-        dataTask?.resume()
-        
-        
-    }*/
-
-    /*func encodeAndEncryptJSONIDString(GetRequest: GetIDRequest) -> Array<UInt8> {
-        var cipherRequest: [UInt8] = []
-        do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(GetRequest)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
-        
-        }
-        catch let err {
-            print("encodeAndEncryptJSONIDString error: \(err)")
-        }
-        return cipherRequest
-    }*/
-
-    //MARK:- XMLParserDelegate methods
-    
-    /*func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
-        currentParsingElement = elementName
-        if elementName == "GetModifyTablesResponse" {
-            //print("Started parsing modifytables...")
-        }
-    }
-    
-    func parser(_ parser: XMLParser, foundCharacters string: String) {
-        let foundedChar = string.trimmingCharacters(in:NSCharacterSet.whitespacesAndNewlines)
-        
-        if (!foundedChar.isEmpty) {
-            if currentParsingElement == "GetModifyTablesResult" {
-                self.soapString = ""
-                self.soapString += foundedChar
-            }
-            else {
-                self.soapString += "nothing"
-            }
-        }
-        
-    }
-    
-    func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
-        if elementName == "GetModifyTablesResponse" {
-            //print("Ended parsing modifytables...")
-            
-        }
-    }
-    
-    func parserDidEndDocument(_ parser: XMLParser) {
-        DispatchQueue.main.async {
-            self.getTablesList()
-            //self.dismiss(animated: true, completion: nil)
-            
-        }
-    }
-    
-    func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("parseErrorOccurred: \(parseError)")
-    }*/*/
     
     func onCreateCategoriaCentroDB() {
         
@@ -458,12 +409,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 t.column(db_descripcion)  //     "descripcion" TEXT,
                 t.column(db_eliminado)   //      "eliminado" TEXT,
                 t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
-            
-            
             })
-            
-            
-            
         }
         catch let ex {
             print("onCreateCategoriaCentro SQLite exception: \(ex)")
@@ -471,7 +417,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
     }
     
-    func onInsert(objeto: CategoriaCentroModel) {
+    func onInsertCategoriaCentroDB(objeto: CategoriaCentroModel) {
         do {
             let db = database
             let insert = db_categoria_centro.insert(or: .replace,
@@ -504,9 +450,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 t.column(db_eliminado)
                 t.column(db_fecha_modificacion)
             })
-            
-            
-            
         }
         catch let ex {
             print("onCreateCentroDB SQLite exception: \(ex)")
@@ -551,9 +494,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 t.column(db_eliminado)
                 t.column(db_fecha_modificacion)
             })
-            
-            
-            
         }
         catch let ex {
             print("onCreateEventosDB SQLite exception: \(ex)")
@@ -578,6 +518,378 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         catch let ex {
             print("onInsertCentroDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateComiteDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_comite.create(ifNotExists: true) { t in
+                t.column(db_comite_id, primaryKey: true)
+                t.column(db_nombre_comite)
+                t.column(db_telefono)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateComitesDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertComiteDB(objeto: ComiteModel) {
+        do {
+            let db = database
+            let insert = db_comite.insert(or: .replace,
+                                           db_comite_id <- Int64(objeto.comite_id),
+                                           db_nombre_comite <- objeto.nombre_comite,
+                                           db_telefono <- objeto.telefono,
+                                           db_eliminado <- Int64(objeto.eliminado),
+                                           db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertComiteDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateCategoriaPublicacionDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_categoria_publicacion.create(ifNotExists: true) { t in
+                t.column(db_categoria_publicacion_id, primaryKey: true)
+                t.column(db_descripcion)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateCategoriaPublicacionDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertCategoriaPublicacionDB(objeto: CategoriaPublicacionModel) {
+        do {
+            let db = database
+            let insert = db_categoria_publicacion.insert(or: .replace,
+                                          db_categoria_publicacion_id <- Int64(objeto.categoria_publicacion_id),
+                                          db_descripcion <- objeto.descripcion,
+                                          db_eliminado <- Int64(objeto.eliminado),
+                                          db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertCategoriaPublicacionDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreatePublicacionDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_publicacion.create(ifNotExists: true) { t in
+                t.column(db_publicacion_id, primaryKey: true)
+                t.column(db_descripcion)
+                t.column(db_fecha_inicial_publicacion)
+                t.column(db_fecha_final_publicacion)
+                t.column(db_categoria_publicacion_id)
+                t.column(db_paginas)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+                t.column(db_activo)
+            })
+        }
+        catch let ex {
+            print("onCreatePublicacionDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertPublicacionDB(objeto: PublicacionModel) {
+        do {
+            let db = database
+            let insert = db_publicacion.insert(or: .replace,
+                                                         db_publicacion_id <- Int64(objeto.publicacion_id),
+                                                         db_descripcion <- objeto.descripcion,
+                                                         db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion,
+                                                         db_fecha_final_publicacion <- objeto.fecha_final_publicacion,
+                                                         db_categoria_publicacion_id <- Int64(objeto.categoria_publicacion_id),
+                                                         db_paginas <- Int64(objeto.paginas),
+                                                         db_eliminado <- Int64(objeto.eliminado),
+                                                         db_fecha_modificacion <- objeto.fecha_modificacion,
+                                                         db_activo <- Int64(objeto.activo))
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertPublicacionDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateComunidadDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_comunidad.create(ifNotExists: true) { t in
+                t.column(db_comunidad_id, primaryKey: true)
+                t.column(db_descripcion)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateComunidadDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertComunidadDB(objeto: ComunidadModel) {
+        do {
+            let db = database
+            let insert = db_comunidad.insert(or: .replace,
+                                                         db_comunidad_id <- Int64(objeto.comunidad_id),
+                                                         db_descripcion <- objeto.descripcion,
+                                                         db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertComunidadDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateHorarioClaseDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_horario_clase.create(ifNotExists: true) { t in
+                t.column(db_horario_clase_id, primaryKey: true)
+                t.column(db_clase_id)
+                t.column(db_profesor)
+                t.column(db_dias)
+                t.column(db_horario)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateHorarioClaseDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertHorarioClaseDB(objeto: HorarioClaseModel) {
+        do {
+            let db = database
+            let insert = db_horario_clase.insert(or: .replace,
+                                             db_horario_clase_id <- Int64(objeto.horario_clase_id),
+                                             db_clase_id <- Int64(objeto.clase_id),
+                                             db_profesor <- objeto.profesor,
+                                             db_dias <- objeto.dias,
+                                             db_horario <- objeto.horario,
+                                             db_eliminado <- Int64(objeto.eliminado),
+                                             db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertHorarioClaseDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateClasesDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_clases.create(ifNotExists: true) { t in
+                t.column(db_clase_id, primaryKey: true)
+                t.column(db_descripcion)
+                t.column(db_centro_id)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateComunidadDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertClasesDB(objeto: ClasesModel) {
+        do {
+            let db = database
+            let insert = db_clases.insert(or: .replace,
+                                             db_clase_id <- Int64(objeto.clase_id),
+                                             db_descripcion <- objeto.descripcion,
+                                             db_centro_id <- Int64(objeto.centro_id),
+                                             db_eliminado <- Int64(objeto.eliminado),
+                                             db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertComunidadDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateHorarioResoDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_horarios_reso.create(ifNotExists: true) { t in
+                t.column(db_horarios_reso_id, primaryKey: true)
+                t.column(db_centro_id)
+                t.column(db_tipo_reso_id)
+                t.column(db_titulo)
+                t.column(db_horario)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateHorarioResoDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertHorarioResoDB(objeto: HorarioResoModel) {
+        do {
+            let db = database
+            let insert = db_horarios_reso.insert(or: .replace,
+                                                 db_horarios_reso_id <- Int64(objeto.horario_reso_id),
+                                                 db_centro_id <- Int64(objeto.centro_id),
+                                                 db_tipo_reso_id <- Int64(objeto.tipo_reso_id),
+                                                 db_titulo <- objeto.titulo,
+                                                 db_horario <- objeto.horario,
+                                                 db_eliminado <- Int64(objeto.eliminado),
+                                                 db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertHorarioResoDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateServicioCentroDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_servicio_centro.create(ifNotExists: true) { t in
+                t.column(db_servicio_centro_id, primaryKey: true)
+                t.column(db_servicio_id)
+                t.column(db_centro_id)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateServicioCentroDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertServicioCentroDB(objeto: ServicioCentroModel) {
+        do {
+            let db = database
+            let insert = db_servicio_centro.insert(or: .replace,
+                                                 db_servicio_centro_id <- Int64(objeto.servicio_centro_id),
+                                                 db_servicio_id <- Int64(objeto.servicio_id),
+                                                 db_centro_id <- Int64(objeto.centro_id),
+                                                 db_eliminado <- Int64(objeto.eliminado),
+                                                 db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertServicioCentroDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateServicioDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_servicio.create(ifNotExists: true) { t in
+                t.column(db_servicio_id, primaryKey: true)
+                t.column(db_descripcion)
+                t.column(db_imagen)
+                t.column(db_activo)
+                t.column(db_categoria_centro_id)
+                t.column(db_eliminado)
+                t.column(db_fecha_modificacion)
+            })
+        }
+        catch let ex {
+            print("onCreateServicioDB SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertServicioDB(objeto: ServicioModel) {
+        do {
+            let db = database
+            let insert = db_servicio.insert(or: .replace,
+                                          db_servicio_id <- Int64(objeto.servicio_id),
+                                          db_descripcion <- objeto.descripcion,
+                                          db_imagen <- objeto.imagen,
+                                          db_categoria_centro_id <- Int64(objeto.categoria_centro_id),
+                                          db_activo <- Int64(objeto.activo!),
+                                          db_eliminado <- Int64(objeto.eliminado),
+                                          db_fecha_modificacion <- objeto.fecha_modificacion)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertServicioDBError: \(ex)")
+        }
+        
+    }
+    
+    func onCreateDomicilioDB() {
+        
+        do {
+            let db = database
+            try db!.run(db_domicilio.create(ifNotExists: true) { t in
+                t.column(db_domicilio_id, primaryKey: true)
+                t.column(db_calle)
+                t.column(db_numero_exterior)
+                t.column(db_numero_interior)
+                t.column(db_cp)
+                t.column(db_colonia)
+                t.column(db_delegacion_municipio)
+                t.column(db_estado)
+                t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
+            })
+        }
+        catch let ex {
+            print("onCreateCategoriaCentro SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertDomicilioDB(objeto: DomicilioModel) {
+        do {
+            let db = database
+            let insert = db_domicilio.insert(or: .replace,
+                                                    db_domicilio_id <- Int64(objeto.domicilio_id),
+                                                    db_calle <- objeto.calle,
+                                                    db_numero_exterior <- objeto.numero_exterior,
+                                                    db_numero_interior <- objeto.numero_interior,
+                                                    db_cp <- Int64(objeto.cp!),
+                                                    db_colonia <- objeto.colonia,
+                                                    db_delegacion_municipio <- objeto.delegacion_municipio,
+                                                    db_estado <- objeto.estado,
+                                                    db_fecha_modificacion <- objeto.fecha_modificacion!)
+            try db!.run(insert)
+        }
+        catch let ex {
+            print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
