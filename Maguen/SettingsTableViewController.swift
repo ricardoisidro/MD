@@ -224,6 +224,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         return 4
     }*/
     
+    /*
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //print(section)
         if section == 3 {
@@ -260,5 +261,5 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }*/
-    
+    */
 }

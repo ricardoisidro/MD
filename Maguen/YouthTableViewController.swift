@@ -61,7 +61,7 @@ class YouthTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "youth") as! YouthCell
         
         let image = UIImage(data: NSData(base64Encoded: tableViewData[indexPath.row].youthImage)! as Data)
-        cell.imgYouth.image = image
+        cell.imgYouth.image = image ?? #imageLiteral(resourceName: "comunidad_default")
         cell.imgYouth.layer.cornerRadius = cell.imgYouth.frame.size.width / 2
         cell.imgYouth.clipsToBounds = true
         cell.txtYouth.text = tableViewData[indexPath.row].youthText

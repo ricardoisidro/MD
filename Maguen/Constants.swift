@@ -21,14 +21,20 @@ struct MaguenColors {
     static let blue8 = UIColor(red:0.44, green:0.56, blue:0.78, alpha:1.0)
     static let blue9 = UIColor(red:0.60, green:0.69, blue:0.85, alpha:1.0)
     
-    //fondo principal ActivityTemplos
+    
+    //fondo principal ActivityTemplos #191919
     static let black1 = UIColor(red:0.10, green:0.10, blue:0.11, alpha:1.0)
-    //fondo recuadro central DetallesTemplosActivity y dialog (modal)
+    //fondo recuadro central DetallesTemplosActivity y dialog (modal) #202020
     static let black2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    //color nodo padre en listas de detalle de templos 
+    //main node : #2d2d2d
+    static let black3 = UIColor(red:0.18, green:0.18, blue:0.18, alpha:1.0)
     //avisos
     static let gray1 = UIColor(red:0.26, green:0.27, blue:0.29, alpha:1.0)
     //expandableitem: #202020
     static let gray2 = UIColor(red:0.13, green:0.13, blue:0.13, alpha:1.0)
+    
+
     
     //textos
     static let titlescolor = UIColor(red:0.24, green:0.71, blue:0.95, alpha:1.0)

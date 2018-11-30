@@ -24,27 +24,55 @@ class EventTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*tableViewData =
-            [eventComponents(eventImage: #imageLiteral(resourceName: "evento_cuatro") ,eventTitle: "Bar Mitzva", eventPlace: "Maguén David", eventDate: "22/08/2016", eventTime: "08:00 A.M."),
-             eventComponents(eventImage: #imageLiteral(resourceName: "evento_uno") ,eventTitle: "Evento 2", eventPlace: "Maguén David", eventDate: "22/08/2017", eventTime: "09:00 A.M."),
-             eventComponents(eventImage: #imageLiteral(resourceName: "evento_dos") ,eventTitle: "Mazel Tov", eventPlace: "Maguén David", eventDate: "22/08/2018", eventTime: "10:00 A.M.")]*/
+        let db_centro = Table("centro")
+        let db_centro_id = Expression<Int64>("centro_id")
+        //let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+        //let db_imagen_portada = Expression<String>("imagen_portada")
+        let db_nombre = Expression<String>("nombre")
+        //let db_descripcion = Expression<String>("descripcion")
+        //let db_domicilio_centro_id = Expression<Int64>("domicilio_centro_id")
+        //let db_telefonos = Expression<String>("telefonos")
+        //let db_activo = Expression<Int64>("activo")
+        //let db_seccion_id = Expression<Int64>("seccion_id")
+        //let db_eliminado = Expression<Int64>("eliminado")
+        //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+        
+        let db_eventos = Table("eventos")
+        //let db_evento_id = Expression<Int64>("evento_id")
+        //let db_centro_id = Expression<Int64>("centro_id")
+        let db_titulo = Expression<String>("titulo")
+        let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
+        //let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
+        let db_horario = Expression<String>("horario")
+        let db_imagen = Expression<String?>("imagen")
+        let db_eliminado = Expression<Int64>("eliminado")
+        //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
         
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            //tableViewData2 = Array(try db.prepare(users.filter(db_categoria_centro_id == 1)))
-            
-            guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0") else {
+            //let query = db_eventos.select(db_imagen, db_titulo, db_fecha_inicial_publicacion, db_horario).where(db_eliminado == 0)
+            //let query2 = db_eventos.join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            let query = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            guard let queryResults = try? db.prepare(query)
+            //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
+                else {
                 print("ERROR al consultar eventos")
                 return
             }
-            
-            _ = queryResults.map { row in
-                let data = eventComponents(eventImage: row[0] as! String, eventTitle: row[1] as! String, eventPlace: "", eventDate: row[2] as! String, eventTime: row[3] as! String)
+            for row in queryResults {
+                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: try row.get(db_fecha_inicial_publicacion), eventTime: try row.get(db_horario))
                 tableViewData.append(data)
             }
+            
+            /*_ = queryResults.map { row in
+                let data = eventComponents(eventImage: row[0]! as! String, eventTitle: row[1] as! String, eventPlace: "", eventDate: row[2] as! String, eventTime: row[3] as! String)
+                tableViewData.append(data)
+            }*/
+            
+            
             
         }
         catch let ex {
@@ -79,9 +107,7 @@ class EventTableViewController: UITableViewController {
                 cell.eventImage.image = UIImage(data: data as Data)
             }
         }
-        //let image = UIImage(data: NSData(base64Encoded: tableViewData[indexPath.row].eventImage)! as Data) ?? #imageLiteral(resourceName: "evento_cuatro")
-        //cell.eventImage.image = image
-        //cell.eventImage.image = #imageLiteral(resourceName: "evento_cuatro")
+        
         return cell
     }
     
@@ -96,16 +122,21 @@ class EventTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "eventdetail", sender: tableViewData[indexPath.row].eventTitle)
+        self.performSegue(withIdentifier: "eventdetail", sender: indexPath)
     }
 
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if(segue.identifier == "eventdetail") {
-            _ = segue.destination as? EventViewController
-            //controller? = (sender as! String)
+        if (segue.identifier == "eventdetail") {
+            let next = segue.destination as? EventViewController
+            
+            next?.eventTitleText = tableViewData[(sender as! NSIndexPath).row].eventTitle
+            next?.eventPlaceText = tableViewData[(sender as! NSIndexPath).row].eventPlace
+            next?.eventDateText = String(tableViewData[(sender as! NSIndexPath).row].eventDate.prefix(10))
+            next?.eventTimeText = tableViewData[(sender as! NSIndexPath).row].eventTime
+            next?.eventImageText = tableViewData[(sender as! NSIndexPath).row].eventImage
             
         }
     }

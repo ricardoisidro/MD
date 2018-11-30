@@ -15,6 +15,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
 
     var window: UIWindow?
     
+    var activityIndicator: UIActivityIndicatorView!
+    
     var database: Connection!
     let db_categoria_centro = Table("categoria_centro")
     let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
@@ -43,7 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
     let db_horario = Expression<String>("horario")
     let db_imagen = Expression<String?>("imagen")
-    
+    //let db_eliminado = Expression<Int64>("eliminado")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
     let db_comite = Table("comites")
     let db_comite_id = Expression<Int64>("comite_id")
@@ -209,8 +212,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         let aesJSON = AESforJSON()
         let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONTablesString(fecha: lastDate!)
-        //print(chainTablesEncodedandEncrypted.toBase64()!)
-
         let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetModifyTables", encryptedString: chainTablesEncodedandEncrypted)
         
         let soapRequest = CallSOAP()
@@ -223,15 +224,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let tablesToSync = self.getTablesList(soapResult: soapRequest.soapResult)
         
         for tables in tablesToSync  {
-            print("""
+            /*print("""
 
 
             \(tables)
 
 
-            """)
+            """)*/
             let chainIDsEncodedandEncrypted = aesJSON.encodeAndEncryptJSONIDsString(fecha: lastDate!, tableName: tables)
-            //print(chainIDsEncodedandEncrypted.toBase64()!)
             let soapXMLIDs = Global.shared.createSOAPXMLString(methodName: "GetIDs", encryptedString: chainIDsEncodedandEncrypted)
             soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyID, soapMessage: soapXMLIDs)
             while !soapRequest.done {
@@ -240,26 +240,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
             let idsToSync = self.getIDList(soapResult: soapRequest.soapResult)
             for ids in idsToSync{
-                print(ids)
+                //print(ids)
                 let chainEntityEncodedAndEncrypted = aesJSON.encodeAndEncryptJSONEntityString(tableName: tables, id: ids)
                 let soapXMLEntities = Global.shared.createSOAPXMLString(methodName: "GetEntidad", encryptedString: chainEntityEncodedAndEncrypted)
-                //print(soapXMLEntities)
                 soapRequest.makeRequest(endpoint: MaguenCredentials.getEntidad, soapMessage: soapXMLEntities)
                 while !soapRequest.done {
                     usleep(100000)
                 }
-                //print(soapRequest.soapResult)
-                let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                //for entities in entitiesToSync{
-                print(entitiesToSync)
-                //}
+                //let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                _ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                //print(entitiesToSync)
             }
         }
         
-        let currentDate = Date()
-        let dateFormat = DateFormatter()
-        dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        print(dateFormat.string(from: currentDate))
+        //let currentDate2 = Date()
+        //let dateFormat = DateFormatter()
+        //dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        //print(dateFormat.string(from: currentDate2))
         
         return true
     }

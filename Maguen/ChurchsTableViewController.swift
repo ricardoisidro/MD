@@ -99,6 +99,8 @@ class ChurchsTableViewController: UITableViewController {
             //controller?.navigationItem.title = (sender as! String)
             //controller?.imagenCabecera = segueData.churchImage
             controller?.navigationItem.title = segueData.churchText
+            let image = UIImage(data: NSData(base64Encoded: segueData.churchImage)! as Data)
+            controller?.imagenCabecera = image
             
             
         }

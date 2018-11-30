@@ -53,8 +53,10 @@ class YouthDetailTableViewController: UITableViewController {
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "youthdetailcell") as! YouthDetailCell
             cell.imgYouthDetail.image = tableViewData[indexPath.section].cellImage
+            cell.backgroundColor = MaguenColors.black3
             cell.txtYouthDetail.text = tableViewData[indexPath.section].cellLabel
             cell.txtYouthDetail.font = UIFont.boldSystemFont(ofSize: 17.0)
+            cell.layer.borderWidth = CGFloat(1.0)
             return cell
         }
         else {

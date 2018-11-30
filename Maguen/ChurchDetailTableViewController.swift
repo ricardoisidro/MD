@@ -67,11 +67,12 @@ class ChurchDetailTableViewController: UITableViewController {
         
         if indexPath.row == 0 {
             let cell = tableView.dequeueReusableCell(withIdentifier: "churchdetailcell") as! ChurchDetailTableViewCell
-            cell.backgroundColor = UIColor.darkGray
+            cell.backgroundColor = MaguenColors.black3
             cell.imgChurchDetail.image = tableViewData[indexPath.section].cellIcon
             cell.txtChurchDetail.text = tableViewData[indexPath.section].cellTitle
             //            cell.label.font = UIFont(name: "System Heavy", size:25.0)
             cell.txtChurchDetail.font = UIFont.boldSystemFont(ofSize: 25.0)
+            cell.layer.borderWidth = CGFloat(1.0)
             return cell
         }
         else {
@@ -82,6 +83,8 @@ class ChurchDetailTableViewController: UITableViewController {
             cell.imgChurchDetailChild.image = #imageLiteral(resourceName: "img_vineta")
             cell.txtSubChurchDetailChild.text = ""
             cell.txtSubChurchDetailChild.font = UIFont.systemFont(ofSize: 12.0)
+            cell.layer.borderWidth = CGFloat(1.0)
+
             return cell
             
         }

@@ -12,8 +12,18 @@ class EventViewController: UIViewController, UIScrollViewDelegate {
     
     @IBOutlet weak var popView: UIView!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var eventpopTitle: UILabel!
+    @IBOutlet weak var eventpopPlace: UILabel!
+    @IBOutlet weak var eventpopDate: UILabel!
+    @IBOutlet weak var eventpopTime: UILabel!
     
     var eventImageView = UIImageView()
+    var tableData = [eventComponents]()
+    var eventTitleText = ""
+    var eventPlaceText = ""
+    var eventDateText = ""
+    var eventTimeText = ""
+    var eventImageText = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +39,7 @@ class EventViewController: UIViewController, UIScrollViewDelegate {
         //scrollView.isUserInteractionEnabled = true
         scrollView.addSubview(eventImageView)
         
-        eventImageView.image = UIImage(named: "evento_uno")
+        //eventImageView.image = UIImage(named: "evento_uno")
         
         let scrollViewFrame = scrollView.frame
         let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
@@ -44,6 +54,18 @@ class EventViewController: UIViewController, UIScrollViewDelegate {
         
         //let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
         //eventImageView.addGestureRecognizer(pinchGesture)
+        eventpopTitle.text = eventTitleText
+        eventpopPlace.text = eventPlaceText
+        eventpopDate.text = eventDateText
+        eventpopTime.text = eventTimeText
+        
+        let url = MaguenCredentials.urlEventImages + eventImageText + ".jpg"
+        if let cad = URL(string: url) {
+            if let data = NSData(contentsOf: cad) {
+                eventImageView.image = UIImage(data: data as Data)
+            }
+        }
+        //eventImageView.image =
         
     }
     

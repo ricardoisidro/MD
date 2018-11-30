@@ -428,7 +428,7 @@
                                             <constraint firstAttribute="width" secondItem="B8q-kU-mTr" secondAttribute="height" id="CvP-ms-p9G"/>
                                         </constraints>
                                     </imageView>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="M99999" placeholder="Usuario" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Fs-Nd-QmC" customClass="MaguenTextFieldDesign" customModule="Maguen" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Usuario" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9Fs-Nd-QmC" customClass="MaguenTextFieldDesign" customModule="Maguen" customModuleProvider="target">
                                         <rect key="frame" x="30" y="225.5" width="180" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="J9R-SA-PQT"/>
@@ -448,7 +448,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </textField>
-                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="12345678" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vc5-eB-1kt" customClass="MaguenTextFieldDesign" customModule="Maguen" customModuleProvider="target">
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="******" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vc5-eB-1kt" customClass="MaguenTextFieldDesign" customModule="Maguen" customModuleProvider="target">
                                         <rect key="frame" x="30" y="278.5" width="180" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="FzG-j0-aZ4"/>
@@ -583,19 +583,19 @@
                                             <rect key="frame" x="24" y="19" width="327" height="82"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KnB-7S-RMU">
-                                                    <rect key="frame" x="8" y="8" width="42" height="21"/>
+                                                    <rect key="frame" x="24" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.23921568627450979" green="0.71372549019607845" blue="0.94901960784313721" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" verticalCompressionResistancePriority="749" scrollEnabled="NO" editable="NO" text="Estimada comunidad son todos bienvenidos a la fiesta que será el día Viernes" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KH3-JA-Itv">
-                                                    <rect key="frame" x="0.0" y="30" width="327" height="44"/>
+                                                    <rect key="frame" x="16.5" y="30" width="294" height="44"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-7w-rZS">
-                                                    <rect key="frame" x="66" y="8" width="42" height="21"/>
+                                                    <rect key="frame" x="82" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.59215686274509804" green="0.78823529411764703" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -605,11 +605,11 @@
                                             <constraints>
                                                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ELU-7w-rZS" secondAttribute="trailing" constant="20" symbolic="YES" id="33q-0e-ayf"/>
                                                 <constraint firstAttribute="bottom" secondItem="KH3-JA-Itv" secondAttribute="bottom" constant="8" id="9KR-cc-ZhE"/>
-                                                <constraint firstItem="KH3-JA-Itv" firstAttribute="width" secondItem="ee1-k4-qY8" secondAttribute="width" id="L4d-fl-iIM"/>
+                                                <constraint firstItem="KH3-JA-Itv" firstAttribute="width" secondItem="ee1-k4-qY8" secondAttribute="width" multiplier="0.9" id="L4d-fl-iIM"/>
                                                 <constraint firstItem="ELU-7w-rZS" firstAttribute="leading" secondItem="KnB-7S-RMU" secondAttribute="trailing" constant="16" id="LU2-hr-iV9"/>
                                                 <constraint firstItem="KH3-JA-Itv" firstAttribute="centerX" secondItem="ee1-k4-qY8" secondAttribute="centerX" id="O9v-w1-zga"/>
                                                 <constraint firstItem="KH3-JA-Itv" firstAttribute="top" secondItem="KnB-7S-RMU" secondAttribute="bottom" constant="1" id="USn-jz-UMJ"/>
-                                                <constraint firstItem="KnB-7S-RMU" firstAttribute="leading" secondItem="ee1-k4-qY8" secondAttribute="leading" constant="8" id="dRB-xx-FxB"/>
+                                                <constraint firstItem="KnB-7S-RMU" firstAttribute="leading" secondItem="ee1-k4-qY8" secondAttribute="leading" constant="24" id="dRB-xx-FxB"/>
                                                 <constraint firstItem="KnB-7S-RMU" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ee1-k4-qY8" secondAttribute="top" constant="8" id="eTX-BF-dRm"/>
                                                 <constraint firstItem="ELU-7w-rZS" firstAttribute="bottom" secondItem="KnB-7S-RMU" secondAttribute="bottom" id="jvZ-8T-jGr"/>
                                             </constraints>
@@ -1053,7 +1053,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="banner_maguen" id="bV6-0W-mG5">
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="templo_default" id="bV6-0W-mG5">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         </imageView>
@@ -1630,6 +1630,10 @@
                         <viewLayoutGuide key="safeArea" id="1hA-IS-kQM"/>
                     </view>
                     <connections>
+                        <outlet property="eventpopDate" destination="hcc-OJ-yR0" id="nAi-fv-fmX"/>
+                        <outlet property="eventpopPlace" destination="cA5-ni-AKR" id="fHT-nE-Uht"/>
+                        <outlet property="eventpopTime" destination="BuT-hk-LkV" id="oUo-Of-Kcy"/>
+                        <outlet property="eventpopTitle" destination="USi-Ip-mdN" id="GhB-gM-da1"/>
                         <outlet property="popView" destination="4u5-9D-NOi" id="Wcx-MG-lKK"/>
                         <outlet property="scrollView" destination="WEL-Og-sQm" id="zuZ-VJ-RY2"/>
                     </connections>
