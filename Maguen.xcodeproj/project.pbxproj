@@ -61,6 +61,9 @@
 		59E61D5221A4F50B00136CB6 /* GetModifyTablesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D5121A4F50B00136CB6 /* GetModifyTablesResponse.swift */; };
 		59E9875021711620004DDE0D /* KashrutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9874F21711620004DDE0D /* KashrutController.swift */; };
 		59E9875221711B6C004DDE0D /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9875121711B6C004DDE0D /* CardController.swift */; };
+		59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */; };
+		59FD713A21B5FECA0030481B /* ClassesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FD713921B5FECA0030481B /* ClassesTableViewCell.swift */; };
+		59FD713C21B61B880030481B /* PrayTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FD713B21B61B880030481B /* PrayTableViewCell.swift */; };
 		8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B0547216FBD3E0079A937 /* HomeViewController.swift */; };
 		8C4B054A216FD3C70079A937 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B0549216FD3C70079A937 /* Constants.swift */; };
 		8C4B054C216FDEA80079A937 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C4B054B216FDEA80079A937 /* HomeCell.swift */; };
@@ -146,6 +149,9 @@
 		59E61D5121A4F50B00136CB6 /* GetModifyTablesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetModifyTablesResponse.swift; sourceTree = "<group>"; };
 		59E9874F21711620004DDE0D /* KashrutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashrutController.swift; sourceTree = "<group>"; };
 		59E9875121711B6C004DDE0D /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
+		59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchClassDetailViewController.swift; sourceTree = "<group>"; };
+		59FD713921B5FECA0030481B /* ClassesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassesTableViewCell.swift; sourceTree = "<group>"; };
+		59FD713B21B61B880030481B /* PrayTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrayTableViewCell.swift; sourceTree = "<group>"; };
 		7F8F764BC2093E1B97B5F49F /* Pods-Maguen.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Maguen.release.xcconfig"; path = "Pods/Target Support Files/Pods-Maguen/Pods-Maguen.release.xcconfig"; sourceTree = "<group>"; };
 		8C4B0547216FBD3E0079A937 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		8C4B0549216FD3C70079A937 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -267,6 +273,8 @@
 				59C0D1AC21AF0F7B00656D52 /* SettingsTableViewCell.swift */,
 				59C0D1AE21AF380700656D52 /* OptionTableViewCell.swift */,
 				59C0D1AF21AF380700656D52 /* OptionTableViewCell.xib */,
+				59FD713921B5FECA0030481B /* ClassesTableViewCell.swift */,
+				59FD713B21B61B880030481B /* PrayTableViewCell.swift */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -362,6 +370,7 @@
 				59CE6744219200B300A5D719 /* NewSettingsViewController.swift */,
 				8C895D622194BF43004F5D46 /* AskLoginViewController.swift */,
 				59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */,
+				59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -506,6 +515,7 @@
 				59CE6745219200B300A5D719 /* NewSettingsViewController.swift in Sources */,
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
 				59C0D1AD21AF0F7B00656D52 /* SettingsTableViewCell.swift in Sources */,
+				59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */,
 				59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */,
 				59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */,
 				5919397521A627A400B0E7EF /* AESforJSON.swift in Sources */,
@@ -537,6 +547,7 @@
 				59DABC1B21A75F4600D7445C /* CategoriaCentroModel.swift in Sources */,
 				8C7F08C321790F6E004A9FBF /* ChurchDetailTableViewCell.swift in Sources */,
 				8C8D05B021ADE60D00B74D99 /* HorarioResoModel.swift in Sources */,
+				59FD713A21B5FECA0030481B /* ClassesTableViewCell.swift in Sources */,
 				59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
 				5919397921A6313D00B0E7EF /* Global.swift in Sources */,
@@ -548,6 +559,7 @@
 				59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */,
 				8C5CEF30216FA155002F5D56 /* AppDelegate.swift in Sources */,
 				59E9875021711620004DDE0D /* KashrutController.swift in Sources */,
+				59FD713C21B61B880030481B /* PrayTableViewCell.swift in Sources */,
 				59E9875221711B6C004DDE0D /* CardController.swift in Sources */,
 				59E61D4E21A47CA300136CB6 /* SaldoResponse.swift in Sources */,
 				59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */,

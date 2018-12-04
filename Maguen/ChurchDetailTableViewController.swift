@@ -32,6 +32,7 @@ class ChurchDetailTableViewController: UITableViewController {
     var tableViewDataServices = [cellChurchSubDetailComponents]()
     var tableViewDataEvents = [cellChurchSubDetailComponents]()
     var tableViewDataClasses = [cellChurchSubDetailComponents]()
+    var tableViewDataEventDetail = [eventComponents]()
     
     var travelText = ""
     var churchId: Int = 0
@@ -53,31 +54,19 @@ class ChurchDetailTableViewController: UITableViewController {
         
         let db_servicio_centro = Table("servicio_centro")
         let db_centro_id = Expression<Int64>("centro_id")
-
-        let db_horario_clase = Table("horario_clase")
-        let db_horario_clase_id = Expression<Int64>("horario_clase")
         let db_clase_id = Expression<Int64>("clase_id")
-        let db_profesor = Expression<String>("profesor")
-        let db_dias = Expression<String>("dias")
-        //let db_horario = Expression<String>("horario")
-        //let db_eliminado = Expression<Int64>("eliminado")
-        //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-        
+    
         let db_clases = Table("clases")
         let db_clases_id = Expression<Int64>("clase_id")
-        //let db_descripcion = Expression<String>("descripcion")
-        //var db_centro_id = Expression<Int64>("centro_id")
         
         let db_eventos = Table("eventos")
         let db_evento_id = Expression<Int64>("evento_id")
-        //let db_centro_id = Expression<Int64>("centro_id")
         let db_titulo = Expression<String>("titulo")
         let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
-        let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
         let db_horario = Expression<String>("horario")
-        //let db_imagen = Expression<String?>("imagen")
-        //let db_eliminado = Expression<Int64>("eliminado")
-        //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+        
+        let db_centro = Table("centro")
+        let db_nombre = Expression<String>("nombre")
 
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
@@ -101,11 +90,12 @@ class ChurchDetailTableViewController: UITableViewController {
                 tableViewDataServices.append(data)
             }
             
+            // getting classes
             let query2 = db_clases.select(db_clases_id, db_descripcion)
                 .where(db_centro_id == Int64(centro_id))
             guard let queryResults2 = try? db.prepare(query2)
                 else {
-                    print("ERROR al consultar servicios join servicio_centro")
+                    print("ERROR al consultar clases")
                     return
             }
             for row in queryResults2 {
@@ -113,12 +103,12 @@ class ChurchDetailTableViewController: UITableViewController {
                 tableViewDataClasses.append(data)
             }
             
-            let query3 = db_eventos.select(db_evento_id, db_titulo, db_fecha_inicial_publicacion, db_horario)
+            /*let query3 = db_eventos.select(db_evento_id, db_titulo, db_fecha_inicial_publicacion, db_horario)
                 .where(db_centro_id == Int64(centro_id))
             
             guard let queryResults3 = try? db.prepare(query3)
                 else {
-                    print("ERROR al consultar servicios join servicio_centro")
+                    print("ERROR al consultar eventos")
                     return
             }
             for row in queryResults3 {
@@ -127,15 +117,32 @@ class ChurchDetailTableViewController: UITableViewController {
                 let horario = String(fecha) + " " + hora
                 let data = cellChurchSubDetailComponents(subLabel: try row.get(db_titulo), subDetail: horario, subImage: "", subId: try Int(row.get(db_evento_id)))
                 tableViewDataEvents.append(data)
+            }*/
+            
+            let query4 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            guard let queryResults4 = try? db.prepare(query4)
+                //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
+                else {
+                    print("ERROR al consultar eventos")
+                    return
+            }
+            for row in queryResults4 {
+                let fecha = try row.get(db_fecha_inicial_publicacion).prefix(10)
+                let hora = try row.get(db_horario)
+                let horario = String(fecha) + " " + hora
+                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: try row.get(db_fecha_inicial_publicacion), eventTime: try row.get(db_horario))
+                tableViewDataEventDetail.append(data)
+                let data2 = cellChurchSubDetailComponents(subLabel: try row.get(db_titulo), subDetail: horario, subImage: "", subId: try Int(row.get(db_evento_id)))
+                tableViewDataEvents.append(data2)
             }
         }
         catch let ex {
             print("ReadDB error: \(ex)")
         }
         
-        tableViewDataItinerary = [cellChurchSubDetailComponents(subLabel: "Lunes-Viernes", subDetail: "", subImage: "", subId: 0),
-                                  cellChurchSubDetailComponents(subLabel: "Sábado", subDetail: "", subImage: "", subId: 0),
-                                  cellChurchSubDetailComponents(subLabel: "Domingo", subDetail: "", subImage: "", subId: 0)]
+        tableViewDataItinerary = [cellChurchSubDetailComponents(subLabel: "Lunes-Viernes", subDetail: "", subImage: "", subId: centro_id),
+                                  cellChurchSubDetailComponents(subLabel: "Sábado", subDetail: "", subImage: "", subId: centro_id),
+                                  cellChurchSubDetailComponents(subLabel: "Domingo", subDetail: "", subImage: "", subId: centro_id)]
         
         
         tableViewRootData = [
@@ -262,17 +269,61 @@ class ChurchDetailTableViewController: UITableViewController {
             }
         }
         else {
-            //travelText = tableViewData[indexPath.section].sectionData[indexPath.row - 1]
-            //print("Selected inner cell: " + travelText)
-            tableView.deselectRow(at: indexPath, animated: true)
-            self.performSegue(withIdentifier: "checkPrays", sender: travelText)
+            if indexPath.section == 0 { //itinerary
+                tableView.deselectRow(at: indexPath, animated: true)
+                self.performSegue(withIdentifier: "checkPrays", sender: tableViewDataItinerary[indexPath.row - 1])
+                //travelText = tableView[indexPath.section].sectionData[indexPath.row - 1]
+                
+            }
+            else if indexPath.section == 2 { //events
+                tableView.deselectRow(at: indexPath, animated: true)
+                //travelText = tableViewDataEvents[indexPath.row - 1].subLabel
+                print("Selected inner cell: " + travelText)
+                self.performSegue(withIdentifier: "checkEvent", sender: tableViewDataEventDetail[indexPath.row - 1])
+                //travelText = tableView[indexPath.section].sectionData[indexPath.row - 1]
+                
+            }
+            else if indexPath.section == 3 { // classes
+                tableView.deselectRow(at: indexPath, animated: true)
+                //print("Selected inner cell: " + travelText)
+                self.performSegue(withIdentifier: "checkClass", sender: tableViewDataClasses[indexPath.row - 1])
+               
+            }
+            else {
+                tableView.deselectRow(at: indexPath, animated: true)
+            }
+            
+            
         }
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if(segue.identifier == "checkPrays") {
-            let controller = segue.destination as? ChurchPrayDetailViewController
-            controller?.txtTitle = (sender as! String)
+            guard let segueData = sender as? cellChurchSubDetailComponents else {
+                return
+            }
+            let controller1 = segue.destination as? ChurchPrayDetailViewController
+            controller1?.txtTitle = segueData.subLabel
+            controller1?.receivedId = segueData.subId
+        }
+        else if(segue.identifier == "checkEvent") {
+            guard let segueData = sender as? eventComponents
+                else { return }
+            let controller2 = segue.destination as? EventViewController
+            controller2?.eventTitleText = segueData.eventTitle
+            controller2?.eventPlaceText = segueData.eventPlace
+            controller2?.eventDateText = String(segueData.eventDate.prefix(10))
+            controller2?.eventTimeText = segueData.eventTime
+            controller2?.eventImageText = segueData.eventImage
+        }
+        else if(segue.identifier == "checkClass") {
+            guard let segueData = sender as? cellChurchSubDetailComponents else {
+                return
+            }
+            let controller3 = segue.destination as? ChurchClassDetailViewController
+            controller3?.id = segueData.subId
+            controller3?.txtMyTitle = segueData.subLabel
             
         }
     }
