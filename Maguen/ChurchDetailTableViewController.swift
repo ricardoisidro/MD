@@ -140,9 +140,9 @@ class ChurchDetailTableViewController: UITableViewController {
             print("ReadDB error: \(ex)")
         }
         
-        tableViewDataItinerary = [cellChurchSubDetailComponents(subLabel: "Lunes-Viernes", subDetail: "", subImage: "", subId: centro_id),
-                                  cellChurchSubDetailComponents(subLabel: "Sábado", subDetail: "", subImage: "", subId: centro_id),
-                                  cellChurchSubDetailComponents(subLabel: "Domingo", subDetail: "", subImage: "", subId: centro_id)]
+        tableViewDataItinerary = [cellChurchSubDetailComponents(subLabel: "Lunes-Viernes", subDetail: "1", subImage: "", subId: centro_id),
+                                  cellChurchSubDetailComponents(subLabel: "Sábado", subDetail: "2", subImage: "", subId: centro_id),
+                                  cellChurchSubDetailComponents(subLabel: "Domingo", subDetail: "3", subImage: "", subId: centro_id)]
         
         
         tableViewRootData = [
@@ -303,9 +303,14 @@ class ChurchDetailTableViewController: UITableViewController {
             guard let segueData = sender as? cellChurchSubDetailComponents else {
                 return
             }
+            /*guard let segueIndexPath = (sender as? IndexPath) else {
+                return
+            }*/
             let controller1 = segue.destination as? ChurchPrayDetailViewController
+            //controller1?.txtTitle = tableViewDataItinerary[sender.row -1 ]
             controller1?.txtTitle = segueData.subLabel
             controller1?.receivedId = segueData.subId
+            controller1?.rowDay = segueData.subDetail
         }
         else if(segue.identifier == "checkEvent") {
             guard let segueData = sender as? eventComponents
@@ -324,6 +329,7 @@ class ChurchDetailTableViewController: UITableViewController {
             let controller3 = segue.destination as? ChurchClassDetailViewController
             controller3?.id = segueData.subId
             controller3?.txtMyTitle = segueData.subLabel
+            
             
         }
     }

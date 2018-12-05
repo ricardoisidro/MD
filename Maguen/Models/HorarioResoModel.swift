@@ -10,7 +10,7 @@ import Foundation
 
 class HorarioResoModel: NSObject {
     
-    var horario_reso_id: Int
+    var horarios_reso_id: Int
     var centro_id: Int
     var tipo_reso_id: Int
     var titulo: String
@@ -19,7 +19,7 @@ class HorarioResoModel: NSObject {
     var fecha_modificacion: String
     
     override init() {
-        self.horario_reso_id = -1
+        self.horarios_reso_id = -1
         self.centro_id = -1
         self.tipo_reso_id = -1
         self.titulo = ""
@@ -34,8 +34,8 @@ class HorarioResoModel: NSObject {
         for valuesPairs in initialPairs {
             let val = valuesPairs.components(separatedBy: "@|")
             
-            if(val[0] == "horario_reso_id"){
-                horario.horario_reso_id = Int(val[1])!
+            if(val[0] == "horarios_reso_id"){
+                horario.horarios_reso_id = Int(val[1])!
             }
             else if(val[0] == "centro_id") {
                 horario.centro_id = Int(val[1])!

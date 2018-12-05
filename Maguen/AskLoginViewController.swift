@@ -8,6 +8,7 @@
 
 import UIKit
 import CryptoSwift
+import SQLite
 
 class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDelegate {
 
@@ -22,6 +23,23 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     var parser = XMLParser()
     var currentParsingElement:String = ""
     var soapString:String = ""
+    
+    var database: Connection!
+    let db_user = Table("usuariomaguen")
+    let db_user_id = Expression<Int64>("user_id")
+    let db_user_name = Expression<String>("user_name")
+    let db_user_surname1 = Expression<String>("user_surname1")
+    let db_user_surname2 = Expression<String>("user_surname2")
+    let db_user_sex = Expression<String>("user_sex")
+    let db_user_birthday = Expression<String>("user_birthday")
+    let db_user_mail = Expression<String>("user_mail")
+    let db_user_phone = Expression<String>("user_phone")
+    let db_user_photo = Expression<String>("user_photo")
+    let db_user_username = Expression<String>("user_username")
+    let db_user_idtype = Expression<Int64>("user_idtype")
+    let db_user_idactivedate = Expression<String>("user_idactivedate")
+    let db_user_cardid = Expression<Int64>("user_cardid")
+    
     
     var activityIndicatorView = UIView()
     
@@ -194,9 +212,16 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
             let loginResult = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
             
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+            
             let sexo = loginResult.Value.sexo == "H"
             let savedSex = sexo ? "HOMBRE" : "MUJER"
             let birthDate = loginResult.Value.fecha_nacimiento.prefix(10)
+            
+            onCreateUserDB(database: db)
+            onInsertUserDB(objeto: loginResult, database: db)
             
             UserDefaults.standard.set(loginResult.Value.nombre, forKey: "name")
             UserDefaults.standard.set(loginResult.Value.primer_apellido, forKey: "surname1")
@@ -207,6 +232,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             UserDefaults.standard.set(loginResult.Value.telefonoActual.numero, forKey: "phone")
             UserDefaults.standard.set(loginResult.Value.credencialActual.fotografia, forKey: "photo")
             UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")
+            
+            
             
             
             
@@ -237,6 +264,58 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         activityIndicatorView.addSubview(textLabel)
         
         view.addSubview(activityIndicatorView)
+    }
+    
+    func onCreateUserDB(database: Connection) {
+        
+        do {
+            //let db = database
+            try database.run(db_user.create(ifNotExists: true) { t in
+                t.column(db_user_id, primaryKey: true)
+                t.column(db_user_name)
+                t.column(db_user_surname1)
+                t.column(db_user_surname2)
+                t.column(db_user_sex)
+                t.column(db_user_birthday)
+                t.column(db_user_mail)
+                t.column(db_user_phone)
+                t.column(db_user_photo)//"fecha_modificacion" TEXT
+                t.column(db_user_idtype)
+                t.column(db_user_username)
+                t.column(db_user_idactivedate)
+                t.column(db_user_cardid)
+            })
+        }
+        catch let ex {
+            print("onCreateUser SQLite exception: \(ex)")
+        }
+        
+    }
+    
+    func onInsertUserDB(objeto: LoginResponse, database: Connection) {
+        do {
+            //let db = database
+            let insert = db_user.insert(or: .replace,
+                                             db_user_id <- Int64(objeto.Value.credencialActual.usuario_app_id),
+                                             db_user_name <- objeto.Value.nombre,
+                                             db_user_surname1 <- objeto.Value.primer_apellido,
+                                             db_user_surname2 <- objeto.Value.segundo_apellido,
+                                             db_user_sex <- objeto.Value.sexo,
+                                             db_user_birthday <- objeto.Value.fecha_nacimiento,
+                                             db_user_mail <- objeto.Value.correo,
+                                             db_user_phone <- objeto.Value.telefonoActual.numero,
+                                             db_user_photo <- objeto.Value.credencialActual.fotografia,
+                                             db_user_idtype <- Int64(objeto.Value.categoria_id),
+                                             db_user_username <- objeto.Value.usuario,
+                                             db_user_idactivedate <- objeto.Value.credencialActual.fecha_vencimiento,
+                                             db_user_cardid <- Int64(objeto.Value.credencialActual.credencial_id))
+            
+            try database.run(insert)
+        }
+        catch let ex {
+            print("onInsertCategoriaCentro Error: \(ex)")
+        }
+        
     }
 
     

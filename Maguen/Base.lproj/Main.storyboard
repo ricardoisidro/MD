@@ -294,7 +294,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DLd-9E-fBp">
                                 <rect key="frame" x="37.5" y="62" width="300" height="494"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="credencial_fondo" translatesAutoresizingMaskIntoConstraints="NO" id="GcW-XN-y3f">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="credencial_invitado" translatesAutoresizingMaskIntoConstraints="NO" id="GcW-XN-y3f">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="494"/>
                                         <color key="backgroundColor" red="0.098039215686274508" green="0.098039215686274508" blue="0.10588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </imageView>
@@ -388,8 +388,10 @@
                     </view>
                     <tabBarItem key="tabBarItem" tag="1" title="Credencial" image="tab_credencial" id="jDT-GF-zVh"/>
                     <connections>
+                        <outlet property="cardBackground" destination="GcW-XN-y3f" id="B7s-NO-vF3"/>
                         <outlet property="cardPhoto" destination="gsO-MK-KJT" id="FmV-Xz-xTp"/>
                         <outlet property="cardView" destination="DLd-9E-fBp" id="nNa-bF-J58"/>
+                        <outlet property="txtClass" destination="nua-Ma-O4X" id="VIw-24-NCI"/>
                         <outlet property="txtDate" destination="qGO-bd-Lho" id="3CK-YE-tLC"/>
                         <outlet property="txtName" destination="Q6F-Ii-io0" id="Flo-Nm-ccm"/>
                         <outlet property="txtSurname" destination="691-qT-WXx" id="P2j-Wh-Uib"/>
@@ -1203,13 +1205,13 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v04-kK-9xG">
-                                                            <rect key="frame" x="33.5" y="1" width="42" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="32.5" y="1" width="44.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAY-yQ-DxA">
-                                                            <rect key="frame" x="35.5" y="25" width="38" height="18"/>
+                                                            <rect key="frame" x="35.5" y="23" width="38" height="18"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                             <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -1219,7 +1221,7 @@
                                                         <constraint firstItem="VAY-yQ-DxA" firstAttribute="centerX" secondItem="TRt-yc-QHn" secondAttribute="centerX" id="H0q-L1-bFL"/>
                                                         <constraint firstItem="v04-kK-9xG" firstAttribute="centerX" secondItem="TRt-yc-QHn" secondAttribute="centerX" id="JB6-uD-Vpk"/>
                                                         <constraint firstItem="v04-kK-9xG" firstAttribute="top" secondItem="TRt-yc-QHn" secondAttribute="top" constant="1" id="JM5-Tc-gfG"/>
-                                                        <constraint firstAttribute="bottom" secondItem="VAY-yQ-DxA" secondAttribute="bottom" constant="1" id="Yra-8G-jw1"/>
+                                                        <constraint firstItem="VAY-yQ-DxA" firstAttribute="top" secondItem="v04-kK-9xG" secondAttribute="bottom" constant="1" id="f2R-3g-7YH"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1238,31 +1240,87 @@
                                         <rect key="frame" x="114" y="90" width="109" height="415"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pray2" id="Map-11-vvH">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pray2" id="Map-11-vvH" customClass="PrayTableViewCell" customModule="Maguen" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="109" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Map-11-vvH" id="zJx-i6-pa3">
                                                     <rect key="frame" x="0.0" y="0.0" width="109" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="h9V-TV-vHv">
+                                                            <rect key="frame" x="32.5" y="1" width="44.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioh-Bf-9sg">
+                                                            <rect key="frame" x="35.5" y="23" width="38" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="h9V-TV-vHv" firstAttribute="centerX" secondItem="zJx-i6-pa3" secondAttribute="centerX" id="FhH-Vv-4fY"/>
+                                                        <constraint firstItem="ioh-Bf-9sg" firstAttribute="top" secondItem="h9V-TV-vHv" secondAttribute="bottom" constant="1" id="GC1-qH-0QN"/>
+                                                        <constraint firstItem="ioh-Bf-9sg" firstAttribute="centerX" secondItem="zJx-i6-pa3" secondAttribute="centerX" id="aV6-Pd-UUu"/>
+                                                        <constraint firstItem="h9V-TV-vHv" firstAttribute="top" secondItem="zJx-i6-pa3" secondAttribute="top" constant="1" id="ohE-dX-INi"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="txtPrayTime" destination="ioh-Bf-9sg" id="QYR-nK-ZeL"/>
+                                                    <outlet property="txtPrayTitle" destination="h9V-TV-vHv" id="rgH-81-TfN"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="T85-qI-4ri" id="22h-dq-k8m"/>
+                                            <outlet property="delegate" destination="T85-qI-4ri" id="5hQ-AN-2I6"/>
+                                        </connections>
                                     </tableView>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ido-Bf-vIc">
                                         <rect key="frame" x="227" y="90" width="109.5" height="415"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pray3" id="orZ-Lh-g6e">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="pray3" id="orZ-Lh-g6e" customClass="PrayTableViewCell" customModule="Maguen" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="109.5" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="orZ-Lh-g6e" id="Spg-Nx-TUJ">
                                                     <rect key="frame" x="0.0" y="0.0" width="109.5" height="44"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KuW-UI-gKc">
+                                                            <rect key="frame" x="32.5" y="1" width="44.5" height="21"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                            <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNs-jX-NiW">
+                                                            <rect key="frame" x="36" y="23" width="38" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="LNs-jX-NiW" firstAttribute="centerX" secondItem="Spg-Nx-TUJ" secondAttribute="centerX" id="KFt-aL-7HZ"/>
+                                                        <constraint firstItem="LNs-jX-NiW" firstAttribute="top" secondItem="KuW-UI-gKc" secondAttribute="bottom" constant="1" id="KGS-pr-Syk"/>
+                                                        <constraint firstItem="KuW-UI-gKc" firstAttribute="centerX" secondItem="Spg-Nx-TUJ" secondAttribute="centerX" id="kpH-0z-hoU"/>
+                                                        <constraint firstItem="KuW-UI-gKc" firstAttribute="top" secondItem="Spg-Nx-TUJ" secondAttribute="top" constant="1" id="uSJ-Nr-NyW"/>
+                                                    </constraints>
                                                 </tableViewCellContentView>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <connections>
+                                                    <outlet property="txtPrayTime" destination="LNs-jX-NiW" id="DLp-Gp-dru"/>
+                                                    <outlet property="txtPrayTitle" destination="KuW-UI-gKc" id="6Gv-c7-ARF"/>
+                                                </connections>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="T85-qI-4ri" id="OXX-0x-kOk"/>
+                                            <outlet property="delegate" destination="T85-qI-4ri" id="7mj-3A-9jQ"/>
+                                        </connections>
                                     </tableView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rHA-YD-A9B">
                                         <rect key="frame" x="68.5" y="521" width="200" height="30"/>
@@ -2662,7 +2720,7 @@
         <image name="banner_maguen" width="308.25" height="183"/>
         <image name="btn_foto" width="64" height="64"/>
         <image name="codigo_default" width="300" height="300"/>
-        <image name="credencial_fondo" width="700" height="1000"/>
+        <image name="credencial_invitado" width="700" height="1000"/>
         <image name="evento_cuatro" width="800" height="600"/>
         <image name="evento_uno" width="384" height="288"/>
         <image name="hoja_p_dos" width="383" height="567"/>

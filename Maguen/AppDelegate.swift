@@ -759,7 +759,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         do {
             let db = database
             let insert = db_horarios_reso.insert(or: .replace,
-                                                 db_horarios_reso_id <- Int64(objeto.horario_reso_id),
+                                                 db_horarios_reso_id <- Int64(objeto.horarios_reso_id),
                                                  db_centro_id <- Int64(objeto.centro_id),
                                                  db_tipo_reso_id <- Int64(objeto.tipo_reso_id),
                                                  db_titulo <- objeto.titulo,
