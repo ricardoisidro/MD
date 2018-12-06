@@ -26,7 +26,7 @@ class CardController: UIViewController {
     @IBOutlet weak var txtName: UILabel!
     @IBOutlet weak var txtSurname: UILabel!
     @IBOutlet weak var txtDate: UILabel!
-    @IBOutlet weak var txtClass: UILabel!
+    @IBOutlet weak var txtClass: UITextView!
     
     let db_user = Table("usuariomaguen")
     let db_user_id = Expression<Int64>("user_id")
@@ -63,7 +63,7 @@ class CardController: UIViewController {
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            let query = db_user.select(db_user_name, db_user_surname1, db_user_idactivedate, db_user_idtype, db_user_photo, db_user_cardid)
+            let query = db_user.select(db_user_name, db_user_surname1, db_user_surname2, db_user_idactivedate, db_user_idtype, db_user_photo, db_user_cardid)
             guard let queryResults = try? db.prepare(query) else {
                 print("ERROR al consultar usuario")
                 return
@@ -71,7 +71,8 @@ class CardController: UIViewController {
             
             for row in queryResults {
                 print("nombre: \(row[db_user_name]), apellido: \(row[db_user_surname1]), fecha vig.: \(row[db_user_idactivedate]), tipoid: \(row[db_user_idtype]), cardid: \(row[db_user_cardid])")
-                let data = usuario(nombre: try row.get(db_user_name), apellido1: try row.get(db_user_surname1), fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
+                let apellido = try row.get(db_user_surname1) + " " + row.get(db_user_surname2)
+                let data = usuario(nombre: try row.get(db_user_name), apellido1: apellido, fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
                 tableData.append(data)
             }
             
@@ -85,9 +86,11 @@ class CardController: UIViewController {
         cardPhoto.image = avatarImage
         
         txtName.text = tableData[0].nombre
-        txtName.font = UIFont.boldSystemFont(ofSize: 10.0)
+        txtName.font = UIFont.boldSystemFont(ofSize: 17.0)
         txtSurname.text = tableData[0].apellido1
+        txtSurname.font = UIFont.boldSystemFont(ofSize: 15.0)
         txtDate.text = String(tableData[0].fecha.prefix(10))
+        txtDate.font = UIFont.systemFont(ofSize: 15.0)
         
         if(tableData[0].tipoCredencial == 1) {
             cardBackground.image = #imageLiteral(resourceName: "credencial_socio")
@@ -98,7 +101,7 @@ class CardController: UIViewController {
         else {
             cardBackground.image = #imageLiteral(resourceName: "credencial_invitado")
             txtClass.text = "SOCIO INVITADO"
-            txtClass.font = UIFont.systemFont(ofSize: 15.0)
+            txtClass.font = UIFont.boldSystemFont(ofSize: 21.0)
         }
     }
 }

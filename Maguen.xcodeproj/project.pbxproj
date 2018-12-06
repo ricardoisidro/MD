@@ -52,6 +52,8 @@
 		59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E272176B2440063B303 /* DirectoryTableViewController.swift */; };
 		59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E292176B7BA0063B303 /* CommitteeCell.swift */; };
 		59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */; };
+		59D7E94021B83B7A00CAA522 /* NotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D7E93F21B83B7A00CAA522 /* NotificationRequest.swift */; };
+		59D7E94221B8523D00CAA522 /* NotificationResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D7E94121B8523D00CAA522 /* NotificationResponse.swift */; };
 		59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */; };
 		59DABC1821A7294800D7445C /* GetEntityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DABC1721A7294800D7445C /* GetEntityResponse.swift */; };
 		59DABC1B21A75F4600D7445C /* CategoriaCentroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */; };
@@ -140,6 +142,8 @@
 		59D30E272176B2440063B303 /* DirectoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectoryTableViewController.swift; sourceTree = "<group>"; };
 		59D30E292176B7BA0063B303 /* CommitteeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommitteeCell.swift; sourceTree = "<group>"; };
 		59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CommitteeTableViewController.swift; path = Maguen/CommitteeTableViewController.swift; sourceTree = SOURCE_ROOT; };
+		59D7E93F21B83B7A00CAA522 /* NotificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationRequest.swift; sourceTree = "<group>"; };
+		59D7E94121B8523D00CAA522 /* NotificationResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationResponse.swift; sourceTree = "<group>"; };
 		59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchPrayDetailViewController.swift; sourceTree = "<group>"; };
 		59DABC1721A7294800D7445C /* GetEntityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEntityResponse.swift; sourceTree = "<group>"; };
 		59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriaCentroModel.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				5919397221A5F98A00B0E7EF /* GetIDResponse.swift */,
 				5919397621A628AF00B0E7EF /* GetEntityRequest.swift */,
 				59DABC1721A7294800D7445C /* GetEntityResponse.swift */,
+				59D7E93F21B83B7A00CAA522 /* NotificationRequest.swift */,
+				59D7E94121B8523D00CAA522 /* NotificationResponse.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -417,6 +423,11 @@
 				TargetAttributes = {
 					8C5CEF2B216FA155002F5D56 = {
 						CreatedOnToolsVersion = 10.0;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 0;
+							};
+						};
 					};
 				};
 			};
@@ -509,6 +520,7 @@
 				59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */,
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
 				8C8D05AE21ADDC4400B74D99 /* ClasesModel.swift in Sources */,
+				59D7E94021B83B7A00CAA522 /* NotificationRequest.swift in Sources */,
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
 				59C6D53321754976004E4813 /* ChurchCell.swift in Sources */,
 				8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */,
@@ -516,6 +528,7 @@
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
 				59C0D1AD21AF0F7B00656D52 /* SettingsTableViewCell.swift in Sources */,
 				59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */,
+				59D7E94221B8523D00CAA522 /* NotificationResponse.swift in Sources */,
 				59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */,
 				59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */,
 				5919397521A627A400B0E7EF /* AESforJSON.swift in Sources */,

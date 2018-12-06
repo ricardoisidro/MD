@@ -71,5 +71,22 @@ class AESforJSON {
         return cipherRequest
     }
     
-     
+    func encodeAndEncryptJSONNotificationsString(request: NotificationRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData: Data
+            jsonData = try jsonEncoder.encode(request)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            //print(jsonString)
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONNotificationString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
 }

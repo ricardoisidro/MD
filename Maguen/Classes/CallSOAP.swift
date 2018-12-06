@@ -36,6 +36,10 @@ class CallSOAP : NSObject, XMLParserDelegate {
             parseType = "GetEntidadResponse"
             parseResult = "GetEntidadResult"
         }
+        else if endpoint.contains("GetNotificaciones"){
+            parseType = "GetNotificacionesResponse"
+            parseResult = "GetNotificacionesResult"
+        }
         
         let url = URL(string: endpoint)
         let req = NSMutableURLRequest(url: url!)

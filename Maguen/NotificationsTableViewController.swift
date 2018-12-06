@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import CryptoSwift
 
 struct notificationsComponents {
+    var notificationId = Int()
     var notificationTitle = String()
     var notificationDate = String()
     var notificationText = String()
@@ -20,13 +22,37 @@ class NotificationsTableViewController: UITableViewController {
 
     @IBOutlet var notificationsTableView: UITableView!
     
+    var dataTask: URLSessionDataTask?
+    var mySession = URLSession.shared
+    var currentParsingElement:String = ""
+    var soapString:String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableViewData =
-            [notificationsComponents(notificationTitle: "Centro Maguén", notificationDate: "19/09/18 10:40", notificationText: "Estimada comunidad, son todos bienvenidos a la fiesta..."),
-             notificationsComponents(notificationTitle: "Centro Maguén", notificationDate: "18/09/18 10:40", notificationText: "Estimada comunidad, son todos bienvenidos a la fiesta que se llevará a cabo este fin de semana por la mañana, acompañando a nuestro amigo el Sr Toffy"),
-             notificationsComponents(notificationTitle: "Centro Maguén", notificationDate: "17/09/18 10:40", notificationText: "Estimada comunidad, son tod@s bienvenidos a la fiesta...")]
+        let lastSyncDate = "01/01/1990 00:00:00"
+        let communityArray = [1, 2, 3, 4, 5]
+        let churchArray = [10, 11, 12, 13, 19, 20]
+        let youthArray = [15, 18]
+        let schoolArray = [14, 16, 17]
+        let nr = NotificationRequest()
+        nr.LastSinc = lastSyncDate
+        nr.comunidad = communityArray
+        nr.templos = churchArray
+        nr.juventud = youthArray
+        nr.colegios = schoolArray
+        
+        let aesJSON = AESforJSON()
+        let chainEncodedandEncrypted = aesJSON.encodeAndEncryptJSONNotificationsString(request: nr)
+        let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetNotificaciones", encryptedString: chainEncodedandEncrypted)
+        let soapRequest = CallSOAP()
+        soapRequest.makeRequest(endpoint: MaguenCredentials.getNotificaciones, soapMessage: soapXMLTables)
+        
+        while !soapRequest.done {
+            usleep(100000)
+        }
+        
+        tableViewData = self.getNotifications(soapResult: soapRequest.soapResult)
 
         self.tableView.backgroundColor = MaguenColors.black1
         
@@ -124,5 +150,62 @@ class NotificationsTableViewController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func getNotifications(soapResult: String) -> [notificationsComponents] {
+        var tablesToSync = [notificationsComponents]()
+        do {
+            
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            
+            let nr = try jsonDecoder.decode(NotificationResponse.self, from: Data(decrypted.utf8))
+            
+            let size = nr.Value.count
+            print(size)
+            
+            for i in 0...(size-1) {
+                let data = notificationsComponents(notificationId: nr.Value[i].id, notificationTitle: nr.Value[i].titulo, notificationDate: nr.Value[i].fecha_publicacion, notificationText: nr.Value[i].descripcion)
+                tablesToSync.append(data)
+            }
+            return tablesToSync
+        }
+        catch let jsonErr{
+            print("getTablesList error: \(jsonErr)")
+        }
+        return tablesToSync
+        
+    }
+    
+    //MARK:- Encode/decode methods
+    
+    func encodeAndEncryptJSONString(request: NotificationRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(request)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
+    func updateAccount() {
+        do {
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            var decrypted = try soapString.decryptBase64ToString(cipher: aes)
+            _ = try jsonDecoder.decode(NotificationResponse.self, from: Data(decrypted.utf8))
+        }
+        catch let ex {
+            print("updateNotifications error: \(ex)")
+        }
+    }
 
 }
