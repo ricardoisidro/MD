@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     let db_evento_id = Expression<Int64>("evento_id")
     //let db_centro_id = Expression<Int64>("centro_id")
     let db_titulo = Expression<String>("titulo")
-    let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
+    let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
     let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
     let db_horario = Expression<String>("horario")
     let db_imagen = Expression<String?>("imagen")
@@ -499,13 +499,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func onInsertEventosDB(objeto: EventosModel) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let defaultDateTime = formatter.date(from: "01/01/1990 00:00:00")
+        
         do {
             let db = database
             let insert = db_eventos.insert(or: .replace,
                                            db_evento_id <- Int64(objeto.evento_id),
                                           db_centro_id <- Int64(objeto.centro_id),
                                           db_titulo <- objeto.titulo,
-                                          db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion,
+                                          db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion ?? defaultDateTime!,
                                           db_fecha_final_publicacion <- objeto.fecha_final_publicacion,
                                           db_horario <- objeto.horario,
                                           db_imagen <- objeto.imagen!,
@@ -610,12 +614,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     }
     
     func onInsertPublicacionDB(objeto: PublicacionModel) {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let defaultDateTime = formatter.date(from: "01/01/1990 00:00:00")
         do {
             let db = database
             let insert = db_publicacion.insert(or: .replace,
                                                          db_publicacion_id <- Int64(objeto.publicacion_id),
                                                          db_descripcion <- objeto.descripcion,
-                                                         db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion,
+                                                         db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion ?? defaultDateTime!,
                                                          db_fecha_final_publicacion <- objeto.fecha_final_publicacion,
                                                          db_categoria_publicacion_id <- Int64(objeto.categoria_publicacion_id),
                                                          db_paginas <- Int64(objeto.paginas),

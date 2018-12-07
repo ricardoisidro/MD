@@ -65,7 +65,6 @@ class EventViewController: UIViewController, UIScrollViewDelegate {
                 eventImageView.image = UIImage(data: data as Data)
             }
         }
-        //eventImageView.image =
         
     }
     

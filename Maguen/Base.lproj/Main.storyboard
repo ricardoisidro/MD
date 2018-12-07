@@ -403,7 +403,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uEJ-13-SW9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2375.1999999999998" y="1295.8020989505249"/>
+            <point key="canvasLocation" x="-3335" y="1285"/>
         </scene>
         <!--AskLoginViewController-->
         <scene sceneID="2sH-6Z-iai">
@@ -567,7 +567,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tdk-20-avE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2042" y="1992"/>
+            <point key="canvasLocation" x="-3002" y="1980"/>
         </scene>
         <!--Avisos-->
         <scene sceneID="zR2-km-jPP">
@@ -603,7 +603,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ELU-7w-rZS">
                                                     <rect key="frame" x="269" y="8" width="42" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.59215686274509804" green="0.78823529411764703" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -651,7 +651,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zEW-u7-J1P" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1674" y="1296"/>
+            <point key="canvasLocation" x="-2634" y="1285"/>
         </scene>
         <!--HomeViewController-->
         <scene sceneID="1Dh-3S-eBQ">
@@ -852,7 +852,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="hoja_p_uno" translatesAutoresizingMaskIntoConstraints="NO" id="sau-0I-cfi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sau-0I-cfi">
                                 <rect key="frame" x="0.0" y="63" width="375" height="604"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Periódico Maguén David" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lDF-j2-g0W">
@@ -1403,7 +1403,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9uX-56-kKF">
                                 <rect key="frame" x="0.0" y="71" width="375" height="596"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" image="hoja_r_uno" translatesAutoresizingMaskIntoConstraints="NO" id="12i-tt-FW6">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="12i-tt-FW6">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="596"/>
                                         <gestureRecognizers/>
                                         <connections>
@@ -1833,7 +1833,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XNJ-g9-Tsb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-218" y="549"/>
+            <point key="canvasLocation" x="-1156" y="1510"/>
         </scene>
         <!--Settings Table View Controller-->
         <scene sceneID="o6S-DS-4Ej">
@@ -2286,7 +2286,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gpK-qz-aEA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-218" y="1555"/>
+            <point key="canvasLocation" x="-286" y="1540"/>
         </scene>
         <!--Escuelas-->
         <scene sceneID="Zey-kH-TYC">
@@ -2578,7 +2578,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kC-u5-d9S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1014" y="1296"/>
+            <point key="canvasLocation" x="-1975" y="1285"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="J56-AC-LPc">
@@ -2728,9 +2728,7 @@
         <image name="evento_cuatro" width="800" height="600"/>
         <image name="evento_uno" width="384" height="288"/>
         <image name="hoja_p_dos" width="383" height="567"/>
-        <image name="hoja_p_uno" width="383" height="567"/>
         <image name="hoja_r_dos" width="299.25" height="387.75"/>
-        <image name="hoja_r_uno" width="299.25" height="387"/>
         <image name="icon_candado" width="26" height="26"/>
         <image name="icon_medios" width="112.5" height="112.5"/>
         <image name="icon_usuario" width="26" height="26"/>
@@ -2757,6 +2755,6 @@
         <image name="templo_default" width="144" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="q1P-Ww-8sp"/>
+        <segue reference="hOY-Mp-rer"/>
     </inferredMetricsTieBreakers>
 </document>
