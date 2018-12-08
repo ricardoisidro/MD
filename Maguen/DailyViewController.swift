@@ -15,10 +15,8 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
     let db_publicacion_id = Expression<Int64>("publicacion_id")
     let db_descripcion = Expression<String>("descripcion")
     let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
-    //let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
     let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
     let db_paginas = Expression<Int64>("paginas")
-    //var db_activo = Expression<Int64>("activo")
     let db_eliminado = Expression<Int64>("eliminado")
     let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
@@ -32,8 +30,6 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
         
         self.delegate = self
         self.dataSource = self
-        
-        //setViewControllers([pagesViewControllers[0]], direction: .forward, animated: true, completion: nil)
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
@@ -49,23 +45,9 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
             let currentDaily = try db.pluck(query)
             
             publicationId = try (currentDaily?.get(db_publicacion_id))!
-            print(publicationId)
             numberOfPages = try (currentDaily?.get(db_paginas))!
-            print(numberOfPages)
-            
             vctitle = try currentDaily?.get(db_descripcion)
-            print(vctitle!)
-            /*guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar usuario")
-                return
-            }
             
-            for row in queryResults {
-                print("nombre: \(row[db_user_name]), apellido: \(row[db_user_surname1]), fecha vig.: \(row[db_user_idactivedate]), tipoid: \(row[db_user_idtype]), cardid: \(row[db_user_cardid])")
-                let apellido = try row.get(db_user_surname1) + " " + row.get(db_user_surname2)
-                let data = usuario(nombre: try row.get(db_user_name), apellido1: apellido, fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
-                tableData.append(data)
-            }*/
         }
         catch let err {
             print("Read publicacionDB error: \(err)")
@@ -76,57 +58,67 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
             let pagename = MaguenCredentials.urlMagazine + "\(String(publicationId))/pagina\(String(i)).jpg"
             pages.append(pagename)
         }
-        let dailyViewController = FrameViewController()
+        
+        let frameVC = FrameViewController()
         let currentCad = pages.first!
+        
         if let cad = URL(string: currentCad) {
             if let data = NSData(contentsOf: cad) {
-                dailyViewController.imageData = data as Data
+                frameVC.imageData = data as Data
+                frameVC.imageIndex = 0
+                frameVC.imageTitle = vctitle
             }
         }
         
-        let viewController = [dailyViewController]
+        let viewController = [frameVC]
         setViewControllers(viewController, direction: .forward, animated: true, completion: nil)
     }
     
-    /*lazy var pagesViewControllers:[UIViewController] = {
-        return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DailyPage01ViewController") as! DailyPage01ViewController,
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "DailyPage02ViewController") as! DailyPage02ViewController
-        ]
-    }()*/
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        /*let currentIndex: Int = pagesViewControllers.index(of: viewController) ?? 0
-        if(currentIndex <= 0) {
-            return nil
+        let currentIndex = (viewController as! FrameViewController).imageIndex ?? 0
+        
+        if (currentIndex > 0) {
+            let frameVC = FrameViewController()
+            let lastPage = pages[currentIndex - 1]
+            
+            if let cad = URL(string: lastPage) {
+                if let data = NSData(contentsOf: cad) {
+                    frameVC.imageData = data as Data
+                    frameVC.imageIndex = currentIndex - 1
+                    frameVC.imageTitle = vctitle
+                    
+                }
+            }
+            return frameVC
         }
-        return pagesViewControllers[currentIndex - 1]*/
-        return UIViewController()
+        
+        return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
-        /*let currentImageName = (viewController as! FrameViewController).imageName
-        let currentIndex = pages.firstIndex(of: currentImageName!)
+        let currentIndex = (viewController as! FrameViewController).imageIndex ?? 0
         
-        if (currentIndex! > 0) {
+        if (currentIndex < pages.count - 1) {
             let frameVC = FrameViewController()
-            frameVC.imageName = pages[currentIndex! + 1]
+            let nextPage = pages[currentIndex + 1]
+            if let cad = URL(string: nextPage) {
+                if let data = NSData(contentsOf: cad) {
+                    frameVC.imageData = data as Data
+                    frameVC.imageIndex = currentIndex + 1
+                    frameVC.imageTitle = vctitle
+                }
+            }
             return frameVC
         }
-        /*let currentIndex: Int = pagesViewControllers.index(of: viewController) ?? 0
-        if(currentIndex >= pagesViewControllers.count-1) {
-            return nil
-        }*/
-        return pagesViewControllers[currentIndex + 1]*/
-        return UIViewController()
+        
+        return nil
     }
     
 
     
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        //return pagesViewControllers.count
         return pages.count
     }
 
@@ -144,11 +136,18 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
 
 class FrameViewController: UIViewController {
     
-    var imageName: String? {
+    var imageIndex: Int? {
         didSet {
-            let url = imageName
+            pageLabel.text = "Página \(String(imageIndex!+1))"
         }
     }
+    var imageTitle: String? {
+        didSet {
+            titleLabel.text = imageTitle
+        }
+    }
+    
+    let navItem = UINavigationItem()
     var imageData: Data? {
         didSet {
             imageView.image = UIImage(data: imageData!)
@@ -157,18 +156,68 @@ class FrameViewController: UIViewController {
     
     let imageView: UIImageView = {
         let imgv = UIImageView()
-        imgv.contentMode = .scaleAspectFill
+        imgv.contentMode = .scaleAspectFit
         imgv.translatesAutoresizingMaskIntoConstraints = false
         return imgv
+    }()
+    
+    let titleLabel: UILabel = {
+        let pt = UILabel()
+        pt.font = UIFont.boldSystemFont(ofSize: 17.0)
+        pt.textColor = UIColor.white
+        pt.backgroundColor = UIColor.clear
+        pt.translatesAutoresizingMaskIntoConstraints = false
+        return pt
+    }()
+    
+    let pageLabel: UILabel = {
+        let pt = UILabel()
+        pt.font = UIFont.systemFont(ofSize: 15.0)
+        pt.textColor = UIColor.white
+        pt.backgroundColor = UIColor.clear
+        pt.translatesAutoresizingMaskIntoConstraints = false
+        return pt
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = MaguenColors.black1
-        view.addSubview(imageView)
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", metrics: nil, views: ["v0":imageView]))
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]|", metrics: nil, views: ["v0":imageView]))
+        let views: [String: Any] = [
+            "v0": imageView,
+            "v1": titleLabel,
+            "v2": pageLabel]
         
+        var allConstraints: [NSLayoutConstraint] = []
+        
+        //UINavigationItem
+        view.backgroundColor = MaguenColors.black1
+        view.addSubview(titleLabel)
+        view.addSubview(pageLabel)
+        view.addSubview(imageView)
+        
+        let imageViewHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", metrics: nil, views: views)
+        allConstraints += imageViewHorizonConstraint
+        let titleLabelHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", metrics: nil, views: views)
+        allConstraints += titleLabelHorizonConstraint
+        let pageLabelHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v2]|", metrics: nil, views: views)
+        allConstraints += pageLabelHorizonConstraint
+        let allVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-1-[v1(>=30)]-1-[v2(>=30)]-[v0]-|", metrics: nil, views: views)
+        allConstraints += allVerticalConstraints
+        
+        NSLayoutConstraint.activate(allConstraints)
+
+        let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
+        self.navigationController?.navigationBar.titleTextAttributes = titleColor
+        //self.navigationController?.navigationBar.topItem?.title = "HI"
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
+        imageView.isUserInteractionEnabled = true
+        imageView.addGestureRecognizer(pinchGesture)
+        
+    }
+    
+    @objc func pinchGesture(sender: UIPinchGestureRecognizer) {
+        sender.view?.transform = ((sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!)
+        sender.scale = 1.0
     }
 }

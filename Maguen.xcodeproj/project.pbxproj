@@ -17,10 +17,6 @@
 		59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A99219CE8A200909453 /* LoginRequest.swift */; };
 		59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A9C219CFACB00909453 /* LoginResponse.swift */; };
 		59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */; };
-		59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */; };
-		59BAF0B7217A5E9500756117 /* DailyPage02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */; };
-		59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0B9217A6A8500756117 /* MagazinePage01ViewController.swift */; };
-		59BAF0BC217A6A9800756117 /* MagazinePage02ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */; };
 		59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4EFE21779965007CC317 /* YoutubeViewController.swift */; };
 		59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0021779C6A007CC317 /* DailyViewController.swift */; };
 		59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4F0221779F4D007CC317 /* MagazineViewController.swift */; };
@@ -107,10 +103,6 @@
 		59AA1A99219CE8A200909453 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		59AA1A9C219CFACB00909453 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
-		59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPage01ViewController.swift; sourceTree = "<group>"; };
-		59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyPage02ViewController.swift; sourceTree = "<group>"; };
-		59BAF0B9217A6A8500756117 /* MagazinePage01ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazinePage01ViewController.swift; sourceTree = "<group>"; };
-		59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazinePage02ViewController.swift; sourceTree = "<group>"; };
 		59BB4EFE21779965007CC317 /* YoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewController.swift; sourceTree = "<group>"; };
 		59BB4F0021779C6A007CC317 /* DailyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyViewController.swift; sourceTree = "<group>"; };
 		59BB4F0221779F4D007CC317 /* MagazineViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MagazineViewController.swift; sourceTree = "<group>"; };
@@ -226,24 +218,6 @@
 			path = JSON;
 			sourceTree = "<group>";
 		};
-		59BAF0B1217A5BCB00756117 /* Daily */ = {
-			isa = PBXGroup;
-			children = (
-				59BAF0B2217A5BFB00756117 /* DailyPage01ViewController.swift */,
-				59BAF0B6217A5E9500756117 /* DailyPage02ViewController.swift */,
-			);
-			path = Daily;
-			sourceTree = "<group>";
-		};
-		59BAF0B8217A6A5600756117 /* Magazine */ = {
-			isa = PBXGroup;
-			children = (
-				59BAF0B9217A6A8500756117 /* MagazinePage01ViewController.swift */,
-				59BAF0BB217A6A9800756117 /* MagazinePage02ViewController.swift */,
-			);
-			path = Magazine;
-			sourceTree = "<group>";
-		};
 		59CE67462192591D00A5D719 /* IBDesignables */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,8 +315,6 @@
 				59AA1A96219CBC7200909453 /* JSON */,
 				59CE674921925F4500A5D719 /* Extensions */,
 				59CE67462192591D00A5D719 /* IBDesignables */,
-				59BAF0B8217A6A5600756117 /* Magazine */,
-				59BAF0B1217A5BCB00756117 /* Daily */,
 				59D30E242176B02A0063B303 /* CellViews */,
 				8C5CEF2F216FA155002F5D56 /* AppDelegate.swift */,
 				8C5CEF33216FA155002F5D56 /* StoreController.swift */,
@@ -530,7 +502,6 @@
 				59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */,
 				59D7E94221B8523D00CAA522 /* NotificationResponse.swift in Sources */,
 				59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */,
-				59BAF0BA217A6A8500756117 /* MagazinePage01ViewController.swift in Sources */,
 				5919397521A627A400B0E7EF /* AESforJSON.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
 				59E61D5221A4F50B00136CB6 /* GetModifyTablesResponse.swift in Sources */,
@@ -545,7 +516,6 @@
 				59E61D4C21A47C5C00136CB6 /* SaldoRequest.swift in Sources */,
 				59C0D1B021AF380700656D52 /* OptionTableViewCell.swift in Sources */,
 				59C9090721A8B6E000B26E69 /* EventosModel.swift in Sources */,
-				59BAF0B4217A5BFB00756117 /* DailyPage01ViewController.swift in Sources */,
 				5919397121A5F94200B0E7EF /* GetIDRequest.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
 				8C8D05B621AE44F400B74D99 /* DomicilioModel.swift in Sources */,
@@ -591,12 +561,10 @@
 				5918142321A79BEA0025DEBE /* CentroModel.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,
 				5919397321A5F98A00B0E7EF /* GetIDResponse.swift in Sources */,
-				59BAF0B7217A5E9500756117 /* DailyPage02ViewController.swift in Sources */,
 				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
 				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
 				8C8D05A421ACC66300B74D99 /* ComiteModel.swift in Sources */,
-				59BAF0BC217A6A9800756117 /* MagazinePage02ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -759,7 +727,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -780,7 +748,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

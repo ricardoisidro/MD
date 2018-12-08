@@ -7,28 +7,63 @@
 //
 
 import UIKit
+import SQLite
 
 struct mediaComponents {
     var mediaImage = UIImage()
     var mediaText = String()
-    var mediaDate = String()
+    var mediaAuxText = String()
 }
 
 class MediaTableViewController: UITableViewController {
 
     var tableViewData = [mediaComponents]()
     var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram"]
+    var dailyTitle: String? = ""
+    var magazineTitle: String? = ""
+
+    let db_publicacion = Table("publicacion")
+    let db_publicacion_id = Expression<Int64>("publicacion_id")
+    let db_descripcion = Expression<String>("descripcion")
+    let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
+    let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
+    let db_paginas = Expression<Int64>("paginas")
+    let db_eliminado = Expression<Int64>("eliminado")
+    let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        do {
+            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)
+            // where categoria publicacion id = 1 (1 periodico; 2 revista)
+            let query1 = db_publicacion.select(db_descripcion).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 1).where(db_eliminado == 0)
+            let currentDaily = try db.pluck(query1)
+            
+            let query2 = db_publicacion.select(db_descripcion).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 2).where(db_eliminado == 0)
+            let currentMagazine = try db.pluck(query2)
+            
+            dailyTitle = try currentDaily?.get(db_descripcion)
+            print(dailyTitle!)
+            
+            magazineTitle = try currentMagazine?.get(db_descripcion)
+            print(magazineTitle!)
+            
+            
+        }
+        catch let err {
+            print("Read publicacionDB error: \(err)")
+        }
 
         tableViewData =
-            [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaDate: "24/abril/2018"),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaDate: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaDate: "")
+            [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaAuxText: ""),
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaAuxText: dailyTitle!),
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaAuxText: magazineTitle!),
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaAuxText: ""),
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaAuxText: "")
         ]
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -52,7 +87,7 @@ class MediaTableViewController: UITableViewController {
         cell.imgMedia.layer.cornerRadius = cell.imgMedia.frame.size.width / 2
         cell.imgMedia.clipsToBounds = true
         cell.textMedia.text = tableViewData[indexPath.row].mediaText
-        cell.dateMedia.text = tableViewData[indexPath.row].mediaDate
+        cell.dateMedia.text = tableViewData[indexPath.row].mediaAuxText
         cell.dateMedia.font = UIFont.systemFont(ofSize: 13.0)
         
         cell.layer.borderWidth = CGFloat(5.0)
@@ -69,7 +104,7 @@ class MediaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        print("You tapped cell number \(indexPath.row).")
+        //print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)

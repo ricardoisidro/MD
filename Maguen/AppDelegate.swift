@@ -224,13 +224,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         let tablesToSync = self.getTablesList(soapResult: soapRequest.soapResult)
         
         for tables in tablesToSync  {
-            print("""
+            /*print("""
 
 
             \(tables)
 
 
-            """)
+            """)*/
             let chainIDsEncodedandEncrypted = aesJSON.encodeAndEncryptJSONIDsString(fecha: lastDate!, tableName: tables)
             let soapXMLIDs = Global.shared.createSOAPXMLString(methodName: "GetIDs", encryptedString: chainIDsEncodedandEncrypted)
             soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyID, soapMessage: soapXMLIDs)
@@ -240,16 +240,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
             let idsToSync = self.getIDList(soapResult: soapRequest.soapResult)
             for ids in idsToSync{
-                //print(ids)
                 let chainEntityEncodedAndEncrypted = aesJSON.encodeAndEncryptJSONEntityString(tableName: tables, id: ids)
                 let soapXMLEntities = Global.shared.createSOAPXMLString(methodName: "GetEntidad", encryptedString: chainEntityEncodedAndEncrypted)
                 soapRequest.makeRequest(endpoint: MaguenCredentials.getEntidad, soapMessage: soapXMLEntities)
                 while !soapRequest.done {
                     usleep(100000)
                 }
-                let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                //_ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                print(entitiesToSync)
+                //let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                _ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                //print(entitiesToSync)
             }
         }
         

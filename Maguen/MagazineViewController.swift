@@ -15,10 +15,8 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
     let db_publicacion_id = Expression<Int64>("publicacion_id")
     let db_descripcion = Expression<String>("descripcion")
     let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
-    //let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
     let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
     let db_paginas = Expression<Int64>("paginas")
-    //var db_activo = Expression<Int64>("activo")
     let db_eliminado = Expression<Int64>("eliminado")
     let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
@@ -33,8 +31,6 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
         self.delegate = self
         self.dataSource = self
         
-        setViewControllers([pagesViewControllers[0]], direction: .forward, animated: true, completion: nil)
-        
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
         
@@ -46,61 +42,80 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
             let db = try Connection(fileURL.path)
             // where categoria publicacion id = 1 (1 periodico; 2 revista)
             let query = db_publicacion.select(db_publicacion_id, db_descripcion, db_fecha_inicial_publicacion, db_categoria_publicacion_id, db_paginas, db_eliminado, db_fecha_modificacion).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 2).where(db_eliminado == 0)
-            let currentMagazine = try db.pluck(query)
+            let currentDaily = try db.pluck(query)
             
-            publicationId = try (currentMagazine?.get(db_publicacion_id))!
-            print(publicationId)
-            numberOfPages = try (currentMagazine?.get(db_paginas))!
-            print(numberOfPages)
+            publicationId = try (currentDaily?.get(db_publicacion_id))!
+            numberOfPages = try (currentDaily?.get(db_paginas))!
+            vctitle = try currentDaily?.get(db_descripcion)
             
-            vctitle = try currentMagazine?.get(db_descripcion)
-            print(vctitle!)
-            /*guard let queryResults = try? db.prepare(query) else {
-             print("ERROR al consultar usuario")
-             return
-             }
-             
-             for row in queryResults {
-             print("nombre: \(row[db_user_name]), apellido: \(row[db_user_surname1]), fecha vig.: \(row[db_user_idactivedate]), tipoid: \(row[db_user_idtype]), cardid: \(row[db_user_cardid])")
-             let apellido = try row.get(db_user_surname1) + " " + row.get(db_user_surname2)
-             let data = usuario(nombre: try row.get(db_user_name), apellido1: apellido, fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
-             tableData.append(data)
-             }*/
         }
         catch let err {
             print("Read publicacionDB error: \(err)")
         }
+        
+        
         for i in 1...numberOfPages {
-            let pagename = "pagina" + String(i) + ".jpg"
+            let pagename = MaguenCredentials.urlMagazine + "\(String(publicationId))/pagina\(String(i)).jpg"
             pages.append(pagename)
         }
+        
+        let frameVC = FrameViewController()
+        let currentCad = pages.first!
+        if let cad = URL(string: currentCad) {
+            if let data = NSData(contentsOf: cad) {
+                frameVC.imageData = data as Data
+                frameVC.imageIndex = 0
+                frameVC.imageTitle = vctitle
+            }
+        }
+        
+        let viewController = [frameVC]
+        setViewControllers(viewController, direction: .forward, animated: true, completion: nil)
     }
     
-    lazy var pagesViewControllers:[UIViewController] = {
-        return [
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MagazinePage01ViewController") as! MagazinePage01ViewController,
-            UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MagazinePage02ViewController") as! MagazinePage02ViewController
-        ]
-    }()
-    
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        let currentIndex: Int = pagesViewControllers.index(of: viewController) ?? 0
-        if(currentIndex <= 0) {
-            return nil
+        let currentIndex = (viewController as! FrameViewController).imageIndex ?? 0
+        
+        
+        if (currentIndex > 0) {
+            let frameVC = FrameViewController()
+            let lastPage = pages[currentIndex - 1]
+            if let cad = URL(string: lastPage) {
+                if let data = NSData(contentsOf: cad) {
+                    frameVC.imageData = data as Data
+                    frameVC.imageIndex = currentIndex - 1
+                    frameVC.imageTitle = vctitle
+
+                }
+            }
+            return frameVC
         }
-        return pagesViewControllers[currentIndex - 1]
+        return nil
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        let currentIndex: Int = pagesViewControllers.index(of: viewController) ?? 0
-        if(currentIndex >= pagesViewControllers.count-1) {
-            return nil
+        
+        let currentIndex = (viewController as! FrameViewController).imageIndex ?? 0
+        
+        
+        if (currentIndex < pages.count - 1) {
+            let frameVC = FrameViewController()
+            let nextPage = pages[currentIndex + 1]
+            if let cad = URL(string: nextPage) {
+                if let data = NSData(contentsOf: cad) {
+                    frameVC.imageData = data as Data
+                    frameVC.imageIndex = currentIndex + 1
+                    frameVC.imageTitle = vctitle
+
+                }
+            }
+            return frameVC
         }
-        return pagesViewControllers[currentIndex + 1]
+        
+        return nil
     }
     
     func presentationCount(for pageViewController: UIPageViewController) -> Int {
-        return pagesViewControllers.count
+        return pages.count
     }
-
 }
