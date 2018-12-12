@@ -12,37 +12,43 @@ import SQLite
 struct youthComponents {
     var youthImage = String()
     var youthText = String()
+    var youthId = Int()
 }
 
 class YouthTableViewController: UITableViewController {
+    
+    let db_centro = Table("centro")
+    let db_centro_id = Expression<Int64>("centro_id")
+    let db_imagen_portada = Expression<String>("imagen_portada")
+    let db_nombre = Expression<String>("nombre")
+    let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
+    let db_eliminado = Expression<Int64>("eliminado")
     
     var tableViewData = [youthComponents]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //tableViewData = [youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Talmud Torah"), youthComponents(youthImage: #imageLiteral(resourceName: "evento_cuatro"), youthText: "Nuevo grupo")]
         
         do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            guard let queryResults = try? db.prepare("SELECT imagen_portada, nombre FROM centro WHERE categoria_centro_id = 3 and eliminado = 0") else {
-                print("ERROR al consultar Juventud")
+            let query = db_centro.select(db_centro[db_imagen_portada], db_centro[db_nombre], db_centro[db_centro_id]).where(db_centro[db_categoria_centro_id] == 3).where(db_centro[db_eliminado] == 0)
+            guard let queryResults = try? db.prepare(query) else {
+                print("ERROR al consultar centro")
                 return
             }
             
-            _ = queryResults.map { row in
-                let data = youthComponents(youthImage: row[0] as! String, youthText: row[1] as! String)
+            for row in queryResults {
+                let data = youthComponents(youthImage: try row.get(db_imagen_portada), youthText: try row.get(db_nombre), youthId: try Int(row.get(db_centro_id)))
+                
                 tableViewData.append(data)
             }
-            
         }
         catch let ex {
-            print("ReadCentroDB in Templos error: \(ex)")
+            print("ReadCentroDB in Juventud error: \(ex)")
         }
-        
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
         
@@ -82,7 +88,7 @@ class YouthTableViewController: UITableViewController {
         //let option = indexPath.row
         print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
-        self.performSegue(withIdentifier: "youthdetail", sender: tableViewData[indexPath.row].youthText)
+        self.performSegue(withIdentifier: "youthdetail", sender: tableViewData[indexPath.row])
     }
 
     /*
@@ -125,9 +131,12 @@ class YouthTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let segueData = sender as? youthComponents
+            else { return }
         if(segue.identifier == "youthdetail") {
             let controller = segue.destination as? YouthDetailTableViewController
-            controller?.navigationItem.title = (sender as! String)
+            controller?.navigationItem.title = segueData.youthText
+            controller?.youthId = segueData.youthId
         }
         
     }

@@ -8,16 +8,17 @@
 
 import UIKit
 
-class EventViewController: UIViewController, UIScrollViewDelegate {
+class EventViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var popView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
+    //@IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var eventpopTitle: UILabel!
     @IBOutlet weak var eventpopPlace: UILabel!
     @IBOutlet weak var eventpopDate: UILabel!
     @IBOutlet weak var eventpopTime: UILabel!
     
-    var eventImageView = UIImageView()
+    //var eventImageView = UIImageView()
     var tableData = [eventComponents]()
     var eventTitleText = ""
     var eventPlaceText = ""
@@ -25,35 +26,24 @@ class EventViewController: UIViewController, UIScrollViewDelegate {
     var eventTimeText = ""
     var eventImageText = ""
     
+    var isZooming = false
+    var originalImageCenter: CGPoint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         popView.layer.cornerRadius = 10
         popView.layer.masksToBounds = true
         
-        scrollView.delegate = self
-        
-        eventImageView.frame = CGRect(x: 0.0, y: 0.0, width: scrollView.frame.size.width, height: scrollView.frame.size.height)
-        //eventImageView.contentMode = UIView.ContentMode.scaleAspectFit
+        eventImageView.contentMode = .scaleAspectFit
         eventImageView.isUserInteractionEnabled = true
-        //scrollView.isUserInteractionEnabled = true
-        scrollView.addSubview(eventImageView)
         
-        //eventImageView.image = UIImage(named: "evento_uno")
-        
-        let scrollViewFrame = scrollView.frame
-        let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
-        let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
-        let minScale = min(scaleHeight, scaleWidth)
-        
-        scrollView.minimumZoomScale = minScale
-        scrollView.maximumZoomScale = 1
-        scrollView.zoomScale = minScale
-        
-        centerScrollViewContents()
-        
-        //let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
-        //eventImageView.addGestureRecognizer(pinchGesture)
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinch(sender:)))
+        pinchGesture.delegate = self
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.pan(sender:)))
+        panGesture.delegate = self
+        eventImageView.addGestureRecognizer(pinchGesture)
+        eventImageView.addGestureRecognizer(panGesture)
         eventpopTitle.text = eventTitleText
         eventpopPlace.text = eventPlaceText
         eventpopDate.text = eventDateText
@@ -68,60 +58,69 @@ class EventViewController: UIViewController, UIScrollViewDelegate {
         
     }
     
-    func centerScrollViewContents() {
-        let boundsSize = scrollView.bounds.size
-        var contentsFrame = eventImageView.frame
+    @objc func pinch(sender: UIPinchGestureRecognizer) {
         
-        if contentsFrame.size.width < boundsSize.width {
-            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2
+        if sender.state == .began {
             
+            let currentScale = self.eventImageView.frame.size.width / self.eventImageView.bounds.size.width
+            let newScale = currentScale * sender.scale
+            if newScale > 1 {
+                self.isZooming = true
+            }
         }
-        else {
-            contentsFrame.origin.x = 0
-        }
-        if contentsFrame.size.height < boundsSize.height {
-            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2
-        }
-        else {
-            contentsFrame.origin.y = 0
             
+        else if sender.state == .changed {
+            
+            guard let view = sender.view else { return }
+            let pinchCenter = CGPoint(x: sender.location(in: view).x - view.bounds.midX,
+                                      y: sender.location(in: view).y - view.bounds.midY)
+            let transform = view.transform.translatedBy(x: pinchCenter.x, y: pinchCenter.y)
+                .scaledBy(x: sender.scale, y: sender.scale)
+                .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
+            let currentScale = self.eventImageView.frame.size.width / self.eventImageView.bounds.size.width
+            var newScale = currentScale * sender.scale
+            if newScale < 1 {
+                newScale = 1
+                let transform = CGAffineTransform(scaleX: newScale, y: newScale)
+                self.eventImageView.transform = transform
+                sender.scale = 1.0
+            }
+            else {
+                view.transform = transform
+                sender.scale = 1.0
+            }
+        }
+            
+        else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
+
+            guard let center = self.originalImageCenter else { return }
+            UIView.animate(withDuration: 0.3, animations: {
+                self.eventImageView.transform = CGAffineTransform.identity
+                self.eventImageView.center = center
+            }, completion: {_ in self.isZooming = false })
         }
         
-        eventImageView.frame = contentsFrame
     }
     
-    func scrollViewDidZoom(_ scrollView: UIScrollView) {
-        print("Scroll view did zoom")
-        centerScrollViewContents()
+    @objc func pan(sender: UIPanGestureRecognizer) {
+        if self.isZooming && sender.state == .began {
+            self.originalImageCenter = sender.view?.center
+        }
+        else if self.isZooming && sender.state == .changed {
+            let translation = sender.translation(in: self.view)
+            if let view = sender.view {
+                view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+            }
+            sender.setTranslation(CGPoint.zero, in: self.eventImageView.superview)
+        }
     }
     
-    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
-        print("View for zooming")
-        return eventImageView
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
-    
-    /*func scrollViewDidEndZooming(_ scrollView: UIScrollView, with view: UIView?, atScale scale: CGFloat) {
-        //centerScrollViewContents()
-    }*/
-    
-    @objc func pinchGesture(sender: UIPinchGestureRecognizer) {
-        sender.view?.transform = ((sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!)
-        sender.scale = 1.0
-    }
-    
-    
 
     @IBAction func closePopup(_ sender: UIButton) {
         dismiss(animated: true, completion: nil)
     }
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

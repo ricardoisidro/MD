@@ -188,27 +188,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             print("createDBFile error: \(ex)")
         }
         
-        onCreateCategoriaCentroDB()
-        onCreateDomicilioDB()
-        onCreateCentroDB()
-        onCreateEventosDB()
-        onCreateServicioDB()
-        onCreateServicioCentroDB()
-        onCreateHorarioResoDB()
-        onCreateHorarioClaseDB()
-        onCreateClasesDB()
-        onCreateComiteDB()
-        onCreateCategoriaPublicacionDB()
-        onCreatePublicacionDB()
-        onCreateComunidadDB()
-        
         if (lastDate == nil) {
             UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
-            lastDate = "01/01/1990 00:00:00"
+            lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
+            onCreateCategoriaCentroDB()
+            onCreateDomicilioDB()
+            onCreateCentroDB()
+            onCreateEventosDB()
+            onCreateServicioDB()
+            onCreateServicioCentroDB()
+            onCreateHorarioResoDB()
+            onCreateHorarioClaseDB()
+            onCreateClasesDB()
+            onCreateComiteDB()
+            onCreateCategoriaPublicacionDB()
+            onCreatePublicacionDB()
+            onCreateComunidadDB()
         }
         else {
-            UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
+            
         }
+        
+        
         
         let aesJSON = AESforJSON()
         let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONTablesString(fecha: lastDate!)
@@ -223,40 +224,45 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
         let tablesToSync = self.getTablesList(soapResult: soapRequest.soapResult)
         
-        for tables in tablesToSync  {
-            /*print("""
-
-
-            \(tables)
-
-
-            """)*/
-            let chainIDsEncodedandEncrypted = aesJSON.encodeAndEncryptJSONIDsString(fecha: lastDate!, tableName: tables)
-            let soapXMLIDs = Global.shared.createSOAPXMLString(methodName: "GetIDs", encryptedString: chainIDsEncodedandEncrypted)
-            soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyID, soapMessage: soapXMLIDs)
-            while !soapRequest.done {
-                usleep(100000)
-                
-            }
-            let idsToSync = self.getIDList(soapResult: soapRequest.soapResult)
-            for ids in idsToSync{
-                let chainEntityEncodedAndEncrypted = aesJSON.encodeAndEncryptJSONEntityString(tableName: tables, id: ids)
-                let soapXMLEntities = Global.shared.createSOAPXMLString(methodName: "GetEntidad", encryptedString: chainEntityEncodedAndEncrypted)
-                soapRequest.makeRequest(endpoint: MaguenCredentials.getEntidad, soapMessage: soapXMLEntities)
+        if tablesToSync != [""] {
+            for tables in tablesToSync  {
+                /*print("""
+                    
+                    
+                    \(tables)
+                    
+                    
+                    """)*/
+                let chainIDsEncodedandEncrypted = aesJSON.encodeAndEncryptJSONIDsString(fecha: lastDate!, tableName: tables)
+                let soapXMLIDs = Global.shared.createSOAPXMLString(methodName: "GetIDs", encryptedString: chainIDsEncodedandEncrypted)
+                soapRequest.makeRequest(endpoint: MaguenCredentials.getModifyID, soapMessage: soapXMLIDs)
                 while !soapRequest.done {
                     usleep(100000)
+                    
                 }
-                //let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                _ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                //print(entitiesToSync)
+                let idsToSync = self.getIDList(soapResult: soapRequest.soapResult)
+                for ids in idsToSync{
+                    let chainEntityEncodedAndEncrypted = aesJSON.encodeAndEncryptJSONEntityString(tableName: tables, id: ids)
+                    let soapXMLEntities = Global.shared.createSOAPXMLString(methodName: "GetEntidad", encryptedString: chainEntityEncodedAndEncrypted)
+                    soapRequest.makeRequest(endpoint: MaguenCredentials.getEntidad, soapMessage: soapXMLEntities)
+                    while !soapRequest.done {
+                        usleep(100000)
+                    }
+                    //let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                    _ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
+                    //print(entitiesToSync)
+                }
             }
         }
+        else {
+            
+        }
         
-        //let currentDate2 = Date()
-        //let dateFormat = DateFormatter()
-        //dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        //print(dateFormat.string(from: currentDate2))
-        
+        let currentDate = Date()
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let currDate = dateFormat.string(from: currentDate)
+        UserDefaults.standard.set(currDate, forKey: "dateLastSync")
         return true
     }
     

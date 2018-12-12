@@ -163,12 +163,15 @@ class NotificationsTableViewController: UITableViewController {
             
             let size = nr.Value.count
             print(size)
-            
-            for i in 0...(size-1) {
-                let data = notificationsComponents(notificationId: nr.Value[i].id, notificationTitle: nr.Value[i].titulo, notificationDate: nr.Value[i].fecha_publicacion, notificationText: nr.Value[i].descripcion)
-                tablesToSync.append(data)
+            if size > 0 {
+                for i in 0...(size-1) {
+                    let data = notificationsComponents(notificationId: nr.Value[i].id, notificationTitle: nr.Value[i].titulo, notificationDate: nr.Value[i].fecha_publicacion, notificationText: nr.Value[i].descripcion)
+                    tablesToSync.append(data)
+                }
+                
             }
             return tablesToSync
+            
         }
         catch let jsonErr{
             print("getTablesList error: \(jsonErr)")

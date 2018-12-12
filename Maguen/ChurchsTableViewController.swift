@@ -35,7 +35,7 @@ class ChurchsTableViewController: UITableViewController {
             let db = try Connection(fileURL.path)
             
             //tableViewData2 = Array(try db.prepare(users.filter(db_categoria_centro_id == 1)))
-            let query = db_centro.select(db_centro[db_imagen_portada], db_centro[db_nombre], db_centro[db_nombre], db_centro[db_centro_id]).where(db_centro[db_categoria_centro_id] == 1).where(db_centro[db_eliminado] == 0)
+            let query = db_centro.select(db_centro[db_imagen_portada], db_centro[db_nombre], db_centro[db_centro_id]).where(db_centro[db_categoria_centro_id] == 1).where(db_centro[db_eliminado] == 0)
             //guard let queryResults = try? db.prepare("SELECT imagen_portada, nombre, centro_id FROM centro WHERE categoria_centro_id = 1 and eliminado = 0") else {
             guard let queryResults = try? db.prepare(query) else {
                 print("ERROR al consultar centro")
@@ -94,7 +94,7 @@ class ChurchsTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        print("You tapped cell number \(indexPath.row).")
+        //print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
         self.performSegue(withIdentifier: "churchdetail", sender: tableViewData[indexPath.row])

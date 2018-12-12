@@ -73,8 +73,7 @@ class ChurchDetailTableViewController: UITableViewController {
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            //let query = db_eventos.select(db_imagen, db_titulo, db_fecha_inicial_publicacion, db_horario).where(db_eliminado == 0)
-            //let query2 = db_eventos.join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            // getting services
             let query = db_servicio.select(db_servicio[db_descripcion], db_servicio[db_imagen])
                 .join(db_servicio_centro, on: db_servicio_centro[db_servicio_id] == db_servicio[db_servicio_id])
                 .where(db_servicio_centro[db_centro_id] == Int64(centro_id))
@@ -102,22 +101,6 @@ class ChurchDetailTableViewController: UITableViewController {
                 let data = cellChurchSubDetailComponents(subLabel: try row.get(db_descripcion), subDetail: "", subImage: "", subId: try Int(row.get(db_clase_id)))
                 tableViewDataClasses.append(data)
             }
-            
-            /*let query3 = db_eventos.select(db_evento_id, db_titulo, db_fecha_inicial_publicacion, db_horario)
-                .where(db_centro_id == Int64(centro_id))
-            
-            guard let queryResults3 = try? db.prepare(query3)
-                else {
-                    print("ERROR al consultar eventos")
-                    return
-            }
-            for row in queryResults3 {
-                let fecha = try row.get(db_fecha_inicial_publicacion).prefix(10)
-                let hora = try row.get(db_horario)
-                let horario = String(fecha) + " " + hora
-                let data = cellChurchSubDetailComponents(subLabel: try row.get(db_titulo), subDetail: horario, subImage: "", subId: try Int(row.get(db_evento_id)))
-                tableViewDataEvents.append(data)
-            }*/
             
             let query4 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
             guard let queryResults4 = try? db.prepare(query4)
@@ -258,14 +241,14 @@ class ChurchDetailTableViewController: UITableViewController {
                 tableViewRootData[indexPath.section].opened = false
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
-                print("Cerrar grupo")
+                //print("Cerrar grupo")
                 
             }
             else {
                 tableViewRootData[indexPath.section].opened = true
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
-                print("Abriendo grupo")
+                //print("Abriendo grupo")
             }
         }
         else {
@@ -278,7 +261,7 @@ class ChurchDetailTableViewController: UITableViewController {
             else if indexPath.section == 2 { //events
                 tableView.deselectRow(at: indexPath, animated: true)
                 //travelText = tableViewDataEvents[indexPath.row - 1].subLabel
-                print("Selected inner cell: " + travelText)
+                //print("Selected inner cell: " + travelText)
                 self.performSegue(withIdentifier: "checkEvent", sender: tableViewDataEventDetail[indexPath.row - 1])
                 //travelText = tableView[indexPath.section].sectionData[indexPath.row - 1]
                 
