@@ -27,7 +27,24 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     @IBOutlet weak var textConfigMail: UITextField!
     @IBOutlet weak var textConfigPhone: UITextField!
     
+    @IBOutlet weak var textConfigCommunity: UITextField!
     @IBOutlet weak var textConfigBalance: UILabel!
+    
+    var database: Connection!
+    let db_user = Table("usuariomaguen")
+    let db_user_id = Expression<Int64>("user_id")
+    let db_user_name = Expression<String>("user_name")
+    let db_user_surname1 = Expression<String>("user_surname1")
+    let db_user_surname2 = Expression<String>("user_surname2")
+    let db_user_sex = Expression<String>("user_sex")
+    let db_user_birthday = Expression<String>("user_birthday")
+    let db_user_mail = Expression<String>("user_mail")
+    let db_user_phone = Expression<String>("user_phone")
+    let db_user_photo = Expression<String>("user_photo")
+    let db_user_username = Expression<String>("user_username")
+    let db_user_idtype = Expression<Int64>("user_idtype")
+    let db_user_idactivedate = Expression<String>("user_idactivedate")
+    let db_user_cardid = Expression<Int64>("user_cardid")
     //let dataNotif = Notification.Name(rawValue: dataNotificationKey)
     
     /*deinit {
@@ -35,10 +52,12 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     }*/
     
     let sexTypes = ["HOMBRE", "MUJER"]
+    var communityTypes: [String] = []
     let birthDatePicker: UIDatePicker = UIDatePicker()
     let doneButton: UIButton = UIButton()
     
     var selectedSex: String = "HOMBRE"
+    var selectedCommunity: String = "SELECCIONE..."
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,8 +66,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         tableView.register(UINib(nibName: "OptionsTableViewCell", bundle: nil), forCellReuseIdentifier: "options")
         
         createSexPicker()
+        createCommunityPicker()
         createDatePicker()
-        createPickerToolbar()
+        createSexPickerToolbar()
+        createCommunityPickerToolbar()
         createDatePickerToolbar()
         
         textConfigName.delegate = self
@@ -66,12 +87,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
          
-         /*let users = Table("centro")
-         let db_centro_id = Expression<Int64>("centro_id")
-         let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-         let db_descripcion = Expression<String>("descripcion")
-         let db_eliminado = Expression<Int64>("eliminado")*/
-         
+            //getting centers list
             guard let queryResults = try? db.prepare("SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id") else {
                 print("ERROR al consultar Comites")
                 return
@@ -81,6 +97,43 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
                 let data = optionsComponents(selected: false, optionClass: row[0] as! Int64, optionName: row[1] as! String)
                 tableViewData.append(data)
             }
+            
+            //getting communities
+            guard let queryResults3 = try? db.prepare("SELECT descripcion FROM comunidad") else {
+                print("ERROR al consultar Comunidad")
+                return
+            }
+            
+            _ = queryResults3.map { row in
+                let data = row[0] as! String
+                communityTypes.append(data)
+            }
+            
+            // getting user
+            let query2 = db_user.select(db_user_name, db_user_surname1, db_user_surname2, db_user_sex, db_user_birthday, db_user_mail, db_user_phone)
+            
+            
+            guard let queryResults2 = try? db.pluck(query2)
+                else {
+                    print("ERROR al consultar usuario")
+                    return
+            }
+        
+            let birthday = try queryResults2?.get(db_user_birthday)
+            let sex = try queryResults2?.get(db_user_sex)
+            textConfigName.text = try queryResults2?.get(db_user_name)
+            textConfigSurname1.text = try queryResults2?.get(db_user_surname1)
+            textConfigSurname2.text = try queryResults2?.get(db_user_surname2)
+            if sex == "H" {
+                textConfigSex.text = sexTypes[0]
+            }
+            else if sex == "M" {
+                textConfigSex.text = sexTypes[1]
+            }
+            textConfigBirthday.text = String((birthday?.prefix(10))!)
+            textConfigMail.text = try queryResults2?.get(db_user_mail)
+            textConfigPhone.text = try queryResults2?.get(db_user_phone)
+            
          }
          catch let ex {
             print("ReadCentroDB error: \(ex)")
@@ -89,14 +142,14 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        textConfigName.text = UserDefaults.standard.string(forKey: "name") ?? ""
+        /*textConfigName.text = UserDefaults.standard.string(forKey: "name") ?? ""
         textConfigSurname1.text = UserDefaults.standard.string(forKey: "surname1") ?? ""
         textConfigSurname2.text =  UserDefaults.standard.string(forKey: "surname2") ?? ""
         textConfigSex.text =  UserDefaults.standard.string(forKey: "sex") ?? ""
         textConfigBirthday.text = UserDefaults.standard.string(forKey: "birthday") ?? ""
         textConfigMail.text = UserDefaults.standard.string(forKey: "mail") ?? ""
         textConfigPhone.text = UserDefaults.standard.string(forKey: "phone") ?? ""
-        textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""
+        textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""*/
     }
     
     /*func createObservers() {
@@ -156,12 +209,21 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     //MARK: - Picker delegates
     func createSexPicker() {
         let sexPicker = UIPickerView()
+        sexPicker.tag = 1
         sexPicker.delegate = self
         
         textConfigSex.inputView = sexPicker
     }
     
-    func createPickerToolbar() {
+    func createCommunityPicker() {
+        let communityPicker = UIPickerView()
+        communityPicker.tag = 2
+        communityPicker.delegate = self
+        
+        textConfigCommunity.inputView = communityPicker
+    }
+    
+    func createSexPickerToolbar() {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()
         
@@ -172,24 +234,60 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigSex.inputAccessoryView = toolbar
     }
     
+    func createCommunityPickerToolbar() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()
+        
+        let okButton = UIBarButtonItem(title: "OK", style: .plain, target: self, action: #selector(SettingsTableViewController.dismissKeyboard))
+        toolbar.setItems([okButton], animated: false)
+        toolbar.isUserInteractionEnabled = true
+        
+        textConfigCommunity.inputAccessoryView = toolbar
+    }
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return sexTypes.count
+        if pickerView.tag == 1 {
+            return sexTypes.count
+
+        }
+        else if pickerView.tag == 2 {
+            return communityTypes.count
+        }
+        else {
+            return 1
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
-        let titleData = sexTypes[row]
-        let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)])
+        if pickerView.tag == 1 {
+            let titleData = sexTypes[row]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)])
+            
+            return myTitle
+        }
+        else {
+            let titleData = communityTypes[row]
+            let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)])
+            
+            return myTitle
+        }
         
-        return myTitle
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectedSex = sexTypes[row]
-        textConfigSex.text = selectedSex
+        if pickerView.tag == 1 {
+            selectedSex = sexTypes[row]
+            textConfigSex.text = selectedSex
+        }
+        else {
+            selectedCommunity = communityTypes[row]
+            textConfigCommunity.text = selectedCommunity
+        }
+        
     }
     
     //MARK: - DatePicker

@@ -67,6 +67,7 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
                 frameVC.imageData = data as Data
                 frameVC.imageIndex = 0
                 frameVC.imageTitle = vctitle
+                frameVC.totalPages = Int(numberOfPages)
             }
         }
         
@@ -86,7 +87,8 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
                     frameVC.imageData = data as Data
                     frameVC.imageIndex = currentIndex - 1
                     frameVC.imageTitle = vctitle
-                    
+                    frameVC.totalPages = Int(numberOfPages)
+
                 }
             }
             return frameVC
@@ -107,6 +109,8 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
                     frameVC.imageData = data as Data
                     frameVC.imageIndex = currentIndex + 1
                     frameVC.imageTitle = vctitle
+                    frameVC.totalPages = Int(numberOfPages)
+
                 }
             }
             return frameVC
@@ -122,25 +126,22 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
         return pages.count
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
-class FrameViewController: UIViewController {
+class FrameViewController: UIViewController, UIGestureRecognizerDelegate {
     
     var imageIndex: Int? {
         didSet {
             pageLabel.text = "Página \(String(imageIndex!+1))"
         }
     }
+    
+    var totalPages: Int? {
+        didSet {
+            pageLabel.text = pageLabel.text! + "/\(String(totalPages!))"
+        }
+    }
+    
     var imageTitle: String? {
         didSet {
             titleLabel.text = imageTitle
@@ -179,6 +180,9 @@ class FrameViewController: UIViewController {
         return pt
     }()
     
+    var isZooming = false
+    var originalImageCenter: CGPoint?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -210,14 +214,94 @@ class FrameViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
         //self.navigationController?.navigationBar.topItem?.title = "HI"
         
-        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
+        //let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinchGesture))
+        
+        let pinchGesture = UIPinchGestureRecognizer(target: self, action: #selector(self.pinch(sender:)))
+        pinchGesture.delegate = self
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.pan(sender:)))
+        panGesture.delegate = self
+        
+        imageView.addGestureRecognizer(pinchGesture)
+        imageView.addGestureRecognizer(panGesture)
+        
         imageView.isUserInteractionEnabled = true
         imageView.addGestureRecognizer(pinchGesture)
         
+        
     }
     
-    @objc func pinchGesture(sender: UIPinchGestureRecognizer) {
-        sender.view?.transform = ((sender.view?.transform.scaledBy(x: sender.scale, y: sender.scale))!)
-        sender.scale = 1.0
+    @objc func pinch(sender: UIPinchGestureRecognizer) {
+        
+        if sender.state == .began {
+            
+            let currentScale = self.imageView.frame.size.width / self.imageView.bounds.size.width
+            let newScale = currentScale * sender.scale
+            if newScale > 1 {
+                self.isZooming = true
+            }
+        }
+            
+        else if sender.state == .changed {
+            
+            guard let view = sender.view else { return }
+            let pinchCenter = CGPoint(x: sender.location(in: view).x - view.bounds.midX,
+                                      y: sender.location(in: view).y - view.bounds.midY)
+            let transform = view.transform.translatedBy(x: pinchCenter.x, y: pinchCenter.y)
+                .scaledBy(x: sender.scale, y: sender.scale)
+                .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
+            let currentScale = self.imageView.frame.size.width / self.imageView.bounds.size.width
+            var newScale = currentScale * sender.scale
+            
+            if newScale < 1 {
+                
+                let w = UIScreen.main.bounds.width
+                let h = UIScreen.main.bounds.height
+                let center = CGPoint(x: w/2, y: h/2)
+                
+                newScale = 1
+
+                let transform = CGAffineTransform(scaleX: newScale, y: newScale)
+                self.imageView.transform = transform
+                
+                self.imageView.center = center
+                sender.scale = 1.0
+            }
+            else {
+                view.transform = transform
+                sender.scale = 1.0
+            }
+        }
+            
+        else if sender.state == .failed || sender.state == .cancelled {
+            
+            let w = UIScreen.main.bounds.width
+            let h = UIScreen.main.bounds.height
+            
+            let center = self.originalImageCenter ?? CGPoint(x: w/2, y: h/2)
+            
+            //let center = self.originalImageCenter
+            UIView.animate(withDuration: 0.3, animations: {
+                self.imageView.transform = CGAffineTransform.identity
+                self.imageView.center = center
+            }, completion: {_ in self.isZooming = false })
+        }
+        
+    }
+    
+    @objc func pan(sender: UIPanGestureRecognizer) {
+        if self.isZooming && sender.state == .began {
+            self.originalImageCenter = sender.view?.center
+        }
+        else if self.isZooming && sender.state == .changed {
+            let translation = sender.translation(in: self.view)
+            if let view = sender.view {
+                view.center = CGPoint(x: view.center.x + translation.x, y: view.center.y + translation.y)
+            }
+            sender.setTranslation(CGPoint.zero, in: self.imageView.superview)
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
     }
 }

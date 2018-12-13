@@ -66,6 +66,8 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
                 frameVC.imageData = data as Data
                 frameVC.imageIndex = 0
                 frameVC.imageTitle = vctitle
+                frameVC.totalPages = Int(numberOfPages)
+
             }
         }
         
@@ -85,6 +87,7 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
                     frameVC.imageData = data as Data
                     frameVC.imageIndex = currentIndex - 1
                     frameVC.imageTitle = vctitle
+                    frameVC.totalPages = Int(numberOfPages)
 
                 }
             }
@@ -106,6 +109,7 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
                     frameVC.imageData = data as Data
                     frameVC.imageIndex = currentIndex + 1
                     frameVC.imageTitle = vctitle
+                    frameVC.totalPages = Int(numberOfPages)
 
                 }
             }

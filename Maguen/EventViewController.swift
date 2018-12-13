@@ -11,14 +11,12 @@ import UIKit
 class EventViewController: UIViewController, UIGestureRecognizerDelegate {
     
     @IBOutlet weak var popView: UIView!
-    //@IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var eventImageView: UIImageView!
     @IBOutlet weak var eventpopTitle: UILabel!
     @IBOutlet weak var eventpopPlace: UILabel!
     @IBOutlet weak var eventpopDate: UILabel!
     @IBOutlet weak var eventpopTime: UILabel!
     
-    //var eventImageView = UIImageView()
     var tableData = [eventComponents]()
     var eventTitleText = ""
     var eventPlaceText = ""
@@ -79,10 +77,19 @@ class EventViewController: UIViewController, UIGestureRecognizerDelegate {
                 .translatedBy(x: -pinchCenter.x, y: -pinchCenter.y)
             let currentScale = self.eventImageView.frame.size.width / self.eventImageView.bounds.size.width
             var newScale = currentScale * sender.scale
+            
             if newScale < 1 {
+                
+                /*let w = UIScreen.main.bounds.width
+                let h = UIScreen.main.bounds.height
+                let center = CGPoint(x: w/2, y: h/2)*/
+                
                 newScale = 1
+                
                 let transform = CGAffineTransform(scaleX: newScale, y: newScale)
                 self.eventImageView.transform = transform
+                
+                //self.eventImageView.center = center
                 sender.scale = 1.0
             }
             else {
@@ -91,9 +98,14 @@ class EventViewController: UIViewController, UIGestureRecognizerDelegate {
             }
         }
             
-        else if sender.state == .ended || sender.state == .failed || sender.state == .cancelled {
-
-            guard let center = self.originalImageCenter else { return }
+        else if sender.state == .failed || sender.state == .cancelled {
+            
+            let w = UIScreen.main.bounds.width
+            let h = UIScreen.main.bounds.height
+            
+            let center = self.originalImageCenter ?? CGPoint(x: w/2, y: h/2)
+            
+            //let center = self.originalImageCenter
             UIView.animate(withDuration: 0.3, animations: {
                 self.eventImageView.transform = CGAffineTransform.identity
                 self.eventImageView.center = center
