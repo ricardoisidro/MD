@@ -40,6 +40,14 @@ class CallSOAP : NSObject, XMLParserDelegate {
             parseType = "GetNotificacionesResponse"
             parseResult = "GetNotificacionesResult"
         }
+        else if endpoint.contains("GetDinamicWegan"){
+            parseType = "GetDinamicWeganResponse"
+            parseResult = "GetDinamicWeganResult"
+        }
+        else if endpoint.contains("GetSaldoActual"){
+            parseType = "GetSaldoActualResponse"
+            parseResult = "GetSaldoActualResult"
+        }
         
         let url = URL(string: endpoint)
         let req = NSMutableURLRequest(url: url!)

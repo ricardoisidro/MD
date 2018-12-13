@@ -57,6 +57,8 @@
 		59E61D4E21A47CA300136CB6 /* SaldoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D4D21A47CA300136CB6 /* SaldoResponse.swift */; };
 		59E61D5021A4F4AB00136CB6 /* GetModifyTablesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D4F21A4F4AB00136CB6 /* GetModifyTablesRequest.swift */; };
 		59E61D5221A4F50B00136CB6 /* GetModifyTablesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D5121A4F50B00136CB6 /* GetModifyTablesResponse.swift */; };
+		59E806B321C2D46A0017D248 /* GetDinamicWeganRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E806B221C2D46A0017D248 /* GetDinamicWeganRequest.swift */; };
+		59E806B521C2D4D00017D248 /* GetDinamicWeganResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E806B421C2D4D00017D248 /* GetDinamicWeganResponse.swift */; };
 		59E9875021711620004DDE0D /* KashrutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9874F21711620004DDE0D /* KashrutController.swift */; };
 		59E9875221711B6C004DDE0D /* CardController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E9875121711B6C004DDE0D /* CardController.swift */; };
 		59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */; };
@@ -144,6 +146,8 @@
 		59E61D4D21A47CA300136CB6 /* SaldoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoResponse.swift; sourceTree = "<group>"; };
 		59E61D4F21A4F4AB00136CB6 /* GetModifyTablesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetModifyTablesRequest.swift; sourceTree = "<group>"; };
 		59E61D5121A4F50B00136CB6 /* GetModifyTablesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetModifyTablesResponse.swift; sourceTree = "<group>"; };
+		59E806B221C2D46A0017D248 /* GetDinamicWeganRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDinamicWeganRequest.swift; sourceTree = "<group>"; };
+		59E806B421C2D4D00017D248 /* GetDinamicWeganResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetDinamicWeganResponse.swift; sourceTree = "<group>"; };
 		59E9874F21711620004DDE0D /* KashrutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KashrutController.swift; sourceTree = "<group>"; };
 		59E9875121711B6C004DDE0D /* CardController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardController.swift; sourceTree = "<group>"; };
 		59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchClassDetailViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				59DABC1721A7294800D7445C /* GetEntityResponse.swift */,
 				59D7E93F21B83B7A00CAA522 /* NotificationRequest.swift */,
 				59D7E94121B8523D00CAA522 /* NotificationResponse.swift */,
+				59E806B221C2D46A0017D248 /* GetDinamicWeganRequest.swift */,
+				59E806B421C2D4D00017D248 /* GetDinamicWeganResponse.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */,
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
+				59E806B321C2D46A0017D248 /* GetDinamicWeganRequest.swift in Sources */,
 				59E61D5021A4F4AB00136CB6 /* GetModifyTablesRequest.swift in Sources */,
 				8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */,
 				59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */,
@@ -556,6 +563,7 @@
 				59D30E1B217684790063B303 /* EventCell.swift in Sources */,
 				8C8D05AC21ADC0FB00B74D99 /* HorarioClaseModel.swift in Sources */,
 				8C4B054C216FDEA80079A937 /* HomeCell.swift in Sources */,
+				59E806B521C2D4D00017D248 /* GetDinamicWeganResponse.swift in Sources */,
 				8C8D05A621ACF93300B74D99 /* CategoriaPublicacionModel.swift in Sources */,
 				59D30E232176AB140063B303 /* YouthTableViewController.swift in Sources */,
 				59BB4F0B2177C2D2007CC317 /* EventViewController.swift in Sources */,
@@ -721,7 +729,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K58JH44H3K;
+				DEVELOPMENT_TEAM = 94L5B9G92G;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -742,7 +750,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K58JH44H3K;
+				DEVELOPMENT_TEAM = 94L5B9G92G;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

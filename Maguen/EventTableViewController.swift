@@ -105,7 +105,7 @@ class EventTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        print("You tapped cell number \(indexPath.row).")
+        //print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "eventdetail", sender: indexPath)
     }

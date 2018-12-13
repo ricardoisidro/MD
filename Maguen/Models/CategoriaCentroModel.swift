@@ -17,9 +17,9 @@ class CategoriaCentroModel: NSObject {
     var fecha_modificacion: String?
     
     override init() {
-        self.categoria_centro_id = 0
+        self.categoria_centro_id = -1
         self.descripcion = ""
-        self.eliminado = 0
+        self.eliminado = -1
         self.fecha_modificacion = ""
     }
     

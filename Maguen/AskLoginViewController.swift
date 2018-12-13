@@ -155,7 +155,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "GetUsuarioAppResponse" {
-            print("Ended parsing...")
+            //print("Ended parsing...")
             
         }
     }
@@ -309,6 +309,32 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                                              db_user_username <- objeto.Value.usuario,
                                              db_user_idactivedate <- objeto.Value.credencialActual.fecha_vencimiento,
                                              db_user_cardid <- Int64(objeto.Value.credencialActual.credencial_id))
+            
+            try database.run(insert)
+        }
+        catch let ex {
+            print("onInsertCategoriaCentro Error: \(ex)")
+        }
+        
+    }
+    
+    func onDeleteUserDB(objeto: LoginResponse, database: Connection) {
+        do {
+            //let db = database
+            let insert = db_user.insert(or: .replace,
+                                        db_user_id <- Int64(objeto.Value.credencialActual.usuario_app_id),
+                                        db_user_name <- objeto.Value.nombre,
+                                        db_user_surname1 <- objeto.Value.primer_apellido,
+                                        db_user_surname2 <- objeto.Value.segundo_apellido,
+                                        db_user_sex <- objeto.Value.sexo,
+                                        db_user_birthday <- objeto.Value.fecha_nacimiento,
+                                        db_user_mail <- objeto.Value.correo,
+                                        db_user_phone <- objeto.Value.telefonoActual.numero,
+                                        db_user_photo <- objeto.Value.credencialActual.fotografia,
+                                        db_user_idtype <- Int64(objeto.Value.categoria_id),
+                                        db_user_username <- objeto.Value.usuario,
+                                        db_user_idactivedate <- objeto.Value.credencialActual.fecha_vencimiento,
+                                        db_user_cardid <- Int64(objeto.Value.credencialActual.credencial_id))
             
             try database.run(insert)
         }

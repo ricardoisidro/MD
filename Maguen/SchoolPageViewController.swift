@@ -59,12 +59,12 @@ class SchoolPageViewController: UIViewController, WKNavigationDelegate {
     
     //MARK:- WKNavigationDelegate
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        print("Start to load")
+        //print("Start to load")
         showActivityIndicator(show: true)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        print("Finish to load")
+        //print("Finish to load")
         title = webView.title
         showActivityIndicator(show: false)
     }

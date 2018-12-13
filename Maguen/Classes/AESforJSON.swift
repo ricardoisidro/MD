@@ -89,4 +89,24 @@ class AESforJSON {
         return cipherRequest
     }
     
+    func encodeAndEncryptJSONQRString(id: Int) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        let getQR = GetDinamicWeganRequest(usuario_app_id: id)
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData: Data
+            //let getModifyTable
+            jsonData = try jsonEncoder.encode(getQR)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            //print(jsonString)
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONTablesString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
 }

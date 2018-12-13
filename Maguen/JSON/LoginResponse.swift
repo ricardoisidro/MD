@@ -26,7 +26,7 @@ struct Value: Decodable {
     var contrasena: String
     var correo: String
     var comunidad_id: Int
-    var categoria_id: Int
+    var categoria_id: Int // 1: socio titular, 2: esposa, 3: hijos, socios titulares; 4: socio invitado
     var credencial_id: Int
     var activo: Int
     var eliminado: Int

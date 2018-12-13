@@ -47,10 +47,10 @@ class MediaTableViewController: UITableViewController {
             let currentMagazine = try db.pluck(query2)
             
             dailyTitle = try currentDaily?.get(db_descripcion)
-            print(dailyTitle!)
+            //print(dailyTitle!)
             
             magazineTitle = try currentMagazine?.get(db_descripcion)
-            print(magazineTitle!)
+            //print(magazineTitle!)
             
             
         }

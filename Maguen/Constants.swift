@@ -51,6 +51,7 @@ struct MaguenCredentials {
     static let getSaldoActual = maguenurl + "MaguenApp/wsMaguenApp.asmx?op=GetSaldoActual"
     static let getModifyTables = maguenurl + "MaguenApp/wsMaguenApp.asmx?op=GetModifyTables"
     static let getModifyID = maguenurl + "MaguenApp/wsMaguenApp.asmx?op=GetIDs"
+    static let getDinamicWegan = maguenurl + "MaguenApp/wsMaguenApp.asmx?op=GetDinamicWegan"
     static let getEntidad = maguenurl + "MaguenApp/wsMaguenApp.asmx?op=GetEntidad"
     static let getNotificaciones = maguenurl + "MaguenApp/wsMaguenApp.asmx?op=GetNotificaciones"
     static let urlEventImages = maguenurl + "maguenapp/eventos/"

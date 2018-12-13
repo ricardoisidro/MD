@@ -434,6 +434,7 @@
                     <connections>
                         <outlet property="cardBackground" destination="GcW-XN-y3f" id="B7s-NO-vF3"/>
                         <outlet property="cardPhoto" destination="gsO-MK-KJT" id="FmV-Xz-xTp"/>
+                        <outlet property="cardQR" destination="bni-nr-v7t" id="Lqb-nm-zYY"/>
                         <outlet property="cardView" destination="DLd-9E-fBp" id="nNa-bF-J58"/>
                         <outlet property="txtClass" destination="TGK-5o-6sc" id="6WP-k6-fWc"/>
                         <outlet property="txtDate" destination="qGO-bd-Lho" id="3CK-YE-tLC"/>
@@ -2593,17 +2594,17 @@
         </scene>
     </scenes>
     <resources>
-        <image name="banner_maguen" width="411" height="244"/>
+        <image name="banner_maguen" width="308.25" height="183"/>
         <image name="btn_foto" width="64" height="64"/>
         <image name="codigo_default" width="300" height="300"/>
         <image name="credencial_invitado" width="700" height="1000"/>
         <image name="evento_cuatro" width="800" height="600"/>
-        <image name="evento_uno" width="800" height="600"/>
+        <image name="evento_uno" width="384" height="288"/>
         <image name="icon_candado" width="26" height="26"/>
-        <image name="icon_medios" width="150" height="150"/>
+        <image name="icon_medios" width="112.5" height="112.5"/>
         <image name="icon_usuario" width="26" height="26"/>
-        <image name="img_1118" width="300" height="300"/>
-        <image name="img_cas" width="300" height="300"/>
+        <image name="img_1118" width="150" height="150"/>
+        <image name="img_cas" width="150" height="150"/>
         <image name="img_colegios" width="600" height="401"/>
         <image name="img_comites" width="600" height="400"/>
         <image name="img_directorio" width="600" height="400"/>
@@ -2617,11 +2618,11 @@
         <image name="img_templos" width="600" height="400"/>
         <image name="logo_azul" width="150" height="120"/>
         <image name="logo_splash" width="354" height="199"/>
-        <image name="tab_avisos" width="25" height="25"/>
-        <image name="tab_config" width="32" height="32"/>
-        <image name="tab_credencial" width="32" height="32"/>
-        <image name="tab_emergencias" width="25" height="25"/>
-        <image name="tab_maguen" width="31" height="22"/>
+        <image name="tab_avisos" width="37.5" height="37.5"/>
+        <image name="tab_config" width="64" height="64"/>
+        <image name="tab_credencial" width="64" height="64"/>
+        <image name="tab_emergencias" width="37.5" height="37.5"/>
+        <image name="tab_maguen" width="62" height="44"/>
         <image name="templo_default" width="144" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
