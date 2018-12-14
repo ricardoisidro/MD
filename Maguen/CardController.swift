@@ -88,19 +88,58 @@ class CardController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        //call QR service
-        let aesJSON = AESforJSON()
-        let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: tableDataSocio[0].id)
-        let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetDinamicWegan", encryptedString: chainTablesEncodedandEncrypted)
-        let soapRequest = CallSOAP()
-        soapRequest.makeRequest(endpoint: MaguenCredentials.getDinamicWegan, soapMessage: soapXMLTables)
-        while !soapRequest.done {
-            usleep(100000)
+        //print QR
+        let currentDate = Date()
+        let dateFormat = DateFormatter()
+        dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        //let currDate = dateFormat.string(from: currentDate)
+        
+        
+        let lastCodeDate = UserDefaults.standard.string(forKey: "cardVigency")
+        
+        if lastCodeDate == nil {
+            
+            let futureDate = currentDate.addingTimeInterval(5.0*60.0)
+            
+            
+            let futDate = dateFormat.string(from: futureDate)
+            UserDefaults.standard.set(futDate, forKey: "cardVigency")
+            
+            //call QR service
+            let aesJSON = AESforJSON()
+            let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: tableDataSocio[0].id)
+            let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetDinamicWegan", encryptedString: chainTablesEncodedandEncrypted)
+            let soapRequest = CallSOAP()
+            soapRequest.makeRequest(endpoint: MaguenCredentials.getDinamicWegan, soapMessage: soapXMLTables)
+            while !soapRequest.done {
+                usleep(100000)
+            }
+            let wiganCode = getWiganCode(soapResult: soapRequest.soapResult)
+            cardQR.image = generateQRCode(from: wiganCode)
+        }
+        else {
+            let lastCodeDatetoDate = dateFormat.date(from: lastCodeDate!)
+            if currentDate > lastCodeDatetoDate! {
+                print("Genera code")
+                //call QR service
+                let aesJSON = AESforJSON()
+                let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: tableDataSocio[0].id)
+                let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetDinamicWegan", encryptedString: chainTablesEncodedandEncrypted)
+                let soapRequest = CallSOAP()
+                soapRequest.makeRequest(endpoint: MaguenCredentials.getDinamicWegan, soapMessage: soapXMLTables)
+                while !soapRequest.done {
+                    usleep(100000)
+                }
+                let wiganCode = getWiganCode(soapResult: soapRequest.soapResult)
+                cardQR.image = generateQRCode(from: wiganCode)
+            }
+            else {
+                print("No necesito codigo")
+            }
         }
         
-        //print QR
-        let wiganCode = getWiganCode(soapResult: soapRequest.soapResult)
-        cardQR.image = generateQRCode(from: wiganCode)
+        
+        
         
         let imageDecoded: Data = Data(base64Encoded: tableDataSocio[0].imagen)!
         let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
