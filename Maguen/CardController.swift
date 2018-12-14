@@ -92,17 +92,18 @@ class CardController: UIViewController {
         let currentDate = Date()
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        //let currDate = dateFormat.string(from: currentDate)
+        let currDate = dateFormat.string(from: currentDate)
         
         
         let lastCodeDate = UserDefaults.standard.string(forKey: "cardVigency")
-        
+        print("1. \(lastCodeDate ?? "null")")
         if lastCodeDate == nil {
             
             let futureDate = currentDate.addingTimeInterval(5.0*60.0)
             
             
             let futDate = dateFormat.string(from: futureDate)
+            print("2. \(futDate) saved on UserDefaults")
             UserDefaults.standard.set(futDate, forKey: "cardVigency")
             
             //call QR service
@@ -119,8 +120,16 @@ class CardController: UIViewController {
         }
         else {
             let lastCodeDatetoDate = dateFormat.date(from: lastCodeDate!)
-            if currentDate > lastCodeDatetoDate! {
+            let currentDatetoDate = dateFormat.date(from: currDate)
+            print("¿\(currentDatetoDate!) > \(lastCodeDatetoDate!)?")
+            if currentDatetoDate! > lastCodeDatetoDate! {
                 print("Genera code")
+                
+                let futureDate2 = currentDate.addingTimeInterval(5.0*60.0)
+                let futDate2 = dateFormat.string(from: futureDate2)
+                print("3. Saved new date: \(futDate2)")
+                UserDefaults.standard.set(futDate2, forKey: "cardVigency")
+
                 //call QR service
                 let aesJSON = AESforJSON()
                 let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: tableDataSocio[0].id)
