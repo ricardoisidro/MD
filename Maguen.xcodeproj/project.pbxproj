@@ -90,6 +90,7 @@
 		8C8D05B221AE1B5B00B74D99 /* ServicioCentroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05B121AE1B5B00B74D99 /* ServicioCentroModel.swift */; };
 		8C8D05B421AE3E3600B74D99 /* ServicioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05B321AE3E3600B74D99 /* ServicioModel.swift */; };
 		8C8D05B621AE44F400B74D99 /* DomicilioModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C8D05B521AE44F400B74D99 /* DomicilioModel.swift */; };
+		8CE7C91C21CA067A00E22D43 /* LoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CE7C91B21CA067A00E22D43 /* LoadViewController.swift */; };
 		C6D705AB43C1EF32A6C28A50 /* Pods_Maguen.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14C6FDEFD400814C4CD04914 /* Pods_Maguen.framework */; };
 /* End PBXBuildFile section */
 
@@ -182,6 +183,7 @@
 		8C8D05B121AE1B5B00B74D99 /* ServicioCentroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioCentroModel.swift; sourceTree = "<group>"; };
 		8C8D05B321AE3E3600B74D99 /* ServicioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicioModel.swift; sourceTree = "<group>"; };
 		8C8D05B521AE44F400B74D99 /* DomicilioModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DomicilioModel.swift; sourceTree = "<group>"; };
+		8CE7C91B21CA067A00E22D43 /* LoadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +360,7 @@
 				8C895D622194BF43004F5D46 /* AskLoginViewController.swift */,
 				59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */,
 				59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */,
+				8CE7C91B21CA067A00E22D43 /* LoadViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
 				59E806B321C2D46A0017D248 /* GetDinamicWeganRequest.swift in Sources */,
+				8CE7C91C21CA067A00E22D43 /* LoadViewController.swift in Sources */,
 				59E61D5021A4F4AB00136CB6 /* GetModifyTablesRequest.swift in Sources */,
 				8C7F08CF21798749004A9FBF /* YouthDetailCell.swift in Sources */,
 				59BB4F052177A0B9007CC317 /* FacebookViewController.swift in Sources */,
@@ -729,13 +733,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94L5B9G92G;
+				DEVELOPMENT_TEAM = K58JH44H3K;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen.David;
+				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen.David.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
@@ -750,13 +754,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 94L5B9G92G;
+				DEVELOPMENT_TEAM = K58JH44H3K;
 				INFOPLIST_FILE = Maguen/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen.David;
+				PRODUCT_BUNDLE_IDENTIFIER = EB.Maguen.David.ac;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
