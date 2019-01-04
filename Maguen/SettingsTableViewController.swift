@@ -148,8 +148,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigSex.text =  UserDefaults.standard.string(forKey: "sex") ?? ""
         textConfigBirthday.text = UserDefaults.standard.string(forKey: "birthday") ?? ""
         textConfigMail.text = UserDefaults.standard.string(forKey: "mail") ?? ""
-        textConfigPhone.text = UserDefaults.standard.string(forKey: "phone") ?? ""
-        textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""*/
+        textConfigPhone.text = UserDefaults.standard.string(forKey: "phone") ?? ""*/
+        textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""
     }
     
     /*func createObservers() {

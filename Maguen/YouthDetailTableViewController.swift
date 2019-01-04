@@ -25,6 +25,8 @@ struct cellYouthSubDetailComponents {
 
 class YouthDetailTableViewController: UITableViewController {
     
+    @IBOutlet weak var imgBanner: UIImageView!
+    
     var tableViewRootData = [cellYouthDetailComponents]()
     var tableViewDataServices = [cellYouthSubDetailComponents]()
     var tableViewDataEvents = [cellYouthSubDetailComponents]()
@@ -37,6 +39,10 @@ class YouthDetailTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let image = imagenCabecera {
+            self.imgBanner.image = image
+        }
         
         let centro_id = youthId
         

@@ -10,7 +10,7 @@ import UIKit
 import CryptoSwift
 import SQLite
 
-class NewSettingsViewController: UIViewController, UINavigationControllerDelegate, XMLParserDelegate {
+class NewSettingsViewController: UIViewController, UINavigationControllerDelegate {
     
     enum ImageSource {
         case photoLibrary
@@ -74,6 +74,10 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                 //tableDataSocio.append(data)
             }
             
+            let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
+            let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
+            imageTake.image = avatarImage
+            
         }
         catch let ex {
             print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
@@ -95,22 +99,32 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
             btnSave.backgroundColor = .orange
             
-            let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
-            let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
-            imageTake.image = avatarImage
+            
         }
         
-        
+        let aesJSON = AESforJSON()
         
         let validUser = UserDefaults.standard.string(forKey: "user")
         let saldoRequest = SaldoRequest(usuario: validUser!)
         
-        let chainEncodedandEncrypted = encodeAndEncryptJSONString(SaldoRequest: saldoRequest)
+        let stringEncodedandEncrypted = aesJSON.encodeAndEncryptJSONSaldo(SaldoRequest: saldoRequest)
         
-        let soapMessage =
-        "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetSaldoActual xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetSaldoActual></soap:Body></soap:Envelope>"
+        let soapXML = Global.shared.createSOAPXMLString(methodName: "GetSaldoActual", encryptedString: stringEncodedandEncrypted)
         
-        //Prepare request
+        let soapRequest = CallSOAP()
+        
+        soapRequest.makeRequest(endpoint: MaguenCredentials.getSaldoActual, soapMessage: soapXML)
+        while !soapRequest.done {
+            usleep(100000)
+        }
+        
+        let res = aesJSON.decodeAndDecryptJSONSaldo(soapResult: soapRequest.soapResult)
+        
+        UserDefaults.standard.set(res, forKey: "balance")
+        
+        
+        
+        /*//Prepare request
         let url = URL(string: MaguenCredentials.getSaldoActual)
         let req = NSMutableURLRequest(url: url!)
         let msgLength = soapMessage.count
@@ -128,7 +142,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             parser.delegate = self
             parser.parse()
         }
-        dataTask?.resume()
+        dataTask?.resume()*/
         
     }
     
@@ -173,7 +187,23 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             selectImageFrom(.photoLibrary)
             return
         }
-        selectImageFrom(.camera)
+        let ac = UIAlertController(title: "Imagen", message: "Selecciona el origen de la foto:", preferredStyle: .alert)
+        
+        let action1 = UIAlertAction(title: "Cámara", style: .default) {
+            (UIAlertAction) in
+            self.selectImageFrom(.camera)
+        }
+        let action2 = UIAlertAction(title: "Galería", style: .default) {
+            (UIAlertAction) in
+            self.selectImageFrom(.photoLibrary)
+        }
+        
+        ac.addAction(action1)
+        ac.addAction(action2)
+        ac.view.layoutIfNeeded()
+        
+        present(ac, animated: true)
+        
     }
     
     //MARK: - Saving Image here
@@ -201,23 +231,9 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         present(ac, animated: true)
     }
     
-    func encodeAndEncryptJSONString(SaldoRequest: SaldoRequest) -> Array<UInt8> {
-        var cipherRequest: [UInt8] = []
-        do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(SaldoRequest)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
-            
-        }
-        catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
-        }
-        return cipherRequest
-    }
     
-    func updateAccount() {
+    
+/*    func updateAccount() {
         do {
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
@@ -272,7 +288,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("parseErrorOccurred: \(parseError)")
-    }
+    }*/
 
 }
 
@@ -280,11 +296,20 @@ extension NewSettingsViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
-        imagePicker.dismiss(animated: true, completion: nil)
-        guard let selectedImage = info[.originalImage] as? UIImage else {
+        /*imagePicker.dismiss(animated: true, completion: nil)
+        guard let selectedImage = info[.editedImage] as? UIImage else {
             print("Image not found!")
             return
         }
-        imageTake.image = selectedImage
+        
+        imageTake.image = selectedImage*/
+        if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+            
+            imagePicker.dismiss(animated: false, completion: nil)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                self.imageTake.image = selectedImage
+            })
+        }
+
     }
 }

@@ -19,8 +19,8 @@ class MediaTableViewController: UITableViewController {
 
     var tableViewData = [mediaComponents]()
     var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram"]
-    var dailyTitle: String? = ""
-    var magazineTitle: String? = ""
+    var dailyTitle: String = ""
+    var magazineTitle: String = ""
 
     let db_publicacion = Table("publicacion")
     let db_publicacion_id = Expression<Int64>("publicacion_id")
@@ -46,22 +46,23 @@ class MediaTableViewController: UITableViewController {
             let query2 = db_publicacion.select(db_descripcion).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 2).where(db_eliminado == 0)
             let currentMagazine = try db.pluck(query2)
             
-            dailyTitle = try currentDaily?.get(db_descripcion)
+            dailyTitle = try currentDaily?.get(db_descripcion) ?? ""
             //print(dailyTitle!)
             
-            magazineTitle = try currentMagazine?.get(db_descripcion)
+            magazineTitle = try currentMagazine?.get(db_descripcion) ?? ""
             //print(magazineTitle!)
             
             
         }
         catch let err {
             print("Read publicacionDB error: \(err)")
+            
         }
 
         tableViewData =
             [mediaComponents(mediaImage: #imageLiteral(resourceName: "img_canal") ,mediaText: "Maguén Media", mediaAuxText: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaAuxText: dailyTitle!),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaAuxText: magazineTitle!),
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaAuxText: dailyTitle),
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaAuxText: magazineTitle),
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaAuxText: ""),
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaAuxText: "")
         ]
@@ -86,6 +87,7 @@ class MediaTableViewController: UITableViewController {
         cell.imgMedia.image = tableViewData[indexPath.row].mediaImage
         cell.imgMedia.layer.cornerRadius = cell.imgMedia.frame.size.width / 2
         cell.imgMedia.clipsToBounds = true
+        cell.imgMedia.contentMode = .scaleAspectFill
         cell.textMedia.text = tableViewData[indexPath.row].mediaText
         cell.dateMedia.text = tableViewData[indexPath.row].mediaAuxText
         cell.dateMedia.font = UIFont.systemFont(ofSize: 13.0)

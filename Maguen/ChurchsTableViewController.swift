@@ -76,6 +76,7 @@ class ChurchsTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "church") as! ChurchCell
         let image = UIImage(data: NSData(base64Encoded: tableViewData[indexPath.row].churchImage)! as Data)
         cell.imgChurch.image = image ?? #imageLiteral(resourceName: "templo_default")
+        cell.imgChurch.contentMode = .scaleAspectFill
         cell.imgChurch.layer.cornerRadius = cell.imgChurch.frame.size.width / 2
         cell.imgChurch.clipsToBounds = true
         cell.txtChurch.text = tableViewData[indexPath.row].churchText

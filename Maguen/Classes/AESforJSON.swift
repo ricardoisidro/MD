@@ -109,4 +109,57 @@ class AESforJSON {
         return cipherRequest
     }
     
+    func encodeAndEncryptJSONSaldo(SaldoRequest: SaldoRequest) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(SaldoRequest)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
+    func decodeAndDecryptJSONSaldo(soapResult: String) -> String {
+        var saldo = "$ PENDIENTE"
+        do {
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            var decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            //print("Cadena decrypted saldo: \(decrypted)")
+            
+            let saldoResult = try jsonDecoder.decode(SaldoResponse.self, from: Data(decrypted.utf8))
+            if saldoResult.Correcto {
+                UserDefaults.standard.set(saldoResult.Value, forKey: "balance")
+                saldo = saldoResult.Value
+            }
+            
+        }
+        catch let ex {
+            print("updateSaldo error: \(ex)")
+        }
+        return saldo
+    }
+    
+    /*func updateAccount() {
+        do {
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            var decrypted = try soapString.decryptBase64ToString(cipher: aes)
+            //print("Cadena decrypted saldo: \(decrypted)")
+            
+            let saldoResult = try jsonDecoder.decode(SaldoResponse.self, from: Data(decrypted.utf8))
+            //print("Saldo: \(saldoResult.Value)")
+            UserDefaults.standard.set(saldoResult.Value, forKey: "balance")
+        }
+        catch let ex {
+            print("updateSaldo error: \(ex)")
+        }
+    }*/
+    
 }

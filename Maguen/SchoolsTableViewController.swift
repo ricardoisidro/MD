@@ -68,6 +68,7 @@ class SchoolsTableViewController: UITableViewController {
         cell.imgSchool.image = image ?? #imageLiteral(resourceName: "escuela_default")
         cell.imgSchool.layer.cornerRadius = cell.imgSchool.frame.size.width / 2
         cell.imgSchool.clipsToBounds = true
+        cell.imgSchool.contentMode = .scaleAspectFill
         cell.txtSchool.text = tableViewData[indexPath.row].schoolText
         
         cell.layer.borderWidth = CGFloat(5.0)

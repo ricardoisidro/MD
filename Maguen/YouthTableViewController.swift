@@ -69,6 +69,8 @@ class YouthTableViewController: UITableViewController {
         cell.imgYouth.image = image ?? #imageLiteral(resourceName: "comunidad_default")
         cell.imgYouth.layer.cornerRadius = cell.imgYouth.frame.size.width / 2
         cell.imgYouth.clipsToBounds = true
+        cell.imgYouth.contentMode = .scaleAspectFill
+
         cell.txtYouth.text = tableViewData[indexPath.row].youthText
         
         cell.layer.borderWidth = CGFloat(5.0)
@@ -137,6 +139,9 @@ class YouthTableViewController: UITableViewController {
             let controller = segue.destination as? YouthDetailTableViewController
             controller?.navigationItem.title = segueData.youthText
             controller?.youthId = segueData.youthId
+            
+            let image = UIImage(data: NSData(base64Encoded: segueData.youthImage)! as Data)
+            controller?.imagenCabecera = image
         }
         
     }
