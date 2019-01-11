@@ -14,6 +14,13 @@
 		5919397721A628AF00B0E7EF /* GetEntityRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5919397621A628AF00B0E7EF /* GetEntityRequest.swift */; };
 		5919397921A6313D00B0E7EF /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5919397821A6313D00B0E7EF /* Global.swift */; };
 		5919397B21A637F700B0E7EF /* CallSOAP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5919397A21A637F700B0E7EF /* CallSOAP.swift */; };
+		594E4D2121E913DE00F7ED54 /* SidurTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2021E913DE00F7ED54 /* SidurTableViewController.swift */; };
+		594E4D2321E9216100F7ED54 /* SidurCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2221E9216100F7ED54 /* SidurCell.swift */; };
+		594E4D2521E9288400F7ED54 /* SidurPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2421E9288400F7ED54 /* SidurPageViewController.swift */; };
+		594E4D2721E92A5600F7ED54 /* OmerPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2621E92A5600F7ED54 /* OmerPageViewController.swift */; };
+		594E4D2921E92A7200F7ED54 /* MinjaPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2821E92A7200F7ED54 /* MinjaPageViewController.swift */; };
+		594E4D2B21E92A8500F7ED54 /* TefilatPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2A21E92A8500F7ED54 /* TefilatPageViewController.swift */; };
+		594E4D2D21E92A9900F7ED54 /* RefuaPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2C21E92A9900F7ED54 /* RefuaPageViewController.swift */; };
 		59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A99219CE8A200909453 /* LoginRequest.swift */; };
 		59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A9C219CFACB00909453 /* LoginResponse.swift */; };
 		59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */; };
@@ -104,6 +111,13 @@
 		5919397621A628AF00B0E7EF /* GetEntityRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEntityRequest.swift; sourceTree = "<group>"; };
 		5919397821A6313D00B0E7EF /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		5919397A21A637F700B0E7EF /* CallSOAP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallSOAP.swift; sourceTree = "<group>"; };
+		594E4D2021E913DE00F7ED54 /* SidurTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidurTableViewController.swift; sourceTree = "<group>"; };
+		594E4D2221E9216100F7ED54 /* SidurCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidurCell.swift; sourceTree = "<group>"; };
+		594E4D2421E9288400F7ED54 /* SidurPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidurPageViewController.swift; sourceTree = "<group>"; };
+		594E4D2621E92A5600F7ED54 /* OmerPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OmerPageViewController.swift; sourceTree = "<group>"; };
+		594E4D2821E92A7200F7ED54 /* MinjaPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinjaPageViewController.swift; sourceTree = "<group>"; };
+		594E4D2A21E92A8500F7ED54 /* TefilatPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TefilatPageViewController.swift; sourceTree = "<group>"; };
+		594E4D2C21E92A9900F7ED54 /* RefuaPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuaPageViewController.swift; sourceTree = "<group>"; };
 		59AA1A99219CE8A200909453 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		59AA1A9C219CFACB00909453 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -266,6 +280,7 @@
 				59FD713921B5FECA0030481B /* ClassesTableViewCell.swift */,
 				59FD713B21B61B880030481B /* PrayTableViewCell.swift */,
 				8C5E15EA21BF4C3C00BC2D99 /* YouthDetailChildCell.swift */,
+				594E4D2221E9216100F7ED54 /* SidurCell.swift */,
 			);
 			path = CellViews;
 			sourceTree = "<group>";
@@ -321,46 +336,52 @@
 		8C5CEF2E216FA155002F5D56 /* Maguen */ = {
 			isa = PBXGroup;
 			children = (
-				59DABC1921A758B800D7445C /* Models */,
+				8C5CEF3D216FA159002F5D56 /* Info.plist */,
+				8C5CEF2F216FA155002F5D56 /* AppDelegate.swift */,
+				8C895D622194BF43004F5D46 /* AskLoginViewController.swift */,
+				59E9875121711B6C004DDE0D /* CardController.swift */,
+				59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */,
+				8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */,
+				59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */,
+				59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */,
+				59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */,
+				8C4B0549216FD3C70079A937 /* Constants.swift */,
+				59BB4F0021779C6A007CC317 /* DailyViewController.swift */,
+				59D30E272176B2440063B303 /* DirectoryTableViewController.swift */,
+				59C6D52C2174F66C004E4813 /* EmergencyController.swift */,
+				59D30E182176829B0063B303 /* EventTableViewController.swift */,
+				59BB4F0A2177C2D2007CC317 /* EventViewController.swift */,
+				59BB4F042177A0B9007CC317 /* FacebookViewController.swift */,
+				8C4B0547216FBD3E0079A937 /* HomeViewController.swift */,
+				59BB4F062177A0CE007CC317 /* InstagramViewController.swift */,
+				59E9874F21711620004DDE0D /* KashrutController.swift */,
+				8CE7C91B21CA067A00E22D43 /* LoadViewController.swift */,
+				59BB4F0221779F4D007CC317 /* MagazineViewController.swift */,
+				59C6D536217554AE004E4813 /* MediaTableViewController.swift */,
+				59CE6744219200B300A5D719 /* NewSettingsViewController.swift */,
+				59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */,
+				59BB4F082177A439007CC317 /* SchoolPageViewController.swift */,
+				59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */,
+				59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */,
+				594E4D2021E913DE00F7ED54 /* SidurTableViewController.swift */,
+				8C5CEF33216FA155002F5D56 /* StoreController.swift */,
+				8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */,
+				59D30E222176AB140063B303 /* YouthTableViewController.swift */,
+				59BB4EFE21779965007CC317 /* YoutubeViewController.swift */,
+				8C5CEF38216FA159002F5D56 /* Assets.xcassets */,
+				59D30E242176B02A0063B303 /* CellViews */,
 				59E61D5321A4F64500136CB6 /* Classes */,
-				59AA1A96219CBC7200909453 /* JSON */,
 				59CE674921925F4500A5D719 /* Extensions */,
 				59CE67462192591D00A5D719 /* IBDesignables */,
-				59D30E242176B02A0063B303 /* CellViews */,
-				8C5CEF2F216FA155002F5D56 /* AppDelegate.swift */,
-				8C5CEF33216FA155002F5D56 /* StoreController.swift */,
-				8C5CEF35216FA156002F5D56 /* Main.storyboard */,
-				8C5CEF38216FA159002F5D56 /* Assets.xcassets */,
+				59AA1A96219CBC7200909453 /* JSON */,
 				8C5CEF3A216FA159002F5D56 /* LaunchScreen.storyboard */,
-				8C5CEF3D216FA159002F5D56 /* Info.plist */,
-				8C4B0547216FBD3E0079A937 /* HomeViewController.swift */,
-				8C4B0549216FD3C70079A937 /* Constants.swift */,
-				59E9874F21711620004DDE0D /* KashrutController.swift */,
-				59E9875121711B6C004DDE0D /* CardController.swift */,
-				59D30E2B2176B83B0063B303 /* CommitteeTableViewController.swift */,
-				59C6D52C2174F66C004E4813 /* EmergencyController.swift */,
-				59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */,
-				59C6D53421754CAE004E4813 /* ChurchsTableViewController.swift */,
-				59C6D536217554AE004E4813 /* MediaTableViewController.swift */,
-				59D30E182176829B0063B303 /* EventTableViewController.swift */,
-				59D30E1C2176A1E80063B303 /* SchoolsTableViewController.swift */,
-				59D30E222176AB140063B303 /* YouthTableViewController.swift */,
-				59D30E272176B2440063B303 /* DirectoryTableViewController.swift */,
-				59BB4EFE21779965007CC317 /* YoutubeViewController.swift */,
-				59BB4F0021779C6A007CC317 /* DailyViewController.swift */,
-				59BB4F0221779F4D007CC317 /* MagazineViewController.swift */,
-				59BB4F042177A0B9007CC317 /* FacebookViewController.swift */,
-				59BB4F062177A0CE007CC317 /* InstagramViewController.swift */,
-				59BB4F082177A439007CC317 /* SchoolPageViewController.swift */,
-				59BB4F0A2177C2D2007CC317 /* EventViewController.swift */,
-				8C7F08C421791057004A9FBF /* ChurchDetailTableViewController.swift */,
-				8C7F08CC217985A0004A9FBF /* YouthDetailTableViewController.swift */,
-				59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */,
-				59CE6744219200B300A5D719 /* NewSettingsViewController.swift */,
-				8C895D622194BF43004F5D46 /* AskLoginViewController.swift */,
-				59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */,
-				59FD713721B5ED5F0030481B /* ChurchClassDetailViewController.swift */,
-				8CE7C91B21CA067A00E22D43 /* LoadViewController.swift */,
+				8C5CEF35216FA156002F5D56 /* Main.storyboard */,
+				59DABC1921A758B800D7445C /* Models */,
+				594E4D2421E9288400F7ED54 /* SidurPageViewController.swift */,
+				594E4D2621E92A5600F7ED54 /* OmerPageViewController.swift */,
+				594E4D2821E92A7200F7ED54 /* MinjaPageViewController.swift */,
+				594E4D2A21E92A8500F7ED54 /* TefilatPageViewController.swift */,
+				594E4D2C21E92A9900F7ED54 /* RefuaPageViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -504,6 +525,7 @@
 				59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */,
 				59C6D539217560EA004E4813 /* MediaCell.swift in Sources */,
 				8C8D05AE21ADDC4400B74D99 /* ClasesModel.swift in Sources */,
+				594E4D2321E9216100F7ED54 /* SidurCell.swift in Sources */,
 				8C5E15EB21BF4C3C00BC2D99 /* YouthDetailChildCell.swift in Sources */,
 				59D7E94021B83B7A00CAA522 /* NotificationRequest.swift in Sources */,
 				59D30E282176B2440063B303 /* DirectoryTableViewController.swift in Sources */,
@@ -511,6 +533,7 @@
 				8C7F08CD217985A0004A9FBF /* YouthDetailTableViewController.swift in Sources */,
 				59CE6745219200B300A5D719 /* NewSettingsViewController.swift in Sources */,
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
+				594E4D2121E913DE00F7ED54 /* SidurTableViewController.swift in Sources */,
 				59C0D1AD21AF0F7B00656D52 /* SettingsTableViewCell.swift in Sources */,
 				59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */,
 				59D7E94221B8523D00CAA522 /* NotificationResponse.swift in Sources */,
@@ -524,6 +547,7 @@
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
+				594E4D2B21E92A8500F7ED54 /* TefilatPageViewController.swift in Sources */,
 				59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */,
 				8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */,
 				59E61D4C21A47C5C00136CB6 /* SaldoRequest.swift in Sources */,
@@ -535,6 +559,7 @@
 				5919397B21A637F700B0E7EF /* CallSOAP.swift in Sources */,
 				8C8D05B421AE3E3600B74D99 /* ServicioModel.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
+				594E4D2D21E92A9900F7ED54 /* RefuaPageViewController.swift in Sources */,
 				59CE674B21925F6D00A5D719 /* UITextField+Extension.swift in Sources */,
 				59DABC1821A7294800D7445C /* GetEntityResponse.swift in Sources */,
 				59D30E2A2176B7BA0063B303 /* CommitteeCell.swift in Sources */,
@@ -545,6 +570,7 @@
 				8C8D05B021ADE60D00B74D99 /* HorarioResoModel.swift in Sources */,
 				59FD713A21B5FECA0030481B /* ClassesTableViewCell.swift in Sources */,
 				59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */,
+				594E4D2721E92A5600F7ED54 /* OmerPageViewController.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
 				5919397921A6313D00B0E7EF /* Global.swift in Sources */,
 				59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */,
@@ -573,6 +599,8 @@
 				59BB4F0B2177C2D2007CC317 /* EventViewController.swift in Sources */,
 				59BB4F072177A0CE007CC317 /* InstagramViewController.swift in Sources */,
 				5919397721A628AF00B0E7EF /* GetEntityRequest.swift in Sources */,
+				594E4D2521E9288400F7ED54 /* SidurPageViewController.swift in Sources */,
+				594E4D2921E92A7200F7ED54 /* MinjaPageViewController.swift in Sources */,
 				59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */,
 				5918142321A79BEA0025DEBE /* CentroModel.swift in Sources */,
 				8C4B0548216FBD3E0079A937 /* HomeViewController.swift in Sources */,

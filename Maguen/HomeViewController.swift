@@ -18,7 +18,7 @@ struct cellComponents {
 class HomeViewController: UITableViewController {
 
     var tableViewData = [cellComponents]()
-    var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut", "Escuelas", "Juventud", "Comite", "Directorio"]
+    var seguesIdentifiers = ["MediosDigitales", "Templos","Sidur", "Eventos", "SuperEmet", "Kashrut", "Escuelas", "Juventud", "Comite", "Directorio"]
     //var seguesIdentifiers = ["MediosDigitales", "Templos", "Eventos", "SuperEmet", "Kashrut", "Escuelas", "Juventud", "Comites", "Directorio"]
     
     @IBOutlet var homeTableView: UITableView!
@@ -29,13 +29,14 @@ class HomeViewController: UITableViewController {
         tableViewData =
             [cellComponents(cellImage: #imageLiteral(resourceName: "icon_medios"), cellColor: MaguenColors.blue1, cellTitle: "MEDIOS DIGITALES"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_templos"), cellColor: MaguenColors.blue2, cellTitle: "TEMPLOS"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_eventos"), cellColor: MaguenColors.blue3, cellTitle: "EVENTOS"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_superemet"), cellColor: MaguenColors.blue4, cellTitle: "SUPER EMET"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_kmd"), cellColor: MaguenColors.blue5, cellTitle: "KASHRUT"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_escuelas"), cellColor: MaguenColors.blue6, cellTitle: "ESCUELAS"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_juventud"), cellColor: MaguenColors.blue7, cellTitle: "JUVENTUD"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_comite"), cellColor: MaguenColors.blue8, cellTitle: "COMITÉ"),
-            cellComponents(cellImage: #imageLiteral(resourceName: "icon_directorio"), cellColor: MaguenColors.blue9, cellTitle: "DIRECTORIO")]
+            cellComponents(cellImage: #imageLiteral(resourceName: "msidur"), cellColor: MaguenColors.blue3, cellTitle: "SIDUR"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_eventos"), cellColor: MaguenColors.blue4, cellTitle: "EVENTOS"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_superemet"), cellColor: MaguenColors.blue5, cellTitle: "SUPER EMET"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_kmd"), cellColor: MaguenColors.blue6, cellTitle: "KASHRUT"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_escuelas"), cellColor: MaguenColors.blue7, cellTitle: "ESCUELAS"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_juventud"), cellColor: MaguenColors.blue8, cellTitle: "JUVENTUD"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_comite"), cellColor: MaguenColors.blue9, cellTitle: "COMITÉ"),
+            cellComponents(cellImage: #imageLiteral(resourceName: "icon_directorio"), cellColor: MaguenColors.blue10, cellTitle: "DIRECTORIO")]
         
         self.homeTableView.backgroundColor = MaguenColors.black1
         self.navigationController?.navigationBar.barTintColor = MaguenColors.black2
@@ -163,7 +164,9 @@ class HomeViewController: UITableViewController {
         case "Templos":
             let controller = segue.destination as? ChurchsTableViewController
             controller?.navigationItem.title = (sender as! String)
-
+        case "Sidur":
+            let controller = segue.destination as? SidurTableViewController
+            controller?.navigationItem.title = (sender as! String)
         case "Eventos":
             let controller = segue.destination as? EventTableViewController
             controller?.navigationItem.title = (sender as! String)

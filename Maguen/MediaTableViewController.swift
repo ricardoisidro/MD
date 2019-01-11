@@ -18,7 +18,7 @@ struct mediaComponents {
 class MediaTableViewController: UITableViewController {
 
     var tableViewData = [mediaComponents]()
-    var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram"]
+    var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram","Historico Periódico","Historico Revista"]
     var dailyTitle: String = ""
     var magazineTitle: String = ""
 
@@ -64,7 +64,9 @@ class MediaTableViewController: UITableViewController {
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Periódico", mediaAuxText: dailyTitle),
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Revista", mediaAuxText: magazineTitle),
              mediaComponents(mediaImage: #imageLiteral(resourceName: "img_facebook"), mediaText: "Facebook", mediaAuxText: ""),
-             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaAuxText: "")
+             mediaComponents(mediaImage: #imageLiteral(resourceName: "img_instagram"), mediaText: "Instagram", mediaAuxText: ""),
+                mediaComponents(mediaImage: #imageLiteral(resourceName: "img_periodico"), mediaText: "Historico Periódico", mediaAuxText: ""),
+                mediaComponents(mediaImage: #imageLiteral(resourceName: "img_revista"), mediaText: "Historico Revista", mediaAuxText: "")
         ]
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]

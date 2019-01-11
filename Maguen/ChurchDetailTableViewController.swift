@@ -129,7 +129,7 @@ class ChurchDetailTableViewController: UITableViewController {
         
         
         tableViewRootData = [
-            cellChurchDetailComponents(opened: false, cellIcon: #imageLiteral(resourceName: "img_itinerario_it"), cellTitle: "Itinerario", sectionData: tableViewDataItinerary),
+            cellChurchDetailComponents(opened: false, cellIcon: #imageLiteral(resourceName: "img_itinerario_it"), cellTitle: "Horarios", sectionData: tableViewDataItinerary),
             cellChurchDetailComponents(opened: false, cellIcon: #imageLiteral(resourceName: "img_servicios_it"), cellTitle: "Servicios", sectionData: tableViewDataServices),
             cellChurchDetailComponents(opened: false, cellIcon: #imageLiteral(resourceName: "img_eventos_it"), cellTitle: "Eventos", sectionData: tableViewDataEvents),
             cellChurchDetailComponents(opened: false, cellIcon: #imageLiteral(resourceName: "img_escuelas_it"), cellTitle: "Clases", sectionData: tableViewDataClasses)]
