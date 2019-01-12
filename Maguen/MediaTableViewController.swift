@@ -18,7 +18,7 @@ struct mediaComponents {
 class MediaTableViewController: UITableViewController {
 
     var tableViewData = [mediaComponents]()
-    var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram","Historico Periódico","Historico Revista"]
+    var seguesIdentifiers = ["Youtube", "Periodico", "Revista", "Facebook", "Instagram","HistPeriodico","HistRevista"]
     var dailyTitle: String = ""
     var magazineTitle: String = ""
 

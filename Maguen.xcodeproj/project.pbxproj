@@ -21,6 +21,10 @@
 		594E4D2921E92A7200F7ED54 /* MinjaPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2821E92A7200F7ED54 /* MinjaPageViewController.swift */; };
 		594E4D2B21E92A8500F7ED54 /* TefilatPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2A21E92A8500F7ED54 /* TefilatPageViewController.swift */; };
 		594E4D2D21E92A9900F7ED54 /* RefuaPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2C21E92A9900F7ED54 /* RefuaPageViewController.swift */; };
+		594E4D2F21E9581B00F7ED54 /* HistPeriodicoTableTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D2E21E9581B00F7ED54 /* HistPeriodicoTableTableViewController.swift */; };
+		594E4D3121E95DC600F7ED54 /* HistPeriodicoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D3021E95DC600F7ED54 /* HistPeriodicoCell.swift */; };
+		594E4D3321E9679300F7ED54 /* HistRevistaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D3221E9679300F7ED54 /* HistRevistaCell.swift */; };
+		594E4D3521E969DD00F7ED54 /* HistRevistaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D3421E969DD00F7ED54 /* HistRevistaTableViewController.swift */; };
 		59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A99219CE8A200909453 /* LoginRequest.swift */; };
 		59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A9C219CFACB00909453 /* LoginResponse.swift */; };
 		59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */; };
@@ -118,6 +122,10 @@
 		594E4D2821E92A7200F7ED54 /* MinjaPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinjaPageViewController.swift; sourceTree = "<group>"; };
 		594E4D2A21E92A8500F7ED54 /* TefilatPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TefilatPageViewController.swift; sourceTree = "<group>"; };
 		594E4D2C21E92A9900F7ED54 /* RefuaPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefuaPageViewController.swift; sourceTree = "<group>"; };
+		594E4D2E21E9581B00F7ED54 /* HistPeriodicoTableTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistPeriodicoTableTableViewController.swift; sourceTree = "<group>"; };
+		594E4D3021E95DC600F7ED54 /* HistPeriodicoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistPeriodicoCell.swift; sourceTree = "<group>"; };
+		594E4D3221E9679300F7ED54 /* HistRevistaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistRevistaCell.swift; sourceTree = "<group>"; };
+		594E4D3421E969DD00F7ED54 /* HistRevistaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistRevistaTableViewController.swift; sourceTree = "<group>"; };
 		59AA1A99219CE8A200909453 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		59AA1A9C219CFACB00909453 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -262,10 +270,12 @@
 		59D30E242176B02A0063B303 /* CellViews */ = {
 			isa = PBXGroup;
 			children = (
+				594E4D3021E95DC600F7ED54 /* HistPeriodicoCell.swift */,
 				59C6D52E217516BE004E4813 /* NotificationCell.swift */,
 				59C6D538217560EA004E4813 /* MediaCell.swift */,
 				59D30E202176AA330063B303 /* YouthCell.swift */,
 				59D30E1E2176A2080063B303 /* SchoolCell.swift */,
+				594E4D3221E9679300F7ED54 /* HistRevistaCell.swift */,
 				59D30E1A217684790063B303 /* EventCell.swift */,
 				59C6D53221754976004E4813 /* ChurchCell.swift */,
 				8C4B054B216FDEA80079A937 /* HomeCell.swift */,
@@ -382,6 +392,8 @@
 				594E4D2821E92A7200F7ED54 /* MinjaPageViewController.swift */,
 				594E4D2A21E92A8500F7ED54 /* TefilatPageViewController.swift */,
 				594E4D2C21E92A9900F7ED54 /* RefuaPageViewController.swift */,
+				594E4D2E21E9581B00F7ED54 /* HistPeriodicoTableTableViewController.swift */,
+				594E4D3421E969DD00F7ED54 /* HistRevistaTableViewController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -541,10 +553,13 @@
 				5919397521A627A400B0E7EF /* AESforJSON.swift in Sources */,
 				8C4B054A216FD3C70079A937 /* Constants.swift in Sources */,
 				59E61D5221A4F50B00136CB6 /* GetModifyTablesResponse.swift in Sources */,
+				594E4D2F21E9581B00F7ED54 /* HistPeriodicoTableTableViewController.swift in Sources */,
+				594E4D3521E969DD00F7ED54 /* HistRevistaTableViewController.swift in Sources */,
 				8C895D6721950C6E004F5D46 /* UIImage+Extension.swift in Sources */,
 				8C8D05A821AD0FAF00B74D99 /* PublicacionModel.swift in Sources */,
 				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
+				594E4D3321E9679300F7ED54 /* HistRevistaCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
 				594E4D2B21E92A8500F7ED54 /* TefilatPageViewController.swift in Sources */,
@@ -609,6 +624,7 @@
 				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
 				8C8D05A421ACC66300B74D99 /* ComiteModel.swift in Sources */,
+				594E4D3121E95DC600F7ED54 /* HistPeriodicoCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -855,7 +855,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmM-Zy-6Gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="48.799999999999997" y="-2208.8455772113944"/>
+            <point key="canvasLocation" x="-489" y="-2068"/>
         </scene>
         <!--Sidur Page View Controller-->
         <scene sceneID="BNM-10-vdS">
@@ -863,7 +863,65 @@
                 <pageViewController storyboardIdentifier="SidurPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="jLK-jr-9DJ" customClass="SidurPageViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ql-Dq-VbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="727" y="-3072"/>
+            <point key="canvasLocation" x="-20" y="-3047"/>
+        </scene>
+        <!--Hist Revista Table View Controller-->
+        <scene sceneID="iRe-UX-zFp">
+            <objects>
+                <tableViewController storyboardIdentifier="HistRevistaTableViewController" id="pEh-sG-ygz" customClass="HistRevistaTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kZv-HX-Mhb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerMedios" id="etL-9t-BMF">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="165"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="hrevista" rowHeight="109" id="bcs-cN-0M8" customClass="HistRevistaCell" customModule="Maguen" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="193" width="375" height="109"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bcs-cN-0M8" id="6Iw-WT-uT2">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="108.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_medios" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-6R-hhz">
+                                            <rect key="frame" x="32" y="19.5" width="70" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="70" id="G6z-IW-qAg"/>
+                                                <constraint firstAttribute="width" constant="70" id="jIq-Md-VsY"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maguen Media" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qDY-TQ-hoa">
+                                            <rect key="frame" x="117" y="44" width="123.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="vkb-6R-hhz" firstAttribute="centerY" secondItem="6Iw-WT-uT2" secondAttribute="centerY" id="3aS-4N-t5t"/>
+                                        <constraint firstItem="qDY-TQ-hoa" firstAttribute="centerY" secondItem="6Iw-WT-uT2" secondAttribute="centerY" id="GnB-ey-mkl"/>
+                                        <constraint firstItem="vkb-6R-hhz" firstAttribute="leading" secondItem="6Iw-WT-uT2" secondAttribute="leadingMargin" constant="16" id="SaL-JT-0R7"/>
+                                        <constraint firstItem="qDY-TQ-hoa" firstAttribute="leading" secondItem="vkb-6R-hhz" secondAttribute="trailing" constant="15" id="xs1-it-7Gk"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="imgHRevista" destination="vkb-6R-hhz" id="0hs-D6-SGS"/>
+                                    <outlet property="textHRevista" destination="qDY-TQ-hoa" id="9tC-hS-H2s"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pEh-sG-ygz" id="Rfo-Wf-Ujh"/>
+                            <outlet property="delegate" destination="pEh-sG-ygz" id="MGS-io-qw9"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3X9-hF-7vf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="941.60000000000002" y="-2921.2893553223389"/>
         </scene>
         <!--Medios-->
         <scene sceneID="A8B-yG-teN">
@@ -936,11 +994,71 @@
                         <segue destination="Rz6-r9-tk5" kind="show" identifier="Instagram" id="bgZ-x3-hJ9"/>
                         <segue destination="qrJ-yj-VRm" kind="show" identifier="Periodico" id="dA3-qy-99p"/>
                         <segue destination="sgG-3L-908" kind="show" identifier="Revista" id="unH-iP-aFo"/>
+                        <segue destination="h20-Gj-kIF" kind="show" identifier="HistPeriodico" id="Glt-br-4Gl"/>
+                        <segue destination="pEh-sG-ygz" kind="show" identifier="HistRevista" id="dej-Yi-HAE"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nf0-Rz-LPV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1120.8" y="-1796.8515742128936"/>
+        </scene>
+        <!--Hist Periodico Table Table View Controller-->
+        <scene sceneID="fH5-PI-lh1">
+            <objects>
+                <tableViewController storyboardIdentifier="HistPeriodicoTableViewcontroller" id="h20-Gj-kIF" customClass="HistPeriodicoTableTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B36-qb-ZeT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <imageView key="tableHeaderView" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bannerMedios" id="cFf-90-kLo">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="160"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        </imageView>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="hperiodico" rowHeight="91" id="gOO-kw-Rwm" customClass="HistPeriodicoCell" customModule="Maguen" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="188" width="375" height="91"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gOO-kw-Rwm" id="NUg-iA-tRx">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_medios" translatesAutoresizingMaskIntoConstraints="NO" id="COF-lf-LRG">
+                                            <rect key="frame" x="16" y="10.5" width="70" height="70"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="70" id="F0u-RV-aca"/>
+                                                <constraint firstAttribute="height" constant="70" id="K0p-37-tiZ"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maguen Media" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Z5-ey-Kkr">
+                                            <rect key="frame" x="101" y="35" width="123.5" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="8Z5-ey-Kkr" firstAttribute="leading" secondItem="COF-lf-LRG" secondAttribute="trailing" constant="15" id="5rc-l9-nn8"/>
+                                        <constraint firstItem="COF-lf-LRG" firstAttribute="leading" secondItem="NUg-iA-tRx" secondAttribute="leading" constant="16" id="OxQ-It-VRp"/>
+                                        <constraint firstItem="8Z5-ey-Kkr" firstAttribute="centerY" secondItem="NUg-iA-tRx" secondAttribute="centerY" id="fNh-OI-1Hk"/>
+                                        <constraint firstItem="COF-lf-LRG" firstAttribute="centerY" secondItem="NUg-iA-tRx" secondAttribute="centerY" id="k8K-qQ-4yV"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <color key="backgroundColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <outlet property="imgHPeriodico" destination="COF-lf-LRG" id="36d-bY-KJg"/>
+                                    <outlet property="textHPeriodico" destination="8Z5-ey-Kkr" id="E4z-na-e1p"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="h20-Gj-kIF" id="y09-Fv-HGW"/>
+                            <outlet property="delegate" destination="h20-Gj-kIF" id="Kn2-7h-03x"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wPq-o1-s5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2205.5999999999999" y="-2894.3028485757122"/>
         </scene>
         <!--YoutubeViewController-->
         <scene sceneID="f3z-q3-yZJ">
