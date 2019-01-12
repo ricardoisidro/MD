@@ -12,6 +12,8 @@ import SQLite
 struct historicopComponents {
     var hpImage = UIImage()
     var hpText = String()
+    var nPag = Int64()
+    var idPub = Int64()
 }
 
 class HistPeriodicoTableTableViewController: UITableViewController {
@@ -40,15 +42,17 @@ class HistPeriodicoTableTableViewController: UITableViewController {
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             // where categoria publicacion id = 1 (1 periodico; 2 revista)
-            let query1 = db_publicacion.select(db_descripcion).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 1).where(db_eliminado == 0)
+            let query1 = db_publicacion.select(db_descripcion,db_paginas,db_publicacion_id).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 1).where(db_eliminado == 0)
             let listPeriodicos = try db.prepare(query1)
             
             for item in listPeriodicos
             {
-                let titulo = try item.get(db_descripcion) ?? ""
+                let titulo = try item.get(db_descripcion)
                 let imagen = #imageLiteral(resourceName: "img_periodico")
+                let nP = try item.get(db_paginas)
+                let idP = try item.get(db_publicacion_id)
               
-                tableViewData.append(historicopComponents(hpImage: imagen, hpText: titulo))
+                tableViewData.append(historicopComponents(hpImage: imagen, hpText: titulo,nPag: nP,idPub: idP))
             }
             
           //  dailyTitle = try currentDaily?.get(db_descripcion) ?? ""
@@ -134,17 +138,20 @@ class HistPeriodicoTableTableViewController: UITableViewController {
         //print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
-        performSegue(withIdentifier: "HistPeriodico", sender: tableViewData[indexPath.row].hpText)
+        performSegue(withIdentifier: "sPeriodico", sender: tableViewData[indexPath.row])
     }
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-      //  guard let segueData = sender as? String
-       //     else { return }
+        guard let segueData = sender as? historicopComponents
+           else { return }
         
-       // let controller = segue.destination as? SidurPageViewController
-       // controller?.tipoRezo = segueData
+        let controller = segue.destination as? HistPeriodicoPageViewController
+        controller?.noPaginas = segueData.nPag
+        controller?.idPublicacion = segueData.idPub
+        controller?.titlePublicacion = segueData.hpText
+        
         
         
         

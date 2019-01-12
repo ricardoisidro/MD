@@ -869,7 +869,7 @@
         <scene sceneID="iRe-UX-zFp">
             <objects>
                 <tableViewController storyboardIdentifier="HistRevistaTableViewController" id="pEh-sG-ygz" customClass="HistRevistaTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kZv-HX-Mhb">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="kZv-HX-Mhb">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -882,7 +882,7 @@
                                 <rect key="frame" x="0.0" y="193" width="375" height="109"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bcs-cN-0M8" id="6Iw-WT-uT2">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="108.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_medios" translatesAutoresizingMaskIntoConstraints="NO" id="vkb-6R-hhz">
@@ -918,10 +918,13 @@
                             <outlet property="delegate" destination="pEh-sG-ygz" id="MGS-io-qw9"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="9kU-nU-0ga" kind="show" identifier="sRevista" id="P49-PH-1i4"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3X9-hF-7vf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="941.60000000000002" y="-2921.2893553223389"/>
+            <point key="canvasLocation" x="945" y="-2969"/>
         </scene>
         <!--Medios-->
         <scene sceneID="A8B-yG-teN">
@@ -1006,7 +1009,7 @@
         <scene sceneID="fH5-PI-lh1">
             <objects>
                 <tableViewController storyboardIdentifier="HistPeriodicoTableViewcontroller" id="h20-Gj-kIF" customClass="HistPeriodicoTableTableViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B36-qb-ZeT">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="B36-qb-ZeT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1019,7 +1022,7 @@
                                 <rect key="frame" x="0.0" y="188" width="375" height="91"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gOO-kw-Rwm" id="NUg-iA-tRx">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="90.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_medios" translatesAutoresizingMaskIntoConstraints="NO" id="COF-lf-LRG">
@@ -1055,10 +1058,21 @@
                             <outlet property="delegate" destination="h20-Gj-kIF" id="Kn2-7h-03x"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="9kU-nU-0ga" kind="show" identifier="sPeriodico" id="S9O-Pc-heB"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wPq-o1-s5t" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2205.5999999999999" y="-2894.3028485757122"/>
+        </scene>
+        <!--Hist Periodico Page View Controller-->
+        <scene sceneID="2A5-Up-HQC">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="9kU-nU-0ga" customClass="HistPeriodicoPageViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eQR-xi-Iib" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3193" y="-3022"/>
         </scene>
         <!--YoutubeViewController-->
         <scene sceneID="f3z-q3-yZJ">
@@ -3835,5 +3849,6 @@
     <inferredMetricsTieBreakers>
         <segue reference="DT1-iD-UQO"/>
         <segue reference="QHH-ge-8WR"/>
+        <segue reference="S9O-Pc-heB"/>
     </inferredMetricsTieBreakers>
 </document>
