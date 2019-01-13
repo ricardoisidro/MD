@@ -44,7 +44,7 @@ class LoadViewController: UIViewController {
     //let db_centro_id = Expression<Int64>("centro_id")
     let db_titulo = Expression<String>("titulo")
     let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
-    let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
+    let db_fecha_final_publicacion = Expression<Date>("fecha_final_publicacion")
     let db_horario = Expression<String>("horario")
     let db_imagen = Expression<String?>("imagen")
     //let db_eliminado = Expression<Int64>("eliminado")
@@ -378,7 +378,7 @@ class LoadViewController: UIViewController {
                                            db_centro_id <- Int64(objeto.centro_id),
                                            db_titulo <- objeto.titulo,
                                            db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion ?? defaultDateTime!,
-                                           db_fecha_final_publicacion <- objeto.fecha_final_publicacion,
+                                           db_fecha_final_publicacion <- objeto.fecha_final_publicacion!,
                                            db_horario <- objeto.horario,
                                            db_imagen <- objeto.imagen!,
                                            db_eliminado <- Int64(objeto.eliminado),
@@ -491,7 +491,7 @@ class LoadViewController: UIViewController {
                                                db_publicacion_id <- Int64(objeto.publicacion_id),
                                                db_descripcion <- objeto.descripcion,
                                                db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion ?? defaultDateTime!,
-                                               db_fecha_final_publicacion <- objeto.fecha_final_publicacion,
+                                               db_fecha_final_publicacion <- objeto.fecha_final_publicacion ?? defaultDateTime!,
                                                db_categoria_publicacion_id <- Int64(objeto.categoria_publicacion_id),
                                                db_paginas <- Int64(objeto.paginas),
                                                db_eliminado <- Int64(objeto.eliminado),

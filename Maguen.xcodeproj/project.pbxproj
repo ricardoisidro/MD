@@ -65,6 +65,11 @@
 		59D86AFF219B8AD100EAD86B /* ChurchPrayDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */; };
 		59DABC1821A7294800D7445C /* GetEntityResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DABC1721A7294800D7445C /* GetEntityResponse.swift */; };
 		59DABC1B21A75F4600D7445C /* CategoriaCentroModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */; };
+		59E059F021EA813000DFA1B0 /* pSetUsuarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E059EF21EA813000DFA1B0 /* pSetUsuarioApp.swift */; };
+		59E059F221EA8D0E00DFA1B0 /* EBReturn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E059F121EA8D0E00DFA1B0 /* EBReturn.swift */; };
+		59E059F421EAB65900DFA1B0 /* Credencial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E059F321EAB65900DFA1B0 /* Credencial.swift */; };
+		59E059F621EAB69600DFA1B0 /* Telefonos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E059F521EAB69600DFA1B0 /* Telefonos.swift */; };
+		59E059F821EAB6AA00DFA1B0 /* UsuarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E059F721EAB6AA00DFA1B0 /* UsuarioApp.swift */; };
 		59E61D4C21A47C5C00136CB6 /* SaldoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D4B21A47C5C00136CB6 /* SaldoRequest.swift */; };
 		59E61D4E21A47CA300136CB6 /* SaldoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D4D21A47CA300136CB6 /* SaldoResponse.swift */; };
 		59E61D5021A4F4AB00136CB6 /* GetModifyTablesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59E61D4F21A4F4AB00136CB6 /* GetModifyTablesRequest.swift */; };
@@ -167,6 +172,11 @@
 		59D86AFE219B8AD100EAD86B /* ChurchPrayDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChurchPrayDetailViewController.swift; sourceTree = "<group>"; };
 		59DABC1721A7294800D7445C /* GetEntityResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetEntityResponse.swift; sourceTree = "<group>"; };
 		59DABC1A21A75F4600D7445C /* CategoriaCentroModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriaCentroModel.swift; sourceTree = "<group>"; };
+		59E059EF21EA813000DFA1B0 /* pSetUsuarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pSetUsuarioApp.swift; sourceTree = "<group>"; };
+		59E059F121EA8D0E00DFA1B0 /* EBReturn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EBReturn.swift; sourceTree = "<group>"; };
+		59E059F321EAB65900DFA1B0 /* Credencial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credencial.swift; sourceTree = "<group>"; };
+		59E059F521EAB69600DFA1B0 /* Telefonos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Telefonos.swift; sourceTree = "<group>"; };
+		59E059F721EAB6AA00DFA1B0 /* UsuarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsuarioApp.swift; sourceTree = "<group>"; };
 		59E61D4B21A47C5C00136CB6 /* SaldoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoRequest.swift; sourceTree = "<group>"; };
 		59E61D4D21A47CA300136CB6 /* SaldoResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaldoResponse.swift; sourceTree = "<group>"; };
 		59E61D4F21A4F4AB00136CB6 /* GetModifyTablesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetModifyTablesRequest.swift; sourceTree = "<group>"; };
@@ -248,6 +258,8 @@
 				59D7E94121B8523D00CAA522 /* NotificationResponse.swift */,
 				59E806B221C2D46A0017D248 /* GetDinamicWeganRequest.swift */,
 				59E806B421C2D4D00017D248 /* GetDinamicWeganResponse.swift */,
+				59E059EF21EA813000DFA1B0 /* pSetUsuarioApp.swift */,
+				59E059F121EA8D0E00DFA1B0 /* EBReturn.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -313,6 +325,9 @@
 				8C8D05B121AE1B5B00B74D99 /* ServicioCentroModel.swift */,
 				8C8D05B321AE3E3600B74D99 /* ServicioModel.swift */,
 				8C8D05B521AE44F400B74D99 /* DomicilioModel.swift */,
+				59E059F321EAB65900DFA1B0 /* Credencial.swift */,
+				59E059F521EAB69600DFA1B0 /* Telefonos.swift */,
+				59E059F721EAB6AA00DFA1B0 /* UsuarioApp.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -563,6 +578,7 @@
 				8C8D05A821AD0FAF00B74D99 /* PublicacionModel.swift in Sources */,
 				59BB4F0121779C6A007CC317 /* DailyViewController.swift in Sources */,
 				59D30E262176B1570063B303 /* DirectoryCell.swift in Sources */,
+				59E059F421EAB65900DFA1B0 /* Credencial.swift in Sources */,
 				594E4D3321E9679300F7ED54 /* HistRevistaCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
@@ -591,7 +607,10 @@
 				59CE67482192594200A5D719 /* MaguenTextFieldDesign.swift in Sources */,
 				594E4D2721E92A5600F7ED54 /* OmerPageViewController.swift in Sources */,
 				59D30E1D2176A1E80063B303 /* SchoolsTableViewController.swift in Sources */,
+				59E059F821EAB6AA00DFA1B0 /* UsuarioApp.swift in Sources */,
 				5919397921A6313D00B0E7EF /* Global.swift in Sources */,
+				59E059F021EA813000DFA1B0 /* pSetUsuarioApp.swift in Sources */,
+				59E059F621EAB69600DFA1B0 /* Telefonos.swift in Sources */,
 				59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */,
 				8C5CEF34216FA155002F5D56 /* StoreController.swift in Sources */,
 				59C6D537217554AE004E4813 /* MediaTableViewController.swift in Sources */,
@@ -626,6 +645,7 @@
 				5919397321A5F98A00B0E7EF /* GetIDResponse.swift in Sources */,
 				59D30E2C2176B83B0063B303 /* CommitteeTableViewController.swift in Sources */,
 				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
+				59E059F221EA8D0E00DFA1B0 /* EBReturn.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
 				8C8D05A421ACC66300B74D99 /* ComiteModel.swift in Sources */,
 				594E4D3121E95DC600F7ED54 /* HistPeriodicoCell.swift in Sources */,

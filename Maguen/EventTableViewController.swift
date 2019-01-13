@@ -30,25 +30,36 @@ class EventTableViewController: UITableViewController {
         
         let db_eventos = Table("eventos")
         let db_titulo = Expression<String>("titulo")
-        let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
+        let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
         let db_horario = Expression<String>("horario")
         let db_imagen = Expression<String?>("imagen")
         let db_eliminado = Expression<Int64>("eliminado")
+        let db_fecha_final_publicacion  = Expression<Date>("fecha_final_publicacion")
         
         do {
+            
+            let format = DateFormatter()
+            format.dateFormat = "dd/MM/yyyy"
+            let fechaInicial = format.string(from: Date())
+            let f = format.date(from: fechaInicial)
+            
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            let query = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            let query = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_centro[db_nombre],db_fecha_final_publicacion).where(db_eventos[db_eliminado] == 0).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id]).where(db_fecha_final_publicacion >= f!)
             guard let queryResults = try? db.prepare(query)
             //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {
                 print("ERROR al consultar eventos")
                 return
             }
+            
             for row in queryResults {
-                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: try row.get(db_fecha_inicial_publicacion), eventTime: try row.get(db_horario))
+                let fecha = try row.get(db_fecha_final_publicacion)
+                  let fFinal = format.string(from: fecha)
+                
+                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: fFinal, eventTime: try row.get(db_horario))
                 tableViewData.append(data)
             }
             
@@ -98,7 +109,7 @@ class EventTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        return 200.0
+        return 300.0
         
     }
     

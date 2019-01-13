@@ -21,6 +21,8 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     @IBOutlet weak var btnPhoto: UIButton!
     @IBOutlet weak var btnSave: UIButton!
     @IBOutlet weak var imageTake: UIImageView!
+    @IBOutlet weak var btnEdit: UIButton!
+    @IBOutlet weak var formView: UIView!
     
     var imagePicker: UIImagePickerController!
     
@@ -28,6 +30,21 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     var mySession = URLSession.shared
     var currentParsingElement:String = ""
     var soapString:String = ""
+    
+    var nombre: String = ""
+    var apellido1: String = ""
+    var apellido2: String = ""
+    var sexo: String = ""
+    var fecha_nacimiento: Date? = nil
+    var fecha_activacion: Date? = nil
+    var usuario: String = ""
+    var contrasena: String = ""
+    var correo: String = ""
+    var comunidad_id: Int = -1
+    var categoria_id: Int = -1
+    var credencial_id: Int = -1
+    var activo: Int = -1
+    var eliminado: Int = -1
     
     let db_user = Table("usuariomaguen")
     let db_user_id = Expression<Int64>("user_id")
@@ -45,14 +62,29 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     let db_user_cardid = Expression<Int64>("user_cardid")
     //var tableData: [String] = [usuario]()
     
+    private var embededVC: SettingsTableViewController!
+    
+
+    // 1: Desactivar 2: Guardar cambios
+    var buttonAction: Int = 0
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SettingsTableViewController, segue.identifier == "embededSegue" {
+            self.embededVC = vc
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
 
         self.view.backgroundColor = MaguenColors.black1
         btnPhoto.layer.cornerRadius = 0.5 * btnPhoto.bounds.size.width
         btnPhoto.clipsToBounds = true
         btnSave.layer.cornerRadius = 10
         btnPhoto.layer.masksToBounds = true
+        btnEdit.isHidden = false
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -68,11 +100,11 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                 return
             }
             
-            for row in queryResults {
+            /*for row in queryResults {
                 let bothSurnames = try row.get(db_user_surname1) + " " + row.get(db_user_surname2)
                 _ = usuario(id: try Int(row.get(db_user_id)), nombre: try row.get(db_user_name), apellido1: bothSurnames, fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
                 //tableDataSocio.append(data)
-            }
+            }*/
             
             let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
             let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
@@ -85,21 +117,47 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+       
+        /*let v1 = self.embededVC.cadena
+         print(v1)
+        nombre = self.embededVC.textConfigName.text ?? ""
+        apellido1 = self.embededVC.textConfigSurname1.text  ?? ""
+        apellido2 = self.embededVC.textConfigSurname2.text  ?? ""
+        print("\(String(describing: nombre)) \(String(describing: apellido1)) \(String(describing: apellido2))")*/
+    }
+    
+   
+    
     override func viewWillAppear(_ animated: Bool) {
         
         //scroll on top always
+        btnEdit.isHidden = false
+
         scrollView.setContentOffset(.zero, animated: true)
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
         if sessionisEmpty {
             btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
             btnSave.backgroundColor = MaguenColors.blue5
+            buttonAction = 2
         }
         else {
-            btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
-            btnSave.backgroundColor = .orange
-            
-            
+            if btnEdit.isHidden == true {
+                btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
+                btnSave.backgroundColor = MaguenColors.blue5
+                btnPhoto.isHidden = false
+                formView.isUserInteractionEnabled = true
+                buttonAction = 2
+
+            }
+            else {
+                btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
+                btnSave.backgroundColor = .orange
+                btnPhoto.isHidden = true
+                formView.isUserInteractionEnabled = false
+                buttonAction = 1
+            }
         }
         
         let aesJSON = AESforJSON()
@@ -122,7 +180,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         UserDefaults.standard.set(res, forKey: "balance")
         
-        
+        btnPhoto.isHidden = true
         
         /*//Prepare request
         let url = URL(string: MaguenCredentials.getSaldoActual)
@@ -148,19 +206,85 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func btnSaveorDiscard(_ sender: UIButton) {
         
-        UserDefaults.standard.removeObject(forKey: "name")
-        UserDefaults.standard.removeObject(forKey: "surname1")
-        UserDefaults.standard.removeObject(forKey: "surname2")
-        UserDefaults.standard.removeObject(forKey: "sex")
-        UserDefaults.standard.removeObject(forKey: "birthday")
-        UserDefaults.standard.removeObject(forKey: "mail")
-        UserDefaults.standard.removeObject(forKey: "phone")
-        UserDefaults.standard.removeObject(forKey: "photo")
-        UserDefaults.standard.removeObject(forKey: "user")
-        UserDefaults.standard.removeObject(forKey: "balance")
+        switch buttonAction {
+        case 1:
+            UserDefaults.standard.removeObject(forKey: "name")
+            UserDefaults.standard.removeObject(forKey: "surname1")
+            UserDefaults.standard.removeObject(forKey: "surname2")
+            UserDefaults.standard.removeObject(forKey: "sex")
+            UserDefaults.standard.removeObject(forKey: "birthday")
+            UserDefaults.standard.removeObject(forKey: "mail")
+            UserDefaults.standard.removeObject(forKey: "phone")
+            UserDefaults.standard.removeObject(forKey: "photo")
+            UserDefaults.standard.removeObject(forKey: "user")
+            UserDefaults.standard.removeObject(forKey: "balance")
+            self.tabBarController?.selectedIndex = 0
+            break
+        case 2:
+            
+            editarUsuario()
+
+            self.tabBarController?.selectedIndex = 1
+
+
+            break
+        default:
+            print("Default")
+            break
+        }
+        
+       
         //UserDefaults.standard.removeObject(forKey: "dateLastSync")
         
-        self.tabBarController?.selectedIndex = 0
+        
+        
+        
+        
+    }
+    
+    func editarUsuario() {
+    
+        let jsUsuario = jsUsuarioApp()
+        jsUsuario.nombre = self.embededVC.textConfigName.text!
+        jsUsuario.primer_apellido = self.embededVC.textConfigSurname1.text!
+        jsUsuario.segundo_apellido = self.embededVC.textConfigSurname2.text!
+        let sex = self.embededVC.selectedSex
+        if sex == "HOMBRE" {
+            jsUsuario.sexo = "H"
+        }
+        else if sex == "MUJER" {
+            jsUsuario.sexo = "M"
+        }
+        let format = DateFormatter()
+        
+        format.dateFormat = "dd/MM/yyyy"
+        let fechaFormulario = self.embededVC.textConfigBirthday.text
+        let f = format.date(from: fechaFormulario!)
+
+        jsUsuario.fecha_nacimiento = f
+        
+        jsUsuario.correo = self.embededVC.textConfigMail.text!
+        jsUsuario.telefonoActual = self.embededVC.textConfigPhone.text
+        jsUsuario.comunidad_id = self.embededVC.selectedComunityId
+        
+        //jsUsuario.credencial_id =
+        
+        /*let aes = AESforJSON()
+        aes.encodeAndEncryptJSONSetUsuarioApp(objeto: <#T##jsUsuarioApp#>)
+        nombre =  ?? ""
+        apellido1 = self.embededVC.textConfigSurname1.text  ?? ""
+        apellido2 = self.embededVC.textConfigSurname2.text  ?? ""
+        print("\(String(describing: nombre)) \(String(describing: apellido1)) \(String(describing: apellido2))")*/
+    }
+    
+    @IBAction func btnEdit(_ sender: UIButton) {
+        btnPhoto.isHidden = false
+        btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
+        btnSave.backgroundColor = MaguenColors.blue5
+        btnEdit.isHidden = true
+        formView.isUserInteractionEnabled = true
+        buttonAction = 2
+
         
     }
     
@@ -231,7 +355,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         present(ac, animated: true)
     }
     
-    
+
     
 /*    func updateAccount() {
         do {

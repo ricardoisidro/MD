@@ -13,7 +13,7 @@ class PublicacionModel: NSObject {
     var publicacion_id: Int
     var descripcion: String
     var fecha_inicial_publicacion: Date?
-    var fecha_final_publicacion: String
+    var fecha_final_publicacion: Date?
     var categoria_publicacion_id: Int
     var paginas: Int
     var eliminado: Int
@@ -24,7 +24,7 @@ class PublicacionModel: NSObject {
         self.publicacion_id = 0
         self.descripcion = ""
         self.fecha_inicial_publicacion = nil
-        self.fecha_final_publicacion = ""
+        self.fecha_final_publicacion = nil
         self.categoria_publicacion_id = 0
         self.paginas = -1
         self.eliminado = 0
@@ -52,7 +52,9 @@ class PublicacionModel: NSObject {
                 publicacion.fecha_inicial_publicacion = date
             }
             else if(val[0] == "fecha_final_publicacion") {
-                publicacion.fecha_final_publicacion = val[1]
+                datesFormatter.dateFormat = defaultFormat
+                let date = datesFormatter.date(from: val[1])
+                publicacion.fecha_final_publicacion = date
             }
             else if(val[0] == "categoria_publicacion_id") {
                 publicacion.categoria_publicacion_id = Int(val[1])!

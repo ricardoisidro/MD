@@ -48,6 +48,10 @@ class CallSOAP : NSObject, XMLParserDelegate {
             parseType = "GetSaldoActualResponse"
             parseResult = "GetSaldoActualResult"
         }
+        else if endpoint.contains("SetUsuarioApp") {
+            parseType = "SetUsuarioAppResponse"
+            parseResult = "SetUsuarioAppResult"
+        }
         
         let url = URL(string: endpoint)
         let req = NSMutableURLRequest(url: url!)

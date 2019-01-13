@@ -15,9 +15,15 @@ struct optionsComponents {
     var optionName = String()
 }
 
+struct comunidadComponents {
+    var id = Int64()
+    var nombre = String()
+}
+
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
     var tableViewData = [optionsComponents]()
+    var comunidadViewData = [comunidadComponents]()
     
     @IBOutlet weak var textConfigName: UITextField!
     @IBOutlet weak var textConfigSurname1: UITextField!
@@ -52,12 +58,14 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     }*/
     
     let sexTypes = ["HOMBRE", "MUJER"]
-    var communityTypes: [String] = []
+    //var communityTypes: [String] = []
     let birthDatePicker: UIDatePicker = UIDatePicker()
     let doneButton: UIButton = UIButton()
     
     var selectedSex: String = "HOMBRE"
+    var selectedComunityId: Int64 = -1
     var selectedCommunity: String = "SELECCIONE..."
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,14 +107,16 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             }
             
             //getting communities
-            guard let queryResults3 = try? db.prepare("SELECT descripcion FROM comunidad") else {
+            guard let queryResults3 = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad") else {
                 print("ERROR al consultar Comunidad")
                 return
             }
             
             _ = queryResults3.map { row in
-                let data = row[0] as! String
-                communityTypes.append(data)
+                let data = comunidadComponents(id: row[0] as! Int64, nombre: row[1] as! String)
+                comunidadViewData.append(data)
+                
+                //communityTypes.append(data)
             }
             
             // getting user
@@ -255,7 +265,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
 
         }
         else if pickerView.tag == 2 {
-            return communityTypes.count
+            //return communityTypes.count
+            return comunidadViewData.count
         }
         else {
             return 1
@@ -270,7 +281,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             return myTitle
         }
         else {
-            let titleData = communityTypes[row]
+            //let titleData = communityTypes[row]
+            let titleData = comunidadViewData[row].nombre
             let myTitle = NSAttributedString(string: titleData, attributes: [NSAttributedString.Key.foregroundColor: UIColor.white, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13)])
             
             return myTitle
@@ -284,7 +296,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             textConfigSex.text = selectedSex
         }
         else {
-            selectedCommunity = communityTypes[row]
+            //selectedCommunity = communityTypes[row]
+            selectedCommunity = comunidadViewData[row].nombre
+            selectedComunityId = comunidadViewData[row].id
             textConfigCommunity.text = selectedCommunity
         }
         

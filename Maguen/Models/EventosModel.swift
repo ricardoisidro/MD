@@ -14,7 +14,7 @@ class EventosModel: NSObject {
     var centro_id: Int
     var titulo: String
     var fecha_inicial_publicacion: Date?
-    var fecha_final_publicacion: String
+    var fecha_final_publicacion: Date?
     var horario: String
     var imagen: String?
     var eliminado: Int
@@ -25,7 +25,7 @@ class EventosModel: NSObject {
         self.centro_id = 0
         self.titulo = ""
         self.fecha_inicial_publicacion = nil
-        self.fecha_final_publicacion = ""
+        self.fecha_final_publicacion = nil
         self.horario = ""
         self.imagen = ""
         self.eliminado = 0
@@ -34,7 +34,7 @@ class EventosModel: NSObject {
     
     static func deserializaEvento(dato: String) -> EventosModel {
         let evento = EventosModel()
-        let publicacion = PublicacionModel()
+       
         let datesFormatter = DateFormatter()
         let defaultFormat = "dd/MM/yyyy HH:mm:ss"
         let initialPairs = dato.components(separatedBy: "|@")
@@ -53,10 +53,13 @@ class EventosModel: NSObject {
             else if(val[0] == "fecha_inicial_publicacion") {
                 datesFormatter.dateFormat = defaultFormat
                 let date = datesFormatter.date(from: val[1])
-                publicacion.fecha_inicial_publicacion = date
+                evento.fecha_inicial_publicacion = date
             }
             else if(val[0] == "fecha_final_publicacion") {
-                evento.fecha_final_publicacion = val[1]
+                datesFormatter.dateFormat = defaultFormat
+                let date = datesFormatter.date(from: val[1])
+                evento.fecha_final_publicacion = date
+                
             }
             else if(val[0] == "horario") {
                 evento.horario = val[1]
