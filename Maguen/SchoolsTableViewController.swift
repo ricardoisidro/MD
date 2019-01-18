@@ -32,7 +32,7 @@ class SchoolsTableViewController: UITableViewController {
             //tableViewData2 = Array(try db.prepare(users.filter(db_categoria_centro_id == 1)))
             
             guard let queryResults = try? db.prepare("SELECT imagen_portada, nombre, descripcion FROM centro WHERE categoria_centro_id = 2 and eliminado = 0") else {
-                print("ERROR al consultar centro")
+                //print("ERROR al consultar centro")
                 return
             }
             
@@ -43,7 +43,7 @@ class SchoolsTableViewController: UITableViewController {
             
         }
         catch let ex {
-            print("ReadDB error: \(ex)")
+            //print("ReadDB error: \(ex)")
         }
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -86,7 +86,7 @@ class SchoolsTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "schoolpage", sender: tableViewData[indexPath.row].schoolPage)
     }

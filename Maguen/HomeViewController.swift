@@ -29,7 +29,7 @@ class HomeViewController: UITableViewController {
         
       //  if(Global.shared.loginOk)
       //  {
-          //  print("entre a cambia tab por willAppear")
+          //  //print("entre a cambia tab por willAppear")
           //  performSegue(withIdentifier: "sTest", sender: "Test")
             //self.tabBarController?.selectedIndex = 4
             
@@ -81,12 +81,12 @@ class HomeViewController: UITableViewController {
             let db_eliminado = Expression<Int64>("eliminado")
             
             for user in try db.prepare(users) {
-                print("centroid: \(user[db_centro_id]), categoriacentroid: \(user[db_categoria_centro_id]), descripcion: \(user[db_descripcion]), eliminado: \(user[db_eliminado])")
+                //print("centroid: \(user[db_centro_id]), categoriacentroid: \(user[db_categoria_centro_id]), descripcion: \(user[db_descripcion]), eliminado: \(user[db_eliminado])")
                 // id: 1, name: Optional("Alice"), email: alice@mac.com
             }
         }
         catch let ex {
-            print("ReadDB error: \(ex)")
+            //print("ReadDB error: \(ex)")
         }*/
         
     }
@@ -134,7 +134,7 @@ class HomeViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         homeTableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: tableViewData[indexPath.row].cellTitle)

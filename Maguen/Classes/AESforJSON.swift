@@ -21,13 +21,13 @@ class AESforJSON {
             //let getModifyTable
             jsonData = try jsonEncoder.encode(getModifyTablesRequest)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
+            ////print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONTablesString error: \(err)")
+            //print("encodeAndEncryptJSONTablesString error: \(err)")
         }
         return cipherRequest
     }
@@ -41,13 +41,13 @@ class AESforJSON {
             //let getModifyTable
             jsonData = try jsonEncoder.encode(getIDRequest)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
+            ////print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONIDsString error: \(err)")
+            //print("encodeAndEncryptJSONIDsString error: \(err)")
         }
         return cipherRequest
     }
@@ -60,13 +60,13 @@ class AESforJSON {
             let jsonData: Data
             jsonData = try jsonEncoder.encode(getEntityRequest)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
+            ////print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONEntityString error: \(err)")
+            //print("encodeAndEncryptJSONEntityString error: \(err)")
         }
         return cipherRequest
     }
@@ -78,13 +78,13 @@ class AESforJSON {
             let jsonData: Data
             jsonData = try jsonEncoder.encode(request)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
+            ////print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONNotificationString error: \(err)")
+            //print("encodeAndEncryptJSONNotificationString error: \(err)")
         }
         return cipherRequest
     }
@@ -98,13 +98,13 @@ class AESforJSON {
             //let getModifyTable
             jsonData = try jsonEncoder.encode(getQR)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
+            ////print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONTablesString error: \(err)")
+            //print("encodeAndEncryptJSONTablesString error: \(err)")
         }
         return cipherRequest
     }
@@ -120,7 +120,7 @@ class AESforJSON {
             
         }
         catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
+            //print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -131,7 +131,7 @@ class AESforJSON {
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             var decrypted = try soapResult.decryptBase64ToString(cipher: aes)
-            //print("Cadena decrypted saldo: \(decrypted)")
+            ////print("Cadena decrypted saldo: \(decrypted)")
             
             let saldoResult = try jsonDecoder.decode(SaldoResponse.self, from: Data(decrypted.utf8))
             if saldoResult.Correcto {
@@ -141,7 +141,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            //print("updateSaldo error: \(ex)")
         }
         return saldo
     }
@@ -153,13 +153,13 @@ class AESforJSON {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(objeto)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
+            //print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
+            //print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -170,14 +170,14 @@ class AESforJSON {
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             var decrypted = try soapResult.decryptBase64ToString(cipher: aes)
-            //print("Cadena decrypted saldo: \(decrypted)")
+            ////print("Cadena decrypted saldo: \(decrypted)")
             
             let ebResult = try jsonDecoder.decode(EBReturn.self, from: Data(decrypted.utf8))
             return ebResult
             
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            //print("updateSaldo error: \(ex)")
             return EBReturn()
         }
         //return saldo
@@ -191,13 +191,13 @@ class AESforJSON {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(pdetalle)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            print(jsonString)
+            //print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
+            //print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -208,14 +208,14 @@ class AESforJSON {
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             var decrypted = try soapResult.decryptBase64ToString(cipher: aes)
-            print("Cadena decrypted saldo: \(decrypted)")
+            //print("Cadena decrypted saldo: \(decrypted)")
             
             let ebResult = try jsonDecoder.decode(EBReturn2.self, from: Data(decrypted.utf8))
             return ebResult
             
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            //print("updateSaldo error: \(ex)")
             return EBReturn2()
         }
         //return saldo

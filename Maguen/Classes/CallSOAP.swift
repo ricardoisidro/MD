@@ -86,9 +86,9 @@ class CallSOAP : NSObject, XMLParserDelegate {
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentParsingElement = elementName
         if elementName == "GetModifyTables" {
-            //print("Started parsing modifytables...")
+            ////print("Started parsing modifytables...")
         } else if elementName == "GetIDs" {
-            //print("Started parsing ids...")
+            ////print("Started parsing ids...")
         }
     }
     
@@ -128,6 +128,6 @@ class CallSOAP : NSObject, XMLParserDelegate {
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         
-        print("parseErrorOccurred: \(parseError)")
+        //print("parseErrorOccurred: \(parseError)")
     }
 }

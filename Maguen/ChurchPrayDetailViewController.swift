@@ -74,7 +74,7 @@ class ChurchPrayDetailViewController: UIViewController, UITableViewDataSource, U
             let queryResults = try? db.prepare(query2)
             
             for row in queryResults! {
-                //print("titulo: \(row[db_titulo]), id: \(row[db_horarios_reso_id]), horario: \(row[db_horario]), tiporesoid: \(row[db_tipo_reso_id]), centro_id: \(row[db_centro_id])")
+                ////print("titulo: \(row[db_titulo]), id: \(row[db_horarios_reso_id]), horario: \(row[db_horario]), tiporesoid: \(row[db_tipo_reso_id]), centro_id: \(row[db_centro_id])")
                 let data = prayComponents(prayName: try row.get(db_titulo), prayTime: try row.get(db_horario), prayType: try Int(row.get(db_tipo_reso_id)))
                 switch data.prayType {
                 case 1:
@@ -113,7 +113,7 @@ class ChurchPrayDetailViewController: UIViewController, UITableViewDataSource, U
             
         }
         catch let ex {
-            print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
+            //print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
         }
     }
     

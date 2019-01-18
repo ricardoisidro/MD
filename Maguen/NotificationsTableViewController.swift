@@ -162,7 +162,7 @@ class NotificationsTableViewController: UITableViewController {
             let nr = try jsonDecoder.decode(NotificationResponse.self, from: Data(decrypted.utf8))
             
             let size = nr.Value.count
-            //print(size)
+            ////print(size)
             if size > 0 {
                 for i in 0...(size-1) {
                     let data = notificationsComponents(notificationId: nr.Value[i].id, notificationTitle: nr.Value[i].titulo, notificationDate: nr.Value[i].fecha_publicacion, notificationText: nr.Value[i].descripcion)
@@ -174,7 +174,7 @@ class NotificationsTableViewController: UITableViewController {
             
         }
         catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
+            //print("getTablesList error: \(jsonErr)")
         }
         return tablesToSync
         
@@ -188,13 +188,13 @@ class NotificationsTableViewController: UITableViewController {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(request)
             let jsonString = String(data: jsonData, encoding: .utf8)!
-            //print(jsonString)
+            ////print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
         catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
+            //print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -207,7 +207,7 @@ class NotificationsTableViewController: UITableViewController {
             _ = try jsonDecoder.decode(NotificationResponse.self, from: Data(decrypted.utf8))
         }
         catch let ex {
-            print("updateNotifications error: \(ex)")
+            //print("updateNotifications error: \(ex)")
         }
     }
 

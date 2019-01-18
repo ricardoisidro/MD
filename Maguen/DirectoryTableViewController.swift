@@ -60,7 +60,7 @@ class DirectoryTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         let number = tableViewData[indexPath.row].directoryPhone
         let url:NSURL = NSURL(string: "tel://" + number)!

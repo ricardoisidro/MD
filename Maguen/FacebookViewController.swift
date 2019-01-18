@@ -58,23 +58,23 @@ class FacebookViewController: UIViewController, WKNavigationDelegate {
     
     //MARK:- WKNavigationDelegate
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
-        //print("Start to load")
+        ////print("Start to load")
         showActivityIndicator(show: true)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        //print("Finish to load")
+        ////print("Finish to load")
         title = webView.title
         showActivityIndicator(show: false)
     }
     
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        print(error.localizedDescription)
+        //print(error.localizedDescription)
         showActivityIndicator(show: false)
     }
     
     func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!, withError error: Error) {
-        print(error.localizedDescription)
+        //print(error.localizedDescription)
         showActivityIndicator(show: false)
     }
 

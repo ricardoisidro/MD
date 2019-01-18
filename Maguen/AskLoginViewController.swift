@@ -136,11 +136,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         
         addLoadingView()
         guard let user = txtUsuario.text else {
-            print("No user")
+            //print("No user")
             return
         }
         guard let pass = txtPassword.text else {
-            print("No password")
+            //print("No password")
             return
         }
         //get data to send
@@ -178,7 +178,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentParsingElement = elementName
         if elementName == "GetUsuarioAppResponse" {
-            //print("Started parsing...")
+            ////print("Started parsing...")
         }
     }
     
@@ -198,7 +198,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "GetUsuarioAppResponse" {
-            //print("Ended parsing...")
+            ////print("Ended parsing...")
             
         }
     }
@@ -241,7 +241,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     }
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("parseErrorOccurred: \(parseError)")
+        //print("parseErrorOccurred: \(parseError)")
     }
     
     func encodeAndEncryptJSONString(LoginRequest: LoginRequest) -> Array<UInt8> {
@@ -255,7 +255,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
         }
         catch let err {
-            print("encodeAndEncryptJSONString error: \(err)")
+            //print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -289,9 +289,9 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
                 let db = try Connection(fileURL.path)
                 
-                let sexo = loginResult.Value!.sexo == "H"
+                let sexo = loginResult.Value.sexo == "H"
                 let savedSex = sexo ? "HOMBRE" : "MUJER"
-                let birthDate = loginResult.Value!.fecha_nacimiento.prefix(10)
+                let birthDate = loginResult.Value.fecha_nacimiento!.prefix(10)
                 //let activationDate = loginResult.Value?.fecha_activacion.prefix(10)
                 
                 let createOK = onCreateUserDB(database: db)
@@ -318,16 +318,16 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 
                 
                 
-                UserDefaults.standard.set(loginResult.Value!.nombre, forKey: "name")
-                UserDefaults.standard.set(loginResult.Value!.primer_apellido, forKey: "surname1")
-                UserDefaults.standard.set(loginResult.Value!.segundo_apellido, forKey: "surname2")
+                UserDefaults.standard.set(loginResult.Value.nombre, forKey: "name")
+                UserDefaults.standard.set(loginResult.Value.primer_apellido, forKey: "surname1")
+                UserDefaults.standard.set(loginResult.Value.segundo_apellido, forKey: "surname2")
                 UserDefaults.standard.set(savedSex, forKey: "sex")
                 UserDefaults.standard.set(birthDate, forKey: "birthday")
-                UserDefaults.standard.set(loginResult.Value!.correo, forKey: "mail")
-                UserDefaults.standard.set(loginResult.Value!.telefonoActual.numero, forKey: "phone")
-                UserDefaults.standard.set(loginResult.Value!.credencialActual.fotografia, forKey: "photo")
-                UserDefaults.standard.set(loginResult.Value!.usuario, forKey: "user")
-                UserDefaults.standard.set(loginResult.Value!.comunidad_id, forKey: "comunidadID")
+                UserDefaults.standard.set(loginResult.Value.correo, forKey: "mail")
+                UserDefaults.standard.set(loginResult.Value.telefonoActual.numero, forKey: "phone")
+                UserDefaults.standard.set(loginResult.Value.credencialActual.fotografia, forKey: "photo")
+                UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")
+                UserDefaults.standard.set(loginResult.Value.comunidad_id, forKey: "comunidadID")
                 
                 
                 
@@ -343,7 +343,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
         }
         catch let jsonErr{
-            print("UpdateUI error: \(jsonErr)")
+            //print("UpdateUI error: \(jsonErr)")
             showAlertWith(title: "Error", message: "Error al validar credenciales")
             self.activityIndicatorView.removeFromSuperview()
         }
@@ -410,11 +410,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 t.column(db_user_idactivedate)
                 t.column(db_user_cardid)*/
             })
-            print("se creo tabla con exito")
+            ////print("se creo tabla con exito")
             return true
         }
         catch let ex {
-            print("onCreateUser SQLite exception: \(ex)")
+            //print("onCreateUser SQLite exception: \(ex)")
             return false
         }
         
@@ -460,41 +460,42 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             */
             let format = DateFormatter()
             format.dateFormat = "dd/MM/yyyy HH:mm:ss"
-            let f = format.date(from: objeto.Value!.fecha_nacimiento)
+            let f = format.date(from: objeto.Value.fecha_nacimiento!)
             
-            let factivacion = format.date(from: objeto.Value!.fecha_activacion)
+            let factivacion = format.date(from: objeto.Value.fecha_activacion!)
             
-            
+            let comid = objeto.Value.comunidad_id ?? 0
+            let act = objeto.Value.activo ?? 1
             let insert = db_user.insert(or: .replace,
-            db_usuario_app_id <- Int64(objeto.Value!.credencialActual.usuario_app_id),
-            db_nombre <- objeto.Value!.nombre,
-            db_primer_apellido <- objeto.Value!.primer_apellido,
-            db_segundo_apellido <- objeto.Value!.segundo_apellido,
-            db_sexo <- objeto.Value!.sexo,
+                                        db_usuario_app_id <- Int64(objeto.Value.credencialActual.usuario_app_id),
+            db_nombre <- objeto.Value.nombre,
+            db_primer_apellido <- objeto.Value.primer_apellido,
+            db_segundo_apellido <- objeto.Value.segundo_apellido,
+            db_sexo <- objeto.Value.sexo,
             db_fecha_nacimiento <- f,
             db_fecha_activacion <- factivacion,
-            db_correo <- objeto.Value!.correo,
-            db_contrasena <- objeto.Value!.contrasena,
-            db_comunidad_id <- Int64(objeto.Value!.comunidad_id),
-            db_categoria_id <- Int64(objeto.Value!.categoria_id),
+            db_correo <- objeto.Value.correo,
+            db_contrasena <- objeto.Value.contrasena,
+            db_comunidad_id <- Int64(comid),
+            db_categoria_id <- Int64(objeto.Value.categoria_id),
             
             //db_user_phone <- objeto.Value.telefonoActual.numero,
             //db_user_photo <- objeto.Value.credencialActual.fotografia,
-            db_activo <- Int64(objeto.Value!.activo),
-            db_usuario <- objeto.Value!.usuario,
+            db_activo <- Int64(act),
+            db_usuario <- objeto.Value.usuario,
             db_domicilio_id <- 0,
-            db_eliminado <-  Int64(objeto.Value!.eliminado))
+            db_eliminado <-  Int64(objeto.Value.eliminado ?? 0))
             
            // db_user_idactivedate <- objeto.Value.credencialActual.fecha_vencimiento,
            // db_user_cardid <- Int64(objeto.Value.credencialActual.credencial_id))
             
             try database.run(insert)
             
-             print("se inserto con  exito")
+             //print("se inserto con  exito")
             return true
         }
         catch let ex {
-            print("onInsertCategoriaCentro Error: \(ex)")
+            //print("onInsertCategoriaCentro Error: \(ex)")
             return false
         }
         
@@ -505,19 +506,19 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             //let db = database
             let format = DateFormatter()
             format.dateFormat = "dd/MM/yyyy"
-            let f = format.date(from: objeto.Value!.fecha_nacimiento)
+            let f = format.date(from: objeto.Value.fecha_nacimiento!)
             let insert = db_user.insert(or: .replace,
-                                        db_usuario_app_id <- Int64(objeto.Value!.credencialActual.usuario_app_id),
-                                        db_nombre <- objeto.Value!.nombre,
-                                        db_primer_apellido <- objeto.Value!.primer_apellido,
-                                        db_segundo_apellido <- objeto.Value!.segundo_apellido,
-                                        db_sexo <- objeto.Value!.sexo,
+                                        db_usuario_app_id <- Int64(objeto.Value.credencialActual.usuario_app_id),
+                                        db_nombre <- objeto.Value.nombre,
+                                        db_primer_apellido <- objeto.Value.primer_apellido,
+                                        db_segundo_apellido <- objeto.Value.segundo_apellido,
+                                        db_sexo <- objeto.Value.sexo,
                                         db_fecha_nacimiento <- f,
-                                        db_correo <- objeto.Value!.correo,
+                                        db_correo <- objeto.Value.correo,
                                         //db_user_phone <- objeto.Value.telefonoActual.numero,
                 //db_user_photo <- objeto.Value.credencialActual.fotografia,
-                db_categoria_id <- Int64(objeto.Value!.categoria_id),
-                db_usuario <- objeto.Value!.usuario)
+                db_categoria_id <- Int64(objeto.Value.categoria_id),
+                db_usuario <- objeto.Value.usuario)
             // db_user_idactivedate <- objeto.Value.credencialActual.fecha_vencimiento,
             // db_user_cardid <- Int64(objeto.Value.credencialActual.credencial_id))
             
@@ -539,7 +540,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             try database.run(insert)
         }
         catch let ex {
-            print("onInsertCategoriaCentro Error: \(ex)")
+            //print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
@@ -560,11 +561,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 t.column(db_usuario_app_id)
             })
             
-            print("se creo tabla credenciales")
+            //print("se creo tabla credenciales")
             return true
         }
         catch let ex {
-            print("onCreateRegistro SQLite exception: \(ex)")
+            //print("onCreateRegistro SQLite exception: \(ex)")
             return false
         }
     }
@@ -580,24 +581,24 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
             let format = DateFormatter()
             format.dateFormat = "dd/MM/yyyy HH:mm:ss"
-            let f = format.date(from: objeto.Value!.credencialActual.fecha_expedicion)
-            let f2 = format.date(from: objeto.Value!.credencialActual.fecha_vencimiento)
+            let f = format.date(from: objeto.Value.credencialActual.fecha_expedicion!)
+            let f2 = format.date(from: objeto.Value.credencialActual.fecha_vencimiento!)
             
             let insert = table_credencial.insert(or: .replace,
-                                                 db_credencial_id <- Int64(objeto.Value!.credencialActual.credencial_id),
+                                                 db_credencial_id <- Int64(objeto.Value.credencialActual.credencial_id),
                         db_fecha_expedicion <- f,
                         db_fecha_vencimiento <- f2,
-                        db_vigencia <- Int64(objeto.Value!.credencialActual.vigencia),
-                        db_activa <- Int64(objeto.Value!.credencialActual.activa),
-                        db_fotografia <- objeto.Value!.credencialActual.fotografia,
-                        db_usuario_app_id <- Int64(objeto.Value!.credencialActual.usuario_app_id))
+                        db_vigencia <- Int64(objeto.Value.credencialActual.vigencia),
+                        db_activa <- Int64(objeto.Value.credencialActual.activa),
+                        db_fotografia <- objeto.Value.credencialActual.fotografia,
+                        db_usuario_app_id <- Int64(objeto.Value.credencialActual.usuario_app_id))
                         
             try database.run(insert)
-            print("se inserto en tabla credenciales")
+            //print("se inserto en tabla credenciales")
             return true
         }
         catch let ex {
-            print("onInsertRegistro SQLite exception: \(ex)")
+            //print("onInsertRegistro SQLite exception: \(ex)")
             return false
         }
     }
@@ -618,11 +619,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 t.column(db_activo)
             })
             
-            print("se creo tabla telefonos")
+            //print("se creo tabla telefonos")
             return true
         }
         catch let ex {
-            print("onCreateRegistro SQLite exception: \(ex)")
+            //print("onCreateRegistro SQLite exception: \(ex)")
             return false
         }
     }
@@ -632,20 +633,20 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
           
             
             let insert = table_telefonos.insert(or: .replace,
-                                                db_telefono_id <- Int64(objeto.Value!.telefonoActual.telefono_id),
-                                                db_usuario_app_id <- Int64(objeto.Value!.telefonoActual.usuario_app_id),
-                                                db_numero <- objeto.Value!.telefonoActual.numero,
-                                                db_tipo_id <- Int64(objeto.Value!.telefonoActual.tipo_id),
-                                                db_imei <- objeto.Value!.telefonoActual.imei,
-                                                db_sistema_operativo <- objeto.Value!.telefonoActual.sistema_operativo,
-                                                db_activo <- Int64(objeto.Value!.telefonoActual.activo))
+                                                db_telefono_id <- Int64(objeto.Value.telefonoActual.telefono_id),
+                                                db_usuario_app_id <- Int64(objeto.Value.telefonoActual.usuario_app_id),
+                                                db_numero <- objeto.Value.telefonoActual.numero,
+                                                db_tipo_id <- Int64(objeto.Value.telefonoActual.tipo_id),
+                                                db_imei <- objeto.Value.telefonoActual.imei,
+                                                db_sistema_operativo <- objeto.Value.telefonoActual.sistema_operativo,
+                                                db_activo <- Int64(objeto.Value.telefonoActual.activo))
             
             try database.run(insert)
-            print("se inserto en tabla telefonos")
+            //print("se inserto en tabla telefonos")
             return true
         }
         catch let ex {
-            print("onInsertRegistro SQLite exception: \(ex)")
+            //print("onInsertRegistro SQLite exception: \(ex)")
             return false
         }
     }

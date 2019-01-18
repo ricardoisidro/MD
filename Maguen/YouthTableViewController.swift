@@ -36,7 +36,7 @@ class YouthTableViewController: UITableViewController {
             
             let query = db_centro.select(db_centro[db_imagen_portada], db_centro[db_nombre], db_centro[db_centro_id]).where(db_centro[db_categoria_centro_id] == 3).where(db_centro[db_eliminado] == 0)
             guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar centro")
+                //print("ERROR al consultar centro")
                 return
             }
             
@@ -47,7 +47,7 @@ class YouthTableViewController: UITableViewController {
             }
         }
         catch let ex {
-            print("ReadCentroDB in Juventud error: \(ex)")
+            //print("ReadCentroDB in Juventud error: \(ex)")
         }
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
@@ -88,7 +88,7 @@ class YouthTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "youthdetail", sender: tableViewData[indexPath.row])
     }

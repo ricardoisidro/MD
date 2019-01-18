@@ -79,7 +79,7 @@ class YouthDetailTableViewController: UITableViewController {
                 .where(db_servicio_centro[db_eliminado] == 0)
             
             guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar servicios JOIN servicio_centro")
+                //print("ERROR al consultar servicios JOIN servicio_centro")
                 return
             }
             
@@ -93,7 +93,7 @@ class YouthDetailTableViewController: UITableViewController {
                 .where(db_centro_id == Int64(centro_id))
             guard let queryResults2 = try? db.prepare(query2)
                 else {
-                    print("ERROR al consultar clases")
+                    //print("ERROR al consultar clases")
                     return
             }
             for row in queryResults2 {
@@ -105,7 +105,7 @@ class YouthDetailTableViewController: UITableViewController {
             guard let queryResults3 = try? db.prepare(query3)
                 //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {
-                    print("ERROR al consultar eventos")
+                    //print("ERROR al consultar eventos")
                     return
             }
             for row in queryResults3 {
@@ -120,7 +120,7 @@ class YouthDetailTableViewController: UITableViewController {
             
         }
         catch let ex {
-            print("ReadCentroDB in Juventud error: \(ex)")
+            //print("ReadCentroDB in Juventud error: \(ex)")
         }
 
         tableViewRootData = [
@@ -220,28 +220,28 @@ class YouthDetailTableViewController: UITableViewController {
                 tableViewRootData[indexPath.section].opened = false
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
-                //print("Cerrar grupo")
+                ////print("Cerrar grupo")
                 
             }
             else {
                 tableViewRootData[indexPath.section].opened = true
                 let sections = IndexSet.init(integer: indexPath.section)
                 tableView.reloadSections(sections, with: .none)
-                //print("Abriendo grupo")
+                ////print("Abriendo grupo")
             }
         }
         else {
             if indexPath.section == 1 { //events
                 tableView.deselectRow(at: indexPath, animated: true)
                 //travelText = tableViewDataEvents[indexPath.row - 1].subLabel
-                //print("Selected inner cell: " + travelText)
+                ////print("Selected inner cell: " + travelText)
                 self.performSegue(withIdentifier: "viewEvent", sender: tableViewDataEventDetail[indexPath.row - 1])
                 //travelText = tableView[indexPath.section].sectionData[indexPath.row - 1]
                 
             }
             else if indexPath.section == 2 { // classes
                 tableView.deselectRow(at: indexPath, animated: true)
-                //print("Selected inner cell: " + travelText)
+                ////print("Selected inner cell: " + travelText)
                 self.performSegue(withIdentifier: "viewClass", sender: tableViewDataClasses[indexPath.row - 1])
                 
             }

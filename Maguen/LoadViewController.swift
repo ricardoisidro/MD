@@ -164,7 +164,7 @@ class LoadViewController: UIViewController {
                 self.database = database
             }
             catch let ex {
-                print("createDBFile error: \(ex)")
+                //print("createDBFile error: \(ex)")
             }
             
             
@@ -207,7 +207,7 @@ class LoadViewController: UIViewController {
             
             if tablesToSync != [""] {
                 for tables in tablesToSync  {
-                    /*print("""
+                    /*//print("""
                      
                      
                      \(tables)
@@ -231,7 +231,7 @@ class LoadViewController: UIViewController {
                         }
                         //let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
                         _ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                        //print(entitiesToSync)
+                        ////print(entitiesToSync)
                     }
                 }
             }
@@ -307,7 +307,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateCategoriaCentro SQLite exception: \(ex)")
+            //print("onCreateCategoriaCentro SQLite exception: \(ex)")
         }
         
     }
@@ -323,7 +323,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertCategoriaCentro Error: \(ex)")
+            //print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
@@ -347,7 +347,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateCentroDB SQLite exception: \(ex)")
+            //print("onCreateCentroDB SQLite exception: \(ex)")
         }
         
     }
@@ -369,7 +369,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertCentroDBError: \(ex)")
+            //print("onInsertCentroDBError: \(ex)")
         }
         
     }
@@ -391,7 +391,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateEventosDB SQLite exception: \(ex)")
+            //print("onCreateEventosDB SQLite exception: \(ex)")
         }
         
     }
@@ -416,7 +416,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertCentroDBError: \(ex)")
+            //print("onInsertCentroDBError: \(ex)")
         }
         
     }
@@ -434,7 +434,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateComitesDB SQLite exception: \(ex)")
+            //print("onCreateComitesDB SQLite exception: \(ex)")
         }
         
     }
@@ -451,7 +451,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertComiteDBError: \(ex)")
+            //print("onInsertComiteDBError: \(ex)")
         }
         
     }
@@ -468,7 +468,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateCategoriaPublicacionDB SQLite exception: \(ex)")
+            //print("onCreateCategoriaPublicacionDB SQLite exception: \(ex)")
         }
         
     }
@@ -484,7 +484,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertCategoriaPublicacionDBError: \(ex)")
+            //print("onInsertCategoriaPublicacionDBError: \(ex)")
         }
         
     }
@@ -506,7 +506,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreatePublicacionDB SQLite exception: \(ex)")
+            //print("onCreatePublicacionDB SQLite exception: \(ex)")
         }
         
     }
@@ -530,7 +530,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertPublicacionDBError: \(ex)")
+            //print("onInsertPublicacionDBError: \(ex)")
         }
         
     }
@@ -546,7 +546,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateComunidadDB SQLite exception: \(ex)")
+            //print("onCreateComunidadDB SQLite exception: \(ex)")
         }
         
     }
@@ -561,7 +561,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertComunidadDBError: \(ex)")
+            //print("onInsertComunidadDBError: \(ex)")
         }
         
     }
@@ -581,7 +581,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateHorarioClaseDB SQLite exception: \(ex)")
+            //print("onCreateHorarioClaseDB SQLite exception: \(ex)")
         }
         
     }
@@ -600,7 +600,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertHorarioClaseDBError: \(ex)")
+            //print("onInsertHorarioClaseDBError: \(ex)")
         }
         
     }
@@ -618,7 +618,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateComunidadDB SQLite exception: \(ex)")
+            //print("onCreateComunidadDB SQLite exception: \(ex)")
         }
         
     }
@@ -635,7 +635,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertComunidadDBError: \(ex)")
+            //print("onInsertComunidadDBError: \(ex)")
         }
         
     }
@@ -655,7 +655,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateHorarioResoDB SQLite exception: \(ex)")
+            //print("onCreateHorarioResoDB SQLite exception: \(ex)")
         }
         
     }
@@ -674,7 +674,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertHorarioResoDBError: \(ex)")
+            //print("onInsertHorarioResoDBError: \(ex)")
         }
         
     }
@@ -692,7 +692,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateServicioCentroDB SQLite exception: \(ex)")
+            //print("onCreateServicioCentroDB SQLite exception: \(ex)")
         }
         
     }
@@ -709,7 +709,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertServicioCentroDBError: \(ex)")
+            //print("onInsertServicioCentroDBError: \(ex)")
         }
         
     }
@@ -729,7 +729,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateServicioDB SQLite exception: \(ex)")
+            //print("onCreateServicioDB SQLite exception: \(ex)")
         }
         
     }
@@ -748,7 +748,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertServicioDBError: \(ex)")
+            //print("onInsertServicioDBError: \(ex)")
         }
         
     }
@@ -770,7 +770,7 @@ class LoadViewController: UIViewController {
             })
         }
         catch let ex {
-            print("onCreateCategoriaCentro SQLite exception: \(ex)")
+            //print("onCreateCategoriaCentro SQLite exception: \(ex)")
         }
         
     }
@@ -791,7 +791,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            print("onInsertCategoriaCentro Error: \(ex)")
+            //print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
@@ -810,7 +810,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
+            //print("getTablesList error: \(jsonErr)")
         }
         return tablesToSync
         
@@ -831,7 +831,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
+            //print("getTablesList error: \(jsonErr)")
         }
         
         return idToSync
@@ -904,7 +904,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
+            //print("getTablesList error: \(jsonErr)")
         }
         
         return entitiesToSync

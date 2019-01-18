@@ -89,7 +89,7 @@ class Telefonos : NSObject
             })
         }
         catch let ex {
-            print("onCreateRegistro SQLite exception: \(ex)")
+            //print("onCreateRegistro SQLite exception: \(ex)")
         }
     }
     func onInsert(connection: Connection, objeto: Telefonos) {
@@ -106,7 +106,7 @@ class Telefonos : NSObject
             try connection.run(insert)
         }
         catch let ex {
-            print("onInsertRegistro SQLite exception: \(ex)")
+            //print("onInsertRegistro SQLite exception: \(ex)")
         }
     }
     
@@ -130,7 +130,7 @@ class Telefonos : NSObject
             
         }
         catch let ex {
-            print("Read TelefonosDB error: \(ex)")
+            //print("Read TelefonosDB error: \(ex)")
             
             return Telefonos()
         }
@@ -141,7 +141,7 @@ class Telefonos : NSObject
             try connection.run(table_telefonos.delete())
         }
         catch let ex {
-            print("onDeleteTelefonos error: \(ex)")
+            //print("onDeleteTelefonos error: \(ex)")
         }
     }
     
@@ -151,16 +151,16 @@ class Telefonos : NSObject
         do {
             if try connection.run(table_telefonos.update(db_numero <- phone)) > 0
             {
-                print("Updated")
+                //print("Updated")
                 success = true
             }
             else {
-                print("Not updated")
+                //print("Not updated")
                 success = false
             }
         }
         catch let error {
-            print("onUpdateTelefonos exception: \(error)")
+            //print("onUpdateTelefonos exception: \(error)")
             success = false
         }
         return success

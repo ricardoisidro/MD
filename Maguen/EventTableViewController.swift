@@ -51,7 +51,7 @@ class EventTableViewController: UITableViewController {
             guard let queryResults = try? db.prepare(query)
             //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {
-                print("ERROR al consultar eventos")
+                //print("ERROR al consultar eventos")
                 return
             }
             
@@ -72,7 +72,7 @@ class EventTableViewController: UITableViewController {
             
         }
         catch let ex {
-            print("ReadDB error: \(ex)")
+            //print("ReadDB error: \(ex)")
         }
 
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -116,7 +116,7 @@ class EventTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         self.performSegue(withIdentifier: "eventdetail", sender: indexPath)
     }

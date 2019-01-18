@@ -58,14 +58,14 @@ class HistRevistaTableViewController: UITableViewController {
             }
             
             //  dailyTitle = try currentDaily?.get(db_descripcion) ?? ""
-            //print(dailyTitle!)
+            ////print(dailyTitle!)
             
             
             
             
         }
         catch let err {
-            print("Read publicacionDB error: \(err)")
+            //print("Read publicacionDB error: \(err)")
             
         }
         
@@ -124,7 +124,7 @@ class HistRevistaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: "sRevista", sender: tableViewData[indexPath.row])

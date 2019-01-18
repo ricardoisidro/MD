@@ -71,12 +71,12 @@ class CardController: UIViewController {
             
             let query = db_user.select(db_user_id, db_user_name, db_user_surname1, db_user_surname2, db_user_idactivedate, db_user_idtype, db_user_photo, db_user_cardid, db_user_idtype)
             guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar usuario")
+                //print("ERROR al consultar usuario")
                 return
             }
             
             for row in queryResults {
-                //print("app id: \(row[db_user_id]) nombre: \(row[db_user_name]), apellido: \(row[db_user_surname1]), fecha vig.: \(row[db_user_idactivedate]), tipoid: \(row[db_user_idtype]), cardid: \(row[db_user_cardid])")
+                ////print("app id: \(row[db_user_id]) nombre: \(row[db_user_name]), apellido: \(row[db_user_surname1]), fecha vig.: \(row[db_user_idactivedate]), tipoid: \(row[db_user_idtype]), cardid: \(row[db_user_cardid])")
                 let bothSurnames = try row.get(db_user_surname1) + " " + row.get(db_user_surname2)
                 let data = usuario(id: try Int(row.get(db_user_id)), nombre: try row.get(db_user_name), apellido1: bothSurnames, fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
                 tableDataSocio.append(data)
@@ -84,7 +84,7 @@ class CardController: UIViewController {
             
         }
         catch let ex {
-            print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
+            //print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
         }*/
         
         
@@ -104,7 +104,7 @@ class CardController: UIViewController {
         let currentUser = user.onReadData(connection: conn)
         let currentCard = card.onReadData(connection: conn)
         
-        //print QR
+        ////print QR
         let currentDate = Date()
         let dateFormat = DateFormatter()
         dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
@@ -112,12 +112,12 @@ class CardController: UIViewController {
         
         
         let lastCodeDate = UserDefaults.standard.string(forKey: "cardVigency")
-        print("1. \(lastCodeDate ?? "null")")
+        //print("1. \(lastCodeDate ?? "null")")
         generacodigo(idUsr: currentUser.usuario_app_id)
         
           let futureDate = currentDate.addingTimeInterval(5.0*60.0)
         let futDate = dateFormat.string(from: futureDate)
-        print("2. \(futDate) saved on UserDefaults")
+        //print("2. \(futDate) saved on UserDefaults")
         UserDefaults.standard.set(futDate, forKey: "cardVigency")
         if (futureDate < currentDate)
         {
@@ -130,7 +130,7 @@ class CardController: UIViewController {
             
             
             let futDate = dateFormat.string(from: futureDate)
-            print("2. \(futDate) saved on UserDefaults")
+            //print("2. \(futDate) saved on UserDefaults")
             UserDefaults.standard.set(futDate, forKey: "cardVigency")
             
             //call QR service
@@ -149,13 +149,13 @@ class CardController: UIViewController {
         else {
             let lastCodeDatetoDate = dateFormat.date(from: lastCodeDate!)
             let currentDatetoDate = dateFormat.date(from: currDate)
-            print("¿\(currentDatetoDate!) > \(lastCodeDatetoDate!)?")
+            //print("¿\(currentDatetoDate!) > \(lastCodeDatetoDate!)?")
             if currentDatetoDate! > lastCodeDatetoDate! {
-                print("Genera code")
+                //print("Genera code")
                 
                 let futureDate2 = currentDate.addingTimeInterval(5.0*60.0)
                 let futDate2 = dateFormat.string(from: futureDate2)
-                print("3. Saved new date: \(futDate2)")
+                //print("3. Saved new date: \(futDate2)")
                 UserDefaults.standard.set(futDate2, forKey: "cardVigency")
                 
                 generacodigo()
@@ -163,7 +163,7 @@ class CardController: UIViewController {
                 
             }
             else {
-                print("No necesito codigo")
+                //print("No necesito codigo")
             }
         }*/
         
@@ -241,7 +241,7 @@ class CardController: UIViewController {
             
         }
         catch let jsonErr{
-            print("getWiganCode error: \(jsonErr)")
+            //print("getWiganCode error: \(jsonErr)")
         }
         return code
         

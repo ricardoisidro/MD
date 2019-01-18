@@ -38,7 +38,7 @@ class Global {
             self.database = database
         }
         catch let ex {
-            print("createDBFile error: \(ex)")
+            //print("createDBFile error: \(ex)")
         }
     }*/
 }

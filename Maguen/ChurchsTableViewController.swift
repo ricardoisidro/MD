@@ -38,7 +38,7 @@ class ChurchsTableViewController: UITableViewController {
             let query = db_centro.select(db_centro[db_imagen_portada], db_centro[db_nombre], db_centro[db_centro_id]).where(db_centro[db_categoria_centro_id] == 1).where(db_centro[db_eliminado] == 0)
             //guard let queryResults = try? db.prepare("SELECT imagen_portada, nombre, centro_id FROM centro WHERE categoria_centro_id = 1 and eliminado = 0") else {
             guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar centro")
+                //print("ERROR al consultar centro")
                 return
             }
             
@@ -54,7 +54,7 @@ class ChurchsTableViewController: UITableViewController {
             
         }
         catch let ex {
-            print("ReadCentroDB in Templos error: \(ex)")
+            //print("ReadCentroDB in Templos error: \(ex)")
         }
 
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
@@ -95,7 +95,7 @@ class ChurchsTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
         self.performSegue(withIdentifier: "churchdetail", sender: tableViewData[indexPath.row])

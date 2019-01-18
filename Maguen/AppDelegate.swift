@@ -43,23 +43,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
-            print("estoy en 0")
+            //print("estoy en 0")
             Global.shared.indexItemTabSelected = 0
         }
         if tabBarIndex == 1 {
-            print("estoy en 1")
+            //print("estoy en 1")
         Global.shared.indexItemTabSelected = 1
         }
         if tabBarIndex == 2 {
-            print("estoy en 2")
+            //print("estoy en 2")
              Global.shared.indexItemTabSelected = 2
         }
         if tabBarIndex == 3 {
-            print("estoy en 3")
+            //print("estoy en 3")
              Global.shared.indexItemTabSelected = 3
         }
         if tabBarIndex == 4 {
-            print("estoy en 4")
+            //print("estoy en 4")
              Global.shared.indexItemTabSelected = 4
         
         }
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
   
     // This delegate open the modal view after open the desired view.
   /*  private func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) -> Bool {
-        print("entre a otro delegado")
+        //print("entre a otro delegado")
         
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
@@ -84,10 +84,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
-           print("estoy en 0")
+           //print("estoy en 0")
         }
         if tabBarIndex == 1 {
-            print("estoy en 1")
+            //print("estoy en 1")
             
          /*   if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
@@ -96,13 +96,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }*/
         }
         if tabBarIndex == 2 {
-            print("estoy en 2")
+            //print("estoy en 2")
         }
         if tabBarIndex == 3 {
-            print("estoy en 3")
+            //print("estoy en 3")
         }
         if tabBarIndex == 4 {
-            print("estoy en 4")
+            //print("estoy en 4")
     
   /*  if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController")  {
     tabBarController.present(popUpVC, animated: true)
@@ -118,7 +118,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     //MARK: - App delegates
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-  print("Selected view controller")
+  //print("Selected view controller")
         
         return true
     }

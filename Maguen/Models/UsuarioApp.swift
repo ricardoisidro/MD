@@ -158,7 +158,7 @@ class UsuarioApp : NSObject
             })
         }
         catch let ex {
-            print("onCreateRegistro SQLite exception: \(ex)")
+            //print("onCreateRegistro SQLite exception: \(ex)")
         }
     }
     func onInsert(connection: Connection, objeto: UsuarioApp) {
@@ -184,7 +184,7 @@ class UsuarioApp : NSObject
             try connection.run(insert)
         }
         catch let ex {
-            print("onInsertRegistro SQLite exception: \(ex)")
+            //print("onInsertRegistro SQLite exception: \(ex)")
         }
     }
     
@@ -217,7 +217,7 @@ class UsuarioApp : NSObject
             
         }
         catch let ex {
-            print("ReadUsuarioAppDB error: \(ex)")
+            //print("ReadUsuarioAppDB error: \(ex)")
             
             return UsuarioApp()
         }
@@ -229,7 +229,7 @@ class UsuarioApp : NSObject
             try connection.run(table_usuarioapp.delete())
         }
         catch let ex {
-            print("onDeleteUsuarioApp error: \(ex)")
+            //print("onDeleteUsuarioApp error: \(ex)")
         }
     }
     
@@ -248,16 +248,16 @@ class UsuarioApp : NSObject
                                                           db_sexo <- sex,
                                                           db_comunidad_id <- community)) > 0
             {
-                print("Updated")
+                //print("Updated")
                 success = true
             }
             else {
-                print("Not updated")
+                //print("Not updated")
                 success = false
             }
         }
         catch let error {
-            print("onUpdateUsuarioApp exception: \(error)")
+            //print("onUpdateUsuarioApp exception: \(error)")
             success = false
         }
         return success

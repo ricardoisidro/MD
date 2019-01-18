@@ -50,7 +50,7 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
             
         }
         catch let err {
-            print("Read publicacionDB error: \(err)")
+            //print("Read publicacionDB error: \(err)")
         }
         
         

@@ -69,7 +69,7 @@ class SidurTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: "Arbit", sender: tableViewData[indexPath.row].sidurText)

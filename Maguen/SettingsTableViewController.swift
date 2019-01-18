@@ -29,7 +29,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
   
     @IBAction func btnVerSaldo(_ sender: Any) {
         
-        print("di clic en ver saldo")
+        //print("di clic en ver saldo")
         let myView = self.storyboard!.instantiateViewController(withIdentifier: "DetalleSaldoViewController")
         
         self.present(myView, animated: true)
@@ -135,7 +135,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
          
             //getting centers list
             guard let queryResults = try? db.prepare("SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id") else {
-                print("ERROR al consultar Comites")
+                //print("ERROR al consultar Comites")
                 return
             }
             
@@ -146,7 +146,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             
             //getting communities
             guard let queryResults3 = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad") else {
-                print("ERROR al consultar Comunidad")
+                //print("ERROR al consultar Comunidad")
                 return
             }
             
@@ -163,7 +163,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
            let idSelected =  UserDefaults.standard.string(forKey: "comunidadID")
             
             guard let queryComunidadSocio = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad where comunidad_id = " + idSelected!) else {
-             print("ERROR al consultar Comunidad")
+             //print("ERROR al consultar Comunidad")
              return
              }
              
@@ -184,12 +184,12 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             
             guard let queryResults2 = try? db.pluck(query2)
                 else {
-                    print("ERROR al consultar usuario")
+                    //print("ERROR al consultar usuario")
                     return
             }
             guard let birthday = try? queryResults2?.get(db_fecha_nacimiento)
                 else {
-                    print("ERROR en fecha tabla usurios")
+                    //print("ERROR en fecha tabla usurios")
                     return
             }
             
@@ -198,7 +198,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             let queryCredencial = objCredencial.table_credencial.select(objCredencial.credencial_id, objCredencial.fotografia!)
             guard let queryResultsFoto = try? db.pluck(queryCredencial)
                 else {
-                    print("consulta foto nula")
+                    //print("consulta foto nula")
                     return
             }
             
@@ -233,7 +233,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             
          }
          catch let ex {
-            print("ReadCentroDB error: \(ex)")
+            //print("ReadCentroDB error: \(ex)")
          }
         
     }
@@ -241,7 +241,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     func GuardaEdicionSocio()
     {
         
-        print("estoy guardando")
+        //print("estoy guardando")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -425,11 +425,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         //tableView.deselectRow(at: indexPath, animated: true)
         
-        print("seccion" + String(indexPath.section.description))
-        print("row" + String(indexPath.row))
+        //print("seccion" + String(indexPath.section.description))
+        //print("row" + String(indexPath.row))
         
        // performSegue(withIdentifier: "Arbit", sender: tableViewData[indexPath.row].sidurText)
     }
@@ -442,7 +442,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     /*
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //print(section)
+        ////print(section)
         if section == 3 {
             return tableViewData.count
         }
@@ -450,9 +450,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     }*/
     
     /*override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-       print("seccion" + String(indexPath.section))
-        print("row" + String(indexPath.row))
-      //  print("seccion" + String(indexPath.section))
+       //print("seccion" + String(indexPath.section))
+        //print("row" + String(indexPath.row))
+      //  //print("seccion" + String(indexPath.section))
         
        // if indexPath.section == 3 {
           /*  let cell = tableView.dequeueReusableCell(withIdentifier: "options", for: indexPath) as! OptionTableViewCell*/

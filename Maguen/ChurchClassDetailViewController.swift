@@ -58,7 +58,7 @@ class ChurchClassDetailViewController: UIViewController, UITableViewDelegate, UI
                 .where(db_clase_id == Int64(classid))
                 .where(db_eliminado == 0)
             guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar centro")
+                //print("ERROR al consultar centro")
                 return
             }
             
@@ -69,7 +69,7 @@ class ChurchClassDetailViewController: UIViewController, UITableViewDelegate, UI
             
         }
         catch let ex {
-            print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
+            //print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
         }
         
     }

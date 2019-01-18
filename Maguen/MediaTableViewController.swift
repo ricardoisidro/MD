@@ -47,15 +47,15 @@ class MediaTableViewController: UITableViewController {
             let currentMagazine = try db.pluck(query2)
             
             dailyTitle = try currentDaily?.get(db_descripcion) ?? ""
-            //print(dailyTitle!)
+            ////print(dailyTitle!)
             
             magazineTitle = try currentMagazine?.get(db_descripcion) ?? ""
-            //print(magazineTitle!)
+            ////print(magazineTitle!)
             
             
         }
         catch let err {
-            print("Read publicacionDB error: \(err)")
+            //print("Read publicacionDB error: \(err)")
             
         }
 
@@ -108,7 +108,7 @@ class MediaTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         
         performSegue(withIdentifier: seguesIdentifiers[indexPath.row], sender: self)

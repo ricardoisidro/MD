@@ -38,14 +38,14 @@ class EmergencyController: UIViewController {
     }
     
     @IBAction func btnHatzala(_ sender: Any) {
-        //print("Calling hatzala")
+        ////print("Calling hatzala")
         let url:NSURL = NSURL(string: "tel://52805780")!
         UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
         
     }
     
     @IBAction func btnAccionSocial1(_ sender: UIButton) {
-        //print("Calling accsocial1")
+        ////print("Calling accsocial1")
         let url:NSURL = NSURL(string: "tel://19951520")!
         UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }

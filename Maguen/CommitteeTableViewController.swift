@@ -27,7 +27,7 @@ class CommitteeTableViewController: UITableViewController {
             let db = try Connection(fileURL.path)
             
             guard let queryResults = try? db.prepare("SELECT nombre_comite, telefono FROM comites WHERE eliminado = 0") else {
-                print("ERROR al consultar Comites")
+                //print("ERROR al consultar Comites")
                 return
             }
             
@@ -38,7 +38,7 @@ class CommitteeTableViewController: UITableViewController {
             
         }
         catch let ex {
-            print("ReadCentroDB in Templos error: \(ex)")
+            //print("ReadCentroDB in Templos error: \(ex)")
         }
         
         /*tableViewData = [
@@ -85,7 +85,7 @@ class CommitteeTableViewController: UITableViewController {
     // method to run when table view cell is tapped
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //let option = indexPath.row
-        //print("You tapped cell number \(indexPath.row).")
+        ////print("You tapped cell number \(indexPath.row).")
         tableView.deselectRow(at: indexPath, animated: true)
         let number = tableViewData[indexPath.row].committeePhone
         let url:NSURL = NSURL(string: "tel://" + number)!

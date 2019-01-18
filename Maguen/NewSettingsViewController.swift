@@ -303,7 +303,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
 
             break
         default:
-            print("Default")
+            //print("Default")
             break
         }
         
@@ -466,7 +466,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
 
         let aes = AESforJSON()
         let strEncode = aes.encodeAndEncryptJSONSetUsuarioApp(objeto: pSUA)
-        //print(strEncode)
+        ////print(strEncode)
         
         let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "SetUsuarioApp", encryptedString: strEncode)
         
@@ -485,7 +485,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
        /* nombre =  ?? ""
         apellido1 = self.embededVC.textConfigSurname1.text  ?? ""
         apellido2 = self.embededVC.textConfigSurname2.text  ?? ""
-        print("\(String(describing: nombre)) \(String(describing: apellido1)) \(String(describing: apellido2))")*/
+        //print("\(String(describing: nombre)) \(String(describing: apellido1)) \(String(describing: apellido2))")*/
     }
     
     @IBAction func btnEdit(_ sender: UIButton) {
@@ -550,7 +550,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     //MARK: - Saving Image here
     @IBAction func save(_ sender: AnyObject) {
         guard let selectedImage = imageTake.image else {
-            print("Image not found!")
+            //print("Image not found!")
             return
         }
         UIImageWriteToSavedPhotosAlbum(selectedImage, self, #selector(image(_:didFinishSavingWithError:contextInfo:)), nil)
@@ -579,14 +579,14 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             var decrypted = try soapString.decryptBase64ToString(cipher: aes)
-            //print("Cadena decrypted saldo: \(decrypted)")
+            ////print("Cadena decrypted saldo: \(decrypted)")
             
             let saldoResult = try jsonDecoder.decode(SaldoResponse.self, from: Data(decrypted.utf8))
-            //print("Saldo: \(saldoResult.Value)")
+            ////print("Saldo: \(saldoResult.Value)")
             UserDefaults.standard.set(saldoResult.Value, forKey: "balance")
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            //print("updateSaldo error: \(ex)")
         }
     }
     
@@ -595,7 +595,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentParsingElement = elementName
         if elementName == "GetSaldoActualResponse" {
-            //print("Started parsing...")
+            ////print("Started parsing...")
         }
     }
     
@@ -616,7 +616,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     
     func parser(_ parser: XMLParser, didEndElement elementName: String, namespaceURI: String?, qualifiedName qName: String?) {
         if elementName == "GetSaldoActualResponse" {
-            //print("Ended parsing...")
+            ////print("Ended parsing...")
             
         }
     }
@@ -628,7 +628,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
-        print("parseErrorOccurred: \(parseError)")
+        //print("parseErrorOccurred: \(parseError)")
     }*/
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
