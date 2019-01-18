@@ -120,7 +120,7 @@ class ChurchDetailTableViewController: UITableViewController {
             }
         }
         catch let ex {
-            //print("ReadDB error: \(ex)")
+            print("ReadDB error: \(ex)")
         }
         
         tableViewDataItinerary = [cellChurchSubDetailComponents(subLabel: "Lunes-Viernes", subDetail: "1", subImage: "", subId: centro_id),

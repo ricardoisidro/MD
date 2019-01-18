@@ -54,7 +54,7 @@ class ChurchsTableViewController: UITableViewController {
             
         }
         catch let ex {
-            //print("ReadCentroDB in Templos error: \(ex)")
+            print("ReadCentroDB in Templos error: \(ex)")
         }
 
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]

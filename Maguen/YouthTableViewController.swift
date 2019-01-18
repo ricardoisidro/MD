@@ -47,7 +47,7 @@ class YouthTableViewController: UITableViewController {
             }
         }
         catch let ex {
-            //print("ReadCentroDB in Juventud error: \(ex)")
+            print("ReadCentroDB in Juventud error: \(ex)")
         }
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor

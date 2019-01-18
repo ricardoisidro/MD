@@ -95,7 +95,7 @@ class Credencial : NSObject
             })
         }
         catch let ex {
-            //print("onCreateRegistro SQLite exception: \(ex)")
+            print("onCreateRegistro SQLite exception: \(ex)")
         }
     }
     func onInsert(connection: Connection, objeto: Credencial) {
@@ -112,7 +112,7 @@ class Credencial : NSObject
             try connection.run(insert)
         }
         catch let ex {
-            //print("onInsertRegistro SQLite exception: \(ex)")
+            print("onInsertRegistro SQLite exception: \(ex)")
         }
     }
     
@@ -136,7 +136,7 @@ class Credencial : NSObject
             
         }
         catch let ex {
-            //print("Read CredencialDB error: \(ex)")
+            print("Read CredencialDB error: \(ex)")
 
             return Credencial()
         }
@@ -147,7 +147,7 @@ class Credencial : NSObject
             try connection.run(table_credencial.delete())
         }
         catch let ex {
-            //print("onDeleteCredencial error: \(ex)")
+            print("onDeleteCredencial error: \(ex)")
         }
     }
     
@@ -166,7 +166,7 @@ class Credencial : NSObject
             }
         }
         catch let error {
-            //print("onUpdateTelefonos exception: \(error)")
+            print("onUpdateTelefonos exception: \(error)")
             success = false
         }
         return success

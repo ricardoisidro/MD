@@ -164,7 +164,7 @@ class LoadViewController: UIViewController {
                 self.database = database
             }
             catch let ex {
-                //print("createDBFile error: \(ex)")
+                print("createDBFile error: \(ex)")
             }
             
             
@@ -306,8 +306,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
             })
         }
-        catch let ex {
-            //print("onCreateCategoriaCentro SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateCategoriaCentro SQLite exception: \(ex)")
         }
         
     }
@@ -322,8 +322,8 @@ class LoadViewController: UIViewController {
                                                     db_fecha_modificacion <- objeto.fecha_modificacion!)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertCategoriaCentro Error: \(ex)")
+        catch let ex{
+            print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
@@ -346,8 +346,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateCentroDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateCentroDB SQLite exception: \(ex)")
         }
         
     }
@@ -368,8 +368,8 @@ class LoadViewController: UIViewController {
                                           db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertCentroDBError: \(ex)")
+        catch let ex{
+            print("onInsertCentroDBError: \(ex)")
         }
         
     }
@@ -390,8 +390,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateEventosDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateEventosDB SQLite exception: \(ex)")
         }
         
     }
@@ -415,8 +415,8 @@ class LoadViewController: UIViewController {
                                            db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertCentroDBError: \(ex)")
+        catch let ex{
+            print("onInsertCentroDBError: \(ex)")
         }
         
     }
@@ -433,8 +433,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateComitesDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateComitesDB SQLite exception: \(ex)")
         }
         
     }
@@ -450,8 +450,8 @@ class LoadViewController: UIViewController {
                                           db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertComiteDBError: \(ex)")
+        catch let ex{
+            print("onInsertComiteDBError: \(ex)")
         }
         
     }
@@ -467,8 +467,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateCategoriaPublicacionDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateCategoriaPublicacionDB SQLite exception: \(ex)")
         }
         
     }
@@ -483,8 +483,8 @@ class LoadViewController: UIViewController {
                                                          db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertCategoriaPublicacionDBError: \(ex)")
+        catch let ex{
+            print("onInsertCategoriaPublicacionDBError: \(ex)")
         }
         
     }
@@ -505,8 +505,8 @@ class LoadViewController: UIViewController {
                 t.column(db_activo)
             })
         }
-        catch let ex {
-            //print("onCreatePublicacionDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreatePublicacionDB SQLite exception: \(ex)")
         }
         
     }
@@ -529,8 +529,8 @@ class LoadViewController: UIViewController {
                                                db_activo <- Int64(objeto.activo))
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertPublicacionDBError: \(ex)")
+        catch let ex{
+            print("onInsertPublicacionDBError: \(ex)")
         }
         
     }
@@ -545,8 +545,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateComunidadDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateComunidadDB SQLite exception: \(ex)")
         }
         
     }
@@ -560,8 +560,8 @@ class LoadViewController: UIViewController {
                                              db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertComunidadDBError: \(ex)")
+        catch let ex{
+            print("onInsertComunidadDBError: \(ex)")
         }
         
     }
@@ -580,8 +580,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateHorarioClaseDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateHorarioClaseDB SQLite exception: \(ex)")
         }
         
     }
@@ -599,8 +599,8 @@ class LoadViewController: UIViewController {
                                                  db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertHorarioClaseDBError: \(ex)")
+        catch let ex{
+            print("onInsertHorarioClaseDBError: \(ex)")
         }
         
     }
@@ -617,8 +617,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateComunidadDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateComunidadDB SQLite exception: \(ex)")
         }
         
     }
@@ -634,8 +634,8 @@ class LoadViewController: UIViewController {
                                           db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertComunidadDBError: \(ex)")
+        catch let ex{
+            print("onInsertComunidadDBError: \(ex)")
         }
         
     }
@@ -654,8 +654,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateHorarioResoDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateHorarioResoDB SQLite exception: \(ex)")
         }
         
     }
@@ -673,8 +673,8 @@ class LoadViewController: UIViewController {
                                                  db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertHorarioResoDBError: \(ex)")
+        catch let ex{
+            print("onInsertHorarioResoDBError: \(ex)")
         }
         
     }
@@ -691,8 +691,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateServicioCentroDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateServicioCentroDB SQLite exception: \(ex)")
         }
         
     }
@@ -708,8 +708,8 @@ class LoadViewController: UIViewController {
                                                    db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertServicioCentroDBError: \(ex)")
+        catch let ex{
+            print("onInsertServicioCentroDBError: \(ex)")
         }
         
     }
@@ -728,8 +728,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)
             })
         }
-        catch let ex {
-            //print("onCreateServicioDB SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateServicioDB SQLite exception: \(ex)")
         }
         
     }
@@ -747,8 +747,8 @@ class LoadViewController: UIViewController {
                                             db_fecha_modificacion <- objeto.fecha_modificacion)
             try db!.run(insert)
         }
-        catch let ex {
-            //print("onInsertServicioDBError: \(ex)")
+        catch let ex{
+            print("onInsertServicioDBError: \(ex)")
         }
         
     }
@@ -769,8 +769,8 @@ class LoadViewController: UIViewController {
                 t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
             })
         }
-        catch let ex {
-            //print("onCreateCategoriaCentro SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateCategoriaCentro SQLite exception: \(ex)")
         }
         
     }
@@ -791,7 +791,7 @@ class LoadViewController: UIViewController {
             try db!.run(insert)
         }
         catch let ex {
-            //print("onInsertCategoriaCentro Error: \(ex)")
+            print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
@@ -810,7 +810,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            //print("getTablesList error: \(jsonErr)")
+            print("getTablesList error: \(jsonErr)")
         }
         return tablesToSync
         
@@ -831,7 +831,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            //print("getTablesList error: \(jsonErr)")
+            print("getTablesList error: \(jsonErr)")
         }
         
         return idToSync
@@ -904,7 +904,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            //print("getTablesList error: \(jsonErr)")
+            print("getTablesList error: \(jsonErr)")
         }
         
         return entitiesToSync

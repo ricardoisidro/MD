@@ -254,8 +254,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
         }
-        catch let err {
-            //print("encodeAndEncryptJSONString error: \(err)")
+        catch let err{
+            print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -343,7 +343,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
         }
         catch let jsonErr{
-            //print("UpdateUI error: \(jsonErr)")
+            print("UpdateUI error: \(jsonErr)")
             showAlertWith(title: "Error", message: "Error al validar credenciales")
             self.activityIndicatorView.removeFromSuperview()
         }
@@ -413,8 +413,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             ////print("se creo tabla con exito")
             return true
         }
-        catch let ex {
-            //print("onCreateUser SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateUser SQLite exception: \(ex)")
             return false
         }
         
@@ -494,8 +494,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
              //print("se inserto con  exito")
             return true
         }
-        catch let ex {
-            //print("onInsertCategoriaCentro Error: \(ex)")
+        catch let ex{
+            print("onInsertCategoriaCentro Error: \(ex)")
             return false
         }
         
@@ -539,8 +539,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             */
             try database.run(insert)
         }
-        catch let ex {
-            //print("onInsertCategoriaCentro Error: \(ex)")
+        catch let ex{
+            print("onInsertCategoriaCentro Error: \(ex)")
         }
         
     }
@@ -564,8 +564,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             //print("se creo tabla credenciales")
             return true
         }
-        catch let ex {
-            //print("onCreateRegistro SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateRegistro SQLite exception: \(ex)")
             return false
         }
     }
@@ -597,8 +597,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             //print("se inserto en tabla credenciales")
             return true
         }
-        catch let ex {
-            //print("onInsertRegistro SQLite exception: \(ex)")
+        catch let ex{
+            print("onInsertRegistro SQLite exception: \(ex)")
             return false
         }
     }
@@ -622,8 +622,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             //print("se creo tabla telefonos")
             return true
         }
-        catch let ex {
-            //print("onCreateRegistro SQLite exception: \(ex)")
+        catch let ex{
+            print("onCreateRegistro SQLite exception: \(ex)")
             return false
         }
     }
@@ -645,8 +645,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             //print("se inserto en tabla telefonos")
             return true
         }
-        catch let ex {
-            //print("onInsertRegistro SQLite exception: \(ex)")
+        catch let ex{
+            print("onInsertRegistro SQLite exception: \(ex)")
             return false
         }
     }

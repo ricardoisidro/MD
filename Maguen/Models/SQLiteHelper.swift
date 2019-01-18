@@ -32,7 +32,7 @@ class SQLiteHelper
             //self.onCreate(db: database)
         }
         catch let ex {
-            //print("createDBFile error: \(ex)")
+            print("createDBFile error: \(ex)")
         }
         return database
     }

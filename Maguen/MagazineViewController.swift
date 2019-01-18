@@ -50,7 +50,7 @@ class MagazineViewController: UIPageViewController, UIPageViewControllerDelegate
             
         }
         catch let err {
-            //print("Read publicacionDB error: \(err)")
+            print("Read publicacionDB error: \(err)")
         }
         
         

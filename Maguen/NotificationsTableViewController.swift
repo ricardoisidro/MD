@@ -174,7 +174,7 @@ class NotificationsTableViewController: UITableViewController {
             
         }
         catch let jsonErr{
-            //print("getTablesList error: \(jsonErr)")
+            print("getTablesList error: \(jsonErr)")
         }
         return tablesToSync
         
@@ -194,7 +194,7 @@ class NotificationsTableViewController: UITableViewController {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONString error: \(err)")
+            print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -206,8 +206,8 @@ class NotificationsTableViewController: UITableViewController {
             var decrypted = try soapString.decryptBase64ToString(cipher: aes)
             _ = try jsonDecoder.decode(NotificationResponse.self, from: Data(decrypted.utf8))
         }
-        catch let ex {
-            //print("updateNotifications error: \(ex)")
+        catch let ex{
+            print("updateNotifications error: \(ex)")
         }
     }
 

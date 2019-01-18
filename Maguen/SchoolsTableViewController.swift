@@ -43,7 +43,7 @@ class SchoolsTableViewController: UITableViewController {
             
         }
         catch let ex {
-            //print("ReadDB error: \(ex)")
+            print("ReadDB error: \(ex)")
         }
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]

@@ -38,7 +38,7 @@ class CommitteeTableViewController: UITableViewController {
             
         }
         catch let ex {
-            //print("ReadCentroDB in Templos error: \(ex)")
+            print("ReadCentroDB in Templos error: \(ex)")
         }
         
         /*tableViewData = [

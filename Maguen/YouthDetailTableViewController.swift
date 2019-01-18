@@ -120,7 +120,7 @@ class YouthDetailTableViewController: UITableViewController {
             
         }
         catch let ex {
-            //print("ReadCentroDB in Juventud error: \(ex)")
+            print("ReadCentroDB in Juventud error: \(ex)")
         }
 
         tableViewRootData = [

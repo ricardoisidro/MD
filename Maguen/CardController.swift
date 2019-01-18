@@ -241,7 +241,7 @@ class CardController: UIViewController {
             
         }
         catch let jsonErr{
-            //print("getWiganCode error: \(jsonErr)")
+            print("getWiganCode error: \(jsonErr)")
         }
         return code
         

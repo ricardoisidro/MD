@@ -65,7 +65,7 @@ class HistRevistaTableViewController: UITableViewController {
             
         }
         catch let err {
-            //print("Read publicacionDB error: \(err)")
+            print("Read publicacionDB error: \(err)")
             
         }
         

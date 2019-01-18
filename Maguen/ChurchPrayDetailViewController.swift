@@ -113,7 +113,7 @@ class ChurchPrayDetailViewController: UIViewController, UITableViewDataSource, U
             
         }
         catch let ex {
-            //print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
+            print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
         }
     }
     

@@ -198,7 +198,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             let queryCredencial = objCredencial.table_credencial.select(objCredencial.credencial_id, objCredencial.fotografia!)
             guard let queryResultsFoto = try? db.pluck(queryCredencial)
                 else {
-                    //print("consulta foto nula")
+                    print("consulta foto nula")
                     return
             }
             
@@ -233,7 +233,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             
          }
          catch let ex {
-            //print("ReadCentroDB error: \(ex)")
+            print("ReadCentroDB error: \(ex)")
          }
         
     }

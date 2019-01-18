@@ -27,7 +27,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONTablesString error: \(err)")
+            print("encodeAndEncryptJSONTablesString error: \(err)")
         }
         return cipherRequest
     }
@@ -47,7 +47,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONIDsString error: \(err)")
+            print("encodeAndEncryptJSONIDsString error: \(err)")
         }
         return cipherRequest
     }
@@ -66,7 +66,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONEntityString error: \(err)")
+            print("encodeAndEncryptJSONEntityString error: \(err)")
         }
         return cipherRequest
     }
@@ -84,7 +84,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONNotificationString error: \(err)")
+            print("encodeAndEncryptJSONNotificationString error: \(err)")
         }
         return cipherRequest
     }
@@ -104,7 +104,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONTablesString error: \(err)")
+            print("encodeAndEncryptJSONTablesString error: \(err)")
         }
         return cipherRequest
     }
@@ -120,7 +120,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONString error: \(err)")
+            print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -141,7 +141,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            //print("updateSaldo error: \(ex)")
+            print("updateSaldo error: \(ex)")
         }
         return saldo
     }
@@ -159,7 +159,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONString error: \(err)")
+            print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -177,7 +177,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            //print("updateSaldo error: \(ex)")
+            print("updateSaldo error: \(ex)")
             return EBReturn()
         }
         //return saldo
@@ -197,7 +197,7 @@ class AESforJSON {
             
         }
         catch let err {
-            //print("encodeAndEncryptJSONString error: \(err)")
+            print("encodeAndEncryptJSONString error: \(err)")
         }
         return cipherRequest
     }
@@ -215,7 +215,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            //print("updateSaldo error: \(ex)")
+            print("updateSaldo error: \(ex)")
             return EBReturn2()
         }
         //return saldo
