@@ -26,6 +26,27 @@ class HomeViewController: UITableViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+      //  if(Global.shared.loginOk)
+      //  {
+          //  print("entre a cambia tab por willAppear")
+          //  performSegue(withIdentifier: "sTest", sender: "Test")
+            //self.tabBarController?.selectedIndex = 4
+            
+            
+            
+          //  let myView2 = self.storyboard!.instantiateViewController(withIdentifier: "DetalleSaldoViewController")
+            
+          //  self.present(myView, animated: true)
+           
+          //  let myView = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "NewSettingsViewController")
+          //  self.present(myView ?? myView2, animated: true)
+        
+            
+           // tabBarController.storyboard?.instantiateViewController(withIdentifier: //"NewSettingsViewController") {
+              //  tabBarController.present(popUpVC, animated: true)
+        //}
+        
         tableViewData =
             [cellComponents(cellImage: #imageLiteral(resourceName: "icon_medios"), cellColor: MaguenColors.blue1, cellTitle: "MEDIOS DIGITALES"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_templos"), cellColor: MaguenColors.blue2, cellTitle: "TEMPLOS"),
@@ -73,9 +94,16 @@ class HomeViewController: UITableViewController {
     // MARK: - Hide and show NavBar
     
     override func viewWillAppear(_ animated: Bool) {
+          super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        super.viewWillAppear(animated)
+        
+     
+        
+      
     }
+    
+  
+    
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -194,7 +222,7 @@ class HomeViewController: UITableViewController {
         case "Escuelas":
             let controller = segue.destination as? SchoolsTableViewController
             controller?.navigationItem.title = (sender as! String)
-            
+
         case .none:
             print("None")
         case .some(_):

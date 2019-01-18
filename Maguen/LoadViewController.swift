@@ -14,8 +14,6 @@ class LoadViewController: UIViewController {
 
     @IBOutlet weak var txtVersion: UILabel!
     
-    @IBOutlet weak var btnVersion: UIButton!
-    
     var progress: UIActivityIndicatorView!
     
     var database: Connection!
@@ -131,10 +129,13 @@ class LoadViewController: UIViewController {
     
     let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
     
+    let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+    
+    var termineSincronizacion = false
+
+    
     override func viewDidAppear(_ animated: Bool) {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-        self.present(controller, animated: false, completion: nil)
+    
     }
     
     
@@ -149,9 +150,11 @@ class LoadViewController: UIViewController {
         
         txtVersion.text = nsObject as? String
         
-        btnVersion.titleLabel?.text = nsObject as? String
-        
+        self.showActivityIndicator()
+
         background {
+            
+            
             var lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
             
             do {
@@ -242,15 +245,19 @@ class LoadViewController: UIViewController {
             let currDate = dateFormat.string(from: currentDate)
             UserDefaults.standard.set(currDate, forKey: "dateLastSync")
             
+            self.termineSincronizacion = true
+            
+            self.main {
+                if self.termineSincronizacion {
+                    self.showActivityIndicator(show: !self.termineSincronizacion)
+                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                     let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+                     self.present(controller, animated: false, completion: nil)
+                }
+            }
         }
         
     }
-        //progress = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
-        //progress.style = UIActivityIndicatorView.Style.white
-        //view.addSubview(progress)
-        //progress.hidesWhenStopped = true
-
-        //progress.startAnimating()
 
     
     func background(work: @escaping () -> ()) {
@@ -263,6 +270,29 @@ class LoadViewController: UIViewController {
         DispatchQueue.main.async {
             work()
         }
+    }
+    
+    func showActivityIndicator(show: Bool) {
+        if show {
+            // Start the loading animation
+            indicator.startAnimating()
+        } else {
+            // Stop the loading animation
+            indicator.stopAnimating()
+        }
+    }
+    
+    func showActivityIndicator() {
+        
+        indicator.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
+        indicator.color = .white
+        indicator.center = view.center
+        self.view.addSubview(indicator)
+        self.view.bringSubviewToFront(indicator)
+        //UIApplication.shared.isNetworkActivityIndicatorVisible = true
+        indicator.startAnimating()
+            
+        
     }
     
     func onCreateCategoriaCentroDB() {

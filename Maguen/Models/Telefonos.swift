@@ -109,4 +109,60 @@ class Telefonos : NSObject
             print("onInsertRegistro SQLite exception: \(ex)")
         }
     }
+    
+    func onReadData(connection: Connection) -> Telefonos {
+        do {
+            let query = table_telefonos.select(db_telefono_id, db_usuario_app_id, db_numero, db_tipo_id, db_imei, db_sistema_operativo, db_activo)
+            
+            let currentPhone = try connection.pluck(query)
+            
+            let obj = Telefonos()
+            
+            obj.telefono_id = try (currentPhone?.get(db_telefono_id))!
+            obj.usuario_app_id = try (currentPhone?.get(db_usuario_app_id))!
+            obj.numero = try currentPhone?.get(db_numero)
+            obj.tipo_id = try (currentPhone?.get(db_tipo_id))!
+            obj.imei = try currentPhone?.get(db_imei)
+            obj.sistema_operativo = try currentPhone?.get(db_sistema_operativo)
+            obj.activo = try (currentPhone?.get(db_activo))!
+            
+            return obj
+            
+        }
+        catch let ex {
+            print("Read TelefonosDB error: \(ex)")
+            
+            return Telefonos()
+        }
+    }
+    
+    func onDelete(connection: Connection) {
+        do {
+            try connection.run(table_telefonos.delete())
+        }
+        catch let ex {
+            print("onDeleteTelefonos error: \(ex)")
+        }
+    }
+    
+    func onUpdate(connection: Connection, phone: String) -> Bool {
+        
+        var success = false
+        do {
+            if try connection.run(table_telefonos.update(db_numero <- phone)) > 0
+            {
+                print("Updated")
+                success = true
+            }
+            else {
+                print("Not updated")
+                success = false
+            }
+        }
+        catch let error {
+            print("onUpdateTelefonos exception: \(error)")
+            success = false
+        }
+        return success
+    }
 }

@@ -12,9 +12,16 @@ import SQLite
 class Global {
 
     static let shared = Global()
+    
+    var loginOk = false
+    var indexItemTabSelected = -1
     //var database: Connection!
     
-    init() {}
+    init() {
+      
+    }
+    
+    
     
     func createSOAPXMLString(methodName: String, encryptedString: Array<UInt8>) -> String {
         //static let soapString: String = ""

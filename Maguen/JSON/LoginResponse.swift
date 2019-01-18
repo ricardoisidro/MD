@@ -7,7 +7,7 @@
 //
 
 struct LoginResponse : Decodable {
-    var Value: Value
+    var Value: Value?
     var Correcto: Bool
     var MensajeError: String
     var ex: String?

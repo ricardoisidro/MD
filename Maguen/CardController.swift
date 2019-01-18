@@ -31,7 +31,11 @@ class CardController: UIViewController {
     @IBOutlet weak var txtClass: UITextView!
     @IBOutlet weak var cardQR: UIImageView!
     
-    let db_user = Table("usuariomaguen")
+    let conn = SQLiteHelper.shared.inicializa(nameBD: "maguen")
+    
+    
+    
+    /*let db_user = Table("usuariomaguen")
     let db_user_id = Expression<Int64>("user_id")
     let db_user_name = Expression<String>("user_name")
     let db_user_surname1 = Expression<String>("user_surname1")
@@ -44,9 +48,11 @@ class CardController: UIViewController {
     let db_user_username = Expression<String>("user_username")
     let db_user_idtype = Expression<Int64>("user_idtype") //categoria_id
     let db_user_idactivedate = Expression<String>("user_idactivedate")
-    let db_user_cardid = Expression<Int64>("user_cardid")
+    let db_user_cardid = Expression<Int64>("user_cardid")*/
 
     var tableDataSocio = [usuario]()
+    
+    //var currentUser: UsuarioApp?
     
     //var qrcodeImage: CIImage!
     
@@ -55,7 +61,10 @@ class CardController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        do {
+        
+        
+        
+        /*do {
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
@@ -76,7 +85,9 @@ class CardController: UIViewController {
         }
         catch let ex {
             print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
-        }
+        }*/
+        
+        
         
         cardView.backgroundColor = .black
         cardView.layer.cornerRadius = 10
@@ -88,6 +99,11 @@ class CardController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
+        let user = UsuarioApp()
+        let card = Credencial()
+        let currentUser = user.onReadData(connection: conn)
+        let currentCard = card.onReadData(connection: conn)
+        
         //print QR
         let currentDate = Date()
         let dateFormat = DateFormatter()
@@ -97,7 +113,18 @@ class CardController: UIViewController {
         
         let lastCodeDate = UserDefaults.standard.string(forKey: "cardVigency")
         print("1. \(lastCodeDate ?? "null")")
-        if lastCodeDate == nil {
+        generacodigo(idUsr: currentUser.usuario_app_id)
+        
+          let futureDate = currentDate.addingTimeInterval(5.0*60.0)
+        let futDate = dateFormat.string(from: futureDate)
+        print("2. \(futDate) saved on UserDefaults")
+        UserDefaults.standard.set(futDate, forKey: "cardVigency")
+        if (futureDate < currentDate)
+        {
+            generacodigo(idUsr: currentUser.usuario_app_id)
+        }
+        
+       /* if lastCodeDate == nil {
             
             let futureDate = currentDate.addingTimeInterval(5.0*60.0)
             
@@ -108,7 +135,8 @@ class CardController: UIViewController {
             
             //call QR service
             let aesJSON = AESforJSON()
-            let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: tableDataSocio[0].id)
+            let id = currentUser.usuario_app_id
+            let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: Int(id))
             let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetDinamicWegan", encryptedString: chainTablesEncodedandEncrypted)
             let soapRequest = CallSOAP()
             soapRequest.makeRequest(endpoint: MaguenCredentials.getDinamicWegan, soapMessage: soapXMLTables)
@@ -129,45 +157,47 @@ class CardController: UIViewController {
                 let futDate2 = dateFormat.string(from: futureDate2)
                 print("3. Saved new date: \(futDate2)")
                 UserDefaults.standard.set(futDate2, forKey: "cardVigency")
+                
+                generacodigo()
 
-                //call QR service
-                let aesJSON = AESforJSON()
-                let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: tableDataSocio[0].id)
-                let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetDinamicWegan", encryptedString: chainTablesEncodedandEncrypted)
-                let soapRequest = CallSOAP()
-                soapRequest.makeRequest(endpoint: MaguenCredentials.getDinamicWegan, soapMessage: soapXMLTables)
-                while !soapRequest.done {
-                    usleep(100000)
-                }
-                let wiganCode = getWiganCode(soapResult: soapRequest.soapResult)
-                cardQR.image = generateQRCode(from: wiganCode)
+                
             }
             else {
                 print("No necesito codigo")
             }
-        }
+        }*/
         
         
         
-        
-        let imageDecoded: Data = Data(base64Encoded: tableDataSocio[0].imagen)!
-        let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
+        let foto = currentCard.fotografia
+        let imageDecoded: Data = Data(base64Encoded: foto!)!
+        let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "tab_socios")
         cardPhoto.image = avatarImage
         
-        txtName.text = tableDataSocio[0].nombre
+        txtName.text = currentUser.nombre
         txtName.font = UIFont.boldSystemFont(ofSize: 17.0)
-        txtSurname.text = tableDataSocio[0].apellido1
+        
+        let apellido = currentUser.primer_apellido! + " " +  currentUser.segundo_apellido!
+        txtSurname.text = apellido
         txtSurname.font = UIFont.boldSystemFont(ofSize: 15.0)
-        txtDate.text = String(tableDataSocio[0].fecha.prefix(10))
+        
+        let format = DateFormatter()
+        format.dateFormat = "dd-MM-yyyy HH:mm:ss"
+        let fechaString = format.string(from: currentCard.fecha_vencimiento!)
+        //let fecha = currentUser.fecha_activacion
+        
+        
+        txtDate.text = String(fechaString.prefix(10))
         txtDate.font = UIFont.systemFont(ofSize: 15.0)
         
-        if(tableDataSocio[0].tipoCredencial < 4) {
+        let tipo = currentUser.categoria_id
+        if(tipo < 4) {
             cardBackground.image = #imageLiteral(resourceName: "credencial_socio")
             txtClass.text = "SOCIO"
             txtClass.font = UIFont.systemFont(ofSize: 25.0)
 
         }
-        else if (tableDataSocio[0].tipoCredencial == 4){
+        else if (tipo == 4){
             cardBackground.image = #imageLiteral(resourceName: "credencial_invitado")
             txtClass.text = "SOCIO INVITADO"
             txtClass.font = UIFont.boldSystemFont(ofSize: 21.0)
@@ -177,6 +207,23 @@ class CardController: UIViewController {
             txtClass.text = "SIN CREDENCIAL"
             txtClass.font = UIFont.boldSystemFont(ofSize: 21.0)
         }
+    }
+    
+    func generacodigo(idUsr: Int64) {
+        //call QR service
+        let aesJSON = AESforJSON()
+        
+        let id = idUsr
+        
+        let chainTablesEncodedandEncrypted = aesJSON.encodeAndEncryptJSONQRString(id: Int(id))
+        let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetDinamicWegan", encryptedString: chainTablesEncodedandEncrypted)
+        let soapRequest = CallSOAP()
+        soapRequest.makeRequest(endpoint: MaguenCredentials.getDinamicWegan, soapMessage: soapXMLTables)
+        while !soapRequest.done {
+            usleep(100000)
+        }
+        let wiganCode = getWiganCode(soapResult: soapRequest.soapResult)
+        cardQR.image = generateQRCode(from: wiganCode)
     }
     
     func getWiganCode(soapResult: String) -> String {

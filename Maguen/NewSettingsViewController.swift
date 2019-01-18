@@ -46,7 +46,9 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     var activo: Int = -1
     var eliminado: Int = -1
     
-    let db_user = Table("usuariomaguen")
+    var isModoEdit = false
+    
+  /*  let db_user = Table("usuariomaguen")
     let db_user_id = Expression<Int64>("user_id")
     let db_user_name = Expression<String>("user_name")
     let db_user_surname1 = Expression<String>("user_surname1")
@@ -59,21 +61,34 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     let db_user_username = Expression<String>("user_username")
     let db_user_idtype = Expression<Int64>("user_idtype") //categoria_id
     let db_user_idactivedate = Expression<String>("user_idactivedate")
-    let db_user_cardid = Expression<Int64>("user_cardid")
+    let db_user_cardid = Expression<Int64>("user_cardid")*/
     //var tableData: [String] = [usuario]()
     
-    private var embededVC: SettingsTableViewController!
+    let db_user = Table("usuarioapp")
+    let db_usuario_app_id = Expression<Int64>("usuario_app_id")
+    let db_numero_maguen = Expression<String?>("numero_maguen")
+    let db_nombre = Expression<String?>("nombre")
+    let db_primer_apellido = Expression<String?>("primer_apellido")
+    let db_segundo_apellido = Expression<String?>("segundo_apellido")
+    let db_sexo = Expression<String?>("sexo")
+    let db_fecha_nacimiento = Expression<Date?>("fecha_nacimiento")
+    let db_usuario = Expression<String?>("usuario")
+    let db_contrasena = Expression<String?>("contrasena")
+    let db_correo = Expression<String?>("correo")
+    let db_categoria_id = Expression<Int64>("categoria_id")
+    let db_comunidad_id = Expression<Int64>("comunidad_id")
+    let db_domicilio_id = Expression<Int64>("domicilio_id")
+    let db_fecha_activacion = Expression<Date?>("fecha_activacion")
+    let db_activo = Expression<Int64>("activo")
+    let db_eliminado = Expression<Int64>("eliminado")
     
+    private var embededVC: SettingsTableViewController!
+
 
     // 1: Desactivar 2: Guardar cambios
     var buttonAction: Int = 0
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let vc = segue.destination as? SettingsTableViewController, segue.identifier == "embededSegue" {
-            self.embededVC = vc
-            
-        }
-    }
+    let conn = SQLiteHelper.shared.inicializa(nameBD: "maguen")
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,50 +104,36 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        do {
-            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
-            let db = try Connection(fileURL.path)
-            
-            let query = db_user.select(db_user_id, db_user_name, db_user_surname1, db_user_surname2, db_user_sex, db_user_birthday, db_user_idactivedate, db_user_idtype, db_user_photo, db_user_cardid, db_user_idtype)
-            guard let queryResults = try? db.prepare(query) else {
-                print("ERROR al consultar usuario")
-                return
-            }
-            
-            /*for row in queryResults {
-                let bothSurnames = try row.get(db_user_surname1) + " " + row.get(db_user_surname2)
-                _ = usuario(id: try Int(row.get(db_user_id)), nombre: try row.get(db_user_name), apellido1: bothSurnames, fecha: try row.get(db_user_idactivedate), tipoCredencial: Int(try row.get(db_user_idtype)), imagen: try row.get(db_user_photo), idCredencial: try Int(row.get(db_user_cardid)))
-                //tableDataSocio.append(data)
-            }*/
-            
-            let imageDecoded: Data = Data(base64Encoded: UserDefaults.standard.string(forKey: "photo") ?? "")!
-            let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
-            imageTake.image = avatarImage
-            
-        }
-        catch let ex {
-            print("ReadHorarioClaseDB in ClassDetail error: \(ex)")
-        }
+    
+        
+       
+        
         
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-       
-        /*let v1 = self.embededVC.cadena
-         print(v1)
-        nombre = self.embededVC.textConfigName.text ?? ""
-        apellido1 = self.embededVC.textConfigSurname1.text  ?? ""
-        apellido2 = self.embededVC.textConfigSurname2.text  ?? ""
-        print("\(String(describing: nombre)) \(String(describing: apellido1)) \(String(describing: apellido2))")*/
-    }
-    
-   
     
     override func viewWillAppear(_ animated: Bool) {
         
         //scroll on top always
-        btnEdit.isHidden = false
+        if isModoEdit {
+            btnEdit.isHidden = true
+            btnPhoto.isHidden = false
+            
+
+        }
+        else {
+            btnEdit.isHidden = false
+            btnPhoto.isHidden = true
+
+
+        }
+        let c = Credencial()
+        let cres = c.onReadData(connection: conn)
+        let foto = cres.fotografia
+        
+        let imageDecoded: Data = Data(base64Encoded: foto!)!
+        let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
+        imageTake.image = avatarImage
+        
 
         scrollView.setContentOffset(.zero, animated: true)
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
@@ -146,7 +147,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             if btnEdit.isHidden == true {
                 btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
                 btnSave.backgroundColor = MaguenColors.blue5
-                btnPhoto.isHidden = false
+                //btnPhoto.isHidden = false
                 formView.isUserInteractionEnabled = true
                 buttonAction = 2
 
@@ -180,7 +181,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         UserDefaults.standard.set(res, forKey: "balance")
         
-        btnPhoto.isHidden = true
+        //btnPhoto.isHidden = true
         
         /*//Prepare request
         let url = URL(string: MaguenCredentials.getSaldoActual)
@@ -206,8 +207,18 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     
     @IBAction func btnSaveorDiscard(_ sender: UIButton) {
         
+        let c = Credencial()
+        let t = Telefonos()
+        let u = UsuarioApp()
+        
         switch buttonAction {
-        case 1:
+        case 1: //Desactivar
+            
+            
+            c.onDelete(connection: conn)
+            t.onDelete(connection: conn)
+            u.onDelete(connection: conn)
+            
             UserDefaults.standard.removeObject(forKey: "name")
             UserDefaults.standard.removeObject(forKey: "surname1")
             UserDefaults.standard.removeObject(forKey: "surname2")
@@ -220,11 +231,74 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             UserDefaults.standard.removeObject(forKey: "balance")
             self.tabBarController?.selectedIndex = 0
             break
-        case 2:
             
-            editarUsuario()
+        case 2: //Guardar
+            
+            let res = editarUsuario()
+            
+            if res.Correcto {
+                
+                let format = DateFormatter()
+                format.dateFormat = "dd/MM/yyyy"
+                
+                
+                let newName = self.embededVC.textConfigName.text
+                let newSurname = self.embededVC.textConfigSurname1.text
+                let newSurname2 = self.embededVC.textConfigSurname2.text
+                let newBirthday = self.embededVC.textConfigBirthday.text
+                
+                let completeBirthday = newBirthday! + " 00:00:00"
+                
+                let newMail = self.embededVC.textConfigMail.text
+                
+                let selectedSex = self.embededVC.textConfigSex.text
+                var newSex = ""
+                switch selectedSex {
+                case "HOMBRE":
+                    newSex = "H"
+                    break
+                case "MUJER":
+                    newSex = "M"
+                    break
+                default:
+                    newSex = "H"
+                    break
+                }
+                let cId = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
+                
+                let image = imageTake.image
+                let imgTo64 = image!.pngData()
+                let newImage = imgTo64?.base64EncodedString()
+                
+                let newPhone = self.embededVC.textConfigPhone.text
+                
+                if u.onUpdate(connection: conn, name: newName!, ap1: newSurname!, ap2: newSurname2!, date: completeBirthday, mail: newMail!, sex: newSex, community: cId) {
+                    if t.onUpdate(connection: conn, phone: newPhone!) {
+                        if c.onUpdate(connection: conn, picture: newImage!) {
+                            isModoEdit = false
+                            self.tabBarController?.selectedIndex = 1
+                        }
+                        else {
+                             showAlertWith(title: "Aviso", message: "Error al actualizar foto")
+                        }
+                        
+                    }
+                    else {
+                        showAlertWith(title: "Aviso", message: "Error al actualizar telefono")
 
-            self.tabBarController?.selectedIndex = 1
+                    }
+                }
+                else {
+                    showAlertWith(title: "Aviso", message: "Error al actualizar usuario")
+                }
+                
+
+            }
+            else {
+                let msg = res.MensajeError
+                showAlertWith(title: "Alerta", message: msg)
+            }
+
 
 
             break
@@ -242,12 +316,36 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
     }
     
-    func editarUsuario() {
+    func editarUsuario() -> EBReturn {
     
+        embededVC.GuardaEdicionSocio()
+        
+        let pSUA = pSetUsuarioApp()
+        
+        let c = Credencial()
+        
+        let t = Telefonos()
+        
+        let u = UsuarioApp()
+        
         let jsUsuario = jsUsuarioApp()
-        jsUsuario.nombre = self.embededVC.textConfigName.text!
-        jsUsuario.primer_apellido = self.embededVC.textConfigSurname1.text!
+        
+        //jsUsuario.credencial_id
+        
+        guard let newName = self.embededVC.textConfigName.text, newName != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar nombre válido")
+            return EBReturn()
+        }
+        jsUsuario.nombre = newName
+        
+        guard let newSurname = self.embededVC.textConfigSurname1.text, newSurname != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar apellido paterno")
+            return EBReturn()
+        }
+        jsUsuario.primer_apellido = newSurname
+        
         jsUsuario.segundo_apellido = self.embededVC.textConfigSurname2.text!
+        
         let sex = self.embededVC.selectedSex
         if sex == "HOMBRE" {
             jsUsuario.sexo = "H"
@@ -255,35 +353,154 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         else if sex == "MUJER" {
             jsUsuario.sexo = "M"
         }
+        
         let format = DateFormatter()
-        
         format.dateFormat = "dd/MM/yyyy"
-        let fechaFormulario = self.embededVC.textConfigBirthday.text
-        let f = format.date(from: fechaFormulario!)
+        /*let fechaFormulario = self.embededVC.textConfigBirthday.text
+        let f = format.date(from: fechaFormulario!)*/
+        
+        guard let newBirthday = self.embededVC.textConfigBirthday.text, newBirthday != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar fecha de nacimiento")
+            return EBReturn()
+        }
 
-        jsUsuario.fecha_nacimiento = f
+        let fechaNac = newBirthday
+        jsUsuario.fecha_nacimiento = fechaNac + " 00:00:00"
         
-        jsUsuario.correo = self.embededVC.textConfigMail.text!
-        jsUsuario.telefonoActual = self.embededVC.textConfigPhone.text
-        jsUsuario.comunidad_id = self.embededVC.selectedComunityId
+        let resUsuarioApp = u.onReadData(connection: conn)
         
-        //jsUsuario.credencial_id =
+        /*let activeDate = resUsuarioApp.fecha_activacion
+        let fechaAct = format.string(from: activeDate!)
+        let f2 = format.date(from: fechaAct)
         
-        /*let aes = AESforJSON()
-        aes.encodeAndEncryptJSONSetUsuarioApp(objeto: <#T##jsUsuarioApp#>)
-        nombre =  ?? ""
+        jsUsuario.fecha_activacion = f2*/
+        
+        let activeDate = resUsuarioApp.fecha_activacion
+        let activeDateString = format.string(from: activeDate!)
+        let f2 = activeDateString + " 00:00:00"
+        
+        jsUsuario.fecha_activacion = f2
+        
+        jsUsuario.usuario = resUsuarioApp.usuario!
+        
+        // FIXME : repetido
+        jsUsuario.numero_maguen = resUsuarioApp.usuario!
+
+        jsUsuario.contrasena = resUsuarioApp.contrasena!
+        
+        guard let newMail = self.embededVC.textConfigMail.text, newMail != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar correo")
+            return EBReturn()
+        }
+        
+        jsUsuario.correo = newMail
+        jsUsuario.comunidad_id = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
+        jsUsuario.categoria_id = resUsuarioApp.categoria_id
+        
+        jsUsuario.activo = resUsuarioApp.activo
+        jsUsuario.eliminado = resUsuarioApp.eliminado
+        
+        jsUsuario.usuario_app_id = resUsuarioApp.usuario_app_id
+        
+        //jsUsuario.telefonoActual = ""
+        //jsUsuario.credencialActual = ""
+        
+        
+        let ptel = pTelefono()
+        
+        let resTelefono = t.onReadData(connection: conn)
+        
+        ptel.activo = resTelefono.activo
+        ptel.usuario_app_id = resTelefono.usuario_app_id
+        
+        guard let newPhone = self.embededVC.textConfigPhone.text, newPhone != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar teléfono")
+            return EBReturn()
+        }
+        ptel.numero = newPhone
+        ptel.tipo_id = resTelefono.tipo_id
+        ptel.imei = resTelefono.imei
+        ptel.sistema_operativo = resTelefono.sistema_operativo
+        ptel.activo = resTelefono.activo
+        ptel.telefono_id = resTelefono.telefono_id
+        
+        let image = imageTake.image
+        let imgTo64 = image!.pngData()
+        let imgString = imgTo64?.base64EncodedString()
+        
+        
+        
+        /*let image = btnPicture.image(for: .normal)
+        let imgTo64 = image!.pngData()
+        let imgString = imgTo64?.base64EncodedString(options: .lineLength64Characters)*/
+        
+        let pcred = pCredencial()
+        
+        let resCredencial = c.onReadData(connection: conn)
+        
+        pcred.credencial_id = resCredencial.credencial_id
+        
+        pcred.activa = resCredencial.activa
+        pcred.vigencia = resCredencial.vigencia
+        
+        pcred.fotografia = imgString
+        pcred.usuario_app_id = resCredencial.usuario_app_id
+        
+        let expDate = resCredencial.fecha_expedicion
+        let expDateString = format.string(from: expDate!)
+        let f3 = expDateString + " 00:00:00"
+
+        pcred.fecha_expedicion = f3
+        
+        let endDate = resCredencial.fecha_vencimiento
+        let endDateString = format.string(from: endDate!)
+        let f4 = endDateString + " 00:00:00"
+        
+        pcred.fecha_vencimiento = f4
+
+        
+        pSUA.usuarioActual = jsUsuario
+        pSUA.telefonoActual = ptel
+        pSUA.credencialActual = pcred
+
+
+        let aes = AESforJSON()
+        let strEncode = aes.encodeAndEncryptJSONSetUsuarioApp(objeto: pSUA)
+        //print(strEncode)
+        
+        let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "SetUsuarioApp", encryptedString: strEncode)
+        
+        let soapRequest = CallSOAP()
+        
+        soapRequest.makeRequest(endpoint: MaguenCredentials.setUsuarioApp, soapMessage: soapXMLTables)
+        
+        while !soapRequest.done {
+            usleep(100000)
+        }
+        
+        let res = aes.decodeAndDecryptJSONSetUsuarioApp(soapResult: soapRequest.soapResult)
+        
+        return res
+        
+       /* nombre =  ?? ""
         apellido1 = self.embededVC.textConfigSurname1.text  ?? ""
         apellido2 = self.embededVC.textConfigSurname2.text  ?? ""
         print("\(String(describing: nombre)) \(String(describing: apellido1)) \(String(describing: apellido2))")*/
     }
     
     @IBAction func btnEdit(_ sender: UIButton) {
-        btnPhoto.isHidden = false
-        btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
-        btnSave.backgroundColor = MaguenColors.blue5
-        btnEdit.isHidden = true
-        formView.isUserInteractionEnabled = true
-        buttonAction = 2
+        if isModoEdit == false {
+            btnPhoto.isHidden = false
+            btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
+            btnSave.backgroundColor = MaguenColors.blue5
+            btnEdit.isHidden = true
+            formView.isUserInteractionEnabled = true
+            //formView.
+            buttonAction = 2
+            isModoEdit = true
+        }
+        
+        
 
         
     }
@@ -413,6 +630,13 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     func parser(_ parser: XMLParser, parseErrorOccurred parseError: Error) {
         print("parseErrorOccurred: \(parseError)")
     }*/
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? SettingsTableViewController, segue.identifier == "embededSegue" {
+            self.embededVC = vc
+            
+        }
+    }
 
 }
 
@@ -420,20 +644,34 @@ extension NewSettingsViewController: UIImagePickerControllerDelegate {
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any])
     {
-        /*imagePicker.dismiss(animated: true, completion: nil)
-        guard let selectedImage = info[.editedImage] as? UIImage else {
-            print("Image not found!")
-            return
-        }
-        
-        imageTake.image = selectedImage*/
         if let selectedImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             
             imagePicker.dismiss(animated: false, completion: nil)
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                self.imageTake.image = selectedImage
+                self.imageResize(with: selectedImage)
+                
             })
         }
-
+        
+    }
+    
+    func imageResize(with image: UIImage){
+        
+        let screenWidth = UIScreen.main.bounds.width
+        
+        let scaleWidth = screenWidth * 0.5
+        let scaleHeight = screenWidth * 0.75
+        
+        UIGraphicsBeginImageContextWithOptions(CGSize(width: scaleWidth, height: scaleHeight), false, 1.0)
+        
+        image.draw(in: CGRect(x: 0, y: 0, width: scaleWidth, height: scaleHeight))
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        imageTake.image = newImage
+        //isModoEdit = true
+        
+        
+        //btnPicture.setImage(newImage, for: .normal)
+        
     }
 }

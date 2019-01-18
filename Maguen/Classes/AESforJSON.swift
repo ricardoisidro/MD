@@ -146,12 +146,14 @@ class AESforJSON {
         return saldo
     }
     
-    func encodeAndEncryptJSONSetUsuarioApp(objeto: jsUsuarioApp) -> Array<UInt8> {
+    
+    func encodeAndEncryptJSONSetUsuarioApp(objeto: pSetUsuarioApp) -> Array<UInt8> {
         var cipherRequest: [UInt8] = []
         do {
             let jsonEncoder = JSONEncoder()
             let jsonData = try jsonEncoder.encode(objeto)
             let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             cipherRequest = try aes.encrypt(Array(jsonString.utf8))
             
@@ -177,6 +179,44 @@ class AESforJSON {
         catch let ex {
             print("updateSaldo error: \(ex)")
             return EBReturn()
+        }
+        //return saldo
+    }
+    
+    func encodeAndEncryptJSONConsultarSaldo(objeto: String) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        let pdetalle = pDetalleSaldo()
+        pdetalle.num_socio = objeto
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(pdetalle)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            print(jsonString)
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err {
+            print("encodeAndEncryptJSONString error: \(err)")
+        }
+        return cipherRequest
+    }
+    
+    func decodeAndEncryptJSONConsultarSaldo(soapResult: String) -> EBReturn2 {
+        
+        do {
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            var decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            print("Cadena decrypted saldo: \(decrypted)")
+            
+            let ebResult = try jsonDecoder.decode(EBReturn2.self, from: Data(decrypted.utf8))
+            return ebResult
+            
+        }
+        catch let ex {
+            print("updateSaldo error: \(ex)")
+            return EBReturn2()
         }
         //return saldo
     }

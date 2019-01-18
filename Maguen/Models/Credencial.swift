@@ -115,4 +115,60 @@ class Credencial : NSObject
             print("onInsertRegistro SQLite exception: \(ex)")
         }
     }
+    
+    func onReadData(connection: Connection) -> Credencial {
+        do {
+            let query = table_credencial.select(db_credencial_id, db_fecha_expedicion, db_fecha_vencimiento, db_vigencia, db_activa, db_fotografia, db_usuario_app_id)
+            
+            let currentCredential = try connection.pluck(query)
+            
+            let obj = Credencial()
+            
+            obj.credencial_id = try (currentCredential?.get(db_credencial_id))!
+            obj.fecha_expedicion = try currentCredential?.get(db_fecha_expedicion) ?? nil
+            obj.fecha_vencimiento = try currentCredential?.get(db_fecha_vencimiento)
+            obj.vigencia = try (currentCredential?.get(db_vigencia))!
+            obj.activa = try (currentCredential?.get(db_activa))!
+            obj.fotografia = try currentCredential?.get(db_fotografia)
+            obj.usuario_app_id = try (currentCredential?.get(db_usuario_app_id))!
+            
+            return obj
+            
+        }
+        catch let ex {
+            print("Read CredencialDB error: \(ex)")
+
+            return Credencial()
+        }
+    }
+    
+    func onDelete(connection: Connection) {
+        do {
+            try connection.run(table_credencial.delete())
+        }
+        catch let ex {
+            print("onDeleteCredencial error: \(ex)")
+        }
+    }
+    
+    func onUpdate(connection: Connection, picture: String) -> Bool {
+        
+        var success = false
+        do {
+            if try connection.run(table_credencial.update(db_fotografia <- picture)) > 0
+            {
+                print("Updated")
+                success = true
+            }
+            else {
+                print("Not updated")
+                success = false
+            }
+        }
+        catch let error {
+            print("onUpdateTelefonos exception: \(error)")
+            success = false
+        }
+        return success
+    }
 }

@@ -21,7 +21,25 @@ struct comunidadComponents {
 }
 
 class SettingsTableViewController: UITableViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
+    
+    @IBOutlet weak var btnVerSaldoName: UIButton!
+    
+     var objCredencial = Credencial()
 
+  
+    @IBAction func btnVerSaldo(_ sender: Any) {
+        
+        print("di clic en ver saldo")
+        let myView = self.storyboard!.instantiateViewController(withIdentifier: "DetalleSaldoViewController")
+        
+        self.present(myView, animated: true)
+        
+        
+     
+        
+        
+    }
+    
     var tableViewData = [optionsComponents]()
     var comunidadViewData = [comunidadComponents]()
     
@@ -37,7 +55,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     @IBOutlet weak var textConfigBalance: UILabel!
     
     var database: Connection!
-    let db_user = Table("usuariomaguen")
+   /* let db_user = Table("usuariomaguen")
     let db_user_id = Expression<Int64>("user_id")
     let db_user_name = Expression<String>("user_name")
     let db_user_surname1 = Expression<String>("user_surname1")
@@ -51,6 +69,25 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     let db_user_idtype = Expression<Int64>("user_idtype")
     let db_user_idactivedate = Expression<String>("user_idactivedate")
     let db_user_cardid = Expression<Int64>("user_cardid")
+ */
+    
+    let db_user = Table("usuarioapp")
+    let db_usuario_app_id = Expression<Int64>("usuario_app_id")
+    let db_numero_maguen = Expression<String?>("numero_maguen")
+    let db_nombre = Expression<String?>("nombre")
+    let db_primer_apellido = Expression<String?>("primer_apellido")
+    let db_segundo_apellido = Expression<String?>("segundo_apellido")
+    let db_sexo = Expression<String?>("sexo")
+    let db_fecha_nacimiento = Expression<Date?>("fecha_nacimiento")
+    let db_usuario = Expression<String?>("usuario")
+    let db_contrasena = Expression<String?>("contrasena")
+    let db_correo = Expression<String?>("correo")
+    let db_categoria_id = Expression<Int64>("categoria_id")
+    let db_comunidad_id = Expression<Int64>("comunidad_id")
+    let db_domicilio_id = Expression<Int64>("domicilio_id")
+    let db_fecha_activacion = Expression<Date?>("fecha_activacion")
+    let db_activo = Expression<Int64>("activo")
+    let db_eliminado = Expression<Int64>("eliminado")
     //let dataNotif = Notification.Name(rawValue: dataNotificationKey)
     
     /*deinit {
@@ -65,6 +102,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     var selectedSex: String = "HOMBRE"
     var selectedComunityId: Int64 = -1
     var selectedCommunity: String = "SELECCIONE..."
+    var comunidadSelected = ""
     
     
     override func viewDidLoad() {
@@ -119,36 +157,91 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
                 //communityTypes.append(data)
             }
             
-            // getting user
-            let query2 = db_user.select(db_user_name, db_user_surname1, db_user_surname2, db_user_sex, db_user_birthday, db_user_mail, db_user_phone)
+       
+            //comento para compilacion
+        
+           let idSelected =  UserDefaults.standard.string(forKey: "comunidadID")
             
+            guard let queryComunidadSocio = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad where comunidad_id = " + idSelected!) else {
+             print("ERROR al consultar Comunidad")
+             return
+             }
+             
+             
+            for row in queryComunidadSocio {
+             
+             if var myComunidad:String = row[1] as! String?
+             {  // do something here if exists
+                comunidadSelected = myComunidad
+             }
+             
+             }
+ 
+            
+            
+            // getting user
+            let query2 = db_user.select(db_nombre, db_primer_apellido, db_segundo_apellido, db_sexo, db_fecha_nacimiento, db_correo)
             
             guard let queryResults2 = try? db.pluck(query2)
                 else {
                     print("ERROR al consultar usuario")
                     return
             }
-        
-            let birthday = try queryResults2?.get(db_user_birthday)
-            let sex = try queryResults2?.get(db_user_sex)
-            textConfigName.text = try queryResults2?.get(db_user_name)
-            textConfigSurname1.text = try queryResults2?.get(db_user_surname1)
-            textConfigSurname2.text = try queryResults2?.get(db_user_surname2)
+            guard let birthday = try? queryResults2?.get(db_fecha_nacimiento)
+                else {
+                    print("ERROR en fecha tabla usurios")
+                    return
+            }
+            
+            
+           
+            let queryCredencial = objCredencial.table_credencial.select(objCredencial.credencial_id, objCredencial.fotografia!)
+            guard let queryResultsFoto = try? db.pluck(queryCredencial)
+                else {
+                    print("consulta foto nula")
+                    return
+            }
+            
+ 
+            
+            let sex = try queryResults2?.get(db_sexo)
+            textConfigName.text = try queryResults2?.get(db_nombre)
+            textConfigSurname1.text = try queryResults2?.get(db_primer_apellido)
+            textConfigSurname2.text = try queryResults2?.get(db_segundo_apellido)
             if sex == "H" {
                 textConfigSex.text = sexTypes[0]
             }
             else if sex == "M" {
                 textConfigSex.text = sexTypes[1]
             }
-            textConfigBirthday.text = String((birthday?.prefix(10))!)
-            textConfigMail.text = try queryResults2?.get(db_user_mail)
-            textConfigPhone.text = try queryResults2?.get(db_user_phone)
+            
+            
+       
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd/MM/yyyy"
+            textConfigBirthday.text = dateFormatter.string(from: birthday!)
+            
+            
+            
+            
+        
+            textConfigMail.text = try queryResults2?.get(db_correo)
+            textConfigPhone.text = UserDefaults.standard.string(forKey: "phone")
+            
+           
+            textConfigCommunity.text = comunidadSelected
             
          }
          catch let ex {
             print("ReadCentroDB error: \(ex)")
          }
         
+    }
+    
+    func GuardaEdicionSocio()
+    {
+        
+        print("estoy guardando")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -330,10 +423,21 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigBirthday.text = dateFormatter.string(from: datePicker.date)
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //let option = indexPath.row
+        //print("You tapped cell number \(indexPath.row).")
+        //tableView.deselectRow(at: indexPath, animated: true)
+        
+        print("seccion" + String(indexPath.section.description))
+        print("row" + String(indexPath.row))
+        
+       // performSegue(withIdentifier: "Arbit", sender: tableViewData[indexPath.row].sidurText)
+    }
+    
     // MARK: - Table view delegates
 
-    /*override func numberOfSections(in tableView: UITableView) -> Int {
-        return 4
+  /*  override func numberOfSections(in tableView: UITableView) -> Int {
+        return 0
     }*/
     
     /*
@@ -343,26 +447,30 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             return tableViewData.count
         }
         return super.tableView(tableView, numberOfRowsInSection: section)
-    }
+    }*/
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 3 {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "options", for: indexPath) as! OptionTableViewCell
+    /*override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       print("seccion" + String(indexPath.section))
+        print("row" + String(indexPath.row))
+      //  print("seccion" + String(indexPath.section))
+        
+       // if indexPath.section == 3 {
+          /*  let cell = tableView.dequeueReusableCell(withIdentifier: "options", for: indexPath) as! OptionTableViewCell*/
             //cell.txtClass.text = "0"//String(tableViewData[indexPath.row].optionClass)
             //cell.txtPlace.text = "Hola"//tableViewData[indexPath.row].optionName
             //cell.option.isSelected = false //tableViewData[indexPath.row].selected
-            return cell
-        }
+           // return cell
+        //}
         return super.tableView(tableView, cellForRowAt: indexPath)
-    }
+    }*/
     
-    override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
+   /* override func tableView(_ tableView: UITableView, indentationLevelForRowAt indexPath: IndexPath) -> Int {
         if indexPath.section == 3 {
             let newIndexPath = IndexPath(row: 0, section: indexPath.section)
             return super.tableView(tableView, indentationLevelForRowAt: newIndexPath)
         }
         return super.tableView(tableView, indentationLevelForRowAt: indexPath as IndexPath)
-    }
+    }*/
     /*override func tableView(tableView: UITableView, indentationLevelForRowAtIndexPath indexPath: NSIndexPath) -> Int {
      
     }
@@ -373,5 +481,5 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         }
         return super.tableView(tableView, heightForRowAt: indexPath)
     }*/
-    */
+    
 }

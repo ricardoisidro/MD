@@ -187,4 +187,82 @@ class UsuarioApp : NSObject
             print("onInsertRegistro SQLite exception: \(ex)")
         }
     }
+    
+    func onReadData(connection: Connection) -> UsuarioApp {
+        do {
+            let query = table_usuarioapp.select(db_nombre, db_numero_maguen, db_primer_apellido, db_segundo_apellido, db_sexo, db_fecha_nacimiento, db_fecha_activacion, db_usuario, db_contrasena, db_correo, db_comunidad_id, db_categoria_id, db_activo, db_eliminado, db_usuario_app_id)
+            
+            let currentUser = try connection.pluck(query)
+            
+            let obj = UsuarioApp()
+            
+            obj.nombre = try currentUser?.get(db_nombre)
+            obj.numero_maguen = try currentUser?.get(db_numero_maguen)
+            obj.primer_apellido = try currentUser?.get(db_primer_apellido)
+            obj.segundo_apellido = try currentUser?.get(db_segundo_apellido)
+            obj.sexo = try currentUser?.get(db_sexo)
+            obj.fecha_nacimiento = try currentUser?.get(db_fecha_nacimiento) ?? nil
+            obj.fecha_activacion = try currentUser?.get(db_fecha_activacion) ?? nil
+            obj.usuario = try currentUser?.get(db_usuario)
+            obj.contrasena = try currentUser?.get(db_contrasena)
+            obj.correo = try currentUser?.get(db_correo)
+            obj.comunidad_id = try (currentUser?.get(db_comunidad_id))!
+            obj.categoria_id = try (currentUser?.get(db_categoria_id))!
+            obj.usuario_app_id = try (currentUser?.get(db_usuario_app_id))!
+            
+            obj.activo = try (currentUser?.get(db_activo))!
+            obj.eliminado = try (currentUser?.get(db_eliminado))!
+            
+            return obj
+            
+        }
+        catch let ex {
+            print("ReadUsuarioAppDB error: \(ex)")
+            
+            return UsuarioApp()
+        }
+    }
+    
+  
+    func onDelete(connection: Connection) {
+        do {
+            try connection.run(table_usuarioapp.delete())
+        }
+        catch let ex {
+            print("onDeleteUsuarioApp error: \(ex)")
+        }
+    }
+    
+    func onUpdate(connection: Connection, name: String, ap1: String, ap2: String, date: String, mail: String, sex: String, community: Int64) -> Bool {
+        
+        var success = false
+        let dateformat = DateFormatter()
+        dateformat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+        let fechaDate = dateformat.date(from: date)
+        do {
+            if try connection.run(table_usuarioapp.update(db_nombre <- name,
+                                                          db_primer_apellido <- ap1,
+                                                          db_segundo_apellido <- ap2,
+                                                          db_correo <- mail,
+                                                          db_fecha_nacimiento <- fechaDate,
+                                                          db_sexo <- sex,
+                                                          db_comunidad_id <- community)) > 0
+            {
+                print("Updated")
+                success = true
+            }
+            else {
+                print("Not updated")
+                success = false
+            }
+        }
+        catch let error {
+            print("onUpdateUsuarioApp exception: \(error)")
+            success = false
+        }
+        return success
+    }
+    
+    
+  
 }

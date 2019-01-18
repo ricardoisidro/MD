@@ -18,16 +18,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     //MARK: - TabBarController delegate
     // This delegate open the modal view before open the desired view.
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+        
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
-        if viewController is CardController && sessionisEmpty {
-            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
-                tabBarController.present(popUpVC, animated: true)
-                //tabBarController.selectedIndex = 1
-                return false
-            }
-        }
-        else if viewController is NewSettingsViewController && sessionisEmpty {
+        
+        
+        
+        if viewController is NewSettingsViewController && sessionisEmpty {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
                 //tabBarController.selectedIndex = 4
@@ -36,32 +33,92 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 //192.168.1.171
             }
         }
+        if viewController is CardController && sessionisEmpty {
+            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
+                tabBarController.present(popUpVC, animated: true)
+                //tabBarController.selectedIndex = 1
+                return false
+            }
+        }
+        
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 0 {
+            print("estoy en 0")
+            Global.shared.indexItemTabSelected = 0
+        }
+        if tabBarIndex == 1 {
+            print("estoy en 1")
+        Global.shared.indexItemTabSelected = 1
+        }
+        if tabBarIndex == 2 {
+            print("estoy en 2")
+             Global.shared.indexItemTabSelected = 2
+        }
+        if tabBarIndex == 3 {
+            print("estoy en 3")
+             Global.shared.indexItemTabSelected = 3
+        }
+        if tabBarIndex == 4 {
+            print("estoy en 4")
+             Global.shared.indexItemTabSelected = 4
+        
+        }
+     
+     
+ 
+ 
         
         return true
     }
     
+
+  
     // This delegate open the modal view after open the desired view.
-    /*func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+  /*  private func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) -> Bool {
+        print("entre a otro delegado")
+        
         let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
-        if viewController is CardController && sessionisEmpty {
-            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
-                tabBarController.present(popUpVC, animated: true)
-                print("Pedir login antes de la credencial")
-            }
+        
+      
+        
+        let tabBarIndex = tabBarController.selectedIndex
+        if tabBarIndex == 0 {
+           print("estoy en 0")
         }
-        else if viewController is NewSettingsViewController && sessionisEmpty {
-            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
+        if tabBarIndex == 1 {
+            print("estoy en 1")
+            
+         /*   if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
-                print("Pedir login antes de los ajustes")
-            }
+                //tabBarController.selectedIndex = 1
+                return false
+            }*/
         }
+        if tabBarIndex == 2 {
+            print("estoy en 2")
+        }
+        if tabBarIndex == 3 {
+            print("estoy en 3")
+        }
+        if tabBarIndex == 4 {
+            print("estoy en 4")
+    
+  /*  if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController")  {
+    tabBarController.present(popUpVC, animated: true)
+    //tabBarController.selectedIndex = 4
+    return false
+    
+    //192.168.1.171
+    }*/
+        }
+      return true
     }*/
 
     //MARK: - App delegates
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-
+  print("Selected view controller")
         
         return true
     }
