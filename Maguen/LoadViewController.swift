@@ -18,7 +18,7 @@ class LoadViewController: UIViewController {
     
     var database: Connection!
     
-    let db_categoria_centro = Table("categoria_centro")
+    /*let db_categoria_centro = Table("categoria_centro")
     let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
     let db_descripcion = Expression<String>("descripcion")
     let db_eliminado = Expression<Int64>("eliminado")
@@ -37,6 +37,14 @@ class LoadViewController: UIViewController {
     //let db_eliminado = Expression<Int64>("eliminado")
     //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
+    let table_eventos = Table("eventos")
+    let db_evento_id = Expression<Int64>("evento_id")
+    let db_titulo = Expression<String?>("titulo")
+    let db_fecha_inicial_publicacion = Expression<Date?>("fecha_inicial_publicacion")
+    let db_fecha_final_publicacion = Expression<Date?>("fecha_final_publicacion")
+    let db_horario = Expression<String?>("horario")
+    let db_imagen = Expression<String?>("imagen")
+    /*
     let db_eventos = Table("eventos")
     let db_evento_id = Expression<Int64>("evento_id")
     //let db_centro_id = Expression<Int64>("centro_id")
@@ -46,7 +54,7 @@ class LoadViewController: UIViewController {
     let db_horario = Expression<String>("horario")
     let db_imagen = Expression<String?>("imagen")
     //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")*/
     
     let db_comite = Table("comites")
     let db_comite_id = Expression<Int64>("comite_id")
@@ -61,7 +69,7 @@ class LoadViewController: UIViewController {
     //let db_eliminado = Expression<Int64>("eliminado")
     //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
-    let db_publicacion = Table("publicacion")
+    let table_publicacion = Table("publicacion")
     let db_publicacion_id = Expression<Int64>("publicacion_id")
     //let db_descripcion = Expression<String>("descripcion")
     //let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
@@ -125,7 +133,7 @@ class LoadViewController: UIViewController {
     let db_colonia = Expression<String>("colonia")
     let db_delegacion_municipio = Expression<String>("delegacion_municipio")
     let db_estado = Expression<String>("estado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
+    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")*/
     
     let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
     
@@ -172,19 +180,35 @@ class LoadViewController: UIViewController {
             if (lastDate == nil) {
                 UserDefaults.standard.set("01/01/1990 00:00:00", forKey: "dateLastSync")
                 lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
-                self.onCreateCategoriaCentroDB()
-                self.onCreateDomicilioDB()
-                self.onCreateCentroDB()
-                self.onCreateEventosDB()
-                self.onCreateServicioDB()
-                self.onCreateServicioCentroDB()
-                self.onCreateHorarioResoDB()
-                self.onCreateHorarioClaseDB()
-                self.onCreateClasesDB()
-                self.onCreateComiteDB()
-                self.onCreateCategoriaPublicacionDB()
-                self.onCreatePublicacionDB()
-                self.onCreateComunidadDB()
+                let catcen = CategoriaCentroModel()
+                catcen.onCreateCategoriaCentroDB(connection: self.database)
+                //self.onCreateDomicilioDB()
+                let dom = DomicilioModel()
+                dom.onCreateDomicilioDB(connection: self.database)
+                let c = CentroModel()
+                c.onCreateCentroDB(connection: self.database)
+                let ev = EventosModel()
+                ev.onCreateEventosDB(connection: self.database)
+                //self.onCreateServicioDB()
+                let serv = ServicioModel()
+                serv.onCreateServicioDB(connection: self.database)
+                let serc = ServicioCentroModel()
+                serc.onCreateServicioCentroDB(connection: self.database)
+                //self.onCreateServicioCentroDB()
+                let hr = HorarioResoModel()
+                hr.onCreateHorarioResoDB(connection: self.database)
+                let hc = HorarioClaseModel()
+                hc.onCreateHorarioClaseDB(connection: self.database)
+                let clas = ClasesModel()
+                clas.onCreateClasesDB(connection: self.database)
+                let com = ComiteModel()
+                com.onCreateComiteDB(connection: self.database)
+                let catp = CategoriaPublicacionModel()
+                catp.onCreateCategoriaPublicacionDB(connection: self.database)
+                let pub = PublicacionModel()
+                pub.onCreatePublicacionDB(connection: self.database)
+                let comu = ComunidadModel()
+                comu.onCreateComunidadDB(connection: self.database)
             }
             else {
                 
@@ -231,7 +255,7 @@ class LoadViewController: UIViewController {
                         }
                         //let entitiesToSync = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
                         _ = self.getEntitiesList(soapResult: soapRequest.soapResult, table: tables)
-                        ////print(entitiesToSync)
+                        //print(entitiesToSync)
                     }
                 }
             }
@@ -295,506 +319,31 @@ class LoadViewController: UIViewController {
         
     }
     
-    func onCreateCategoriaCentroDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_categoria_centro.create(ifNotExists: true) { t in     // CREATE TABLE "users" (
-                t.column(db_categoria_centro_id, primaryKey: true) //     "id" TEXT PRIMARY KEY NOT NULL,
-                t.column(db_descripcion)  //     "descripcion" TEXT,
-                t.column(db_eliminado)   //      "eliminado" TEXT,
-                t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
-            })
-        }
-        catch let ex{
-            print("onCreateCategoriaCentro SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertCategoriaCentroDB(objeto: CategoriaCentroModel) {
-        do {
-            let db = database
-            let insert = db_categoria_centro.insert(or: .replace,
-                                                    db_categoria_centro_id <- Int64(objeto.categoria_centro_id),
-                                                    db_descripcion <- objeto.descripcion!,
-                                                    db_eliminado <- Int64(objeto.eliminado!),
-                                                    db_fecha_modificacion <- objeto.fecha_modificacion!)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertCategoriaCentro Error: \(ex)")
-        }
-        
-    }
     
-    func onCreateCentroDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_centro.create(ifNotExists: true) { t in     // CREATE TABLE "users" (
-                t.column(db_centro_id, primaryKey: true)
-                t.column(db_categoria_centro_id) //     "id" TEXT PRIMARY KEY NOT NULL,
-                t.column(db_imagen_portada)  //     "descripcion" TEXT,
-                t.column(db_nombre)   //      "eliminado" TEXT,
-                t.column(db_descripcion)//"fecha_modificacion" TEXT
-                t.column(db_domicilio_centro_id)
-                t.column(db_telefonos)
-                t.column(db_activo)
-                t.column(db_seccion_id)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateCentroDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertCentroDB(objeto: CentroModel) {
-        do {
-            let db = database
-            let insert = db_centro.insert(or: .replace, db_centro_id <- Int64(objeto.centro_id),
-                                          db_categoria_centro_id <- Int64(objeto.categoria_centro_id),
-                                          db_imagen_portada <- objeto.imagen_portada!,
-                                          db_nombre <- objeto.nombre,
-                                          db_descripcion <- objeto.descripcion,
-                                          db_domicilio_centro_id <- Int64(objeto.domicilio_centro_id),
-                                          db_telefonos <- objeto.telefonos!,
-                                          db_activo <- Int64(objeto.activo),
-                                          db_seccion_id <- Int64?(objeto.seccion_id!)!,
-                                          db_eliminado <- Int64(objeto.eliminado),
-                                          db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertCentroDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateEventosDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_eventos.create(ifNotExists: true) { t in
-                t.column(db_evento_id, primaryKey: true)
-                t.column(db_centro_id)
-                t.column(db_titulo)
-                t.column(db_fecha_inicial_publicacion)
-                t.column(db_fecha_final_publicacion)
-                t.column(db_horario)
-                t.column(db_imagen)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateEventosDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertEventosDB(objeto: EventosModel) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        let defaultDateTime = formatter.date(from: "01/01/1990 00:00:00")
-        
-        do {
-            let db = database
-            let insert = db_eventos.insert(or: .replace,
-                                           db_evento_id <- Int64(objeto.evento_id),
-                                           db_centro_id <- Int64(objeto.centro_id),
-                                           db_titulo <- objeto.titulo,
-                                           db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion ?? defaultDateTime!,
-                                           db_fecha_final_publicacion <- objeto.fecha_final_publicacion!,
-                                           db_horario <- objeto.horario,
-                                           db_imagen <- objeto.imagen!,
-                                           db_eliminado <- Int64(objeto.eliminado),
-                                           db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertCentroDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateComiteDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_comite.create(ifNotExists: true) { t in
-                t.column(db_comite_id, primaryKey: true)
-                t.column(db_nombre_comite)
-                t.column(db_telefono)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateComitesDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertComiteDB(objeto: ComiteModel) {
-        do {
-            let db = database
-            let insert = db_comite.insert(or: .replace,
-                                          db_comite_id <- Int64(objeto.comite_id),
-                                          db_nombre_comite <- objeto.nombre_comite,
-                                          db_telefono <- objeto.telefono,
-                                          db_eliminado <- Int64(objeto.eliminado),
-                                          db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertComiteDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateCategoriaPublicacionDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_categoria_publicacion.create(ifNotExists: true) { t in
-                t.column(db_categoria_publicacion_id, primaryKey: true)
-                t.column(db_descripcion)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateCategoriaPublicacionDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertCategoriaPublicacionDB(objeto: CategoriaPublicacionModel) {
-        do {
-            let db = database
-            let insert = db_categoria_publicacion.insert(or: .replace,
-                                                         db_categoria_publicacion_id <- Int64(objeto.categoria_publicacion_id),
-                                                         db_descripcion <- objeto.descripcion,
-                                                         db_eliminado <- Int64(objeto.eliminado),
-                                                         db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertCategoriaPublicacionDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreatePublicacionDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_publicacion.create(ifNotExists: true) { t in
-                t.column(db_publicacion_id, primaryKey: true)
-                t.column(db_descripcion)
-                t.column(db_fecha_inicial_publicacion)
-                t.column(db_fecha_final_publicacion)
-                t.column(db_categoria_publicacion_id)
-                t.column(db_paginas)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-                t.column(db_activo)
-            })
-        }
-        catch let ex{
-            print("onCreatePublicacionDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertPublicacionDB(objeto: PublicacionModel) {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd/MM/yyyy HH:mm:ss"
-        let defaultDateTime = formatter.date(from: "01/01/1990 00:00:00")
-        do {
-            let db = database
-            let insert = db_publicacion.insert(or: .replace,
-                                               db_publicacion_id <- Int64(objeto.publicacion_id),
-                                               db_descripcion <- objeto.descripcion,
-                                               db_fecha_inicial_publicacion <- objeto.fecha_inicial_publicacion ?? defaultDateTime!,
-                                               db_fecha_final_publicacion <- objeto.fecha_final_publicacion ?? defaultDateTime!,
-                                               db_categoria_publicacion_id <- Int64(objeto.categoria_publicacion_id),
-                                               db_paginas <- Int64(objeto.paginas),
-                                               db_eliminado <- Int64(objeto.eliminado),
-                                               db_fecha_modificacion <- objeto.fecha_modificacion,
-                                               db_activo <- Int64(objeto.activo))
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertPublicacionDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateComunidadDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_comunidad.create(ifNotExists: true) { t in
-                t.column(db_comunidad_id, primaryKey: true)
-                t.column(db_descripcion)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateComunidadDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertComunidadDB(objeto: ComunidadModel) {
-        do {
-            let db = database
-            let insert = db_comunidad.insert(or: .replace,
-                                             db_comunidad_id <- Int64(objeto.comunidad_id),
-                                             db_descripcion <- objeto.descripcion,
-                                             db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertComunidadDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateHorarioClaseDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_horario_clase.create(ifNotExists: true) { t in
-                t.column(db_horario_clase_id, primaryKey: true)
-                t.column(db_clase_id)
-                t.column(db_profesor)
-                t.column(db_dias)
-                t.column(db_horario)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateHorarioClaseDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertHorarioClaseDB(objeto: HorarioClaseModel) {
-        do {
-            let db = database
-            let insert = db_horario_clase.insert(or: .replace,
-                                                 db_horario_clase_id <- Int64(objeto.horario_clase_id),
-                                                 db_clase_id <- Int64(objeto.clase_id),
-                                                 db_profesor <- objeto.profesor,
-                                                 db_dias <- objeto.dias,
-                                                 db_horario <- objeto.horario,
-                                                 db_eliminado <- Int64(objeto.eliminado),
-                                                 db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertHorarioClaseDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateClasesDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_clases.create(ifNotExists: true) { t in
-                t.column(db_clase_id, primaryKey: true)
-                t.column(db_descripcion)
-                t.column(db_centro_id)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateComunidadDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertClasesDB(objeto: ClasesModel) {
-        do {
-            let db = database
-            let insert = db_clases.insert(or: .replace,
-                                          db_clase_id <- Int64(objeto.clase_id),
-                                          db_descripcion <- objeto.descripcion,
-                                          db_centro_id <- Int64(objeto.centro_id),
-                                          db_eliminado <- Int64(objeto.eliminado),
-                                          db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertComunidadDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateHorarioResoDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_horarios_reso.create(ifNotExists: true) { t in
-                t.column(db_horarios_reso_id, primaryKey: true)
-                t.column(db_centro_id)
-                t.column(db_tipo_reso_id)
-                t.column(db_titulo)
-                t.column(db_horario)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateHorarioResoDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertHorarioResoDB(objeto: HorarioResoModel) {
-        do {
-            let db = database
-            let insert = db_horarios_reso.insert(or: .replace,
-                                                 db_horarios_reso_id <- Int64(objeto.horarios_reso_id),
-                                                 db_centro_id <- Int64(objeto.centro_id),
-                                                 db_tipo_reso_id <- Int64(objeto.tipo_reso_id),
-                                                 db_titulo <- objeto.titulo,
-                                                 db_horario <- objeto.horario,
-                                                 db_eliminado <- Int64(objeto.eliminado),
-                                                 db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertHorarioResoDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateServicioCentroDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_servicio_centro.create(ifNotExists: true) { t in
-                t.column(db_servicio_centro_id, primaryKey: true)
-                t.column(db_servicio_id)
-                t.column(db_centro_id)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateServicioCentroDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertServicioCentroDB(objeto: ServicioCentroModel) {
-        do {
-            let db = database
-            let insert = db_servicio_centro.insert(or: .replace,
-                                                   db_servicio_centro_id <- Int64(objeto.servicio_centro_id),
-                                                   db_servicio_id <- Int64(objeto.servicio_id),
-                                                   db_centro_id <- Int64(objeto.centro_id),
-                                                   db_eliminado <- Int64(objeto.eliminado),
-                                                   db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertServicioCentroDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateServicioDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_servicio.create(ifNotExists: true) { t in
-                t.column(db_servicio_id, primaryKey: true)
-                t.column(db_descripcion)
-                t.column(db_imagen)
-                t.column(db_activo)
-                t.column(db_categoria_centro_id)
-                t.column(db_eliminado)
-                t.column(db_fecha_modificacion)
-            })
-        }
-        catch let ex{
-            print("onCreateServicioDB SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertServicioDB(objeto: ServicioModel) {
-        do {
-            let db = database
-            let insert = db_servicio.insert(or: .replace,
-                                            db_servicio_id <- Int64(objeto.servicio_id),
-                                            db_descripcion <- objeto.descripcion,
-                                            db_imagen <- objeto.imagen,
-                                            db_categoria_centro_id <- Int64(objeto.categoria_centro_id),
-                                            db_activo <- Int64(objeto.activo!),
-                                            db_eliminado <- Int64(objeto.eliminado),
-                                            db_fecha_modificacion <- objeto.fecha_modificacion)
-            try db!.run(insert)
-        }
-        catch let ex{
-            print("onInsertServicioDBError: \(ex)")
-        }
-        
-    }
     
-    func onCreateDomicilioDB() {
-        
-        do {
-            let db = database
-            try db!.run(db_domicilio.create(ifNotExists: true) { t in
-                t.column(db_domicilio_id, primaryKey: true)
-                t.column(db_calle)
-                t.column(db_numero_exterior)
-                t.column(db_numero_interior)
-                t.column(db_cp)
-                t.column(db_colonia)
-                t.column(db_delegacion_municipio)
-                t.column(db_estado)
-                t.column(db_fecha_modificacion)//"fecha_modificacion" TEXT
-            })
-        }
-        catch let ex{
-            print("onCreateCategoriaCentro SQLite exception: \(ex)")
-        }
-        
-    }
     
-    func onInsertDomicilioDB(objeto: DomicilioModel) {
-        do {
-            let db = database
-            let insert = db_domicilio.insert(or: .replace,
-                                             db_domicilio_id <- Int64(objeto.domicilio_id),
-                                             db_calle <- objeto.calle,
-                                             db_numero_exterior <- objeto.numero_exterior,
-                                             db_numero_interior <- objeto.numero_interior,
-                                             db_cp <- Int64(objeto.cp!),
-                                             db_colonia <- objeto.colonia,
-                                             db_delegacion_municipio <- objeto.delegacion_municipio,
-                                             db_estado <- objeto.estado,
-                                             db_fecha_modificacion <- objeto.fecha_modificacion!)
-            try db!.run(insert)
-        }
-        catch let ex {
-            print("onInsertCategoriaCentro Error: \(ex)")
-        }
-        
-    }
     
     func getTablesList(soapResult: String) -> [String] {
         var tablesToSync: [String] = [String]()
@@ -850,56 +399,85 @@ class LoadViewController: UIViewController {
             entitiesToSync = entityTablesResult.Value
             
             if(table == "categoria_centro") {
-                let ccm = CategoriaCentroModel.deserializaCategoriaCentro(dato: entitiesToSync)
-                onInsertCategoriaCentroDB(objeto: ccm)
+                let ccm = CategoriaCentroModel()
+                let info = ccm.deserializaCategoriaCentro(dato: entitiesToSync)
+                ccm.onInsertCategoriaCentroDB(connection: self.database, objeto: info)
             }
             else if(table == "domicilio") {
-                let d = DomicilioModel.deserializaCentro(dato: entitiesToSync)
-                onInsertDomicilioDB(objeto: d)
+                let dom = DomicilioModel()
+                let info = dom.deserializaCentro(dato: entitiesToSync)
+                dom.onInsertDomicilioDB(connection: self.database, objeto: info)
+                //let d = DomicilioModel.deserializaCentro(dato: entitiesToSync)
+                //onInsertDomicilioDB(objeto: d)
             }
             else if(table == "centro") {
-                let c = CentroModel.deserializaCentro(dato: entitiesToSync)
-                onInsertCentroDB(objeto: c)
+                let c = CentroModel()
+                let info = c.deserializaCentro(dato: entitiesToSync)
+                c.onInsertCentroDB(objeto: info, connection: self.database)
             }
             else if(table == "eventos") {
-                let e = EventosModel.deserializaEvento(dato: entitiesToSync)
-                onInsertEventosDB(objeto: e)
+                let e = EventosModel()
+                let info = e.deserializaEvento(dato: entitiesToSync)
+                e.onInsertEventosDB(connection: self.database, objeto: info)
             }
             else if(table == "servicio") {
-                let s = ServicioModel.deserializaCentro(dato: entitiesToSync)
-                onInsertServicioDB(objeto: s)
+                let s = ServicioModel()
+                let info = s.deserializaCentro(dato: entitiesToSync)
+                s.onInsertServicioDB(connection: self.database, objeto: info)
+                //let s = ServicioModel.deserializaCentro(dato: entitiesToSync)
+                //onInsertServicioDB(objeto: s)
             }
             else if(table == "servicio_centro") {
-                let sc = ServicioCentroModel.deserializaEvento(dato: entitiesToSync)
-                onInsertServicioCentroDB(objeto: sc)
+                let sc = ServicioCentroModel()
+                let info = sc.deserializaEvento(dato: entitiesToSync)
+                sc.onInsertServicioCentroDB(connection: self.database, objeto: info)
+                //let sc = ServicioCentroModel.deserializaEvento(dato: entitiesToSync)
+                //onInsertServicioCentroDB(objeto: sc)
             }
             else if(table == "horarios_reso") {
-                let hr = HorarioResoModel.deserializaEvento(dato: entitiesToSync)
-                onInsertHorarioResoDB(objeto: hr)
+                let hr = HorarioResoModel()
+                let info = hr.deserializaEvento(dato: entitiesToSync)
+                hr.onInsertHorarioResoDB(connection: self.database, objeto: info)
+                //let hr = HorarioResoModel.deserializaEvento(dato: entitiesToSync)
+                //onInsertHorarioResoDB(objeto: hr)
             }
             else if(table == "clases") {
-                let c = ClasesModel.deserializaEvento(dato: entitiesToSync)
-                onInsertClasesDB(objeto: c)
+                let clas = ClasesModel()
+                let info = clas.deserializaEvento(dato: entitiesToSync)
+                clas.onInsertClasesDB(connection: self.database, objeto: info)
+                //let c = ClasesModel.deserializaEvento(dato: entitiesToSync)
+                //onInsertClasesDB(objeto: c)
             }
             else if(table == "horario_clase") {
-                let h = HorarioClaseModel.deserializaEvento(dato: entitiesToSync)
-                onInsertHorarioClaseDB(objeto: h)
+                let h = HorarioClaseModel()
+                let info = h.deserializaEvento(dato: entitiesToSync)
+                h.onInsertHorarioClaseDB(connection: self.database, objeto: info)
+                //let h = HorarioClaseModel.deserializaEvento(dato: entitiesToSync)
+                //onInsertHorarioClaseDB(objeto: h)
             }
             else if(table == "comites") {
-                let c = ComiteModel.deserializaEvento(dato: entitiesToSync)
-                onInsertComiteDB(objeto: c)
+                let c = ComiteModel()
+                let info = c.deserializaEvento(dato: entitiesToSync)
+                c.onInsertComiteDB(connection: self.database, objeto: info)
+                
             }
             else if(table == "categoria_publicacion") {
-                let cp = CategoriaPublicacionModel.deserializaEvento(dato: entitiesToSync)
-                onInsertCategoriaPublicacionDB(objeto: cp)
+                let catp = CategoriaPublicacionModel()
+                let info = catp.deserializaEvento(dato: entitiesToSync)
+                catp.onInsertCategoriaPublicacionDB(connection: self.database, objeto: info)
+                
             }
             else if(table == "publicacion") {
-                let p = PublicacionModel.deserializaEvento(dato: entitiesToSync)
-                onInsertPublicacionDB(objeto: p)
+                let pub = PublicacionModel()
+                let info = pub.deserializaEvento(dato: entitiesToSync)
+                pub.onInsertPublicacionDB(connection: self.database, objeto: info)
+                
             }
             else if(table == "comunidad") {
-                let c = ComunidadModel.deserializaEvento(dato: entitiesToSync)
-                onInsertComunidadDB(objeto: c)
+                let com = ComunidadModel()
+                let info = com.deserializaEvento(dato: entitiesToSync)
+                com.onInsertComunidadDB(connection: self.database, objeto: info)
+                
             }
             
         }

@@ -367,7 +367,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FECHA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-bd-Lho">
-                                        <rect key="frame" x="175.5" y="267.5" width="127.5" height="18"/>
+                                        <rect key="frame" x="175.5" y="268" width="127.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -378,8 +378,8 @@
                                             <constraint firstAttribute="width" secondItem="gsO-MK-KJT" secondAttribute="height" multiplier="3:4" id="cnl-8E-nxR"/>
                                         </constraints>
                                     </imageView>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" text="SOCIO INVITADO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TGK-5o-6sc">
-                                        <rect key="frame" x="175.5" y="286.5" width="127.5" height="75"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="SOCIO INVITADO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGK-5o-6sc">
+                                        <rect key="frame" x="175.5" y="287" width="127.5" height="75"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="iRg-mA-WTO"/>
@@ -387,9 +387,16 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIGENCIA:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dT-qr-PdI">
+                                        <rect key="frame" x="175.5" y="252.5" width="127.5" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="6dT-qr-PdI" firstAttribute="top" secondItem="691-qT-WXx" secondAttribute="bottom" constant="1" id="1S7-5H-Akj"/>
                                     <constraint firstItem="gsO-MK-KJT" firstAttribute="centerY" secondItem="DLd-9E-fBp" secondAttribute="centerY" id="1Zv-4T-NFf"/>
                                     <constraint firstItem="qGO-bd-Lho" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="1.5" id="5Yn-fu-cUj"/>
                                     <constraint firstItem="TGK-5o-6sc" firstAttribute="top" secondItem="qGO-bd-Lho" secondAttribute="bottom" constant="1" id="7g6-uk-9bE"/>
@@ -407,13 +414,15 @@
                                     <constraint firstItem="gsO-MK-KJT" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="0.5" id="YAI-XH-NJ4"/>
                                     <constraint firstItem="Q6F-Ii-io0" firstAttribute="top" secondItem="gsO-MK-KJT" secondAttribute="top" id="c2M-3w-iOH"/>
                                     <constraint firstItem="691-qT-WXx" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="1.5" id="eAW-J5-R83"/>
-                                    <constraint firstItem="qGO-bd-Lho" firstAttribute="top" secondItem="691-qT-WXx" secondAttribute="bottom" constant="16" id="emw-jQ-A1F"/>
                                     <constraint firstItem="gsO-MK-KJT" firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="width" multiplier="0.4" id="f5n-0O-NmG"/>
                                     <constraint firstItem="GcW-XN-y3f" firstAttribute="leading" secondItem="DLd-9E-fBp" secondAttribute="leading" id="f9i-MD-AuJ"/>
+                                    <constraint firstItem="6dT-qr-PdI" firstAttribute="width" secondItem="GcW-XN-y3f" secondAttribute="width" multiplier="0.4" id="g7U-wA-ZNQ"/>
                                     <constraint firstItem="GcW-XN-y3f" firstAttribute="top" secondItem="DLd-9E-fBp" secondAttribute="top" id="jA6-zo-rtC"/>
                                     <constraint firstItem="bni-nr-v7t" firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="width" multiplier="0.4" id="jFP-rT-H7a"/>
                                     <constraint firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="height" multiplier="1:1.59" id="lWW-jF-FOL"/>
+                                    <constraint firstItem="qGO-bd-Lho" firstAttribute="top" secondItem="6dT-qr-PdI" secondAttribute="bottom" constant="1" id="mC1-HV-3TY"/>
                                     <constraint firstItem="qGO-bd-Lho" firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="width" multiplier="0.4" id="npz-Mc-7AI"/>
+                                    <constraint firstItem="6dT-qr-PdI" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="1.5" id="rZs-nl-A21"/>
                                     <constraint firstItem="mOO-lM-MVq" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" id="sNb-Oy-gPP"/>
                                     <constraint firstItem="Q6F-Ii-io0" firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="width" multiplier="0.4" id="xoF-DM-zNX"/>
                                 </constraints>
@@ -1368,8 +1377,8 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAY-yQ-DxA">
                                                             <rect key="frame" x="8" y="19" width="93" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1415,8 +1424,8 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioh-Bf-9sg">
                                                             <rect key="frame" x="8" y="19" width="93" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1462,8 +1471,8 @@
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNs-jX-NiW">
                                                             <rect key="frame" x="8" y="19" width="93.5" height="17"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                            <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
+                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -4031,19 +4040,19 @@
         <image name="bannerJuventud" width="1200" height="515"/>
         <image name="bannerMedios" width="1200" height="515"/>
         <image name="bannerTemplos" width="1200" height="515"/>
-        <image name="banner_maguen" width="308.25" height="183"/>
+        <image name="banner_maguen" width="411" height="244"/>
         <image name="btn_foto" width="64" height="64"/>
         <image name="codigo_default" width="300" height="300"/>
         <image name="credencial_invitado" width="700" height="1000"/>
         <image name="edit_b" width="26" height="26"/>
         <image name="evento_cuatro" width="800" height="600"/>
-        <image name="evento_uno" width="384" height="288"/>
+        <image name="evento_uno" width="800" height="600"/>
         <image name="fondo_splash" width="720" height="1280"/>
         <image name="icon_candado" width="26" height="26"/>
-        <image name="icon_medios" width="112.5" height="112.5"/>
+        <image name="icon_medios" width="150" height="150"/>
         <image name="icon_usuario" width="26" height="26"/>
-        <image name="img_1118" width="150" height="150"/>
-        <image name="img_cas" width="150" height="150"/>
+        <image name="img_1118" width="300" height="300"/>
+        <image name="img_cas" width="300" height="300"/>
         <image name="img_foto_default" width="405" height="388"/>
         <image name="img_hatzala" width="150" height="150"/>
         <image name="img_itinerario_it" width="32" height="32"/>
@@ -4051,16 +4060,16 @@
         <image name="logo_azul" width="150" height="120"/>
         <image name="logo_splash" width="354" height="199"/>
         <image name="sidur" width="1200" height="515"/>
-        <image name="tab_avisos" width="37.5" height="37.5"/>
-        <image name="tab_config" width="64" height="64"/>
-        <image name="tab_credencial" width="64" height="64"/>
-        <image name="tab_emergencias" width="37.5" height="37.5"/>
-        <image name="tab_maguen" width="62" height="44"/>
+        <image name="tab_avisos" width="25" height="25"/>
+        <image name="tab_config" width="32" height="32"/>
+        <image name="tab_credencial" width="32" height="32"/>
+        <image name="tab_emergencias" width="25" height="25"/>
+        <image name="tab_maguen" width="31" height="22"/>
         <image name="templo_default" width="144" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DT1-iD-UQO"/>
-        <segue reference="hOY-Mp-rer"/>
+        <segue reference="JEZ-ZJ-bEK"/>
+        <segue reference="q1P-Ww-8sp"/>
         <segue reference="P49-PH-1i4"/>
     </inferredMetricsTieBreakers>
 </document>
