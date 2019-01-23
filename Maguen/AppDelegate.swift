@@ -7,8 +7,8 @@
 //
 
 import UIKit
-import CryptoSwift
-import SQLite
+//import CryptoSwift
+//import SQLite
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
@@ -19,12 +19,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     // This delegate open the modal view before open the desired view.
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-        let validString = UserDefaults.standard.string(forKey: "name") ?? ""
+        /*let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
+        */
         
         
-        
-        if viewController is NewSettingsViewController && sessionisEmpty {
+        if viewController is NewSettingsViewController && !Global.shared.loginOk {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
                 //tabBarController.selectedIndex = 4
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
                 //192.168.1.171
             }
         }
-        if viewController is CardController && sessionisEmpty {
+        if viewController is CardController && !Global.shared.loginOk {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
                 tabBarController.present(popUpVC, animated: true)
                 //tabBarController.selectedIndex = 1
@@ -41,7 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             }
         }
         
-        let tabBarIndex = tabBarController.selectedIndex
+        /*let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
             //print("estoy en 0")
             Global.shared.indexItemTabSelected = 0
@@ -62,7 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
             //print("estoy en 4")
              Global.shared.indexItemTabSelected = 4
         
-        }
+        }*/
      
      
  

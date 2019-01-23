@@ -66,7 +66,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     
     let db_user = Table("usuarioapp")
     let db_usuario_app_id = Expression<Int64>("usuario_app_id")
-    let db_numero_maguen = Expression<String?>("numero_maguen")
+    //let db_numero_maguen = Expression<String?>("numero_maguen")
     let db_nombre = Expression<String?>("nombre")
     let db_primer_apellido = Expression<String?>("primer_apellido")
     let db_segundo_apellido = Expression<String?>("segundo_apellido")
@@ -136,9 +136,10 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
 
         scrollView.setContentOffset(.zero, animated: true)
-        let validString = UserDefaults.standard.string(forKey: "name") ?? ""
-        let sessionisEmpty = (validString == "")
-        if sessionisEmpty {
+        //let validString = UserDefaults.standard.string(forKey: "name") ?? ""
+        //let sessionisEmpty = (validString == "")
+        
+        if !Global.shared.loginOk {
             btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
             btnSave.backgroundColor = MaguenColors.blue5
             buttonAction = 2
@@ -150,7 +151,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                 //btnPhoto.isHidden = false
                 formView.isUserInteractionEnabled = true
                 buttonAction = 2
-
+                
             }
             else {
                 btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
@@ -160,10 +161,19 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                 buttonAction = 1
             }
         }
+        /*if sessionisEmpty {
+            
+        }
+        else {
+            
+        }*/
         
         let aesJSON = AESforJSON()
         
-        let validUser = UserDefaults.standard.string(forKey: "user")
+        let u = UsuarioApp()
+        let user = u.onReadData(connection: conn)
+        let validUser = user.usuario
+        //let validUser = UserDefaults.standard.string(forKey: "user")
         let saldoRequest = SaldoRequest(usuario: validUser!)
         
         let stringEncodedandEncrypted = aesJSON.encodeAndEncryptJSONSaldo(SaldoRequest: saldoRequest)
@@ -230,6 +240,8 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             UserDefaults.standard.removeObject(forKey: "user")
             UserDefaults.standard.removeObject(forKey: "balance")
             self.tabBarController?.selectedIndex = 0
+            Global.shared.loginOk = false
+            
             break
             
         case 2: //Guardar
@@ -317,9 +329,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func editarUsuario() -> EBReturn {
-    
-        embededVC.GuardaEdicionSocio()
-        
+            
         let pSUA = pSetUsuarioApp()
         
         let c = Credencial()
@@ -384,7 +394,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         jsUsuario.usuario = resUsuarioApp.usuario!
         
         // FIXME : repetido
-        jsUsuario.numero_maguen = resUsuarioApp.usuario!
+        //jsUsuario.numero_maguen = resUsuarioApp.usuario!
 
         jsUsuario.contrasena = resUsuarioApp.contrasena!
         

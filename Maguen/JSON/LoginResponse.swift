@@ -36,7 +36,7 @@ class LoginResponse: NSObject, Decodable {
 }*/
 
 class Value4: NSObject, Decodable {
-    var usuario_app_id: Int
+    var usuario_app_id: Int64
     var nombre: String?
     var primer_apellido: String?
     var segundo_apellido: String?
@@ -46,11 +46,11 @@ class Value4: NSObject, Decodable {
     var usuario: String?
     var contrasena: String?
     var correo: String?
-    var comunidad_id: Int?
-    var categoria_id: Int // 1: socio titular, 2: esposa, 3: hijos, socios titulares; 4: socio invitado
-    var credencial_id: Int
-    var activo: Int?
-    var eliminado: Int?
+    var comunidad_id: Int64?
+    var categoria_id: Int64 // 1: socio titular, 2: esposa, 3: hijos, socios titulares; 4: socio invitado
+    var credencial_id: Int64
+    var activo: Int64?
+    var eliminado: Int64?
     var telefonoActual: TelefonoActual
     var credencialActual: CredencialActual
     

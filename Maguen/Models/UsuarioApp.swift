@@ -12,7 +12,7 @@ import SQLite
 class UsuarioApp : NSObject
 {
     var usuario_app_id : Int64
-    var numero_maguen : String?
+    //var numero_maguen : String?
     var nombre : String?
     var primer_apellido : String?
     var segundo_apellido : String?
@@ -32,7 +32,7 @@ class UsuarioApp : NSObject
     //campos de la tabla
     let table_usuarioapp = Table("usuarioapp")
     let db_usuario_app_id = Expression<Int64>("usuario_app_id")
-    let db_numero_maguen = Expression<String?>("numero_maguen")
+    //let db_numero_maguen = Expression<String?>("numero_maguen")
     let db_nombre = Expression<String?>("nombre")
     let db_primer_apellido = Expression<String?>("primer_apellido")
     let db_segundo_apellido = Expression<String?>("segundo_apellido")
@@ -52,7 +52,7 @@ class UsuarioApp : NSObject
     override init()
     {
         self.usuario_app_id = -1
-        self.numero_maguen = ""
+        //self.numero_maguen = ""
         self.nombre = ""
         self.primer_apellido = ""
         self.segundo_apellido = ""
@@ -80,9 +80,9 @@ class UsuarioApp : NSObject
             if(val[0] == "usuario_app_id") {
                 usu.usuario_app_id = Int64(val[1])!
             }
-            else if(val[0] == "numero_maguen") {
+            /*else if(val[0] == "numero_maguen") {
                 usu.numero_maguen = val[1]
-            }
+            }*/
             else if(val[0] == "nombre") {
                 usu.nombre = val[1]
             }
@@ -140,7 +140,7 @@ class UsuarioApp : NSObject
         {
             try connection.run(table_usuarioapp.create(ifNotExists: true) { t in
                 t.column(db_usuario_app_id, primaryKey: true)
-                t.column(db_numero_maguen)
+                //t.column(db_numero_maguen)
                 t.column(db_nombre)
                 t.column(db_primer_apellido)
                 t.column(db_segundo_apellido)
@@ -166,7 +166,7 @@ class UsuarioApp : NSObject
         {
             let insert = table_usuarioapp.insert(or: .replace,
                                                  db_usuario_app_id <- objeto.usuario_app_id,
-                                                 db_numero_maguen <- objeto.numero_maguen,
+                                                 //db_numero_maguen <- objeto.numero_maguen,
                                                  db_nombre <- objeto.nombre,
                                                  db_primer_apellido <- objeto.primer_apellido,
                                                  db_segundo_apellido <- objeto.segundo_apellido,
@@ -190,14 +190,14 @@ class UsuarioApp : NSObject
     
     func onReadData(connection: Connection) -> UsuarioApp {
         do {
-            let query = table_usuarioapp.select(db_nombre, db_numero_maguen, db_primer_apellido, db_segundo_apellido, db_sexo, db_fecha_nacimiento, db_fecha_activacion, db_usuario, db_contrasena, db_correo, db_comunidad_id, db_categoria_id, db_activo, db_eliminado, db_usuario_app_id)
+            let query = table_usuarioapp.select(db_nombre, db_primer_apellido, db_segundo_apellido, db_sexo, db_fecha_nacimiento, db_fecha_activacion, db_usuario, db_contrasena, db_correo, db_comunidad_id, db_categoria_id, db_activo, db_eliminado, db_usuario_app_id)
             
             let currentUser = try connection.pluck(query)
             
             let obj = UsuarioApp()
             
             obj.nombre = try currentUser?.get(db_nombre)
-            obj.numero_maguen = try currentUser?.get(db_numero_maguen)
+            //obj.numero_maguen = try currentUser?.get(db_numero_maguen)
             obj.primer_apellido = try currentUser?.get(db_primer_apellido)
             obj.segundo_apellido = try currentUser?.get(db_segundo_apellido)
             obj.sexo = try currentUser?.get(db_sexo)

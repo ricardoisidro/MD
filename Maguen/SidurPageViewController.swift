@@ -30,6 +30,11 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         
         self.view.backgroundColor = MaguenColors.black1
         
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
         guard let paramRezo = tipoRezo else
         {
             return
@@ -98,7 +103,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         }
         
         
-     
+        
         let frameVC = FrameViewController2()
         let currentCad = pages.first!
         
@@ -121,14 +126,13 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         
         let currentIndex = (viewController as! FrameViewController2).imageIndex ?? 0
         
-        if (currentIndex > 0) {
-            let frameVC = FrameViewController()
-            let lastPage = pages[currentIndex - 1]
-            
-            if let cad = URL(string: lastPage) {
+        if (currentIndex < pages.count - 1) {
+            let frameVC = FrameViewController2()
+            let nextPage = pages[currentIndex + 1]
+            if let cad = URL(string: nextPage) {
                 if let data = NSData(contentsOf: cad) {
                     frameVC.imageData = data as Data
-                    frameVC.imageIndex = currentIndex - 1
+                    frameVC.imageIndex = currentIndex + 1
                     frameVC.imageTitle = vctitle
                     frameVC.totalPages = Int(numberOfPages)
                     
@@ -143,15 +147,18 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         
+        
+        
         let currentIndex = (viewController as! FrameViewController2).imageIndex ?? 0
         
-        if (currentIndex < pages.count - 1) {
+        if (currentIndex > 0) {
             let frameVC = FrameViewController2()
-            let nextPage = pages[currentIndex + 1]
-            if let cad = URL(string: nextPage) {
+            let lastPage = pages[currentIndex - 1]
+            
+            if let cad = URL(string: lastPage) {
                 if let data = NSData(contentsOf: cad) {
                     frameVC.imageData = data as Data
-                    frameVC.imageIndex = currentIndex + 1
+                    frameVC.imageIndex = currentIndex - 1
                     frameVC.imageTitle = vctitle
                     frameVC.totalPages = Int(numberOfPages)
                     

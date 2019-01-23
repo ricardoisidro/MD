@@ -45,7 +45,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     let db_user = Table("usuarioapp")
     let db_usuario_app_id = Expression<Int64>("usuario_app_id")
-    let db_numero_maguen = Expression<String?>("numero_maguen")
+    //let db_numero_maguen = Expression<String?>("numero_maguen")
     let db_nombre = Expression<String?>("nombre")
     let db_primer_apellido = Expression<String?>("primer_apellido")
     let db_segundo_apellido = Expression<String?>("segundo_apellido")
@@ -135,18 +135,26 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         //let aes: AES
         
         addLoadingView()
-        guard let user = txtUsuario.text else {
-            //print("No user")
+        guard let user = txtUsuario.text, user != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar usuario")
+            activityIndicatorView.removeFromSuperview()
+
             return
         }
-        guard let pass = txtPassword.text else {
-            //print("No password")
+        guard let pass = txtPassword.text, pass != "" else {
+            showAlertWith(title: "Datos faltantes", message: "Agregar contraseña")
+            activityIndicatorView.removeFromSuperview()
+
             return
         }
         //get data to send
-        let loginRequest = LoginRequest(contrasena: pass, imei: "356021081404192", sistema_operativo: "iOS", usuario: user)
+        let lr = LoginRequest()
+        lr.contrasena = pass
+        lr.usuario = user
+        lr.imei = "999999999999999"
+        lr.sistema_operativo = "i0S"
         
-        let chainEncodedandEncrypted = encodeAndEncryptJSONString(LoginRequest: loginRequest)
+        let chainEncodedandEncrypted = encodeAndEncryptJSONString(LoginRequest: lr)
         
         let soapMessage =
         "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetUsuarioApp xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetUsuarioApp></soap:Body></soap:Envelope>"
@@ -207,14 +215,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         DispatchQueue.main.async {
             self.updateUI()
             
-            let tabBarController = self.presentingViewController as? UITabBarController
             
-      
-            
-            self.dismiss(animated: true) {
-                let _ = tabBarController?.selectedIndex = 4
-            }
-           /* Global.shared.loginOk = true
+           /*
             
             let myView = self.storyboard!.instantiateViewController(withIdentifier: "HomeViewController")
             
@@ -281,10 +283,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             let jsonDecoder = JSONDecoder()
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             let decrypted = try soapString.decryptBase64ToString(cipher: aes)
-            
+            //print(decrypted)
             let loginResult = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
             
             if loginResult.Correcto == true {
+                Global.shared.loginOk = true
                 let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
                 let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
                 let db = try Connection(fileURL.path)
@@ -329,7 +332,10 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")
                 UserDefaults.standard.set(loginResult.Value.comunidad_id, forKey: "comunidadID")
                 
-                
+                let tabBarController = self.presentingViewController as? UITabBarController
+                self.dismiss(animated: true) {
+                    let _ = tabBarController?.selectedIndex = 4
+                }
                 
             }
             else {
@@ -379,7 +385,6 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
            
             try database.run(db_user.create(ifNotExists: true) { t in
                 t.column(db_usuario_app_id, primaryKey: true)
-                t.column(db_numero_maguen)
                 t.column(db_nombre)
                 t.column(db_primer_apellido)
                 t.column(db_segundo_apellido)
@@ -466,9 +471,12 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
             let comid = objeto.Value.comunidad_id ?? 0
             let act = objeto.Value.activo ?? 1
+            let eliminado = objeto.Value.eliminado ?? 0
+            
             let insert = db_user.insert(or: .replace,
-                                        db_usuario_app_id <- Int64(objeto.Value.credencialActual.usuario_app_id),
+                                        db_usuario_app_id <- objeto.Value.usuario_app_id,
             db_nombre <- objeto.Value.nombre,
+            //db_numero_maguen <- objeto.Value.usuario,
             db_primer_apellido <- objeto.Value.primer_apellido,
             db_segundo_apellido <- objeto.Value.segundo_apellido,
             db_sexo <- objeto.Value.sexo,
@@ -484,7 +492,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             db_activo <- Int64(act),
             db_usuario <- objeto.Value.usuario,
             db_domicilio_id <- 0,
-            db_eliminado <-  Int64(objeto.Value.eliminado ?? 0))
+            db_eliminado <-  Int64(eliminado))
             
            // db_user_idactivedate <- objeto.Value.credencialActual.fecha_vencimiento,
            // db_user_cardid <- Int64(objeto.Value.credencialActual.credencial_id))

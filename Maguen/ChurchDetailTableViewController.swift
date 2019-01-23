@@ -62,7 +62,7 @@ class ChurchDetailTableViewController: UITableViewController {
         let db_eventos = Table("eventos")
         let db_evento_id = Expression<Int64>("evento_id")
         let db_titulo = Expression<String>("titulo")
-        let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
+        let db_fecha_final_publicacion = Expression<Date?>("fecha_final_publicacion")
         let db_horario = Expression<String>("horario")
         
         let db_centro = Table("centro")
@@ -91,7 +91,7 @@ class ChurchDetailTableViewController: UITableViewController {
             
             // getting classes
             let query2 = db_clases.select(db_clases_id, db_descripcion)
-                .where(db_centro_id == Int64(centro_id))
+                .where(db_centro_id == Int64(centro_id)).where(db_eliminado == 0)
             guard let queryResults2 = try? db.prepare(query2)
                 else {
                     //print("ERROR al consultar clases")
@@ -102,7 +102,12 @@ class ChurchDetailTableViewController: UITableViewController {
                 tableViewDataClasses.append(data)
             }
             
-            let query4 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            let format = DateFormatter()
+            format.dateFormat = "dd/MM/yyyy"
+            let fechaInicial = format.string(from: Date())
+            let dateToday = format.date(from: fechaInicial)
+            
+            let query4 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_final_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_fecha_final_publicacion >= dateToday!).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
             guard let queryResults4 = try? db.prepare(query4)
                 //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {
@@ -110,10 +115,12 @@ class ChurchDetailTableViewController: UITableViewController {
                     return
             }
             for row in queryResults4 {
-                let fecha = try row.get(db_fecha_inicial_publicacion).prefix(10)
+                let fecha = try row.get(db_fecha_final_publicacion)!
+                let fechaString = format.string(from: fecha)
                 let hora = try row.get(db_horario)
-                let horario = String(fecha) + " " + hora
-                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: try row.get(db_fecha_inicial_publicacion), eventTime: try row.get(db_horario))
+                //let horario = String(fecha) + " " + hora
+                let horario = fechaString + " " + hora
+                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: fechaString, eventTime: try row.get(db_horario))
                 tableViewDataEventDetail.append(data)
                 let data2 = cellChurchSubDetailComponents(subLabel: try row.get(db_titulo), subDetail: horario, subImage: "", subId: try Int(row.get(db_evento_id)))
                 tableViewDataEvents.append(data2)

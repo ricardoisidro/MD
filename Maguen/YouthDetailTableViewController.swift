@@ -62,7 +62,7 @@ class YouthDetailTableViewController: UITableViewController {
         let db_eventos = Table("eventos")
         let db_evento_id = Expression<Int64>("evento_id")
         let db_titulo = Expression<String>("titulo")
-        let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
+        let db_fecha_final_publicacion = Expression<Date?>("fecha_final_publicacion")
         let db_horario = Expression<String>("horario")
         
         let db_centro = Table("centro")
@@ -90,7 +90,7 @@ class YouthDetailTableViewController: UITableViewController {
             
             // getting classes
             let query2 = db_clases.select(db_clases_id, db_descripcion)
-                .where(db_centro_id == Int64(centro_id))
+                .where(db_centro_id == Int64(centro_id)).where(db_eliminado == 0)
             guard let queryResults2 = try? db.prepare(query2)
                 else {
                     //print("ERROR al consultar clases")
@@ -101,7 +101,13 @@ class YouthDetailTableViewController: UITableViewController {
                 tableViewDataClasses.append(data)
             }
             
-            let query3 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            //getting events
+            let format = DateFormatter()
+            format.dateFormat = "dd/MM/yyyy"
+            let fechaInicial = format.string(from: Date())
+            let dateToday = format.date(from: fechaInicial)
+            
+            let query3 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_final_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_fecha_final_publicacion >= dateToday!).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
             guard let queryResults3 = try? db.prepare(query3)
                 //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {
@@ -109,10 +115,14 @@ class YouthDetailTableViewController: UITableViewController {
                     return
             }
             for row in queryResults3 {
-                let fecha = try row.get(db_fecha_inicial_publicacion).prefix(10)
+                let fecha = try row.get(db_fecha_final_publicacion)!
+                let fechaString = format.string(from: fecha)
+                
+                //let fecha = try row.get(db_fecha_inicial_publicacion).prefix(10)
                 let hora = try row.get(db_horario)
-                let horario = String(fecha) + " " + hora
-                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: try row.get(db_fecha_inicial_publicacion), eventTime: try row.get(db_horario))
+                //let horario = String(fecha) + " " + hora
+                let horario = fechaString + " " + hora
+                let data = eventComponents(eventImage: try row.get(db_imagen)!, eventTitle: try row.get(db_titulo), eventPlace: try row.get(db_nombre), eventDate: fechaString, eventTime: try row.get(db_horario))
                 tableViewDataEventDetail.append(data)
                 let data2 = cellYouthSubDetailComponents(subLabel: try row.get(db_titulo), subDetail: horario, subImage: "", subId: try Int(row.get(db_evento_id)))
                 tableViewDataEvents.append(data2)
@@ -123,8 +133,11 @@ class YouthDetailTableViewController: UITableViewController {
             print("ReadCentroDB in Juventud error: \(ex)")
         }
 
+        /*tableViewRootData = [
+            cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_servicios_it"), cellLabel: "Servicios", sectionData: tableViewDataServices), cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_eventos_it"), cellLabel: "Eventos", sectionData: tableViewDataEvents), cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_escuelas_it"), cellLabel: "Clases", sectionData: tableViewDataClasses)]*/
         tableViewRootData = [
-            cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_servicios_it"), cellLabel: "Servicios", sectionData: tableViewDataServices), cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_eventos_it"), cellLabel: "Eventos", sectionData: tableViewDataEvents), cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_escuelas_it"), cellLabel: "Clases", sectionData: tableViewDataClasses)]
+             cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_eventos_it"), cellLabel: "Eventos", sectionData: tableViewDataEvents),
+             cellYouthDetailComponents(opened: false, cellImage: #imageLiteral(resourceName: "img_escuelas_it"), cellLabel: "Clases", sectionData: tableViewDataClasses)]
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor
@@ -163,7 +176,7 @@ class YouthDetailTableViewController: UITableViewController {
             return cell
         }
         else {
-            if indexPath.section == 0 { // services
+            /*if indexPath.section == 0 { // services
                 let cell = tableView.dequeueReusableCell(withIdentifier: "youthdetailchildcell") as! YouthDetailChildCell
                 cell.txtYouthDetailChild.text = tableViewDataServices[indexPath.row - 1].subLabel
                 //cell.txtChurchDetailChild.text = tableViewData[indexPath.row].sectionData[tableViewData2[indexPath.row - 1].subLabel]
@@ -179,8 +192,8 @@ class YouthDetailTableViewController: UITableViewController {
                 cell.accessoryType = .none
                 
                 return cell
-            }
-            else if indexPath.section == 1 { //events
+            }*/
+            if indexPath.section == 0 { //events
                 let cell = tableView.dequeueReusableCell(withIdentifier: "youthdetailchildcell") as! YouthDetailChildCell
                 cell.txtYouthDetailChild.text = tableViewDataEvents[indexPath.row - 1].subLabel
                 cell.txtYouthDetailChild.font = UIFont.systemFont(ofSize: 15.0)
@@ -190,7 +203,7 @@ class YouthDetailTableViewController: UITableViewController {
                 cell.layer.borderWidth = CGFloat(1.0)
                 return cell
             }
-            else if indexPath.section == 2 { // classes
+            else if indexPath.section == 1 { // classes
                 let cell = tableView.dequeueReusableCell(withIdentifier: "youthdetailchildcell") as! YouthDetailChildCell
                 cell.txtYouthDetailChild.text = tableViewDataClasses[indexPath.row - 1].subLabel
                 //cell.txtChurchDetailChild.text = tableViewData[indexPath.row].sectionData[tableViewData2[indexPath.row - 1].subLabel]
@@ -231,7 +244,7 @@ class YouthDetailTableViewController: UITableViewController {
             }
         }
         else {
-            if indexPath.section == 1 { //events
+            if indexPath.section == 0 { //events
                 tableView.deselectRow(at: indexPath, animated: true)
                 //travelText = tableViewDataEvents[indexPath.row - 1].subLabel
                 ////print("Selected inner cell: " + travelText)
@@ -239,7 +252,7 @@ class YouthDetailTableViewController: UITableViewController {
                 //travelText = tableView[indexPath.section].sectionData[indexPath.row - 1]
                 
             }
-            else if indexPath.section == 2 { // classes
+            else if indexPath.section == 1 { // classes
                 tableView.deselectRow(at: indexPath, animated: true)
                 ////print("Selected inner cell: " + travelText)
                 self.performSegue(withIdentifier: "viewClass", sender: tableViewDataClasses[indexPath.row - 1])

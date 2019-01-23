@@ -73,7 +73,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     let db_user = Table("usuarioapp")
     let db_usuario_app_id = Expression<Int64>("usuario_app_id")
-    let db_numero_maguen = Expression<String?>("numero_maguen")
+    //let db_numero_maguen = Expression<String?>("numero_maguen")
     let db_nombre = Expression<String?>("nombre")
     let db_primer_apellido = Expression<String?>("primer_apellido")
     let db_segundo_apellido = Expression<String?>("segundo_apellido")
@@ -93,6 +93,12 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     /*deinit {
         NotificationCenter.default.removeObserver(self)
     }*/
+    let table_telefonos = Table("telefonos")
+    let db_numero = Expression<String?>("numero")
+    
+    let table_credencial = Table("credencial")
+    let db_credencial_id = Expression<Int64>("credencial_id")
+    let db_fotografia = Expression<String?>("fotografia")
     
     let sexTypes = ["HOMBRE", "MUJER"]
     //var communityTypes: [String] = []
@@ -127,15 +133,20 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigPhone.delegate = self
 
         //createObservers()
+        
+        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        
         do {
             
             let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
-         
+            
             //getting centers list
             guard let queryResults = try? db.prepare("SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id") else {
-                //print("ERROR al consultar Comites")
                 return
             }
             
@@ -157,26 +168,25 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
                 //communityTypes.append(data)
             }
             
-       
+            
             //comento para compilacion
-        
-           let idSelected =  UserDefaults.standard.string(forKey: "comunidadID")
+            
+            let idSelected =  UserDefaults.standard.string(forKey: "comunidadID")
             
             guard let queryComunidadSocio = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad where comunidad_id = " + idSelected!) else {
-             //print("ERROR al consultar Comunidad")
-             return
-             }
-             
-             
+                //print("ERROR al consultar Comunidad")
+                return
+            }
+            
+            
             for row in queryComunidadSocio {
-             
-             if var myComunidad:String = row[1] as! String?
-             {  // do something here if exists
-                comunidadSelected = myComunidad
-             }
-             
-             }
- 
+                
+                if var myComunidad:String = row[1] as! String? {  // do something here if exists
+                    comunidadSelected = myComunidad
+                }
+                
+            }
+            
             
             
             // getting user
@@ -193,16 +203,11 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
                     return
             }
             
+            let queryTelefono = table_telefonos.select(db_numero)
             
-           
-            let queryCredencial = objCredencial.table_credencial.select(objCredencial.credencial_id, objCredencial.fotografia!)
-            guard let queryResultsFoto = try? db.pluck(queryCredencial)
-                else {
-                    print("consulta foto nula")
-                    return
+            guard let resultTelefono = try db.pluck(queryTelefono) else {
+                return
             }
-            
- 
             
             let sex = try queryResults2?.get(db_sexo)
             textConfigName.text = try queryResults2?.get(db_nombre)
@@ -215,57 +220,22 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
                 textConfigSex.text = sexTypes[1]
             }
             
-            
-       
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy"
             textConfigBirthday.text = dateFormatter.string(from: birthday!)
             
-            
-            
-            
-        
             textConfigMail.text = try queryResults2?.get(db_correo)
-            textConfigPhone.text = UserDefaults.standard.string(forKey: "phone")
+            textConfigPhone.text = try resultTelefono.get(db_numero)
             
-           
             textConfigCommunity.text = comunidadSelected
             
-         }
-         catch let ex {
+        }
+        catch let ex {
             print("ReadCentroDB error: \(ex)")
-         }
+        }
         
-    }
-    
-    func GuardaEdicionSocio()
-    {
-        
-        //print("estoy guardando")
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        /*textConfigName.text = UserDefaults.standard.string(forKey: "name") ?? ""
-        textConfigSurname1.text = UserDefaults.standard.string(forKey: "surname1") ?? ""
-        textConfigSurname2.text =  UserDefaults.standard.string(forKey: "surname2") ?? ""
-        textConfigSex.text =  UserDefaults.standard.string(forKey: "sex") ?? ""
-        textConfigBirthday.text = UserDefaults.standard.string(forKey: "birthday") ?? ""
-        textConfigMail.text = UserDefaults.standard.string(forKey: "mail") ?? ""
-        textConfigPhone.text = UserDefaults.standard.string(forKey: "phone") ?? ""*/
         textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""
     }
-    
-    /*func createObservers() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(self.updateData(notification:)),
-                                               name: dataNotif,
-                                               object: nil)
-    }
-    
-    @objc func updateData(notification: Notification) {
-        let info = notification.userInfo?["mykey"]
-        //textConfigName.text =
-    }*/
     
     @objc func dismissKeyboard(){
         view.endEditing(true)

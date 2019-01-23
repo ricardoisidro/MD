@@ -14,8 +14,9 @@ class Global {
     static let shared = Global()
     
     var loginOk = false
-    var indexItemTabSelected = -1
+    //var indexItemTabSelected = -1
     //var database: Connection!
+    
     
     init() {
       
