@@ -149,16 +149,18 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                 btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
                 btnSave.backgroundColor = MaguenColors.blue5
                 //btnPhoto.isHidden = false
-                formView.isUserInteractionEnabled = true
-                buttonAction = 2
+                //formView.isUserInteractionEnabled = true
+                unlockForm(blocked: true)
+                buttonAction = 2 // guardar cambios
                 
             }
             else {
                 btnSave.setTitle("DESACTIVAR USUARIO", for: .normal)
                 btnSave.backgroundColor = .orange
                 btnPhoto.isHidden = true
-                formView.isUserInteractionEnabled = false
-                buttonAction = 1
+                //formView.isUserInteractionEnabled = false
+                unlockForm(blocked: false)
+                buttonAction = 1 //desactivar
             }
         }
         /*if sessionisEmpty {
@@ -213,6 +215,17 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         }
         dataTask?.resume()*/
         
+    }
+    
+    func unlockForm(blocked: Bool) {
+        self.embededVC.textConfigName.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigSurname1.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigSurname2.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigSex.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigBirthday.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigMail.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigPhone.isUserInteractionEnabled = blocked
+        self.embededVC.textConfigCommunity.isUserInteractionEnabled = blocked
     }
     
     @IBAction func btnSaveorDiscard(_ sender: UIButton) {
@@ -504,8 +517,8 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
             btnSave.backgroundColor = MaguenColors.blue5
             btnEdit.isHidden = true
-            formView.isUserInteractionEnabled = true
-            //formView.
+            //formView.isUserInteractionEnabled = true
+            unlockForm(blocked: true)
             buttonAction = 2
             isModoEdit = true
         }

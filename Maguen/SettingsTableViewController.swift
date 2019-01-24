@@ -279,7 +279,8 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         return true
     }
     
-    //MARK: - Picker delegates
+    //MARK: - PickerView delegates
+    
     func createSexPicker() {
         let sexPicker = UIPickerView()
         sexPicker.tag = 1
@@ -393,18 +394,28 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         textConfigBirthday.text = dateFormatter.string(from: datePicker.date)
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let option = indexPath.row
-        ////print("You tapped cell number \(indexPath.row).")
-        //tableView.deselectRow(at: indexPath, animated: true)
-        
-        //print("seccion" + String(indexPath.section.description))
-        //print("row" + String(indexPath.row))
-        
-       // performSegue(withIdentifier: "Arbit", sender: tableViewData[indexPath.row].sidurText)
-    }
-    
     // MARK: - Table view delegates
+
+    /*override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == 2 {
+            if indexPath.row == 0 {
+                print("Hola")
+                let myView = self.storyboard!.instantiateViewController(withIdentifier: "DetalleSaldoViewController")
+                self.present(myView, animated: true)
+            }
+           
+        }
+        
+    }*/
+    
+    /*override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if (indexPath.section == 2) {
+            print(indexPath)
+            return indexPath
+        }else{
+            return nil
+        }
+    }*/
 
   /*  override func numberOfSections(in tableView: UITableView) -> Int {
         return 0
