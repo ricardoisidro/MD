@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icono_maguen.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "icono_maguen.png",
       "scale" : "2x"
     },
     {
