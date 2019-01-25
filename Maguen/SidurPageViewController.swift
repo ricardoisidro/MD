@@ -30,8 +30,27 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         
         self.view.backgroundColor = MaguenColors.black1
         
+        canRotate()
+        Global.shared.isinSidur = true
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        Global.shared.isinSidur = false
+        
+        if (self.isMovingFromParent) {
+            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+        }
         
     }
+    
+    /*override func transition(from fromViewController: UIViewController, to toViewController: UIViewController, duration: TimeInterval, options: UIView.AnimationOptions = [], animations: (() -> Void)?, completion: ((Bool) -> Void)? = nil) {
+        <#code#>
+    }*/
+    
+    @objc func canRotate() -> Void{}
+    
     
     override func viewWillAppear(_ animated: Bool) {
         
@@ -45,7 +64,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         case "Arbit":
             vctitle = paramRezo
             for i in 1...42 {
-                let pagename = MaguenCredentials.urlArbit + "/pagina\(String(i)).jpg"
+                let pagename = MaguenCredentials.urlArbit + "pagina\(String(i)).jpg"
                 pages.append(pagename)
                 numberOfPages = 42
             }
@@ -55,7 +74,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         case "Omer":
             vctitle = paramRezo
             for i in 1...8 {
-                let pagename = MaguenCredentials.urlOmer + "/pagina\(String(i)).jpg"
+                let pagename = MaguenCredentials.urlOmer + "pagina\(String(i)).jpg"
                 pages.append(pagename)
                 numberOfPages = 8
             }
@@ -65,7 +84,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         case "Minja":
             vctitle = paramRezo
             for i in 1...41 {
-                let pagename = MaguenCredentials.urlOmer + "/pagina\(String(i)).jpg"
+                let pagename = MaguenCredentials.urlMinja + "pagina\(String(i)).jpg"
                 pages.append(pagename)
                 numberOfPages = 41
             }
@@ -74,7 +93,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         case "Refua":
             vctitle = paramRezo
             for i in 1...4 {
-                let pagename = MaguenCredentials.urlOmer + "/pagina\(String(i)).jpg"
+                let pagename = MaguenCredentials.urlRefua + "pagina\(String(i)).jpg"
                 pages.append(pagename)
                 numberOfPages = 4
             }
@@ -84,7 +103,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         case "Tefilat":
             vctitle = paramRezo
             for i in 1...5 {
-                let pagename = MaguenCredentials.urlOmer + "/pagina\(String(i)).jpg"
+                let pagename = MaguenCredentials.urlTefilat + "pagina\(String(i)).jpg"
                 pages.append(pagename)
                 numberOfPages = 5
             }
@@ -94,7 +113,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
         default:
             vctitle = paramRezo
             for i in 1...42 {
-                let pagename = MaguenCredentials.urlArbit + "/pagina\(String(i)).jpg"
+                let pagename = MaguenCredentials.urlArbit + "pagina\(String(i)).jpg"
                 pages.append(pagename)
                 numberOfPages = 42
             }
@@ -208,7 +227,8 @@ class FrameViewController2: UIViewController, UIGestureRecognizerDelegate {
     
     let imageView: UIImageView = {
         let imgv = UIImageView()
-        imgv.contentMode = .scaleAspectFit
+        //imgv.contentMode = .scaleAspectFit
+        imgv.contentMode = .scaleAspectFill
         imgv.translatesAutoresizingMaskIntoConstraints = false
         return imgv
     }()

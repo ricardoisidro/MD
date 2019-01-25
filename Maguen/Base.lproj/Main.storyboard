@@ -354,20 +354,20 @@
                                             <constraint firstAttribute="width" secondItem="mOO-lM-MVq" secondAttribute="height" multiplier="4:3" id="toz-Wf-clU"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NOMBRE DEL SOCIO" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6F-Ii-io0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="NOMBRE DEL SOCIO" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q6F-Ii-io0">
                                         <rect key="frame" x="175.5" y="168.5" width="127.5" height="41"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="APELLIDOS DEL SOCIO" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="691-qT-WXx">
-                                        <rect key="frame" x="175.5" y="210.5" width="127.5" height="41"/>
+                                        <rect key="frame" x="175.5" y="210.5" width="127.5" height="32"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="FECHA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-bd-Lho">
-                                        <rect key="frame" x="175.5" y="268" width="127.5" height="18"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" text="FECHA" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-bd-Lho">
+                                        <rect key="frame" x="175.5" y="244.5" width="127.5" height="18"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -379,16 +379,16 @@
                                         </constraints>
                                     </imageView>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="SOCIO INVITADO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TGK-5o-6sc">
-                                        <rect key="frame" x="175.5" y="287" width="127.5" height="75"/>
+                                        <rect key="frame" x="175.5" y="263.5" width="127.5" height="75"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="75" id="iRg-mA-WTO"/>
                                         </constraints>
-                                        <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="23"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VIGENCIA:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dT-qr-PdI">
-                                        <rect key="frame" x="175.5" y="252.5" width="127.5" height="14.5"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="250" text="VIGENCIA:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6dT-qr-PdI">
+                                        <rect key="frame" x="175.5" y="243.5" width="127.5" height="0.0"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -399,7 +399,7 @@
                                     <constraint firstItem="6dT-qr-PdI" firstAttribute="top" secondItem="691-qT-WXx" secondAttribute="bottom" constant="1" id="1S7-5H-Akj"/>
                                     <constraint firstItem="gsO-MK-KJT" firstAttribute="centerY" secondItem="DLd-9E-fBp" secondAttribute="centerY" id="1Zv-4T-NFf"/>
                                     <constraint firstItem="qGO-bd-Lho" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="1.5" id="5Yn-fu-cUj"/>
-                                    <constraint firstItem="TGK-5o-6sc" firstAttribute="top" secondItem="qGO-bd-Lho" secondAttribute="bottom" constant="1" id="7g6-uk-9bE"/>
+                                    <constraint firstItem="TGK-5o-6sc" firstAttribute="top" relation="greaterThanOrEqual" secondItem="qGO-bd-Lho" secondAttribute="bottom" constant="1" id="7g6-uk-9bE"/>
                                     <constraint firstItem="mOO-lM-MVq" firstAttribute="top" secondItem="DLd-9E-fBp" secondAttribute="top" constant="8" id="8Nw-EQ-Yug"/>
                                     <constraint firstItem="TGK-5o-6sc" firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="width" multiplier="0.4" id="FAA-lv-jTm"/>
                                     <constraint firstAttribute="bottom" secondItem="GcW-XN-y3f" secondAttribute="bottom" id="IGx-S9-IO5"/>
@@ -409,6 +409,7 @@
                                     <constraint firstItem="691-qT-WXx" firstAttribute="top" secondItem="Q6F-Ii-io0" secondAttribute="bottom" constant="1" id="SGF-7S-K0a"/>
                                     <constraint firstAttribute="trailing" secondItem="GcW-XN-y3f" secondAttribute="trailing" id="Suc-3t-IUs"/>
                                     <constraint firstItem="Q6F-Ii-io0" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="1.5" id="UDN-eP-Bri"/>
+                                    <constraint firstItem="TGK-5o-6sc" firstAttribute="bottom" secondItem="gsO-MK-KJT" secondAttribute="bottom" id="Wsq-bH-XCF"/>
                                     <constraint firstItem="691-qT-WXx" firstAttribute="width" secondItem="DLd-9E-fBp" secondAttribute="width" multiplier="0.4" id="XRV-SN-2rd"/>
                                     <constraint firstItem="bni-nr-v7t" firstAttribute="centerY" secondItem="DLd-9E-fBp" secondAttribute="centerY" multiplier="1.7" id="Xq5-v0-jtV"/>
                                     <constraint firstItem="gsO-MK-KJT" firstAttribute="centerX" secondItem="DLd-9E-fBp" secondAttribute="centerX" multiplier="0.5" id="YAI-XH-NJ4"/>
@@ -834,8 +835,8 @@
                                                 <constraint firstAttribute="height" constant="70" id="bXS-yh-BZx"/>
                                             </constraints>
                                         </imageView>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Maguen Media" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gu-xc-aNE">
-                                            <rect key="frame" x="117" y="45" width="123.5" height="20.5"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Arbit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Gu-xc-aNE">
+                                            <rect key="frame" x="117" y="45" width="43.5" height="20.5"/>
                                             <fontDescription key="fontDescription" type="system" weight="black" pointSize="17"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
@@ -867,7 +868,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bmM-Zy-6Gw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-489" y="-2068"/>
+            <point key="canvasLocation" x="210" y="-1797"/>
         </scene>
         <!--Sidur Page View Controller-->
         <scene sceneID="BNM-10-vdS">
@@ -875,7 +876,7 @@
                 <pageViewController storyboardIdentifier="SidurPageViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="jLK-jr-9DJ" customClass="SidurPageViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ql-Dq-VbC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-20" y="-3047"/>
+            <point key="canvasLocation" x="-662" y="-1797"/>
         </scene>
         <!--Hist Revista Table View Controller-->
         <scene sceneID="iRe-UX-zFp">
@@ -1378,7 +1379,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VAY-yQ-DxA">
                                                             <rect key="frame" x="8" y="19" width="93" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1425,7 +1426,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ioh-Bf-9sg">
                                                             <rect key="frame" x="8" y="19" width="93" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -1472,7 +1473,7 @@
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LNs-jX-NiW">
                                                             <rect key="frame" x="8" y="19" width="93.5" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
@@ -4040,19 +4041,19 @@
         <image name="bannerJuventud" width="1200" height="515"/>
         <image name="bannerMedios" width="1200" height="515"/>
         <image name="bannerTemplos" width="1200" height="515"/>
-        <image name="banner_maguen" width="411" height="244"/>
+        <image name="banner_maguen" width="308.25" height="183"/>
         <image name="btn_foto" width="64" height="64"/>
         <image name="codigo_default" width="300" height="300"/>
         <image name="credencial_invitado" width="700" height="1000"/>
         <image name="edit_b" width="26" height="26"/>
         <image name="evento_cuatro" width="800" height="600"/>
-        <image name="evento_uno" width="800" height="600"/>
+        <image name="evento_uno" width="384" height="288"/>
         <image name="fondo_splash" width="720" height="1280"/>
         <image name="icon_candado" width="26" height="26"/>
-        <image name="icon_medios" width="150" height="150"/>
+        <image name="icon_medios" width="112.5" height="112.5"/>
         <image name="icon_usuario" width="26" height="26"/>
-        <image name="img_1118" width="300" height="300"/>
-        <image name="img_cas" width="300" height="300"/>
+        <image name="img_1118" width="150" height="150"/>
+        <image name="img_cas" width="150" height="150"/>
         <image name="img_foto_default" width="405" height="388"/>
         <image name="img_hatzala" width="150" height="150"/>
         <image name="img_itinerario_it" width="32" height="32"/>
@@ -4060,11 +4061,11 @@
         <image name="logo_azul" width="150" height="120"/>
         <image name="logo_splash" width="354" height="199"/>
         <image name="sidur" width="1200" height="515"/>
-        <image name="tab_avisos" width="25" height="25"/>
-        <image name="tab_config" width="32" height="32"/>
-        <image name="tab_credencial" width="32" height="32"/>
-        <image name="tab_emergencias" width="25" height="25"/>
-        <image name="tab_maguen" width="31" height="22"/>
+        <image name="tab_avisos" width="37.5" height="37.5"/>
+        <image name="tab_config" width="64" height="64"/>
+        <image name="tab_credencial" width="64" height="64"/>
+        <image name="tab_emergencias" width="37.5" height="37.5"/>
+        <image name="tab_maguen" width="62" height="44"/>
         <image name="templo_default" width="144" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>

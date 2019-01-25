@@ -22,7 +22,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         /*let validString = UserDefaults.standard.string(forKey: "name") ?? ""
         let sessionisEmpty = (validString == "")
         */
-        
+        if Global.shared.isinSidur {
+            return false
+        }
         
         if viewController is NewSettingsViewController && !Global.shared.loginOk {
             if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
@@ -44,23 +46,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         /*let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {
             //print("estoy en 0")
-            Global.shared.indexItemTabSelected = 0
+            
         }
         if tabBarIndex == 1 {
             //print("estoy en 1")
-        Global.shared.indexItemTabSelected = 1
         }
         if tabBarIndex == 2 {
             //print("estoy en 2")
-             Global.shared.indexItemTabSelected = 2
         }
         if tabBarIndex == 3 {
             //print("estoy en 3")
-             Global.shared.indexItemTabSelected = 3
         }
         if tabBarIndex == 4 {
             //print("estoy en 4")
-             Global.shared.indexItemTabSelected = 4
         
         }*/
      
@@ -69,6 +67,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
  
         
         return true
+    }
+    
+    func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
+        if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
+            if (rootViewController.responds(to: Selector(("canRotate")))) {
+                // Unlock landscape view orientations for this view controller
+                return .allButUpsideDown;
+            }
+        }
+        
+        // Only allow portrait (standard behaviour)
+        return .portrait;
+    }
+    
+    private func topViewControllerWithRootViewController(rootViewController: UIViewController!) -> UIViewController? {
+        if (rootViewController == nil) {
+            return nil
+        }
+        if (rootViewController.isKind(of: UITabBarController.self)) {
+            return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UITabBarController).selectedViewController)
+        }
+        else if (rootViewController.isKind(of: UINavigationController.self)) {
+            return topViewControllerWithRootViewController(rootViewController: (rootViewController as! UINavigationController).visibleViewController)
+        }
+        else if (rootViewController.presentedViewController != nil) {
+            return topViewControllerWithRootViewController(rootViewController: rootViewController.presentedViewController)
+        }
+        else {
+            return rootViewController
+        }
+       
     }
     
 

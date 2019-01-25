@@ -20,8 +20,8 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
     let db_eliminado = Expression<Int64>("eliminado")
     let db_fecha_modificacion = Expression<String>("fecha_modificacion")
     
-    var publicationId: Int64 = 0
-    var numberOfPages: Int64 = 0
+    var publicationId = Int64()
+    var numberOfPages = Int64()
     var vctitle: String? = ""
     var pages: [String] = []
     
@@ -44,8 +44,8 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
             let query = db_publicacion.select(db_publicacion_id, db_descripcion, db_fecha_inicial_publicacion, db_categoria_publicacion_id, db_paginas, db_eliminado, db_fecha_modificacion).order(db_fecha_inicial_publicacion.date.desc).where(db_categoria_publicacion_id == 1).where(db_eliminado == 0)
             let currentDaily = try db.pluck(query)
             
-            publicationId = try (currentDaily?.get(db_publicacion_id))!
-            numberOfPages = try (currentDaily?.get(db_paginas))!
+            publicationId = try currentDaily?.get(db_publicacion_id) ?? 0
+            numberOfPages = try currentDaily?.get(db_paginas) ?? 0
             vctitle = try currentDaily?.get(db_descripcion)
             
         }
@@ -53,11 +53,17 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
             print("Read publicacionDB error: \(err)")
         }
         
-        
-        for i in 1...numberOfPages {
-            let pagename = MaguenCredentials.urlMagazine + "\(String(publicationId))/pagina\(String(i)).jpg"
+        if numberOfPages > 0 {
+            for i in 1...numberOfPages {
+                let pagename = MaguenCredentials.urlMagazine + "\(String(publicationId))/pagina\(String(i)).jpg"
+                pages.append(pagename)
+            }
+        }
+        else {
+            let pagename = MaguenCredentials.urlMagazine + "\(String(publicationId))/pagina.jpg"
             pages.append(pagename)
         }
+        
         
         let frameVC = FrameViewController()
         let currentCad = pages.first!
