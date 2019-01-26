@@ -118,12 +118,11 @@ class SidurTableViewController: UITableViewController {
         guard let segueData = sender as? String
             else { return }
        
-            let controller = segue.destination as? SidurPageViewController
-            controller?.tipoRezo = segueData
-            
-            
-     
-      
+        let controller = segue.destination as? SidurPageViewController
+        
+        controller?.tipoRezo = segueData
+        controller?.navigationItem.title = segueData
+        
     }
  
 

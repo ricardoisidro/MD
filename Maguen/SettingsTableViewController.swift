@@ -24,14 +24,20 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     @IBOutlet weak var btnVerSaldoName: UIButton!
     
-     var objCredencial = Credencial()
+    var objCredencial = Credencial()
+    
+    var activityIndicatorView = UIView()
+
 
   
     @IBAction func btnVerSaldo(_ sender: Any) {
         
-        //print("di clic en ver saldo")
+        addLoadingView()
+
         let myView = self.storyboard!.instantiateViewController(withIdentifier: "DetalleSaldoViewController")
         
+        activityIndicatorView.removeFromSuperview()
+
         self.present(myView, animated: true)
         
         
@@ -392,6 +398,28 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy"
         textConfigBirthday.text = dateFormatter.string(from: datePicker.date)
+    }
+    
+    func addLoadingView() {
+        // You only need to adjust this frame to move it anywhere you want
+        activityIndicatorView = UIView(frame: CGRect(x: view.frame.midX - 140, y: view.frame.midY - 25, width: 280, height: 50))
+        activityIndicatorView.backgroundColor = UIColor.white
+        activityIndicatorView.alpha = 0.8
+        activityIndicatorView.layer.cornerRadius = 10
+        
+        //Here the spinnier is initialized
+        let activityView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
+        activityView.frame = CGRect(x: 0, y: 0, width: 50, height: 50)
+        activityView.startAnimating()
+        
+        let textLabel = UILabel(frame: CGRect(x: 60, y: 0, width: 200, height: 50))
+        textLabel.textColor = UIColor.gray
+        textLabel.text = "Validando credenciales..."
+        
+        activityIndicatorView.addSubview(activityView)
+        activityIndicatorView.addSubview(textLabel)
+        
+        view.addSubview(activityIndicatorView)
     }
     
     // MARK: - Table view delegates

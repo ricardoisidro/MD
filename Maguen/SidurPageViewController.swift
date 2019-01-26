@@ -227,8 +227,8 @@ class FrameViewController2: UIViewController, UIGestureRecognizerDelegate {
     
     let imageView: UIImageView = {
         let imgv = UIImageView()
-        //imgv.contentMode = .scaleAspectFit
-        imgv.contentMode = .scaleAspectFill
+        imgv.contentMode = .scaleAspectFit
+        //imgv.contentMode = .scaleAspectFill
         imgv.translatesAutoresizingMaskIntoConstraints = false
         return imgv
     }()
@@ -259,24 +259,24 @@ class FrameViewController2: UIViewController, UIGestureRecognizerDelegate {
         
         let views: [String: Any] = [
             "v0": imageView,
-            "v1": titleLabel,
+            //"v1": titleLabel,
             "v2": pageLabel]
         
         var allConstraints: [NSLayoutConstraint] = []
         
         //UINavigationItem
         view.backgroundColor = MaguenColors.black1
-        view.addSubview(titleLabel)
+        //view.addSubview(titleLabel)
         view.addSubview(pageLabel)
         view.addSubview(imageView)
         
         let imageViewHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", metrics: nil, views: views)
         allConstraints += imageViewHorizonConstraint
-        let titleLabelHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", metrics: nil, views: views)
-        allConstraints += titleLabelHorizonConstraint
+        //let titleLabelHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1]|", metrics: nil, views: views)
+        //allConstraints += titleLabelHorizonConstraint
         let pageLabelHorizonConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v2]|", metrics: nil, views: views)
         allConstraints += pageLabelHorizonConstraint
-        let allVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-1-[v1(>=30)]-1-[v0]-[v2(>=30)]-|", metrics: nil, views: views)
+        let allVerticalConstraints = NSLayoutConstraint.constraints(withVisualFormat: "V:|-[v0]-[v2(>=30)]-|", metrics: nil, views: views)
         allConstraints += allVerticalConstraints
         
         NSLayoutConstraint.activate(allConstraints)
@@ -296,7 +296,7 @@ class FrameViewController2: UIViewController, UIGestureRecognizerDelegate {
         imageView.addGestureRecognizer(panGesture)
         
         imageView.isUserInteractionEnabled = true
-        imageView.addGestureRecognizer(pinchGesture)
+        //imageView.addGestureRecognizer(pinchGesture)
         
         
     }
@@ -325,8 +325,10 @@ class FrameViewController2: UIViewController, UIGestureRecognizerDelegate {
             
             if newScale < 1 {
                 
-                let w = UIScreen.main.bounds.width
-                let h = UIScreen.main.bounds.height
+                //let w = UIScreen.main.bounds.width
+                let w = self.imageView.frame.size.width
+                //let h = UIScreen.main.bounds.height
+                let h = self.imageView.frame.size.height
                 let center = CGPoint(x: w/2, y: h/2)
                 
                 newScale = 1

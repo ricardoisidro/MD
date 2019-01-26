@@ -28,7 +28,7 @@ class CardController: UIViewController {
     @IBOutlet weak var txtName: UILabel!
     @IBOutlet weak var txtSurname: UILabel!
     @IBOutlet weak var txtDate: UILabel!
-    @IBOutlet weak var txtClass: UITextView!
+    @IBOutlet weak var txtClass: UILabel!
     @IBOutlet weak var cardQR: UIImageView!
     
     let conn = SQLiteHelper.shared.inicializa(nameBD: "maguen")

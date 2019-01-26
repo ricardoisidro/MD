@@ -30,10 +30,10 @@ class EventTableViewController: UITableViewController {
         
         let db_eventos = Table("eventos")
         let db_titulo = Expression<String>("titulo")
-        let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
         let db_horario = Expression<String>("horario")
         let db_imagen = Expression<String?>("imagen")
         let db_eliminado = Expression<Int64>("eliminado")
+        let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
         let db_fecha_final_publicacion  = Expression<Date>("fecha_final_publicacion")
         
         do {
@@ -47,7 +47,11 @@ class EventTableViewController: UITableViewController {
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            let query = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_centro[db_nombre],db_fecha_final_publicacion).where(db_eventos[db_eliminado] == 0).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id]).where(db_fecha_final_publicacion >= f!)
+            let query = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_inicial_publicacion], db_eventos[db_horario], db_centro[db_nombre],db_fecha_final_publicacion)
+                .where(db_eventos[db_eliminado] == 0)
+                .join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+                .where(db_fecha_inicial_publicacion <= f!)
+                .where(db_fecha_final_publicacion >= f!)
             guard let queryResults = try? db.prepare(query)
             //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {

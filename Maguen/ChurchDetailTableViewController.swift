@@ -63,6 +63,7 @@ class ChurchDetailTableViewController: UITableViewController {
         let db_evento_id = Expression<Int64>("evento_id")
         let db_titulo = Expression<String>("titulo")
         let db_fecha_final_publicacion = Expression<Date?>("fecha_final_publicacion")
+        let db_fecha_inicial_publicacion = Expression<Date?>("fecha_inicial_publicacion")
         let db_horario = Expression<String>("horario")
         
         let db_centro = Table("centro")
@@ -107,7 +108,12 @@ class ChurchDetailTableViewController: UITableViewController {
             let fechaInicial = format.string(from: Date())
             let dateToday = format.date(from: fechaInicial)
             
-            let query4 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_final_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre]).where(db_eventos[db_eliminado] == 0).where(db_fecha_final_publicacion >= dateToday!).where(db_eventos[db_centro_id] == Int64(centro_id)).join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
+            let query4 = db_eventos.select(db_eventos[db_imagen], db_eventos[db_titulo], db_eventos[db_fecha_final_publicacion], db_eventos[db_horario], db_eventos[db_evento_id], db_centro[db_nombre])
+                .where(db_eventos[db_eliminado] == 0)
+                .where(db_fecha_inicial_publicacion <= dateToday!)
+                .where(db_fecha_final_publicacion >= dateToday!)
+                .where(db_eventos[db_centro_id] == Int64(centro_id))
+                .join(db_centro, on: db_centro[db_centro_id] == db_eventos[db_centro_id])
             guard let queryResults4 = try? db.prepare(query4)
                 //guard let queryResults = try? db.prepare("SELECT imagen, titulo, fecha_inicial_publicacion, horario FROM eventos WHERE eliminado = 0")
                 else {
