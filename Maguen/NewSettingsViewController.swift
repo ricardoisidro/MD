@@ -352,7 +352,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         let u = UsuarioApp()
         
-        let jsUsuario = jsUsuarioApp()
+        let jsUsuario = pUsuarioApp()
         
         //jsUsuario.credencial_id
         

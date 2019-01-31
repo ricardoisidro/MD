@@ -148,7 +148,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             return
         }
         //get data to send
-        let lr = LoginRequest()
+        let lr = pGetUsuarioApp()
         lr.contrasena = pass
         lr.usuario = user
         lr.imei = "999999999999999"
@@ -246,7 +246,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         //print("parseErrorOccurred: \(parseError)")
     }
     
-    func encodeAndEncryptJSONString(LoginRequest: LoginRequest) -> Array<UInt8> {
+    func encodeAndEncryptJSONString(LoginRequest: pGetUsuarioApp) -> Array<UInt8> {
         var cipherRequest: [UInt8] = []
         do {
             let jsonEncoder = JSONEncoder()

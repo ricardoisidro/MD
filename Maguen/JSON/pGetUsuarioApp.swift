@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LoginRequest: NSObject, Codable {
+class pGetUsuarioApp: NSObject, Codable {
     var contrasena: String
     var imei: String
     var sistema_operativo: String

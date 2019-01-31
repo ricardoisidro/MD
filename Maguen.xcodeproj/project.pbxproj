@@ -29,7 +29,7 @@
 		594E4D3521E969DD00F7ED54 /* HistRevistaTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D3421E969DD00F7ED54 /* HistRevistaTableViewController.swift */; };
 		594E4D3721E9786E00F7ED54 /* HistPeriodicoPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 594E4D3621E9786E00F7ED54 /* HistPeriodicoPageViewController.swift */; };
 		5977938421EC3F6500D86BE0 /* SQLiteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5977938321EC3F6500D86BE0 /* SQLiteHelper.swift */; };
-		59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A99219CE8A200909453 /* LoginRequest.swift */; };
+		59AA1A9A219CE8A200909453 /* pGetUsuarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A99219CE8A200909453 /* pGetUsuarioApp.swift */; };
 		59AA1A9D219CFACB00909453 /* LoginResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59AA1A9C219CFACB00909453 /* LoginResponse.swift */; };
 		59BAF0B0217A3F1900756117 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */; };
 		59BB4EFF21779965007CC317 /* YoutubeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59BB4EFE21779965007CC317 /* YoutubeViewController.swift */; };
@@ -44,6 +44,9 @@
 		59C0D1AD21AF0F7B00656D52 /* SettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C0D1AC21AF0F7B00656D52 /* SettingsTableViewCell.swift */; };
 		59C0D1B021AF380700656D52 /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C0D1AE21AF380700656D52 /* OptionTableViewCell.swift */; };
 		59C0D1B121AF380700656D52 /* OptionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 59C0D1AF21AF380700656D52 /* OptionTableViewCell.xib */; };
+		59C4725B22035E9300371657 /* pUsuarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C4725A22035E9300371657 /* pUsuarioApp.swift */; };
+		59C4725D22035EB500371657 /* pTelefono.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C4725C22035EB500371657 /* pTelefono.swift */; };
+		59C4725F22035EDB00371657 /* pCredencial.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C4725E22035EDB00371657 /* pCredencial.swift */; };
 		59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52C2174F66C004E4813 /* EmergencyController.swift */; };
 		59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52E217516BE004E4813 /* NotificationCell.swift */; };
 		59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */; };
@@ -142,7 +145,7 @@
 		594E4D3421E969DD00F7ED54 /* HistRevistaTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistRevistaTableViewController.swift; sourceTree = "<group>"; };
 		594E4D3621E9786E00F7ED54 /* HistPeriodicoPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistPeriodicoPageViewController.swift; sourceTree = "<group>"; };
 		5977938321EC3F6500D86BE0 /* SQLiteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SQLiteHelper.swift; sourceTree = "<group>"; };
-		59AA1A99219CE8A200909453 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
+		59AA1A99219CE8A200909453 /* pGetUsuarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pGetUsuarioApp.swift; sourceTree = "<group>"; };
 		59AA1A9C219CFACB00909453 /* LoginResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginResponse.swift; sourceTree = "<group>"; };
 		59BAF0AF217A3F1900756117 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		59BB4EFE21779965007CC317 /* YoutubeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YoutubeViewController.swift; sourceTree = "<group>"; };
@@ -157,6 +160,9 @@
 		59C0D1AC21AF0F7B00656D52 /* SettingsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsTableViewCell.swift; sourceTree = "<group>"; };
 		59C0D1AE21AF380700656D52 /* OptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		59C0D1AF21AF380700656D52 /* OptionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OptionTableViewCell.xib; sourceTree = "<group>"; };
+		59C4725A22035E9300371657 /* pUsuarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pUsuarioApp.swift; sourceTree = "<group>"; };
+		59C4725C22035EB500371657 /* pTelefono.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pTelefono.swift; sourceTree = "<group>"; };
+		59C4725E22035EDB00371657 /* pCredencial.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = pCredencial.swift; sourceTree = "<group>"; };
 		59C6D52C2174F66C004E4813 /* EmergencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyController.swift; sourceTree = "<group>"; };
 		59C6D52E217516BE004E4813 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -256,7 +262,7 @@
 		59AA1A96219CBC7200909453 /* JSON */ = {
 			isa = PBXGroup;
 			children = (
-				59AA1A99219CE8A200909453 /* LoginRequest.swift */,
+				59AA1A99219CE8A200909453 /* pGetUsuarioApp.swift */,
 				59AA1A9C219CFACB00909453 /* LoginResponse.swift */,
 				59E61D4B21A47C5C00136CB6 /* SaldoRequest.swift */,
 				59E61D4D21A47CA300136CB6 /* SaldoResponse.swift */,
@@ -274,6 +280,9 @@
 				59E059F121EA8D0E00DFA1B0 /* EBReturn.swift */,
 				5906764C21ED7C1F0068464F /* EBReturn2.swift */,
 				5906764A21ED784A0068464F /* pDetalleSaldo.swift */,
+				59C4725A22035E9300371657 /* pUsuarioApp.swift */,
+				59C4725C22035EB500371657 /* pTelefono.swift */,
+				59C4725E22035EDB00371657 /* pCredencial.swift */,
 			);
 			path = JSON;
 			sourceTree = "<group>";
@@ -600,8 +609,9 @@
 				594E4D3321E9679300F7ED54 /* HistRevistaCell.swift in Sources */,
 				59D30E1F2176A2080063B303 /* SchoolCell.swift in Sources */,
 				59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */,
+				59C4725D22035EB500371657 /* pTelefono.swift in Sources */,
 				594E4D2B21E92A8500F7ED54 /* TefilatPageViewController.swift in Sources */,
-				59AA1A9A219CE8A200909453 /* LoginRequest.swift in Sources */,
+				59AA1A9A219CE8A200909453 /* pGetUsuarioApp.swift in Sources */,
 				8C7F08C521791057004A9FBF /* ChurchDetailTableViewController.swift in Sources */,
 				59E61D4C21A47C5C00136CB6 /* SaldoRequest.swift in Sources */,
 				59C0D1B021AF380700656D52 /* OptionTableViewCell.swift in Sources */,
@@ -609,6 +619,7 @@
 				5919397121A5F94200B0E7EF /* GetIDRequest.swift in Sources */,
 				59D30E192176829B0063B303 /* EventTableViewController.swift in Sources */,
 				8C8D05B621AE44F400B74D99 /* DomicilioModel.swift in Sources */,
+				59C4725F22035EDB00371657 /* pCredencial.swift in Sources */,
 				5919397B21A637F700B0E7EF /* CallSOAP.swift in Sources */,
 				8C8D05B421AE3E3600B74D99 /* ServicioModel.swift in Sources */,
 				59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */,
@@ -671,6 +682,7 @@
 				8C7F08C921792405004A9FBF /* ChurchDetailChildCell.swift in Sources */,
 				59E059F221EA8D0E00DFA1B0 /* EBReturn.swift in Sources */,
 				59BB4F0321779F4D007CC317 /* MagazineViewController.swift in Sources */,
+				59C4725B22035E9300371657 /* pUsuarioApp.swift in Sources */,
 				8C8D05A421ACC66300B74D99 /* ComiteModel.swift in Sources */,
 				594E4D3121E95DC600F7ED54 /* HistPeriodicoCell.swift in Sources */,
 			);
