@@ -242,7 +242,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             t.onDelete(connection: conn)
             u.onDelete(connection: conn)
             
-            UserDefaults.standard.removeObject(forKey: "name")
+            /*UserDefaults.standard.removeObject(forKey: "name")
             UserDefaults.standard.removeObject(forKey: "surname1")
             UserDefaults.standard.removeObject(forKey: "surname2")
             UserDefaults.standard.removeObject(forKey: "sex")
@@ -251,7 +251,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             UserDefaults.standard.removeObject(forKey: "phone")
             UserDefaults.standard.removeObject(forKey: "photo")
             UserDefaults.standard.removeObject(forKey: "user")
-            UserDefaults.standard.removeObject(forKey: "balance")
+            UserDefaults.standard.removeObject(forKey: "balance")*/
             self.tabBarController?.selectedIndex = 0
             Global.shared.loginOk = false
             
@@ -289,6 +289,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                     newSex = "H"
                     break
                 }
+                // FIXME
                 let cId = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
                 
                 let image = imageTake.image
@@ -418,10 +419,10 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         jsUsuario.correo = newMail
         jsUsuario.comunidad_id = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
-        jsUsuario.categoria_id = resUsuarioApp.categoria_id
+        jsUsuario.categoria_id = resUsuarioApp.categoria_id ?? -1
         
-        jsUsuario.activo = resUsuarioApp.activo
-        jsUsuario.eliminado = resUsuarioApp.eliminado
+        jsUsuario.activo = resUsuarioApp.activo ?? 1
+        jsUsuario.eliminado = resUsuarioApp.eliminado ?? 0
         
         jsUsuario.usuario_app_id = resUsuarioApp.usuario_app_id
         
@@ -433,18 +434,18 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         let resTelefono = t.onReadData(connection: conn)
         
-        ptel.activo = resTelefono.activo
-        ptel.usuario_app_id = resTelefono.usuario_app_id
+        //ptel.activo = resTelefono.activo ?? 1
+        ptel.usuario_app_id = resTelefono.usuario_app_id ?? -1
         
         guard let newPhone = self.embededVC.textConfigPhone.text, newPhone != "" else {
             showAlertWith(title: "Datos faltantes", message: "Agregar teléfono")
             return EBReturn()
         }
         ptel.numero = newPhone
-        ptel.tipo_id = resTelefono.tipo_id
+        ptel.tipo_id = resTelefono.tipo_id ?? -1
         ptel.imei = resTelefono.imei
         ptel.sistema_operativo = resTelefono.sistema_operativo
-        ptel.activo = resTelefono.activo
+        ptel.activo = resTelefono.activo ?? 1
         ptel.telefono_id = resTelefono.telefono_id
         
         let image = imageTake.image
@@ -463,11 +464,11 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         pcred.credencial_id = resCredencial.credencial_id
         
-        pcred.activa = resCredencial.activa
-        pcred.vigencia = resCredencial.vigencia
+        pcred.activa = resCredencial.activa ?? -1
+        pcred.vigencia = resCredencial.vigencia ?? -1
         
         pcred.fotografia = imgString
-        pcred.usuario_app_id = resCredencial.usuario_app_id
+        pcred.usuario_app_id = resCredencial.usuario_app_id ?? -1
         
         let expDate = resCredencial.fecha_expedicion
         let expDateString = format.string(from: expDate!)

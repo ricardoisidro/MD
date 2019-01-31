@@ -21,12 +21,12 @@ class UsuarioApp : NSObject
     var usuario : String?
     var contrasena : String?
     var correo : String?
-    var categoria_id : Int64
-    var comunidad_id : Int64
-    var domicilio_id : Int64
+    var categoria_id : Int64?
+    var comunidad_id : Int64?
+    var domicilio_id : Int64?
     var fecha_activacion : Date?
-    var activo : Int64
-    var eliminado : Int64
+    var activo : Int64?
+    var eliminado : Int64?
     
     
     //campos de la tabla
@@ -41,12 +41,12 @@ class UsuarioApp : NSObject
     let db_usuario = Expression<String?>("usuario")
     let db_contrasena = Expression<String?>("contrasena")
     let db_correo = Expression<String?>("correo")
-    let db_categoria_id = Expression<Int64>("categoria_id")
-    let db_comunidad_id = Expression<Int64>("comunidad_id")
-    let db_domicilio_id = Expression<Int64>("domicilio_id")
+    let db_categoria_id = Expression<Int64?>("categoria_id")
+    let db_comunidad_id = Expression<Int64?>("comunidad_id")
+    let db_domicilio_id = Expression<Int64?>("domicilio_id")
     let db_fecha_activacion = Expression<Date?>("fecha_activacion")
-    let db_activo = Expression<Int64>("activo")
-    let db_eliminado = Expression<Int64>("eliminado")
+    let db_activo = Expression<Int64?>("activo")
+    let db_eliminado = Expression<Int64?>("eliminado")
     
     
     override init()
@@ -134,7 +134,7 @@ class UsuarioApp : NSObject
     }
     
     
-    func onCreate(connection: Connection)
+    func onCreate(connection: Connection) -> Bool
     {
         do
         {
@@ -156,12 +156,15 @@ class UsuarioApp : NSObject
                 t.column(db_activo)
                 t.column(db_eliminado)
             })
+            return true
         }
         catch let ex {
             print("onCreateRegistro SQLite exception: \(ex)")
+            return false
         }
     }
-    func onInsert(connection: Connection, objeto: UsuarioApp) {
+    
+    func onInsert(connection: Connection, objeto: UsuarioApp) -> Bool {
         do
         {
             let insert = table_usuarioapp.insert(or: .replace,
@@ -182,9 +185,11 @@ class UsuarioApp : NSObject
                                                  db_activo <- objeto.activo,
                                                  db_eliminado <- objeto.eliminado)
             try connection.run(insert)
+            return true
         }
         catch let ex {
             print("onInsertRegistro SQLite exception: \(ex)")
+            return false
         }
     }
     

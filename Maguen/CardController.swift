@@ -190,7 +190,7 @@ class CardController: UIViewController {
         txtDate.text = String(fechaString.prefix(10))
         txtDate.font = UIFont.systemFont(ofSize: 15.0)
         
-        let tipo = currentUser.categoria_id
+        let tipo = Int(currentUser.categoria_id ?? -1)
         if(tipo < 4) {
             cardBackground.image = #imageLiteral(resourceName: "credencial_socio")
             txtClass.text = "SOCIO"

@@ -291,13 +291,102 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
                 let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
                 let db = try Connection(fileURL.path)
+                /*var savedSex = ""
+                switch loginResult.Value.sexo {
+                case "H":
+                    savedSex = "HOMBRE"
+                    break
+                case "M":
+                    savedSex = "MUJER"
+                    break
+                default:
+                    savedSex = ""
+                    break
+                }
                 
                 let sexo = loginResult.Value.sexo == "H"
                 let savedSex = sexo ? "HOMBRE" : "MUJER"
                 let birthDate = loginResult.Value.fecha_nacimiento!.prefix(10)
-                //let activationDate = loginResult.Value?.fecha_activacion.prefix(10)
+                //let activationDate = loginResult.Value?.fecha_activacion.prefix(10)*/
                 
-                let createOK = onCreateUserDB(database: db)
+                let usrAppDowload = UsuarioApp()
+                
+                var birthdateNum: Date = Date()
+                var activatedateNum: Date = Date()
+                var expeddateNum: Date = Date()
+                var vencdateNum: Date = Date()
+                
+                let dateformat = DateFormatter()
+                dateformat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+                guard let birthdateString = loginResult.Value.fecha_nacimiento else {
+                    return
+                }
+                birthdateNum = dateformat.date(from: birthdateString) ?? Date()
+                guard let activatedateString = loginResult.Value.fecha_activacion else {
+                    return
+                }
+                activatedateNum = dateformat.date(from: activatedateString) ?? Date()
+
+                guard let expeditiondateString = loginResult.Value.credencialActual.fecha_expedicion else {
+                    return
+                }
+                expeddateNum = dateformat.date(from: expeditiondateString) ?? Date()
+
+                guard let vencimientodateString = loginResult.Value.credencialActual.fecha_vencimiento else {
+                    return
+                }
+                vencdateNum = dateformat.date(from: vencimientodateString) ?? Date()
+
+        
+                usrAppDowload.usuario_app_id = loginResult.Value.usuario_app_id
+                usrAppDowload.nombre = loginResult.Value.nombre
+                usrAppDowload.primer_apellido = loginResult.Value.primer_apellido
+                usrAppDowload.segundo_apellido = loginResult.Value.segundo_apellido
+                usrAppDowload.sexo = loginResult.Value.sexo
+                usrAppDowload.fecha_nacimiento = birthdateNum
+                usrAppDowload.usuario = loginResult.Value.usuario
+                usrAppDowload.contrasena = loginResult.Value.contrasena
+                usrAppDowload.correo = loginResult.Value.correo
+                usrAppDowload.categoria_id = loginResult.Value.categoria_id
+                usrAppDowload.comunidad_id = loginResult.Value.comunidad_id
+                usrAppDowload.domicilio_id = loginResult.Value.domicilio_id
+                usrAppDowload.fecha_activacion = activatedateNum
+                usrAppDowload.activo = loginResult.Value.activo
+                usrAppDowload.eliminado = loginResult.Value.eliminado
+                
+                
+                let creduser = Credencial()
+                
+                creduser.credencial_id = loginResult.Value.credencialActual.credencial_id
+                creduser.fecha_expedicion = expeddateNum
+                creduser.fecha_vencimiento = vencdateNum
+                creduser.vigencia = loginResult.Value.credencialActual.vigencia
+                creduser.activa = loginResult.Value.credencialActual.activa
+                creduser.fotografia = loginResult.Value.credencialActual.fotografia
+                creduser.usuario_app_id = loginResult.Value.credencialActual.usuario_app_id
+                
+                let telefuser = Telefonos()
+                
+                telefuser.telefono_id = loginResult.Value.telefonoActual.telefono_id
+                telefuser.usuario_app_id = loginResult.Value.telefonoActual.usuario_app_id
+                telefuser.numero = loginResult.Value.telefonoActual.numero
+                telefuser.tipo_id = loginResult.Value.telefonoActual.tipo_id
+                telefuser.imei = loginResult.Value.telefonoActual.imei
+                telefuser.sistema_operativo = loginResult.Value.telefonoActual.sistema_operativo
+                telefuser.activo = loginResult.Value.telefonoActual.activo
+                
+                if usrAppDowload.onCreate(connection: db) {
+                    if usrAppDowload.onInsert(connection: db, objeto: usrAppDowload) {
+                        if creduser.onCreate(connection: db) {
+                            if creduser.onInsert(connection: db, objeto: creduser) {
+                                if telefuser.onCreate(connection: db) {
+                                    let _ = telefuser.onInsert(connection: db, objeto: telefuser)
+                                }
+                            }
+                        }
+                    }
+                }
+                /*let createOK = onCreateUserDB(database: db)
                 if(createOK)
                 {
                     let insertOk =   onInsertUserDB(objeto: loginResult, database: db)
@@ -317,11 +406,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                             }
                         }
                     }
-                }
+                }*/
                 
                 
                 
-                UserDefaults.standard.set(loginResult.Value.nombre, forKey: "name")
+                /*UserDefaults.standard.set(loginResult.Value.nombre, forKey: "name")
                 UserDefaults.standard.set(loginResult.Value.primer_apellido, forKey: "surname1")
                 UserDefaults.standard.set(loginResult.Value.segundo_apellido, forKey: "surname2")
                 UserDefaults.standard.set(savedSex, forKey: "sex")
@@ -329,7 +418,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 UserDefaults.standard.set(loginResult.Value.correo, forKey: "mail")
                 UserDefaults.standard.set(loginResult.Value.telefonoActual.numero, forKey: "phone")
                 UserDefaults.standard.set(loginResult.Value.credencialActual.fotografia, forKey: "photo")
-                UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")
+                UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")*/
                 UserDefaults.standard.set(loginResult.Value.comunidad_id, forKey: "comunidadID")
                 
                 let tabBarController = self.presentingViewController as? UITabBarController
@@ -379,7 +468,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         view.addSubview(activityIndicatorView)
     }
     
-    func onCreateUserDB(database: Connection) -> Bool {
+    /*func onCreateUserDB(database: Connection) -> Bool {
         
         do {
            
@@ -657,7 +746,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             print("onInsertRegistro SQLite exception: \(ex)")
             return false
         }
-    }
+    }*/
     
     func showAlertWith(title: String, message: String){
         let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)

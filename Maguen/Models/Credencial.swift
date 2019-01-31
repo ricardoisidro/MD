@@ -14,10 +14,10 @@ class Credencial : NSObject
     var credencial_id : Int64
     var fecha_expedicion : Date?
     var fecha_vencimiento : Date?
-    var vigencia : Int64
-    var activa : Int64
+    var vigencia : Int64?
+    var activa : Int64?
     var fotografia : String?
-    var usuario_app_id : Int64
+    var usuario_app_id : Int64?
     
     
     //campos de la tabla
@@ -25,10 +25,10 @@ class Credencial : NSObject
     let db_credencial_id = Expression<Int64>("credencial_id")
     let db_fecha_expedicion = Expression<Date?>("fecha_expedicion")
     let db_fecha_vencimiento = Expression<Date?>("fecha_vencimiento")
-    let db_vigencia = Expression<Int64>("vigencia")
-    let db_activa = Expression<Int64>("activa")
+    let db_vigencia = Expression<Int64?>("vigencia")
+    let db_activa = Expression<Int64?>("activa")
     let db_fotografia = Expression<String?>("fotografia")
-    let db_usuario_app_id = Expression<Int64>("usuario_app_id")
+    let db_usuario_app_id = Expression<Int64?>("usuario_app_id")
     
     
     override init()
@@ -80,7 +80,7 @@ class Credencial : NSObject
     }
     
     
-    func onCreate(connection: Connection)
+    func onCreate(connection: Connection) -> Bool
     {
         do
         {
@@ -93,12 +93,14 @@ class Credencial : NSObject
                 t.column(db_fotografia)
                 t.column(db_usuario_app_id)
             })
+            return true
         }
         catch let ex {
             print("onCreateRegistro SQLite exception: \(ex)")
+            return false
         }
     }
-    func onInsert(connection: Connection, objeto: Credencial) {
+    func onInsert(connection: Connection, objeto: Credencial) -> Bool {
         do
         {
             let insert = table_credencial.insert(or: .replace,
@@ -110,9 +112,11 @@ class Credencial : NSObject
                                                  db_fotografia <- objeto.fotografia,
                                                  db_usuario_app_id <- objeto.usuario_app_id)
             try connection.run(insert)
+            return true
         }
         catch let ex {
             print("onInsertRegistro SQLite exception: \(ex)")
+            return false
         }
     }
     

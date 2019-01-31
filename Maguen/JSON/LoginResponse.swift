@@ -47,8 +47,9 @@ class Value4: NSObject, Decodable {
     var contrasena: String?
     var correo: String?
     var comunidad_id: Int64?
-    var categoria_id: Int64 // 1: socio titular, 2: esposa, 3: hijos, socios titulares; 4: socio invitado
-    var credencial_id: Int64
+    var domicilio_id: Int64?
+    var categoria_id: Int64? // 1: socio titular, 2: esposa, 3: hijos, socios titulares; 4: socio invitado
+    var credencial_id: Int64?
     var activo: Int64?
     var eliminado: Int64?
     var telefonoActual: TelefonoActual
@@ -66,6 +67,7 @@ class Value4: NSObject, Decodable {
         self.contrasena = ""
         self.correo = ""
         self.comunidad_id = -1
+        self.domicilio_id = -1
         self.categoria_id = -1
         self.credencial_id = -1
         self.activo = -1
@@ -117,13 +119,13 @@ struct credencialActual: Decodable {
 }*/
 class TelefonoActual: NSObject, Decodable {
     
-    var telefono_id: Int
-    var activo: Int
+    var telefono_id: Int64
+    var activo: Int64?
     var imei: String?
     var numero: String?
     var sistema_operativo: String?
-    var tipo_id: Int
-    var usuario_app_id: Int
+    var tipo_id: Int64?
+    var usuario_app_id: Int64?
     
     override init() {
         self.activo = -1
@@ -137,12 +139,12 @@ class TelefonoActual: NSObject, Decodable {
 }
 
 class CredencialActual: NSObject, Decodable {
-    var credencial_id : Int
+    var credencial_id : Int64
     var fecha_expedicion: String?
     var fecha_vencimiento: String?
-    var vigencia: Int
-    var activa: Int
-    var usuario_app_id: Int
+    var vigencia: Int64?
+    var activa: Int64?
+    var usuario_app_id: Int64?
     var fotografia: String?
     
     override init() {
