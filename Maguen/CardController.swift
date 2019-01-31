@@ -169,21 +169,25 @@ class CardController: UIViewController {
         
         
         
-        let foto = currentCard.fotografia
-        let imageDecoded: Data = Data(base64Encoded: foto!)!
+        guard let foto = currentCard.fotografia else {
+            return
+        }
+        guard let imageDecoded: Data = Data(base64Encoded: foto) else {
+            return
+        }
         let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "tab_socios")
         cardPhoto.image = avatarImage
         
         txtName.text = currentUser.nombre
         txtName.font = UIFont.boldSystemFont(ofSize: 17.0)
         
-        let apellido = currentUser.primer_apellido! + " " +  currentUser.segundo_apellido!
+        let apellido = (currentUser.primer_apellido ?? "") + " " +  (currentUser.segundo_apellido ?? "")
         txtSurname.text = apellido
         txtSurname.font = UIFont.boldSystemFont(ofSize: 15.0)
         
         let format = DateFormatter()
         format.dateFormat = "dd-MM-yyyy HH:mm:ss"
-        let fechaString = format.string(from: currentCard.fecha_vencimiento!)
+        let fechaString = format.string(from: currentCard.fecha_vencimiento ?? Date())
         //let fecha = currentUser.fecha_activacion
         
         

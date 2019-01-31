@@ -82,6 +82,8 @@ class CategoriaPublicacionModel: NSObject {
         }
         catch let ex{
             print("onInsertCategoriaPublicacionDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

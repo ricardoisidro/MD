@@ -73,6 +73,8 @@ class ComunidadModel: NSObject {
         }
         catch let ex{
             print("onInsertComunidadDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

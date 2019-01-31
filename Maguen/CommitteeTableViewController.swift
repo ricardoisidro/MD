@@ -26,7 +26,7 @@ class CommitteeTableViewController: UITableViewController {
             let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
             let db = try Connection(fileURL.path)
             
-            guard let queryResults = try? db.prepare("SELECT nombre_comite, telefono FROM comites WHERE eliminado = 0") else {
+            guard let queryResults = try? db.prepare("SELECT nombre_comite, telefono FROM comites WHERE eliminado = 0 ORDER BY nombre_comite ASC") else {
                 //print("ERROR al consultar Comites")
                 return
             }

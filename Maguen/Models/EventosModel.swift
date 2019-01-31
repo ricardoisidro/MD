@@ -157,6 +157,8 @@ class EventosModel: NSObject {
         }
         catch let ex {
             print("onInsertEventosDB SQLite exception: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
     }
     

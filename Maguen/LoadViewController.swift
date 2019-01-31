@@ -18,138 +18,11 @@ class LoadViewController: UIViewController {
     
     var database: Connection!
     
-    /*let db_categoria_centro = Table("categoria_centro")
-    let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-    let db_descripcion = Expression<String>("descripcion")
-    let db_eliminado = Expression<Int64>("eliminado")
-    let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_centro = Table("centro")
-    let db_centro_id = Expression<Int64>("centro_id")
-    //let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-    let db_imagen_portada = Expression<String>("imagen_portada")
-    let db_nombre = Expression<String>("nombre")
-    //let db_descripcion = Expression<String>("descripcion")
-    let db_domicilio_centro_id = Expression<Int64>("domicilio_centro_id")
-    let db_telefonos = Expression<String>("telefonos")
-    let db_activo = Expression<Int64>("activo")
-    let db_seccion_id = Expression<Int64>("seccion_id")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let table_eventos = Table("eventos")
-    let db_evento_id = Expression<Int64>("evento_id")
-    let db_titulo = Expression<String?>("titulo")
-    let db_fecha_inicial_publicacion = Expression<Date?>("fecha_inicial_publicacion")
-    let db_fecha_final_publicacion = Expression<Date?>("fecha_final_publicacion")
-    let db_horario = Expression<String?>("horario")
-    let db_imagen = Expression<String?>("imagen")
-    /*
-    let db_eventos = Table("eventos")
-    let db_evento_id = Expression<Int64>("evento_id")
-    //let db_centro_id = Expression<Int64>("centro_id")
-    let db_titulo = Expression<String>("titulo")
-    let db_fecha_inicial_publicacion = Expression<Date>("fecha_inicial_publicacion")
-    let db_fecha_final_publicacion = Expression<Date>("fecha_final_publicacion")
-    let db_horario = Expression<String>("horario")
-    let db_imagen = Expression<String?>("imagen")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")*/
-    
-    let db_comite = Table("comites")
-    let db_comite_id = Expression<Int64>("comite_id")
-    let db_nombre_comite = Expression<String>("nombre_comite")
-    let db_telefono = Expression<String>("telefono")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_categoria_publicacion = Table("categoria_publicacion")
-    let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
-    //let db_descripcion = Expression<String>("categoria_descripcion")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let table_publicacion = Table("publicacion")
-    let db_publicacion_id = Expression<Int64>("publicacion_id")
-    //let db_descripcion = Expression<String>("descripcion")
-    //let db_fecha_inicial_publicacion = Expression<String>("fecha_inicial_publicacion")
-    //let db_fecha_final_publicacion = Expression<String>("fecha_final_publicacion")
-    //let db_categoria_publicacion_id = Expression<Int64>("categoria_publicacion_id")
-    let db_paginas = Expression<Int64>("paginas")
-    //var db_activo = Expression<Int64>("activo")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_comunidad = Table("comunidad")
-    let db_comunidad_id = Expression<Int64>("comunidad_id")
-    //let db_descripcion = Expression<String>("descripcion")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_horario_clase = Table("horario_clase")
-    let db_horario_clase_id = Expression<Int64>("horario_clase")
-    let db_clase_id = Expression<Int64>("clase_id")
-    let db_profesor = Expression<String>("profesor")
-    let db_dias = Expression<String>("dias")
-    //let db_horario = Expression<String>("horario")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_clases = Table("clases")
-    let db_clases_id = Expression<Int64>("clase_id")
-    //let db_descripcion = Expression<String>("descripcion")
-    //var db_centro_id = Expression<Int64>("centro_id")
-    
-    let db_horarios_reso = Table("horarios_reso")
-    let db_horarios_reso_id = Expression<Int64>("horarios_reso_id")
-    //let db_centro_id = Expression<Int64>("centro_id")
-    let db_tipo_reso_id = Expression<Int64>("tipo_reso_id")
-    //let db_titulo = Expression<String>("titulo")
-    //let db_horario = Expression<String>("horario")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_servicio_centro = Table("servicio_centro")
-    let db_servicio_centro_id = Expression<Int64>("servicio_centro_id")
-    //let db_servicio_id = Expression<Int64>("servicio_id")
-    //let db_centro_id = Expression<Int64>("centro_id")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_servicio = Table("servicio")
-    let db_servicio_id = Expression<Int64>("servicio_id")
-    //let db_descripcion = Expression<String>("descripcion")
-    //let db_imagen = Expression<String?>("imagen")
-    //let db_activo = Expression<Int64>("activo")
-    //let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-    //let db_eliminado = Expression<Int64>("eliminado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")
-    
-    let db_domicilio = Table("domicilio")
-    let db_domicilio_id = Expression<Int64>("domicilio_id")
-    let db_calle = Expression<String>("calle")
-    let db_numero_exterior = Expression<String>("numero_exterior")
-    let db_numero_interior = Expression<String>("numero_interior")
-    let db_cp = Expression<Int64>("cp")
-    let db_colonia = Expression<String>("colonia")
-    let db_delegacion_municipio = Expression<String>("delegacion_municipio")
-    let db_estado = Expression<String>("estado")
-    //let db_fecha_modificacion = Expression<String>("fecha_modificacion")*/
-    
     let lastDate = UserDefaults.standard.string(forKey: "dateLastSync")
     
     let indicator: UIActivityIndicatorView = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.gray)
     
     var termineSincronizacion = false
-
-    
-    override func viewDidAppear(_ animated: Bool) {
-    
-    }
-    
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        //progress.stopAnimating()
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -263,21 +136,57 @@ class LoadViewController: UIViewController {
                 
             }
             
-            let currentDate = Date()
-            let dateFormat = DateFormatter()
-            dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
-            let currDate = dateFormat.string(from: currentDate)
-            UserDefaults.standard.set(currDate, forKey: "dateLastSync")
+            if Global.shared.sincroniceOK {
+                let currentDate = Date()
+                let dateFormat = DateFormatter()
+                dateFormat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+                let currDate = dateFormat.string(from: currentDate)
+                UserDefaults.standard.set(currDate, forKey: "dateLastSync")
+                self.termineSincronizacion = true
+
+            }
             
-            self.termineSincronizacion = true
             
             self.main {
-                if self.termineSincronizacion {
-                    self.showActivityIndicator(show: !self.termineSincronizacion)
-                     let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                     let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-                     self.present(controller, animated: false, completion: nil)
+                if Global.shared.sincroniceOK {
+                    if self.termineSincronizacion {
+                        self.showActivityIndicator(show: !self.termineSincronizacion)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+                        self.present(controller, animated: false, completion: nil)
+                    }
                 }
+                else {
+                    let fecha = UserDefaults.standard.string(forKey: "dateLastSync")
+                    if (fecha != nil) || (fecha != "01/01/1990 00:00:00") {
+                        self.showActivityIndicator(show: !self.termineSincronizacion)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+                        self.present(controller, animated: false, completion: nil)
+                    }
+                    else {
+                        let ac = UIAlertController(title: "Maguén David A.C.", message: "No se pudo sincronizar contenido ¿Que desea hacer?", preferredStyle: .alert)
+                        let resetApp = UIAlertAction(title: "Intentar mas tarde", style: .destructive) {
+                            (alert) -> Void in
+                            // home button pressed programmatically - to thorw app to background
+                            UIControl().sendAction(#selector(URLSessionTask.suspend), to: UIApplication.shared, for: nil)
+                            // terminaing app in background
+                            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+                                exit(EXIT_SUCCESS)
+                            })
+                        }
+                        ac.addAction(UIAlertAction(title: "Reintentar", style: .default) {
+                            (alert) -> Void in
+                            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                            let controller = storyboard.instantiateViewController(withIdentifier: "LoadViewController")
+                            self.present(controller, animated: false, completion: nil)
+                        })
+                        ac.addAction(resetApp)
+                        self.present(ac, animated: true)
+                    }
+                    
+                }
+                
             }
         }
         
@@ -318,33 +227,7 @@ class LoadViewController: UIViewController {
             
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
     func getTablesList(soapResult: String) -> [String] {
         var tablesToSync: [String] = [String]()
         do {
@@ -380,7 +263,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
+            print("getIDList error: \(jsonErr)")
         }
         
         return idToSync
@@ -482,7 +365,7 @@ class LoadViewController: UIViewController {
             
         }
         catch let jsonErr{
-            print("getTablesList error: \(jsonErr)")
+            print("getEntitiesList error: \(jsonErr)")
         }
         
         return entitiesToSync

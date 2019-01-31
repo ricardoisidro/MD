@@ -105,6 +105,8 @@ class HorarioClaseModel : NSObject {
         }
         catch let ex{
             print("onInsertHorarioClaseDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

@@ -124,6 +124,8 @@ class DomicilioModel: NSObject {
         }
         catch let ex {
             print("onInsertDomicilioDB Error: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

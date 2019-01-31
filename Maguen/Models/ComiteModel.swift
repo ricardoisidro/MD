@@ -91,6 +91,8 @@ class ComiteModel: NSObject {
         }
         catch let ex{
             print("onInsertComiteDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

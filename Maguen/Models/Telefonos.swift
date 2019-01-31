@@ -123,12 +123,12 @@ class Telefonos : NSObject
             let obj = Telefonos()
             
             obj.telefono_id = try (currentPhone?.get(db_telefono_id))!
-            obj.usuario_app_id = try (currentPhone?.get(db_usuario_app_id))!
+            obj.usuario_app_id = try currentPhone?.get(db_usuario_app_id)
             obj.numero = try currentPhone?.get(db_numero)
-            obj.tipo_id = try (currentPhone?.get(db_tipo_id))!
+            obj.tipo_id = try currentPhone?.get(db_tipo_id)
             obj.imei = try currentPhone?.get(db_imei)
             obj.sistema_operativo = try currentPhone?.get(db_sistema_operativo)
-            obj.activo = try (currentPhone?.get(db_activo))!
+            obj.activo = try currentPhone?.get(db_activo)
             
             return obj
             

@@ -89,6 +89,8 @@ class ServicioCentroModel : NSObject {
         }
         catch let ex{
             print("onInsertServicioCentroDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

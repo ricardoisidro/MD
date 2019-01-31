@@ -84,6 +84,7 @@ class CategoriaCentroModel: NSObject {
         }
         catch let ex{
             print("onInsertCategoriaCentro Error: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
         }
         
     }

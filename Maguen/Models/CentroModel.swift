@@ -140,6 +140,7 @@ class CentroModel: NSObject {
         }
         catch let ex{
             print("onInsertCentroDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
         }
         
     }

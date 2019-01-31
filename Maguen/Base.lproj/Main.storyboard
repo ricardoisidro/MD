@@ -3427,31 +3427,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Factura" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1IO-D3-CkQ">
-                                                    <rect key="frame" x="16" y="25.5" width="74.5" height="13.5"/>
+                                                    <rect key="frame" x="16" y="25.5" width="67.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Desc" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKF-5e-o5x">
-                                                    <rect key="frame" x="98.5" y="25.5" width="87" height="13.5"/>
+                                                    <rect key="frame" x="91.5" y="25.5" width="79" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Fecha" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mWg-D0-JVb">
-                                                    <rect key="frame" x="193.5" y="25.5" width="74.5" height="13.5"/>
+                                                    <rect key="frame" x="178.5" y="25.5" width="67.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venc" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mQa-Ug-Tlo">
-                                                    <rect key="frame" x="276" y="25.5" width="74.5" height="13.5"/>
+                                                    <rect key="frame" x="254" y="25.5" width="67.5" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monto" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSh-YG-jZY">
-                                                    <rect key="frame" x="358.5" y="25.5" width="66" height="13.5"/>
+                                                    <rect key="frame" x="329.5" y="25.5" width="60" height="13.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
@@ -3604,7 +3604,7 @@
         <!--Load View Controller-->
         <scene sceneID="PiH-Kn-4Qq">
             <objects>
-                <viewController id="YN9-iT-hQ0" customClass="LoadViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoadViewController" id="YN9-iT-hQ0" customClass="LoadViewController" customModule="Maguen" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Qh5-I4-UBA">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3949,7 +3949,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pMD-Iy-Xbo">
-                                                            <rect key="frame" x="277.5" y="31.5" width="62" height="17"/>
+                                                            <rect key="frame" x="242.5" y="31.5" width="62" height="17"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
                                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -4035,19 +4035,19 @@
         <image name="bannerJuventud" width="1200" height="515"/>
         <image name="bannerMedios" width="1200" height="515"/>
         <image name="bannerTemplos" width="1200" height="515"/>
-        <image name="banner_maguen" width="411" height="244"/>
+        <image name="banner_maguen" width="308.25" height="183"/>
         <image name="btn_foto" width="64" height="64"/>
         <image name="codigo_default" width="300" height="300"/>
         <image name="credencial_invitado" width="700" height="1000"/>
         <image name="edit_b" width="26" height="26"/>
         <image name="evento_cuatro" width="800" height="600"/>
-        <image name="evento_uno" width="800" height="600"/>
+        <image name="evento_uno" width="384" height="288"/>
         <image name="fondo_splash" width="720" height="1280"/>
         <image name="icon_candado" width="26" height="26"/>
-        <image name="icon_medios" width="150" height="150"/>
+        <image name="icon_medios" width="112.5" height="112.5"/>
         <image name="icon_usuario" width="26" height="26"/>
-        <image name="img_1118" width="300" height="300"/>
-        <image name="img_cas" width="300" height="300"/>
+        <image name="img_1118" width="150" height="150"/>
+        <image name="img_cas" width="150" height="150"/>
         <image name="img_foto_default" width="405" height="388"/>
         <image name="img_hatzala" width="150" height="150"/>
         <image name="img_itinerario_it" width="32" height="32"/>
@@ -4055,11 +4055,11 @@
         <image name="logo_azul" width="150" height="120"/>
         <image name="logo_splash" width="354" height="199"/>
         <image name="sidur" width="1200" height="515"/>
-        <image name="tab_avisos" width="32" height="32"/>
-        <image name="tab_config" width="32" height="32"/>
-        <image name="tab_credencial" width="32" height="32"/>
-        <image name="tab_emergencias" width="32" height="32"/>
-        <image name="tab_maguen" width="31" height="22"/>
+        <image name="tab_avisos" width="64" height="64"/>
+        <image name="tab_config" width="64" height="64"/>
+        <image name="tab_credencial" width="64" height="64"/>
+        <image name="tab_emergencias" width="64" height="64"/>
+        <image name="tab_maguen" width="62" height="44"/>
         <image name="templo_default" width="144" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>

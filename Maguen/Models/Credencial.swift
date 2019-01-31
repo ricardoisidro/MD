@@ -128,13 +128,13 @@ class Credencial : NSObject
             
             let obj = Credencial()
             
-            obj.credencial_id = try (currentCredential?.get(db_credencial_id))!
+            obj.credencial_id = try currentCredential?.get(db_credencial_id) ?? -1
             obj.fecha_expedicion = try currentCredential?.get(db_fecha_expedicion) ?? nil
             obj.fecha_vencimiento = try currentCredential?.get(db_fecha_vencimiento)
-            obj.vigencia = try (currentCredential?.get(db_vigencia))!
-            obj.activa = try (currentCredential?.get(db_activa))!
+            obj.vigencia = try currentCredential?.get(db_vigencia)
+            obj.activa = try currentCredential?.get(db_activa)
             obj.fotografia = try currentCredential?.get(db_fotografia)
-            obj.usuario_app_id = try (currentCredential?.get(db_usuario_app_id))!
+            obj.usuario_app_id = try currentCredential?.get(db_usuario_app_id)
             
             return obj
             

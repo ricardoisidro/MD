@@ -201,28 +201,27 @@ class UsuarioApp : NSObject
             
             let obj = UsuarioApp()
             
+            obj.usuario_app_id = try (currentUser?.get(db_usuario_app_id))!
             obj.nombre = try currentUser?.get(db_nombre)
             //obj.numero_maguen = try currentUser?.get(db_numero_maguen)
             obj.primer_apellido = try currentUser?.get(db_primer_apellido)
             obj.segundo_apellido = try currentUser?.get(db_segundo_apellido)
             obj.sexo = try currentUser?.get(db_sexo)
-            obj.fecha_nacimiento = try currentUser?.get(db_fecha_nacimiento) ?? nil
-            obj.fecha_activacion = try currentUser?.get(db_fecha_activacion) ?? nil
+            obj.fecha_nacimiento = try currentUser?.get(db_fecha_nacimiento)
+            obj.fecha_activacion = try currentUser?.get(db_fecha_activacion)
             obj.usuario = try currentUser?.get(db_usuario)
             obj.contrasena = try currentUser?.get(db_contrasena)
             obj.correo = try currentUser?.get(db_correo)
-            obj.comunidad_id = try (currentUser?.get(db_comunidad_id))!
-            obj.categoria_id = try (currentUser?.get(db_categoria_id))!
-            obj.usuario_app_id = try (currentUser?.get(db_usuario_app_id))!
-            
-            obj.activo = try (currentUser?.get(db_activo))!
-            obj.eliminado = try (currentUser?.get(db_eliminado))!
+            obj.comunidad_id = try currentUser?.get(db_comunidad_id)
+            obj.categoria_id = try currentUser?.get(db_categoria_id)
+            obj.activo = try currentUser?.get(db_activo)
+            obj.eliminado = try currentUser?.get(db_eliminado)
             
             return obj
             
         }
         catch let ex {
-            print("ReadUsuarioAppDB error: \(ex)")
+            print("ReadDataUsuarioAppDB error: \(ex)")
             
             return UsuarioApp()
         }

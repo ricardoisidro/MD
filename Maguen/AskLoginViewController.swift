@@ -284,7 +284,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
             let decrypted = try soapString.decryptBase64ToString(cipher: aes)
             //print(decrypted)
-            let loginResult = try jsonDecoder.decode(LoginResponse.self, from: Data(decrypted.utf8))
+            let loginResult = try jsonDecoder.decode(EBReturnUserApp.self, from: Data(decrypted.utf8))
             
             if loginResult.Correcto == true {
                 Global.shared.loginOk = true
@@ -353,7 +353,6 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                 usrAppDowload.fecha_activacion = activatedateNum
                 usrAppDowload.activo = loginResult.Value.activo
                 usrAppDowload.eliminado = loginResult.Value.eliminado
-                
                 
                 let creduser = Credencial()
                 

@@ -110,6 +110,8 @@ class ServicioModel : NSObject {
         }
         catch let ex{
             print("onInsertServicioDBError: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
         
     }

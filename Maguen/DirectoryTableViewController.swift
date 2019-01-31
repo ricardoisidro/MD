@@ -21,7 +21,13 @@ class DirectoryTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableViewData = [directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "CMD", directoryPhone: "58140600"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Arija", directoryPhone: "58140649"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Caja", directoryPhone: "58140654"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Eventos", directoryPhone: "58140633"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Ayudas", directoryPhone: "58140636"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Prensa", directoryPhone: "58140652"), directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Juventud", directoryPhone: "58140626")]
+        tableViewData = [directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Arija", directoryPhone: "58140649"),
+                         directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Ayudas", directoryPhone: "58140636"),
+                         directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Caja", directoryPhone: "58140654"),
+                         directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "CMD", directoryPhone: "58140600"),
+                         directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Eventos", directoryPhone: "58140633"),
+                         directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Juventud", directoryPhone: "58140626"),
+                         directoryComponents(directoryImage: #imageLiteral(resourceName: "img_jebrakadisha"), directoryTitle: "Prensa", directoryPhone: "58140652")]
         
         let titleColor = [NSAttributedString.Key.foregroundColor:UIColor.white]
         self.navigationController?.navigationBar.titleTextAttributes = titleColor

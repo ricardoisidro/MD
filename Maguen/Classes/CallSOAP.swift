@@ -72,6 +72,7 @@ class CallSOAP : NSObject, XMLParserDelegate {
                 self.dataTask = nil
             }
             guard let data = data else {
+                Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
                 self.done = true
                 return
             }

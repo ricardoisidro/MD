@@ -15,6 +15,7 @@ class Global {
     
     var loginOk = false
     var isinSidur = false
+    var sincroniceOK = true
     //var indexItemTabSelected = -1
     //var database: Connection!
     

@@ -128,9 +128,12 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         }
         let c = Credencial()
         let cres = c.onReadData(connection: conn)
-        let foto = cres.fotografia
         
-        let imageDecoded: Data = Data(base64Encoded: foto!)!
+        guard let foto = cres.fotografia else {
+            return
+        }
+        
+        let imageDecoded: Data = Data(base64Encoded: foto)!
         let avatarImage: UIImage = UIImage(data: imageDecoded) ?? #imageLiteral(resourceName: "img_foto_default")
         imageTake.image = avatarImage
         
@@ -174,11 +177,13 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         let u = UsuarioApp()
         let user = u.onReadData(connection: conn)
-        let validUser = user.usuario
+        //let validUser = user.usuario
         //let validUser = UserDefaults.standard.string(forKey: "user")
-        let saldoRequest = SaldoRequest(usuario: validUser!)
+        let sr = SaldoRequest()
+        sr.usuario = user.usuario
+        //let saldoRequest = SaldoRequest(usuario: validUser!)
         
-        let stringEncodedandEncrypted = aesJSON.encodeAndEncryptJSONSaldo(SaldoRequest: saldoRequest)
+        let stringEncodedandEncrypted = aesJSON.encodeAndEncryptJSONSaldo(SaldoRequest: sr)
         
         let soapXML = Global.shared.createSOAPXMLString(methodName: "GetSaldoActual", encryptedString: stringEncodedandEncrypted)
         
@@ -352,7 +357,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         let u = UsuarioApp()
         
-        let jsUsuario = pUsuarioApp()
+        let pUA = pUsuarioApp()
         
         //jsUsuario.credencial_id
         
@@ -360,22 +365,22 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             showAlertWith(title: "Datos faltantes", message: "Agregar nombre válido")
             return EBReturn()
         }
-        jsUsuario.nombre = newName
+        pUA.nombre = newName
         
         guard let newSurname = self.embededVC.textConfigSurname1.text, newSurname != "" else {
             showAlertWith(title: "Datos faltantes", message: "Agregar apellido paterno")
             return EBReturn()
         }
-        jsUsuario.primer_apellido = newSurname
+        pUA.primer_apellido = newSurname
         
-        jsUsuario.segundo_apellido = self.embededVC.textConfigSurname2.text!
+        pUA.segundo_apellido = self.embededVC.textConfigSurname2.text!
         
         let sex = self.embededVC.selectedSex
         if sex == "HOMBRE" {
-            jsUsuario.sexo = "H"
+            pUA.sexo = "H"
         }
         else if sex == "MUJER" {
-            jsUsuario.sexo = "M"
+            pUA.sexo = "M"
         }
         
         let format = DateFormatter()
@@ -389,7 +394,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         }
 
         let fechaNac = newBirthday
-        jsUsuario.fecha_nacimiento = fechaNac + " 00:00:00"
+        pUA.fecha_nacimiento = fechaNac + " 00:00:00"
         
         let resUsuarioApp = u.onReadData(connection: conn)
         
@@ -403,28 +408,28 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         let activeDateString = format.string(from: activeDate!)
         let f2 = activeDateString + " 00:00:00"
         
-        jsUsuario.fecha_activacion = f2
+        pUA.fecha_activacion = f2
         
-        jsUsuario.usuario = resUsuarioApp.usuario!
+        pUA.usuario = resUsuarioApp.usuario!
         
         // FIXME : repetido
         //jsUsuario.numero_maguen = resUsuarioApp.usuario!
 
-        jsUsuario.contrasena = resUsuarioApp.contrasena!
+        pUA.contrasena = resUsuarioApp.contrasena!
         
         guard let newMail = self.embededVC.textConfigMail.text, newMail != "" else {
             showAlertWith(title: "Datos faltantes", message: "Agregar correo")
             return EBReturn()
         }
         
-        jsUsuario.correo = newMail
-        jsUsuario.comunidad_id = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
-        jsUsuario.categoria_id = resUsuarioApp.categoria_id ?? -1
+        pUA.correo = newMail
+        pUA.comunidad_id = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
+        pUA.categoria_id = resUsuarioApp.categoria_id ?? -1
         
-        jsUsuario.activo = resUsuarioApp.activo ?? 1
-        jsUsuario.eliminado = resUsuarioApp.eliminado ?? 0
+        pUA.activo = resUsuarioApp.activo ?? 1
+        pUA.eliminado = resUsuarioApp.eliminado ?? 0
         
-        jsUsuario.usuario_app_id = resUsuarioApp.usuario_app_id
+        pUA.usuario_app_id = resUsuarioApp.usuario_app_id
         
         //jsUsuario.telefonoActual = ""
         //jsUsuario.credencialActual = ""
@@ -452,12 +457,6 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         let imgTo64 = image!.pngData()
         let imgString = imgTo64?.base64EncodedString()
         
-        
-        
-        /*let image = btnPicture.image(for: .normal)
-        let imgTo64 = image!.pngData()
-        let imgString = imgTo64?.base64EncodedString(options: .lineLength64Characters)*/
-        
         let pcred = pCredencial()
         
         let resCredencial = c.onReadData(connection: conn)
@@ -483,7 +482,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         pcred.fecha_vencimiento = f4
 
         
-        pSUA.usuarioActual = jsUsuario
+        pSUA.usuarioActual = pUA
         pSUA.telefonoActual = ptel
         pSUA.credencialActual = pcred
 

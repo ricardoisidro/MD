@@ -125,6 +125,8 @@ class PublicacionModel: NSObject {
         }
         catch let ex {
             print("onInsertPublicacionDB SQLite exception: \(ex)")
+            Global.shared.sincroniceOK = false && Global.shared.sincroniceOK
+
         }
     }
 }
