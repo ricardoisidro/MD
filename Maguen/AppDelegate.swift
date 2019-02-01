@@ -11,60 +11,9 @@ import UIKit
 //import SQLite
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-    //MARK: - TabBarController delegate
-    // This delegate open the modal view before open the desired view.
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
-        if Global.shared.isinSidur {
-            return false
-        }
-        
-        if viewController is NewSettingsViewController && !Global.shared.loginOk {
-            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
-                tabBarController.present(popUpVC, animated: true)
-                //tabBarController.selectedIndex = 4
-                return false
-                
-                //192.168.1.171
-            }
-        }
-        if viewController is CardController && !Global.shared.loginOk {
-            if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
-                tabBarController.present(popUpVC, animated: true)
-                //tabBarController.selectedIndex = 1
-                return false
-            }
-        }
-        
-        /*let tabBarIndex = tabBarController.selectedIndex
-        if tabBarIndex == 0 {
-            //print("estoy en 0")
-            
-        }
-        if tabBarIndex == 1 {
-            //print("estoy en 1")
-        }
-        if tabBarIndex == 2 {
-            //print("estoy en 2")
-        }
-        if tabBarIndex == 3 {
-            //print("estoy en 3")
-        }
-        if tabBarIndex == 4 {
-            //print("estoy en 4")
-        
-        }*/
-     
-     
- 
- 
-        
-        return true
-    }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {
@@ -96,45 +45,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         }
        
     }
-    
-
-  
-    // This delegate open the modal view after open the desired view.
-  /*  private func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) -> Bool {
-        //print("entre a otro delegado")
-        
-        let tabBarIndex = tabBarController.selectedIndex
-        if tabBarIndex == 0 {
-           //print("estoy en 0")
-        }
-        if tabBarIndex == 1 {
-            //print("estoy en 1")
-            
-         /*   if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController") {
-                tabBarController.present(popUpVC, animated: true)
-                //tabBarController.selectedIndex = 1
-                return false
-            }*/
-        }
-        if tabBarIndex == 2 {
-            //print("estoy en 2")
-        }
-        if tabBarIndex == 3 {
-            //print("estoy en 3")
-        }
-        if tabBarIndex == 4 {
-            //print("estoy en 4")
-    
-  /*  if let popUpVC = tabBarController.storyboard?.instantiateViewController(withIdentifier: "AskLoginViewController")  {
-    tabBarController.present(popUpVC, animated: true)
-    //tabBarController.selectedIndex = 4
-    return false
-    
-    //192.168.1.171
-    }*/
-        }
-      return true
-    }*/
 
     //MARK: - App delegates
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {

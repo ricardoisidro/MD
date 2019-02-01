@@ -50,6 +50,7 @@
 		59C472612203641E00371657 /* jsTelefonoActual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C472602203641E00371657 /* jsTelefonoActual.swift */; };
 		59C472632203643E00371657 /* jsCredencialActual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C472622203643E00371657 /* jsCredencialActual.swift */; };
 		59C472652203647700371657 /* jsUsuarioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C472642203647700371657 /* jsUsuarioApp.swift */; };
+		59C472672203D6A100371657 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C472662203D6A100371657 /* TabBarController.swift */; };
 		59C6D52D2174F66C004E4813 /* EmergencyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52C2174F66C004E4813 /* EmergencyController.swift */; };
 		59C6D52F217516BE004E4813 /* NotificationCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D52E217516BE004E4813 /* NotificationCell.swift */; };
 		59C6D53121751E88004E4813 /* NotificationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */; };
@@ -169,6 +170,7 @@
 		59C472602203641E00371657 /* jsTelefonoActual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsTelefonoActual.swift; sourceTree = "<group>"; };
 		59C472622203643E00371657 /* jsCredencialActual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsCredencialActual.swift; sourceTree = "<group>"; };
 		59C472642203647700371657 /* jsUsuarioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = jsUsuarioApp.swift; sourceTree = "<group>"; };
+		59C472662203D6A100371657 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		59C6D52C2174F66C004E4813 /* EmergencyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmergencyController.swift; sourceTree = "<group>"; };
 		59C6D52E217516BE004E4813 /* NotificationCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCell.swift; sourceTree = "<group>"; };
 		59C6D53021751E88004E4813 /* NotificationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsTableViewController.swift; sourceTree = "<group>"; };
@@ -448,6 +450,7 @@
 				8C5CEF35216FA156002F5D56 /* Main.storyboard */,
 				59DABC1921A758B800D7445C /* Models */,
 				59D767E121F11BA500D0EB33 /* TestViewController.swift */,
+				59C472662203D6A100371657 /* TabBarController.swift */,
 			);
 			path = Maguen;
 			sourceTree = "<group>";
@@ -601,6 +604,7 @@
 				59BB4F092177A439007CC317 /* SchoolPageViewController.swift in Sources */,
 				594E4D2121E913DE00F7ED54 /* SidurTableViewController.swift in Sources */,
 				59C472652203647700371657 /* jsUsuarioApp.swift in Sources */,
+				59C472672203D6A100371657 /* TabBarController.swift in Sources */,
 				59C0D1AD21AF0F7B00656D52 /* SettingsTableViewCell.swift in Sources */,
 				59FD713821B5ED5F0030481B /* ChurchClassDetailViewController.swift in Sources */,
 				594E4D3721E9786E00F7ED54 /* HistPeriodicoPageViewController.swift in Sources */,

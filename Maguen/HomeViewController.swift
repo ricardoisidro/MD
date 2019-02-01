@@ -27,26 +27,6 @@ class HomeViewController: UITableViewController {
         
         super.viewDidLoad()
         
-      //  if(Global.shared.loginOk)
-      //  {
-          //  //print("entre a cambia tab por willAppear")
-          //  performSegue(withIdentifier: "sTest", sender: "Test")
-            //self.tabBarController?.selectedIndex = 4
-            
-            
-            
-          //  let myView2 = self.storyboard!.instantiateViewController(withIdentifier: "DetalleSaldoViewController")
-            
-          //  self.present(myView, animated: true)
-           
-          //  let myView = tabBarController?.storyboard?.instantiateViewController(withIdentifier: "NewSettingsViewController")
-          //  self.present(myView ?? myView2, animated: true)
-        
-            
-           // tabBarController.storyboard?.instantiateViewController(withIdentifier: //"NewSettingsViewController") {
-              //  tabBarController.present(popUpVC, animated: true)
-        //}
-        
         tableViewData =
             [cellComponents(cellImage: #imageLiteral(resourceName: "icon_medios"), cellColor: MaguenColors.blue1, cellTitle: "MEDIOS DIGITALES"),
             cellComponents(cellImage: #imageLiteral(resourceName: "icon_templos"), cellColor: MaguenColors.blue2, cellTitle: "TEMPLOS"),
@@ -62,48 +42,14 @@ class HomeViewController: UITableViewController {
         self.homeTableView.backgroundColor = MaguenColors.black1
         self.navigationController?.navigationBar.barTintColor = MaguenColors.black2
         
-        self.tabBarController?.delegate = UIApplication.shared.delegate as? UITabBarControllerDelegate
-        //self.tabBarController?.tabBar.backgroundImage = UIImage.gif(asset: "logo_animado")
-        self.tabBarController?.tabBarItem.image = UIImage.gif(asset: "logo_animado")
-        self.tabBarController?.tabBarItem.title = "Hola"
-        
-        //Global.shared.createDBFile()
-        
-        /*do {
-            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
-            let db = try Connection(fileURL.path)
-            
-            let users = Table("centro")
-            let db_centro_id = Expression<Int64>("centro_id")
-            let db_categoria_centro_id = Expression<Int64>("categoria_centro_id")
-            let db_descripcion = Expression<String>("descripcion")
-            let db_eliminado = Expression<Int64>("eliminado")
-            
-            for user in try db.prepare(users) {
-                //print("centroid: \(user[db_centro_id]), categoriacentroid: \(user[db_categoria_centro_id]), descripcion: \(user[db_descripcion]), eliminado: \(user[db_eliminado])")
-                // id: 1, name: Optional("Alice"), email: alice@mac.com
-            }
-        }
-        catch let ex {
-            //print("ReadDB error: \(ex)")
-        }*/
-        
     }
     
     // MARK: - Hide and show NavBar
     
     override func viewWillAppear(_ animated: Bool) {
-          super.viewWillAppear(animated)
+        super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
-        
-     
-        
-      
     }
-    
-  
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
