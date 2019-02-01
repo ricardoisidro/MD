@@ -163,13 +163,8 @@ class LoadViewController: UIViewController {
                 }
                 else {
                     let fecha = UserDefaults.standard.string(forKey: "dateLastSync")
-                    if (fecha != nil) || (fecha != "01/01/1990 00:00:00") {
-                        self.showActivityIndicator(show: !self.termineSincronizacion)
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
-                        self.present(controller, animated: false, completion: nil)
-                    }
-                    else {
+                    if fecha == "01/01/1990 00:00:00" {
+                        
                         let ac = UIAlertController(title: "Maguén David A.C.", message: "No se pudo sincronizar contenido ¿Que desea hacer?", preferredStyle: .alert)
                         let resetApp = UIAlertAction(title: "Intentar mas tarde", style: .destructive) {
                             (alert) -> Void in
@@ -188,6 +183,14 @@ class LoadViewController: UIViewController {
                         })
                         ac.addAction(resetApp)
                         self.present(ac, animated: true)
+                    }
+                    else {
+                        self.showActivityIndicator(show: !self.termineSincronizacion)
+                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                        let controller = storyboard.instantiateViewController(withIdentifier: "TabBarController")
+                        self.present(controller, animated: false, completion: nil)
+                        
+                        
                     }
                     
                 }
