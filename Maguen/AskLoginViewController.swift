@@ -26,21 +26,6 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     //variables originales
     var database: Connection!
-   /*let db_user = Table("usuariomaguen")
-    let db_user_id = Expression<Int64>("user_id")
-    let db_user_name = Expression<String>("user_name")
-    let db_user_surname1 = Expression<String>("user_surname1")
-    let db_user_surname2 = Expression<String>("user_surname2")
-    let db_user_sex = Expression<String>("user_sex")
-    let db_user_birthday = Expression<String>("user_birthday")
-    let db_user_mail = Expression<String>("user_mail")
-    let db_user_phone = Expression<String>("user_phone")
-    let db_user_photo = Expression<String>("user_photo")
-    let db_user_username = Expression<String>("user_username")
-    let db_user_idtype = Expression<Int64>("user_idtype")
-    let db_user_idactivedate = Expression<String>("user_idactivedate")
-    let db_user_cardid = Expression<Int64>("user_cardid")
- */
     
     
     let db_user = Table("usuarioapp")
@@ -288,26 +273,10 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             
             if loginResult.Correcto == true {
                 Global.shared.loginOk = true
+                UserDefaults.standard.set(true, forKey: "loginOk")
                 let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
                 let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
                 let db = try Connection(fileURL.path)
-                /*var savedSex = ""
-                switch loginResult.Value.sexo {
-                case "H":
-                    savedSex = "HOMBRE"
-                    break
-                case "M":
-                    savedSex = "MUJER"
-                    break
-                default:
-                    savedSex = ""
-                    break
-                }
-                
-                let sexo = loginResult.Value.sexo == "H"
-                let savedSex = sexo ? "HOMBRE" : "MUJER"
-                let birthDate = loginResult.Value.fecha_nacimiento!.prefix(10)
-                //let activationDate = loginResult.Value?.fecha_activacion.prefix(10)*/
                 
                 let usrAppDowload = UsuarioApp()
                 
@@ -385,39 +354,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
                         }
                     }
                 }
-                /*let createOK = onCreateUserDB(database: db)
-                if(createOK)
-                {
-                    let insertOk =   onInsertUserDB(objeto: loginResult, database: db)
-                    if(insertOk)
-                    {
-                        let createCOk = onCreateCredencialDB(database: db)
-                        if(createCOk)
-                        {
-                            let credInsertOk =  onInsertCredencialDB(objeto: loginResult, database: db)
-                            if(credInsertOk)
-                            {
-                                let createTelefonos = onCreateTelefonoDB(database: db)
-                                if(createTelefonos)
-                                {
-                                    _ = onInsertTelefonoDB(objeto: loginResult, database: db)
-                                }
-                            }
-                        }
-                    }
-                }*/
                 
-                
-                
-                /*UserDefaults.standard.set(loginResult.Value.nombre, forKey: "name")
-                UserDefaults.standard.set(loginResult.Value.primer_apellido, forKey: "surname1")
-                UserDefaults.standard.set(loginResult.Value.segundo_apellido, forKey: "surname2")
-                UserDefaults.standard.set(savedSex, forKey: "sex")
-                UserDefaults.standard.set(birthDate, forKey: "birthday")
-                UserDefaults.standard.set(loginResult.Value.correo, forKey: "mail")
-                UserDefaults.standard.set(loginResult.Value.telefonoActual.numero, forKey: "phone")
-                UserDefaults.standard.set(loginResult.Value.credencialActual.fotografia, forKey: "photo")
-                UserDefaults.standard.set(loginResult.Value.usuario, forKey: "user")*/
                 UserDefaults.standard.set(loginResult.Value.comunidad_id, forKey: "comunidadID")
                 
                 let tabBarController = self.presentingViewController as? UITabBarController

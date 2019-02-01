@@ -19,9 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     // This delegate open the modal view before open the desired view.
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-        /*let validString = UserDefaults.standard.string(forKey: "name") ?? ""
-        let sessionisEmpty = (validString == "")
-        */
         if Global.shared.isinSidur {
             return false
         }
@@ -105,11 +102,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
     // This delegate open the modal view after open the desired view.
   /*  private func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) -> Bool {
         //print("entre a otro delegado")
-        
-        let validString = UserDefaults.standard.string(forKey: "name") ?? ""
-        let sessionisEmpty = (validString == "")
-        
-      
         
         let tabBarIndex = tabBarController.selectedIndex
         if tabBarIndex == 0 {

@@ -139,8 +139,6 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
 
         scrollView.setContentOffset(.zero, animated: true)
-        //let validString = UserDefaults.standard.string(forKey: "name") ?? ""
-        //let sessionisEmpty = (validString == "")
         
         if !Global.shared.loginOk {
             btnSave.setTitle("GUARDAR CAMBIOS", for: .normal)
@@ -177,12 +175,9 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         
         let u = UsuarioApp()
         let user = u.onReadData(connection: conn)
-        //let validUser = user.usuario
-        //let validUser = UserDefaults.standard.string(forKey: "user")
+        
         let sr = SaldoRequest()
         sr.usuario = user.usuario
-        //let saldoRequest = SaldoRequest(usuario: validUser!)
-        
         let stringEncodedandEncrypted = aesJSON.encodeAndEncryptJSONSaldo(SaldoRequest: sr)
         
         let soapXML = Global.shared.createSOAPXMLString(methodName: "GetSaldoActual", encryptedString: stringEncodedandEncrypted)
@@ -247,18 +242,9 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             t.onDelete(connection: conn)
             u.onDelete(connection: conn)
             
-            /*UserDefaults.standard.removeObject(forKey: "name")
-            UserDefaults.standard.removeObject(forKey: "surname1")
-            UserDefaults.standard.removeObject(forKey: "surname2")
-            UserDefaults.standard.removeObject(forKey: "sex")
-            UserDefaults.standard.removeObject(forKey: "birthday")
-            UserDefaults.standard.removeObject(forKey: "mail")
-            UserDefaults.standard.removeObject(forKey: "phone")
-            UserDefaults.standard.removeObject(forKey: "photo")
-            UserDefaults.standard.removeObject(forKey: "user")
-            UserDefaults.standard.removeObject(forKey: "balance")*/
             self.tabBarController?.selectedIndex = 0
             Global.shared.loginOk = false
+            UserDefaults.standard.set(false, forKey: "loginOk")
             
             break
             
@@ -337,14 +323,6 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             //print("Default")
             break
         }
-        
-       
-        //UserDefaults.standard.removeObject(forKey: "dateLastSync")
-        
-        
-        
-        
-        
     }
     
     func editarUsuario() -> EBReturn {

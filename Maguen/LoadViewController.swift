@@ -31,6 +31,11 @@ class LoadViewController: UIViewController {
         
         txtVersion.text = nsObject as? String
         
+        
+        let flag = UserDefaults.standard.bool(forKey: "loginOk")
+            
+        Global.shared.loginOk = flag
+        
         self.showActivityIndicator()
 
         background {
