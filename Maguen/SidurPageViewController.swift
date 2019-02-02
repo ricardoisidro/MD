@@ -142,7 +142,7 @@ class SidurPageViewController: UIPageViewController, UIPageViewControllerDataSou
     
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        
+        // FIXME: - ERROR al setear valor
         let currentIndex = (viewController as! FrameViewController2).imageIndex ?? 0
         
         if (currentIndex < pages.count - 1) {

@@ -53,6 +53,7 @@ class DailyViewController: UIPageViewController, UIPageViewControllerDataSource,
             print("Read publicacionDB error: \(err)")
         }
         
+        // FIXME :- Arreglado, cuando pagina no venia
         if numberOfPages > 0 {
             for i in 1...numberOfPages {
                 let pagename = MaguenCredentials.urlMagazine + "\(String(publicationId))/pagina\(String(i)).jpg"

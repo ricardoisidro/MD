@@ -4038,19 +4038,19 @@
         <image name="bannerJuventud" width="1200" height="515"/>
         <image name="bannerMedios" width="1200" height="515"/>
         <image name="bannerTemplos" width="1200" height="515"/>
-        <image name="banner_maguen" width="308.25" height="183"/>
+        <image name="banner_maguen" width="411" height="244"/>
         <image name="btn_foto" width="64" height="64"/>
         <image name="codigo_default" width="300" height="300"/>
         <image name="credencial_invitado" width="700" height="1000"/>
         <image name="edit_b" width="26" height="26"/>
         <image name="evento_cuatro" width="800" height="600"/>
-        <image name="evento_uno" width="384" height="288"/>
+        <image name="evento_uno" width="800" height="600"/>
         <image name="fondo_splash" width="720" height="1280"/>
         <image name="icon_candado" width="26" height="26"/>
-        <image name="icon_medios" width="112.5" height="112.5"/>
+        <image name="icon_medios" width="150" height="150"/>
         <image name="icon_usuario" width="26" height="26"/>
-        <image name="img_1118" width="150" height="150"/>
-        <image name="img_cas" width="150" height="150"/>
+        <image name="img_1118" width="300" height="300"/>
+        <image name="img_cas" width="300" height="300"/>
         <image name="img_foto_default" width="405" height="388"/>
         <image name="img_hatzala" width="150" height="150"/>
         <image name="img_itinerario_it" width="32" height="32"/>
@@ -4058,16 +4058,16 @@
         <image name="logo_azul" width="150" height="120"/>
         <image name="logo_splash" width="354" height="199"/>
         <image name="sidur" width="1200" height="515"/>
-        <image name="tab_avisos" width="64" height="64"/>
-        <image name="tab_config" width="64" height="64"/>
-        <image name="tab_credencial" width="64" height="64"/>
-        <image name="tab_emergencias" width="64" height="64"/>
-        <image name="tab_maguen" width="62" height="44"/>
+        <image name="tab_avisos" width="32" height="32"/>
+        <image name="tab_config" width="32" height="32"/>
+        <image name="tab_credencial" width="32" height="32"/>
+        <image name="tab_emergencias" width="32" height="32"/>
+        <image name="tab_maguen" width="31" height="22"/>
         <image name="templo_default" width="144" height="142"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DT1-iD-UQO"/>
-        <segue reference="hOY-Mp-rer"/>
+        <segue reference="JEZ-ZJ-bEK"/>
+        <segue reference="q1P-Ww-8sp"/>
         <segue reference="P49-PH-1i4"/>
     </inferredMetricsTieBreakers>
 </document>

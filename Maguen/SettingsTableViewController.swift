@@ -160,7 +160,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
                 let data = optionsComponents(selected: false, optionClass: row[0] as! Int64, optionName: row[1] as! String)
                 tableViewData.append(data)
             }
-            
+            // FIXME: - error al hacer select en comunidad
             //getting communities
             guard let queryResults3 = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad") else {
                 //print("ERROR al consultar Comunidad")
@@ -214,18 +214,20 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
             guard let resultTelefono = try db.pluck(queryTelefono) else {
                 return
             }
-            
             let sex = try queryResults2?.get(db_sexo)
             textConfigName.text = try queryResults2?.get(db_nombre)
             textConfigSurname1.text = try queryResults2?.get(db_primer_apellido)
             textConfigSurname2.text = try queryResults2?.get(db_segundo_apellido)
-            if sex == "H" {
+            switch sex {
+            case "H":
+                textConfigSex.text = sexTypes[0]
+                break
+            case "M":
+                textConfigSex.text = sexTypes[1]
+                break
+            default:
                 textConfigSex.text = sexTypes[0]
             }
-            else if sex == "M" {
-                textConfigSex.text = sexTypes[1]
-            }
-            
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "dd/MM/yyyy"
             textConfigBirthday.text = dateFormatter.string(from: birthday!)

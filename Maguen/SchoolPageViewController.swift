@@ -18,9 +18,19 @@ class SchoolPageViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: schoolURL)
-        let req = URLRequest(url: url!)
-        webView.load(req)
+        if let myURL = schoolURL {
+            if let url = URL(string: myURL) {
+                let req = URLRequest(url: url)
+                webView.load(req)
+            }
+            else {
+                let ac = UIAlertController(title: "Aviso", message: "Dirección Web no disponible", preferredStyle: .alert)
+                ac.addAction(UIAlertAction(title: "OK", style: .default))
+                present(ac, animated: true)
+            }
+        }
+        
+        
     }
     
     override func loadView() {
