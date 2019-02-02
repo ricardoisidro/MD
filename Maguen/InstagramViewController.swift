@@ -17,7 +17,7 @@ class InstagramViewController: UIViewController, WKNavigationDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = URL(string: "https://www.instagram.com/maguendavidmx/?hl=es-la")
+        let url = URL(string: "https://instagram.com/maguen_david_comunidad?utm_source=ig_profile_share&igshid=15by09k8wkwq4")
         let req = URLRequest(url: url!)
         webView.load(req)
     }
