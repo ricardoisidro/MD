@@ -10,7 +10,7 @@ import Foundation
 
 class EBReturnUserApp: NSObject, Decodable {
     
-    var Value: jsUsuarioApp
+    var Value: jsUsuarioApp?
     var Correcto: Bool
     var MensajeError: String
     var ex: String?

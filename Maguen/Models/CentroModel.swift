@@ -145,4 +145,29 @@ class CentroModel: NSObject {
         
     }
     
+    func onGetCenterList(connection: Connection) -> [switchOptionsComponents] {
+        //SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id
+        var values = [switchOptionsComponents]()
+        do {
+            let table = table_centro.filter(db_eliminado == 0)
+            let query = table.select(db_centro_id, db_categoria_centro_id, db_nombre).order(db_centro_id.asc)
+            
+            for centro in try connection.prepare(query) {
+                //let id = try centro.get(db_centro_id)
+                let c_id = try centro.get(db_categoria_centro_id)
+                let name = try centro.get(db_nombre)
+                let data = switchOptionsComponents(selected: false, optionClass: c_id, optionName: name)
+                values.append(data)
+                
+            }
+            return values
+            
+        }
+        catch let ex{
+            print("onGetCenterList error: \(ex)")
+            return values
+        }
+        
+    }
+    
 }

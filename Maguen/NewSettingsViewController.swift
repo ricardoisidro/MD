@@ -254,6 +254,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
             
             if res.Correcto {
                 
+                var cId = 0
                 let format = DateFormatter()
                 format.dateFormat = "dd/MM/yyyy"
                 
@@ -280,8 +281,13 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                     newSex = "H"
                     break
                 }
-                // FIXME
-                let cId = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
+                
+                let com = ComunidadModel()
+                if let comunidad = self.embededVC.textConfigCommunity.text {
+                    cId = com.getComunidadByName(connection: conn, string: comunidad)
+                }
+                
+                //let cId = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
                 
                 let image = imageTake.image
                 let imgTo64 = image!.pngData()
@@ -289,7 +295,7 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
                 
                 let newPhone = self.embededVC.textConfigPhone.text
                 
-                if u.onUpdate(connection: conn, name: newName!, ap1: newSurname!, ap2: newSurname2!, date: completeBirthday, mail: newMail!, sex: newSex, community: cId) {
+                if u.onUpdate(connection: conn, name: newName!, ap1: newSurname!, ap2: newSurname2!, date: completeBirthday, mail: newMail!, sex: newSex, community: Int64(cId)) {
                     if t.onUpdate(connection: conn, phone: newPhone!) {
                         if c.onUpdate(connection: conn, picture: newImage!) {
                             isModoEdit = false
@@ -336,6 +342,10 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         let u = UsuarioApp()
         
         let pUA = pUsuarioApp()
+        
+        let com = ComunidadModel()
+
+        var cId = 0
         
         //jsUsuario.credencial_id
         
@@ -401,7 +411,12 @@ class NewSettingsViewController: UIViewController, UINavigationControllerDelegat
         }
         
         pUA.correo = newMail
-        pUA.comunidad_id = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
+        
+        if let comunidad = self.embededVC.textConfigCommunity.text {
+            cId = com.getComunidadByName(connection: conn, string: comunidad)
+        }
+        //pUA.comunidad_id = Int64(UserDefaults.standard.integer(forKey: "comunidadID"))
+        pUA.comunidad_id = Int64(cId)
         pUA.categoria_id = resUsuarioApp.categoria_id ?? -1
         
         pUA.activo = resUsuarioApp.activo ?? 1

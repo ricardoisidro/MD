@@ -26,6 +26,8 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
     
     //variables originales
     var database: Connection!
+    let conn = SQLiteHelper.shared.inicializa(nameBD: "maguen")
+
     
     
     let db_user = Table("usuarioapp")
@@ -125,6 +127,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         //let aes: AES
         
         addLoadingView()
+        
         guard let user = txtUsuario.text, user != "" else {
             showAlertWith(title: "Datos faltantes", message: "Agregar usuario")
             activityIndicatorView.removeFromSuperview()
@@ -144,9 +147,123 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         lr.imei = "999999999999999"
         lr.sistema_operativo = "i0S"
         
-        let chainEncodedandEncrypted = encodeAndEncryptJSONString(LoginRequest: lr)
+        let aes = AESforJSON()
+        let chainEncodedandEncrypted = aes.encodeAndEncryptJSONGetUsuarioApp(LoginRequest: lr)
         
-        let soapMessage =
+        let soapXMLTables = Global.shared.createSOAPXMLString(methodName: "GetUsuarioApp", encryptedString: chainEncodedandEncrypted)
+        
+        let soapRequest = CallSOAP()
+        soapRequest.makeRequest(endpoint: MaguenCredentials.getUsuarioApp, soapMessage: soapXMLTables)
+        
+        while !soapRequest.done {
+            usleep(100000)
+            
+        }
+        
+        let loginResult = aes.decodeAndDecryptJSONGetUsuarioApp(soapResult: soapRequest.soapResult)
+
+        if loginResult.Correcto == true {
+            Global.shared.loginOk = true
+            UserDefaults.standard.set(true, forKey: "loginOk")
+            /*let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+            let db = try Connection(fileURL.path)*/
+            
+            let usrAppDowload = UsuarioApp()
+            
+            var birthdateNum: Date = Date()
+            var activatedateNum: Date = Date()
+            var expeddateNum: Date = Date()
+            var vencdateNum: Date = Date()
+            
+            let dateformat = DateFormatter()
+            dateformat.dateFormat = "dd/MM/yyyy HH:mm:ss"
+            guard let birthdateString = loginResult.Value?.fecha_nacimiento else {
+                return
+            }
+            birthdateNum = dateformat.date(from: birthdateString) ?? Date()
+            guard let activatedateString = loginResult.Value?.fecha_activacion else {
+                return
+            }
+            activatedateNum = dateformat.date(from: activatedateString) ?? Date()
+            
+            guard let expeditiondateString = loginResult.Value?.credencialActual.fecha_expedicion else {
+                return
+            }
+            expeddateNum = dateformat.date(from: expeditiondateString) ?? Date()
+            
+            guard let vencimientodateString = loginResult.Value?.credencialActual.fecha_vencimiento else {
+                return
+            }
+            vencdateNum = dateformat.date(from: vencimientodateString) ?? Date()
+            
+            
+            usrAppDowload.usuario_app_id = (loginResult.Value?.usuario_app_id)!
+            usrAppDowload.nombre = loginResult.Value?.nombre
+            usrAppDowload.primer_apellido = loginResult.Value?.primer_apellido
+            usrAppDowload.segundo_apellido = loginResult.Value?.segundo_apellido
+            usrAppDowload.sexo = loginResult.Value?.sexo
+            usrAppDowload.fecha_nacimiento = birthdateNum
+            usrAppDowload.usuario = loginResult.Value?.usuario
+            usrAppDowload.contrasena = loginResult.Value?.contrasena
+            usrAppDowload.correo = loginResult.Value?.correo
+            usrAppDowload.categoria_id = loginResult.Value?.categoria_id
+            usrAppDowload.comunidad_id = loginResult.Value?.comunidad_id
+            usrAppDowload.domicilio_id = loginResult.Value?.domicilio_id
+            usrAppDowload.fecha_activacion = activatedateNum
+            usrAppDowload.activo = loginResult.Value?.activo
+            usrAppDowload.eliminado = loginResult.Value?.eliminado
+            
+            let creduser = Credencial()
+            
+            creduser.credencial_id = (loginResult.Value?.credencialActual.credencial_id)!
+            creduser.fecha_expedicion = expeddateNum
+            creduser.fecha_vencimiento = vencdateNum
+            creduser.vigencia = loginResult.Value?.credencialActual.vigencia
+            creduser.activa = loginResult.Value?.credencialActual.activa
+            creduser.fotografia = loginResult.Value?.credencialActual.fotografia
+            creduser.usuario_app_id = loginResult.Value?.credencialActual.usuario_app_id
+            
+            let telefuser = Telefonos()
+            
+            telefuser.telefono_id = (loginResult.Value?.telefonoActual.telefono_id)!
+            telefuser.usuario_app_id = loginResult.Value?.telefonoActual.usuario_app_id
+            telefuser.numero = loginResult.Value?.telefonoActual.numero
+            telefuser.tipo_id = loginResult.Value?.telefonoActual.tipo_id
+            telefuser.imei = loginResult.Value?.telefonoActual.imei
+            telefuser.sistema_operativo = loginResult.Value?.telefonoActual.sistema_operativo
+            telefuser.activo = loginResult.Value?.telefonoActual.activo
+            
+            if usrAppDowload.onCreate(connection: conn) {
+                if usrAppDowload.onInsert(connection: conn, objeto: usrAppDowload) {
+                    if creduser.onCreate(connection: conn) {
+                        if creduser.onInsert(connection: conn, objeto: creduser) {
+                            if telefuser.onCreate(connection: conn) {
+                                let _ = telefuser.onInsert(connection: conn, objeto: telefuser)
+                            }
+                        }
+                    }
+                }
+            }
+            
+            //UserDefaults.standard.set(loginResult.Value?.comunidad_id, forKey: "comunidadID")
+            
+            let tabBarController = self.presentingViewController as? UITabBarController
+            self.dismiss(animated: true) {
+                let _ = tabBarController?.selectedIndex = 4
+            }
+            
+        }
+        else {
+            let msg = loginResult.MensajeError
+            showAlertWith(title: "Aviso", message: msg)
+            activityIndicatorView.removeFromSuperview()
+        }
+        
+        
+        //let chainEncodedandEncrypted = encodeAndEncryptJSONString(LoginRequest: lr)
+        
+        /*let soapMessage =
         "<?xml version='1.0' encoding='utf-8'?><soap:Envelope xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:soap='http://schemas.xmlsoap.org/soap/envelope/'><soap:Body><GetUsuarioApp xmlns='http://tempuri.org/'><Cadena>\(chainEncodedandEncrypted.toBase64()!)</Cadena><Token></Token></GetUsuarioApp></soap:Body></soap:Envelope>"
         
         //Prepare request
@@ -167,11 +284,11 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             parser.delegate = self
             parser.parse()
         }
-        dataTask?.resume()
+        dataTask?.resume()*/
         
     }
     
-    //MARK:- XML Delegate methods
+    /*//MARK:- XML Delegate methods
     
     func parser(_ parser: XMLParser, didStartElement elementName: String, namespaceURI: String?, qualifiedName qName: String?, attributes attributeDict: [String : String] = [:]) {
         currentParsingElement = elementName
@@ -236,21 +353,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
         //print("parseErrorOccurred: \(parseError)")
     }
     
-    func encodeAndEncryptJSONString(LoginRequest: pGetUsuarioApp) -> Array<UInt8> {
-        var cipherRequest: [UInt8] = []
-        do {
-            let jsonEncoder = JSONEncoder()
-            let jsonData = try jsonEncoder.encode(LoginRequest)
-            let jsonString = String(data: jsonData, encoding: .utf8)!
-            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
-            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
-            
-        }
-        catch let err{
-            print("encodeAndEncryptJSONString error: \(err)")
-        }
-        return cipherRequest
-    }
+    
     
     /*func decryptAndDecodeJSONString() -> LoginResponse {
         var loginResultData: LoginResponse = LoginResponse()
@@ -383,7 +486,7 @@ class AskLoginViewController: UIViewController, UITextFieldDelegate, XMLParserDe
             showAlertWith(title: "Error", message: "Error al validar credenciales")
             self.activityIndicatorView.removeFromSuperview()
         }
-    }
+    }*/
     
     //MARK: - WS ActivityIndicator
     

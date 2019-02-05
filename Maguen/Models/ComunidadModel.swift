@@ -15,7 +15,7 @@ class ComunidadModel: NSObject {
     var descripcion: String
     var fecha_modificacion: Date?
     
-    let db_comunidad = Table("comunidad")
+    let table_comunidad = Table("comunidad")
     let db_comunidad_id = Expression<Int64>("comunidad_id")
     let db_descripcion = Expression<String>("descripcion")
     let db_fecha_modificacion = Expression<Date?>("fecha_modificacion")
@@ -51,7 +51,7 @@ class ComunidadModel: NSObject {
     func onCreateComunidadDB(connection: Connection) {
         
         do {
-            try connection.run(db_comunidad.create(ifNotExists: true) { t in
+            try connection.run(table_comunidad.create(ifNotExists: true) { t in
                 t.column(db_comunidad_id, primaryKey: true)
                 t.column(db_descripcion)
                 t.column(db_fecha_modificacion)
@@ -65,7 +65,7 @@ class ComunidadModel: NSObject {
     
     func onInsertComunidadDB(connection: Connection, objeto: ComunidadModel) {
         do {
-            let insert = db_comunidad.insert(or: .replace,
+            let insert = table_comunidad.insert(or: .replace,
                                              db_comunidad_id <- Int64(objeto.comunidad_id),
                                              db_descripcion <- objeto.descripcion,
                                              db_fecha_modificacion <- objeto.fecha_modificacion)
@@ -77,5 +77,40 @@ class ComunidadModel: NSObject {
 
         }
         
+    }
+    
+    func onReadComunidad(connection: Connection) -> [comunidadComponents] {
+        var comunidades = [comunidadComponents]()
+
+        do {
+            //var comunidades: [String] = []
+            let query = table_comunidad.select(db_comunidad_id, db_descripcion).order(db_comunidad_id.asc)
+            
+            for comunidad in try connection.prepare(query) {
+                let id = try comunidad.get(db_comunidad_id)
+                let name = try comunidad.get(db_descripcion)
+                //comunidades.updateValue(name, forKey: id)
+                let data = comunidadComponents(id: id, nombre: name)
+                comunidades.append(data)
+            }
+            return comunidades
+        }
+        catch let ex {
+            print("onReadComunidad error: \(ex)")
+            return comunidades
+        }
+    }
+    
+    func getComunidadByName(connection: Connection, string: String) -> Int {
+        do {
+            let query = table_comunidad.select(db_comunidad_id).where(db_descripcion == string)
+            let community = try connection.pluck(query)
+            let res = try community?.get(db_comunidad_id) ?? -1
+            return Int(res)
+        }
+        catch let ex{
+            print("getComunidadByName error: \(ex)")
+            return -1
+        }
     }
 }

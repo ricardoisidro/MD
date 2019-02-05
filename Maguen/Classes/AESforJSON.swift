@@ -71,6 +71,56 @@ class AESforJSON {
         return cipherRequest
     }
     
+    func encodeAndEncryptJSONGetUsuarioApp(LoginRequest: pGetUsuarioApp) -> Array<UInt8> {
+        var cipherRequest: [UInt8] = []
+        do {
+            let jsonEncoder = JSONEncoder()
+            let jsonData = try jsonEncoder.encode(LoginRequest)
+            let jsonString = String(data: jsonData, encoding: .utf8)!
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            cipherRequest = try aes.encrypt(Array(jsonString.utf8))
+            
+        }
+        catch let err{
+            print("encodeAndEncryptJSONGetUsuarioApp error: \(err)")
+        }
+        return cipherRequest
+    }
+    
+    func decodeAndDecryptJSONGetUsuarioApp(soapResult: String) -> EBReturnUserApp {
+        do {
+            //let res = EBReturnUserApp()
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            print(decrypted)
+            let loginResult = try jsonDecoder.decode(EBReturnUserApp.self, from: Data(decrypted.utf8))
+            return loginResult
+        }
+        catch let ex {
+            print("decodeAndDecryptJSONGetUsuarioApp error: \(ex)")
+            //decodeAndDecryptErrorGetUsuarioApp(soapResult: soapResult)
+            return EBReturnUserApp()
+        }
+    }
+    
+    /*func decodeAndDecryptErrorGetUsuarioApp(soapResult: String) -> EBReturnError {
+        do {
+            //let res = EBReturnUserApp()
+            let jsonDecoder = JSONDecoder()
+            let aes = try AES(key: Array(MaguenCredentials.key.utf8), blockMode: CBC(iv: Array(MaguenCredentials.IV.utf8)), padding: .pkcs7)
+            let decrypted = try soapResult.decryptBase64ToString(cipher: aes)
+            print(decrypted)
+            let loginResult = try jsonDecoder.decode(EBReturnUserApp.self, from: Data(decrypted.utf8))
+            return loginResult
+        }
+        catch let ex {
+            print("decodeAndDecryptJSONGetUsuarioApp error: \(ex)")
+            
+            return EBReturnUserApp()
+        }
+    }*/
+    
     func encodeAndEncryptJSONNotificationsString(request: NotificationRequest) -> Array<UInt8> {
         var cipherRequest: [UInt8] = []
         do {
@@ -141,7 +191,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            print("decodeAndDecryptJSONSaldo error: \(ex)")
         }
         return saldo
     }
@@ -177,7 +227,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            print("decodeAndDecryptJSONSetUsuarioApp error: \(ex)")
             return EBReturn()
         }
         //return saldo
@@ -215,7 +265,7 @@ class AESforJSON {
             
         }
         catch let ex {
-            print("updateSaldo error: \(ex)")
+            print("decodeAndEncryptJSONConsultarSaldo error: \(ex)")
             return EBReturn2()
         }
         //return saldo

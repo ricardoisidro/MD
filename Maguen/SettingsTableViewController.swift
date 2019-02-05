@@ -9,7 +9,7 @@
 import UIKit
 import SQLite
 
-struct optionsComponents {
+struct switchOptionsComponents {
     var selected = Bool()
     var optionClass = Int64()
     var optionName = String()
@@ -28,7 +28,10 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     var activityIndicatorView = UIView()
 
-
+    let conn = SQLiteHelper.shared.inicializa(nameBD: "maguen")
+    
+    var centersTableViewData = [switchOptionsComponents]()
+    var comunidadViewData = [comunidadComponents]()
   
     @IBAction func btnVerSaldo(_ sender: Any) {
         
@@ -46,8 +49,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         
     }
     
-    var tableViewData = [optionsComponents]()
-    var comunidadViewData = [comunidadComponents]()
+    
     
     @IBOutlet weak var textConfigName: UITextField!
     @IBOutlet weak var textConfigSurname1: UITextField!
@@ -77,7 +79,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     let db_user_cardid = Expression<Int64>("user_cardid")
  */
     
-    let db_user = Table("usuarioapp")
+    /*let db_user = Table("usuarioapp")
     let db_usuario_app_id = Expression<Int64>("usuario_app_id")
     //let db_numero_maguen = Expression<String?>("numero_maguen")
     let db_nombre = Expression<String?>("nombre")
@@ -104,7 +106,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     let table_credencial = Table("credencial")
     let db_credencial_id = Expression<Int64>("credencial_id")
-    let db_fotografia = Expression<String?>("fotografia")
+    let db_fotografia = Expression<String?>("fotografia")*/
     
     let sexTypes = ["HOMBRE", "MUJER"]
     //var communityTypes: [String] = []
@@ -112,9 +114,9 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     let doneButton: UIButton = UIButton()
     
     var selectedSex: String = "HOMBRE"
-    var selectedComunityId: Int64 = -1
+    //var selectedComunityId: Int = -1
     var selectedCommunity: String = "SELECCIONE..."
-    var comunidadSelected = ""
+    //var comunidadSelected = ""
     
     
     override func viewDidLoad() {
@@ -145,101 +147,123 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
     
     override func viewWillAppear(_ animated: Bool) {
         
-        do {
-            
-            let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
-            let db = try Connection(fileURL.path)
-            
-            //getting centers list
-            guard let queryResults = try? db.prepare("SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id") else {
-                return
-            }
-            
-            _ = queryResults.map { row in
-                let data = optionsComponents(selected: false, optionClass: row[0] as! Int64, optionName: row[1] as! String)
-                tableViewData.append(data)
-            }
-            // FIXME: - error al hacer select en comunidad
-            //getting communities
-            guard let queryResults3 = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad") else {
-                //print("ERROR al consultar Comunidad")
-                return
-            }
-            
-            _ = queryResults3.map { row in
-                let data = comunidadComponents(id: row[0] as! Int64, nombre: row[1] as! String)
-                comunidadViewData.append(data)
-                
-                //communityTypes.append(data)
-            }
-            
-            
-            //comento para compilacion
-            
-            let idSelected =  UserDefaults.standard.string(forKey: "comunidadID")
-            
-            guard let queryComunidadSocio = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad where comunidad_id = " + idSelected!) else {
-                //print("ERROR al consultar Comunidad")
-                return
-            }
-            
-            
-            for row in queryComunidadSocio {
-                
-                if var myComunidad:String = row[1] as! String? {  // do something here if exists
-                    comunidadSelected = myComunidad
-                }
-                
-            }
-            
-            
-            
-            // getting user
-            let query2 = db_user.select(db_nombre, db_primer_apellido, db_segundo_apellido, db_sexo, db_fecha_nacimiento, db_correo)
-            
-            guard let queryResults2 = try? db.pluck(query2)
-                else {
-                    //print("ERROR al consultar usuario")
-                    return
-            }
-            guard let birthday = try? queryResults2?.get(db_fecha_nacimiento)
-                else {
-                    //print("ERROR en fecha tabla usurios")
-                    return
-            }
-            
-            let queryTelefono = table_telefonos.select(db_numero)
-            
-            guard let resultTelefono = try db.pluck(queryTelefono) else {
-                return
-            }
-            let sex = try queryResults2?.get(db_sexo)
-            textConfigName.text = try queryResults2?.get(db_nombre)
-            textConfigSurname1.text = try queryResults2?.get(db_primer_apellido)
-            textConfigSurname2.text = try queryResults2?.get(db_segundo_apellido)
-            switch sex {
-            case "H":
-                textConfigSex.text = sexTypes[0]
-                break
-            case "M":
-                textConfigSex.text = sexTypes[1]
-                break
-            default:
-                textConfigSex.text = sexTypes[0]
-            }
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "dd/MM/yyyy"
-            textConfigBirthday.text = dateFormatter.string(from: birthday!)
-            
-            textConfigMail.text = try queryResults2?.get(db_correo)
-            textConfigPhone.text = try resultTelefono.get(db_numero)
-            
-            textConfigCommunity.text = comunidadSelected
-            
+        /*let documentDirectory = try FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+         let fileURL = documentDirectory.appendingPathComponent("maguen").appendingPathExtension("sqlite3")
+         let db = try Connection(fileURL.path)*/
+        
+        //getting centers list for switches
+        
+        let ce = CentroModel()
+        centersTableViewData = ce.onGetCenterList(connection: conn)
+        
+        
+        /*guard let queryResults = try? conn.prepare("SELECT categoria_centro_id, nombre FROM centro WHERE eliminado = 0 ORDER BY categoria_centro_id") else {
+         return
+         }
+         
+         _ = queryResults.map { row in
+         let data = optionsComponents(selected: false, optionClass: row[0] as! Int64, optionName: row[1] as! String)
+         centersTableViewData.append(data)
+         }*/
+        // FIXME: - error al hacer select en comunidad
+        //getting communities
+        /*guard let queryResults3 = try? db.prepare("SELECT comunidad_id, descripcion  FROM comunidad") else {
+         //print("ERROR al consultar Comunidad")
+         return
+         }*/
+        
+        let co = ComunidadModel()
+        
+        comunidadViewData = co.onReadComunidad(connection: conn)
+        
+        /*_ = queryResults3.map { row in
+         let data = comunidadComponents(id: row[0] as! Int64, nombre: row[1] as! String)
+         comunidadViewData.append(data)
+         
+         //communityTypes.append(data)
+         }*/
+        
+        
+        //comento para compilacion
+        
+        //let idSelected =  UserDefaults.standard.integer(forKey: "comunidadID")
+        
+        
+        /*guard let queryComunidadSocio = try? conn.prepare("SELECT comunidad_id, descripcion  FROM comunidad where comunidad_id = " + idSelected!) else {
+         //print("ERROR al consultar Comunidad")
+         return
+         }
+         
+         
+         for row in queryComunidadSocio {
+         
+         if var myComunidad:String = row[1] as! String? {  // do something here if exists
+         comunidadSelected = myComunidad
+         }
+         
+         }*/
+        
+        
+        
+        
+        // getting user
+        //let query2 = db_user.select(db_nombre, db_primer_apellido, db_segundo_apellido, db_sexo, db_fecha_nacimiento, db_correo)
+        let u = UsuarioApp()
+        let currentUser = u.onReadData(connection: conn)
+        let t = Telefonos()
+        let currentPhone = t.onReadData(connection: conn)
+        //let c = Credencial()
+        //let currentCard = c.onReadData(connection: conn)
+        
+        /*guard let queryResults2 = try? conn.pluck(query2)
+         else {
+         //print("ERROR al consultar usuario")
+         return
+         }*/
+        /*guard let birthday = try? queryResults2?.get(db_fecha_nacimiento)
+         else {
+         //print("ERROR en fecha tabla usurios")
+         return
+         }*/
+        
+        /*let queryTelefono = table_telefonos.select(db_numero)
+         
+         guard let resultTelefono = try conn.pluck(queryTelefono) else {
+         return
+         }*/
+        /*let sex = try queryResults2?.get(db_sexo)
+         textConfigName.text = try queryResults2?.get(db_nombre)
+         textConfigSurname1.text = try queryResults2?.get(db_primer_apellido)
+         textConfigSurname2.text = try queryResults2?.get(db_segundo_apellido)*/
+        textConfigName.text = currentUser.nombre
+        textConfigSurname1.text = currentUser.primer_apellido
+        textConfigSurname2.text = currentUser.segundo_apellido
+        let sex = currentUser.sexo
+        
+        switch sex {
+        case "H":
+            textConfigSex.text = sexTypes[0]
+            break
+        case "M":
+            textConfigSex.text = sexTypes[1]
+            break
+        default:
+            textConfigSex.text = sexTypes[0]
         }
-        catch let ex {
-            print("ReadCentroDB error: \(ex)")
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM/yyyy"
+        if let birth = currentUser.fecha_nacimiento {
+            textConfigBirthday.text = dateFormatter.string(from: birth)
+        }
+        
+        textConfigMail.text = currentUser.correo
+        textConfigPhone.text = currentPhone.numero
+        //textConfigMail.text = try queryResults2?.get(db_correo)
+        //textConfigPhone.text = try resultTelefono.get(db_numero)
+        
+        if let currentCommunity = currentUser.comunidad_id {
+            let index = Int(currentCommunity)
+            textConfigCommunity.text = comunidadViewData[index - 1].nombre
         }
         
         textConfigBalance.text = UserDefaults.standard.string(forKey: "balance") ?? ""
@@ -370,7 +394,7 @@ class SettingsTableViewController: UITableViewController, UITextFieldDelegate, U
         else {
             //selectedCommunity = communityTypes[row]
             selectedCommunity = comunidadViewData[row].nombre
-            selectedComunityId = comunidadViewData[row].id
+            //selectedComunityId = Int(comunidadViewData[row].id)
             textConfigCommunity.text = selectedCommunity
         }
         
